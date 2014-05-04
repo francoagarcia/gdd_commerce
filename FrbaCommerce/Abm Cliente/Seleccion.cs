@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Login
+namespace FrbaCommerce.Abm_Cliente
 {
-    public partial class Form1 : Form
+    public partial class SeleccionClientes : Form
     {
-        public Form1()
+        public SeleccionClientes()
         {
             InitializeComponent();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
