@@ -1,0 +1,1 @@
+sqlcmd -S localhost\SQLSERVER2008 -U gd -P gd2014 -i script_creacion_inicial.sql -o resultado_output.txt
