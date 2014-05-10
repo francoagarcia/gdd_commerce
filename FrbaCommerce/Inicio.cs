@@ -27,7 +27,7 @@ namespace FrbaCommerce
 
         private void buttonClienteAlta_Click(object sender, EventArgs e)
         {
-            alta_cli = new Abm_Cliente.FormAltaClientes();
+            alta_cli = new Abm_Cliente.FormAltaEmpresa();
             alta_cli.Show();
         }
     }

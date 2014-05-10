@@ -34,8 +34,6 @@
             this.textBoxFecNac = new System.Windows.Forms.TextBox();
             this.labelTelefono = new System.Windows.Forms.Label();
             this.textBoxTelefono = new System.Windows.Forms.TextBox();
-            this.labelDoc = new System.Windows.Forms.Label();
-            this.comboBoxTipoDoc = new System.Windows.Forms.ComboBox();
             this.labelMail = new System.Windows.Forms.Label();
             this.textBoxMail = new System.Windows.Forms.TextBox();
             this.labelTipoDoc = new System.Windows.Forms.Label();
@@ -65,7 +63,6 @@
             this.textBoxDirNro = new System.Windows.Forms.TextBox();
             this.labelDirCalle = new System.Windows.Forms.Label();
             this.textBoxDirCalle = new System.Windows.Forms.TextBox();
-            this.monthCalendar = new System.Windows.Forms.MonthCalendar();
             this.groupBoxDatos.SuspendLayout();
             this.groupBoxDireccion.SuspendLayout();
             this.SuspendLayout();
@@ -77,8 +74,6 @@
             this.groupBoxDatos.Controls.Add(this.textBoxFecNac);
             this.groupBoxDatos.Controls.Add(this.labelTelefono);
             this.groupBoxDatos.Controls.Add(this.textBoxTelefono);
-            this.groupBoxDatos.Controls.Add(this.labelDoc);
-            this.groupBoxDatos.Controls.Add(this.comboBoxTipoDoc);
             this.groupBoxDatos.Controls.Add(this.labelMail);
             this.groupBoxDatos.Controls.Add(this.textBoxMail);
             this.groupBoxDatos.Controls.Add(this.labelTipoDoc);
@@ -108,9 +103,10 @@
             this.labelFecNac.AutoSize = true;
             this.labelFecNac.Location = new System.Drawing.Point(14, 165);
             this.labelFecNac.Name = "labelFecNac";
-            this.labelFecNac.Size = new System.Drawing.Size(111, 13);
+            this.labelFecNac.Size = new System.Drawing.Size(100, 13);
             this.labelFecNac.TabIndex = 27;
-            this.labelFecNac.Text = "Fecha de Nacimiento:";
+            this.labelFecNac.Text = "Fecha de Creacion:";
+            this.labelFecNac.Click += new System.EventHandler(this.labelFecNac_Click);
             // 
             // textBoxFecNac
             // 
@@ -136,23 +132,6 @@
             this.textBoxTelefono.Size = new System.Drawing.Size(221, 20);
             this.textBoxTelefono.TabIndex = 24;
             // 
-            // labelDoc
-            // 
-            this.labelDoc.AutoSize = true;
-            this.labelDoc.Location = new System.Drawing.Point(241, 87);
-            this.labelDoc.Name = "labelDoc";
-            this.labelDoc.Size = new System.Drawing.Size(35, 13);
-            this.labelDoc.TabIndex = 23;
-            this.labelDoc.Text = "Num.:";
-            // 
-            // comboBoxTipoDoc
-            // 
-            this.comboBoxTipoDoc.FormattingEnabled = true;
-            this.comboBoxTipoDoc.Location = new System.Drawing.Point(124, 83);
-            this.comboBoxTipoDoc.Name = "comboBoxTipoDoc";
-            this.comboBoxTipoDoc.Size = new System.Drawing.Size(94, 21);
-            this.comboBoxTipoDoc.TabIndex = 22;
-            // 
             // labelMail
             // 
             this.labelMail.AutoSize = true;
@@ -174,16 +153,16 @@
             this.labelTipoDoc.AutoSize = true;
             this.labelTipoDoc.Location = new System.Drawing.Point(14, 86);
             this.labelTipoDoc.Name = "labelTipoDoc";
-            this.labelTipoDoc.Size = new System.Drawing.Size(104, 13);
+            this.labelTipoDoc.Size = new System.Drawing.Size(35, 13);
             this.labelTipoDoc.TabIndex = 19;
-            this.labelTipoDoc.Text = "Tipo de Documento:";
+            this.labelTipoDoc.Text = "CUIT:";
             this.labelTipoDoc.Click += new System.EventHandler(this.labelDni_Click);
             // 
             // textBoxNumDoc
             // 
-            this.textBoxNumDoc.Location = new System.Drawing.Point(282, 84);
+            this.textBoxNumDoc.Location = new System.Drawing.Point(124, 84);
             this.textBoxNumDoc.Name = "textBoxNumDoc";
-            this.textBoxNumDoc.Size = new System.Drawing.Size(131, 20);
+            this.textBoxNumDoc.Size = new System.Drawing.Size(289, 20);
             this.textBoxNumDoc.TabIndex = 18;
             this.textBoxNumDoc.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
@@ -192,16 +171,16 @@
             this.labelApellido.AutoSize = true;
             this.labelApellido.Location = new System.Drawing.Point(14, 60);
             this.labelApellido.Name = "labelApellido";
-            this.labelApellido.Size = new System.Drawing.Size(47, 13);
+            this.labelApellido.Size = new System.Drawing.Size(108, 13);
             this.labelApellido.TabIndex = 17;
-            this.labelApellido.Text = "Apellido:";
+            this.labelApellido.Text = "Nombre de Contacto:";
             this.labelApellido.Click += new System.EventHandler(this.label1_Click);
             // 
             // textBoxApellido
             // 
-            this.textBoxApellido.Location = new System.Drawing.Point(66, 57);
+            this.textBoxApellido.Location = new System.Drawing.Point(124, 57);
             this.textBoxApellido.Name = "textBoxApellido";
-            this.textBoxApellido.Size = new System.Drawing.Size(347, 20);
+            this.textBoxApellido.Size = new System.Drawing.Size(289, 20);
             this.textBoxApellido.TabIndex = 16;
             this.textBoxApellido.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -210,15 +189,15 @@
             this.labelNombre.AutoSize = true;
             this.labelNombre.Location = new System.Drawing.Point(14, 34);
             this.labelNombre.Name = "labelNombre";
-            this.labelNombre.Size = new System.Drawing.Size(47, 13);
+            this.labelNombre.Size = new System.Drawing.Size(73, 13);
             this.labelNombre.TabIndex = 15;
-            this.labelNombre.Text = "Nombre:";
+            this.labelNombre.Text = "Razon Social:";
             // 
             // textBoxNombre
             // 
-            this.textBoxNombre.Location = new System.Drawing.Point(66, 31);
+            this.textBoxNombre.Location = new System.Drawing.Point(124, 31);
             this.textBoxNombre.Name = "textBoxNombre";
-            this.textBoxNombre.Size = new System.Drawing.Size(347, 20);
+            this.textBoxNombre.Size = new System.Drawing.Size(289, 20);
             this.textBoxNombre.TabIndex = 14;
             // 
             // buttonLimpiar
@@ -253,9 +232,9 @@
             this.labelPassword.AutoSize = true;
             this.labelPassword.Location = new System.Drawing.Point(248, 396);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(58, 13);
+            this.labelPassword.Size = new System.Drawing.Size(64, 13);
             this.labelPassword.TabIndex = 14;
-            this.labelPassword.Text = "Contrseña:";
+            this.labelPassword.Text = "Contraseña:";
             // 
             // labelUsername
             // 
@@ -412,22 +391,11 @@
             this.textBoxDirCalle.Size = new System.Drawing.Size(152, 20);
             this.textBoxDirCalle.TabIndex = 14;
             // 
-            // monthCalendar
-            // 
-            this.monthCalendar.Location = new System.Drawing.Point(326, 138);
-            this.monthCalendar.MaxDate = new System.DateTime(3000, 12, 31, 0, 0, 0, 0);
-            this.monthCalendar.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
-            this.monthCalendar.Name = "monthCalendar";
-            this.monthCalendar.TabIndex = 30;
-            this.monthCalendar.TitleBackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.monthCalendar.Visible = false;
-            // 
-            // FormAltaClientes
+            // FormAltaEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(494, 474);
-            this.Controls.Add(this.monthCalendar);
             this.Controls.Add(this.groupBoxDireccion);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.groupBoxDatos);
@@ -436,9 +404,9 @@
             this.Controls.Add(this.labelUsername);
             this.Controls.Add(this.buttonGuardar);
             this.Controls.Add(this.textBoxUsername);
-            this.Name = "FormAltaClientes";
+            this.Name = "FormAltaEmpresa";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Alta de Cliente";
+            this.Text = "Alta de Empresa";
             this.Load += new System.EventHandler(this.FormAltaClientes_Load);
             this.groupBoxDatos.ResumeLayout(false);
             this.groupBoxDatos.PerformLayout();
@@ -467,8 +435,6 @@
         private System.Windows.Forms.Label labelMail;
         private System.Windows.Forms.Label labelTelefono;
         private System.Windows.Forms.TextBox textBoxTelefono;
-        private System.Windows.Forms.Label labelDoc;
-        private System.Windows.Forms.ComboBox comboBoxTipoDoc;
         private System.Windows.Forms.Button buttonCalendarioVisible;
         private System.Windows.Forms.Label labelFecNac;
         private System.Windows.Forms.TextBox textBoxFecNac;
@@ -484,7 +450,6 @@
         private System.Windows.Forms.TextBox textBoxDirNro;
         private System.Windows.Forms.Label labelDirCalle;
         private System.Windows.Forms.TextBox textBoxDirCalle;
-        private System.Windows.Forms.MonthCalendar monthCalendar;
         private System.Windows.Forms.Label labelDirPiso;
         private System.Windows.Forms.TextBox textBoxDirPiso;
         private System.Windows.Forms.ComboBox comboBoxDirLoc;
