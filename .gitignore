@@ -92,6 +92,7 @@ AppPackages/
 [Bb]in
 [Oo]bj
 TestResults
+resultado_output.txt
 [Tt]est[Rr]esult*
 *.Cache
 ClientBin
