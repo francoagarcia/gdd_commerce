@@ -2,200 +2,144 @@
 -------------------------------------------------------------------------------------
 ---------------------------------CREANDO EL ESQUEMA----------------------------------
 -------------------------------------------------------------------------------------
-BEGIN TRANSACTION --Comienza transaccion
+BEGIN TRANSACTION 
 
 USE [GD1C2014]
 GO
 
-DECLARE @SchemaName AS VARCHAR(100) = 'PEPITO'
+DECLARE @SchemaName AS VARCHAR(100) = 'DATA_GROUP'
 DECLARE @sql VARCHAR(100) = 'CREATE SCHEMA '+ @SchemaName +' AUTHORIZATION [gd]'
 
 IF NOT EXISTS(SELECT name FROM sys.schemas WHERE name = @SchemaName)
-	BEGIN
-		PRINT 'Creating ' + @SchemaName + ' schema'
-		EXEC(@sql)
-		PRINT @SchemaName + ' schema created'
-	END
+BEGIN
+	PRINT 'Creating ' + @SchemaName + ' schema'
+	EXEC(@sql)
+	PRINT @SchemaName + ' schema created'
+END
 ELSE
   PRINT @SchemaName + ' schema already exists.'
 -------------------------------------------------------------------------------------
 ---------------------------------CREANDO LAS TABLAS----------------------------------
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('PEPITO.FuncionalidadXRol', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.FuncionalidadXRol;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.FuncionalidadXRol (
+IF OBJECT_ID('DATA_GROUP.FuncionalidadXRol', 'U') IS NOT NULL DROP TABLE DATA_GROUP.FuncionalidadXRol;
+CREATE TABLE DATA_GROUP.FuncionalidadXRol (
 	id_rol NUMERIC(18,0) NOT NULL,
 	id_funcionalidad NUMERIC(18,0) NOT NULL,
-	habilitada bit DEFAULT 1,
+	habilitada bit DEFAULT 1 NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.UsuarioXRol', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.UsuarioXRol;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.UsuarioXRol (
+IF OBJECT_ID('DATA_GROUP.UsuarioXRol', 'U') IS NOT NULL	DROP TABLE DATA_GROUP.UsuarioXRol;
+CREATE TABLE DATA_GROUP.UsuarioXRol (
 	id_usuario NUMERIC(18,0) NOT NULL, 
 	id_rol NUMERIC(18,0) NOT NULL,
-	habilitada bit DEFAULT 1,
+	habilitada bit DEFAULT 1 NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.RubroXPublicacion', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.RubroXPublicacion;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.RubroXPublicacion(
+IF OBJECT_ID('DATA_GROUP.RubroXPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.RubroXPublicacion;
+CREATE TABLE DATA_GROUP.RubroXPublicacion(
 	id_rubro NUMERIC(18, 0) NOT NULL, 
 	id_publicacion NUMERIC(18, 0) NOT NULL, 
-	habilitada bit DEFAULT 1,
+	habilitada bit DEFAULT 1 NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.CalificacionPublicacion', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.CalificacionPublicacion;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.CalificacionPublicacion(
+IF OBJECT_ID('DATA_GROUP.CalificacionPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.CalificacionPublicacion;
+CREATE TABLE DATA_GROUP.CalificacionPublicacion(
 	id_publicacion NUMERIC(18, 0) NOT NULL,
 	id_usuario NUMERIC(18, 0) NOT NULL,
 	estrellas_calificacion NUMERIC(18, 0),
 	detalle_calificacion nvarchar(255),
 );
 
-IF OBJECT_ID('PEPITO.Compra', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Compra;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Compra (
+IF OBJECT_ID('DATA_GROUP.Compra', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Compra;
+CREATE TABLE DATA_GROUP.Compra (
 	id_compra NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
-	id_publicacion NUMERIC(18, 0),
-	id_usuario_comprador NUMERIC(18, 0),
-	fecha datetime,
-	cantidad NUMERIC(18, 0),
+	id_publicacion NUMERIC(18, 0) NOT NULL,
+	id_usuario_comprador NUMERIC(18, 0) NOT NULL,
+	fecha datetime NOT NULL,
+	cantidad NUMERIC(18, 0) NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.Oferta', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Oferta;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Oferta(
+IF OBJECT_ID('DATA_GROUP.Oferta', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Oferta;
+CREATE TABLE DATA_GROUP.Oferta(
 	id_oferta NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
-	id_publicacion NUMERIC(18, 0),
-	id_usuario_ofertador NUMERIC(18, 0),
-	fecha datetime,
-	monto NUMERIC(18, 2),
+	id_publicacion NUMERIC(18, 0) NOT NULL,
+	id_usuario_ofertador NUMERIC(18, 0) NOT NULL,
+	fecha datetime NOT NULL,
+	monto NUMERIC(18, 2) NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.ItemFactura', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.ItemFactura;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.ItemFactura(
+IF OBJECT_ID('DATA_GROUP.ItemFactura', 'U') IS NOT NULL DROP TABLE DATA_GROUP.ItemFactura;
+CREATE TABLE DATA_GROUP.ItemFactura(
 	nro_factura NUMERIC(18, 0) NOT NULL,
 	id_publicacion NUMERIC(18, 0) NOT NULL,
-	cantidad NUMERIC(18, 0),
-	monto NUMERIC(18, 2),
+	cantidad NUMERIC(18, 0) NOT NULL,
+	monto NUMERIC(18, 2) NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.Factura', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Factura;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Factura(
+IF OBJECT_ID('DATA_GROUP.Factura', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Factura;
+CREATE TABLE DATA_GROUP.Factura(
 	nro_factura NUMERIC(18, 0) NOT NULL,
-	id_vendedor NUMERIC(18, 0),
-	fecha datetime,
-	total NUMERIC(18, 2),
-	forma_pago_descripcion nvarchar(255),
+	id_vendedor NUMERIC(18, 0) NOT NULL,
+	fecha datetime NOT NULL,
+	total NUMERIC(18, 2) NOT NULL,
+	forma_pago_descripcion nvarchar(255) NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.Pregunta', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Pregunta;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Pregunta(
+IF OBJECT_ID('DATA_GROUP.Pregunta', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Pregunta;
+CREATE TABLE DATA_GROUP.Pregunta(
 	id_pregunta NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
-	id_publicacion NUMERIC(18,0),
-	id_usuario NUMERIC(18, 0),
+	id_publicacion NUMERIC(18,0) NOT NULL,
+	id_usuario NUMERIC(18, 0) NOT NULL,
 	pregunta nvarchar(255),
 	fecha_pregunta datetime,
 	respuesta nvarchar(400),
 	fecha_respuesta datetime,
 );
 
-IF OBJECT_ID('PEPITO.Publicacion', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Publicacion;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Publicacion(
+IF OBJECT_ID('DATA_GROUP.Publicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Publicacion;
+CREATE TABLE DATA_GROUP.Publicacion(
 	id_publicacion NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
 	descripcion nvarchar(255),
 	stock NUMERIC(18,0),
 	fecha_inicio datetime,
 	fecha_vencimiento datetime,
 	precio NUMERIC(18,2),
-	id_tipo_publicacion NUMERIC(18,0),
-	id_visibilidad NUMERIC(18,0), 
-	id_estado NUMERIC(18,0), 
-	id_usuario_publicador NUMERIC(18,0),
-	habilitada bit DEFAULT 1,
+	id_tipo_publicacion NUMERIC(18,0) NOT NULL,
+	id_visibilidad NUMERIC(18,0) NOT NULL, 
+	id_estado NUMERIC(18,0) NOT NULL, 
+	id_usuario_publicador NUMERIC(18,0) NOT NULL,
+	habilitada bit DEFAULT 1 NOT NULL,
 );
 
-----------
-IF OBJECT_ID('PEPITO.Rol', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Rol;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Rol(
+IF OBJECT_ID('DATA_GROUP.Rol', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Rol;
+CREATE TABLE DATA_GROUP.Rol(
 	id_rol NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
-	nombre varchar(255),
-	habilitada bit DEFAULT 1, 
+	nombre varchar(255) NOT NULL,
+	habilitada bit DEFAULT 1 NOT NULL, 
 );
 
-IF OBJECT_ID('PEPITO.Funcionalidad', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Funcionalidad;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Funcionalidad (
+IF OBJECT_ID('DATA_GROUP.Funcionalidad', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Funcionalidad;
+CREATE TABLE DATA_GROUP.Funcionalidad (
 	id_funcionalidad NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
-	nombre varchar(255),
-	habilitada bit DEFAULT 1,
+	nombre varchar(255) NOT NULL,
+	habilitada bit DEFAULT 1 NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.Administrador', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Administrador;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Administrador ( 
+IF OBJECT_ID('DATA_GROUP.Administrador', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Administrador;
+CREATE TABLE DATA_GROUP.Administrador ( 
+	id_administrador NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
 	id_usuario NUMERIC(18,0) NOT NULL, 
-	habilitada bit DEFAULT 1,
+	habilitada bit DEFAULT 1 NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.Cliente', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Cliente;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Cliente (
-	id_usuario NUMERIC(18,0) NOT NULL,
+IF OBJECT_ID('DATA_GROUP.Cliente', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Cliente;
+CREATE TABLE DATA_GROUP.Cliente (
+	id_tipo_documento NUMERIC(18, 0) NOT NULL,
+	nro_documento NUMERIC(18,0) NOT NULL,
+	id_usuario NUMERIC(18,0),
 	nombre nvarchar(255), 
 	apellido nvarchar (255),
-	tipo_documento varchar(255), 
-	numero_documento NUMERIC(18,0),
 	dom_calle nvarchar(255),
 	nro_calle NUMERIC(18, 0),
 	piso NUMERIC(18,0),      
@@ -208,14 +152,11 @@ CREATE TABLE PEPITO.Cliente (
 	habilitada bit DEFAULT 1,
 );
 
-IF OBJECT_ID('PEPITO.Empresa', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Empresa;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Empresa (
-	id_usuario NUMERIC(18,0) NOT NULL, 
-	razon_social nvarchar(255), 
+IF OBJECT_ID('DATA_GROUP.Empresa', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Empresa;
+CREATE TABLE DATA_GROUP.Empresa (
+	cuit nvarchar(50) NOT NULL,
+	razon_social nvarchar(255) NOT NULL, 
+	id_usuario NUMERIC(18,0), 
 	mail nvarchar(50),
 	dom_calle nvarchar(255),
 	piso NUMERIC(18,0) , 
@@ -224,178 +165,166 @@ CREATE TABLE PEPITO.Empresa (
 	nro_calle NUMERIC(18,0),
 	cod_postal nvarchar(50),
 	ciudad nvarchar(255),
-	CUIT nvarchar(50),
 	nombre_de_contacto nvarchar(255),
 	fecha_creacion datetime,
 );
 
-IF OBJECT_ID('PEPITO.Usuario', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Usuario;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Usuario (
+IF OBJECT_ID('DATA_GROUP.Usuario', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Usuario;
+CREATE TABLE DATA_GROUP.Usuario (
 	id_usuario NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
-	username varchar(255),
-	contrasenia varchar(255),
+	username nvarchar(255),
+	contrasenia nvarchar(255),
 	telefono NUMERIC(18,0),
 	intentos_login NUMERIC(1, 0) DEFAULT 0, 
-	tipo_usuario varchar(3), 
+	tipo_usuario nvarchar(3), 
 	habilitada bit DEFAULT 1,
 );
 
-IF OBJECT_ID('PEPITO.Rubro', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.Rubro;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.Rubro(
+IF OBJECT_ID('DATA_GROUP.TipoDocumento', 'U') IS NOT NULL DROP TABLE DATA_GROUP.TipoDocumento;
+CREATE TABLE DATA_GROUP.TipoDocumento (
+	id_tipo_documento NUMERIC(18, 0) IDENTITY (1,1) NOT NULL,
+	descripcion nvarchar(255) NOT NULL,
+)
+
+IF OBJECT_ID('DATA_GROUP.Rubro', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Rubro;
+CREATE TABLE DATA_GROUP.Rubro(
 	id_rubro NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
-	descripcion nvarchar(255),
+	descripcion nvarchar(255) NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.TipoPublicacion', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.TipoPublicacion;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.TipoPublicacion(
+IF OBJECT_ID('DATA_GROUP.TipoPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.TipoPublicacion;
+CREATE TABLE DATA_GROUP.TipoPublicacion(
 	id_tipo_publicacion NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
-	descripcion nvarchar(255),
+	descripcion nvarchar(255) NOT NULL,
 );
 
-IF OBJECT_ID('PEPITO.VisibilidadPublicacion', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.VisibilidadPublicacion;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.VisibilidadPublicacion(
+IF OBJECT_ID('DATA_GROUP.VisibilidadPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.VisibilidadPublicacion;
+CREATE TABLE DATA_GROUP.VisibilidadPublicacion(
 	id_visibilidad NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
-	descripcion nvarchar(255),
-	precio NUMERIC(18, 2),
-	porcentaje NUMERIC(18, 2),
+	descripcion nvarchar(255) NOT NULL,
+	precio NUMERIC(18, 2) NOT NULL,
+	porcentaje NUMERIC(18, 2) NOT NULL,
 );
-SET IDENTITY_INSERT PEPITO.VisibilidadPublicacion ON
+SET IDENTITY_INSERT DATA_GROUP.VisibilidadPublicacion ON
 
-IF OBJECT_ID('PEPITO.EstadoPublicacion', 'U') IS NOT NULL 
-	BEGIN
-		DROP TABLE PEPITO.EstadoPublicacion;
-		PRINT 'Table already exists: DROP TABLE and CREATE again.'
-	END
-CREATE TABLE PEPITO.EstadoPublicacion(
+IF OBJECT_ID('DATA_GROUP.EstadoPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.EstadoPublicacion;
+CREATE TABLE DATA_GROUP.EstadoPublicacion(
 	id_estado NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
-	descripcion nvarchar(255),
+	descripcion nvarchar(255) NOT NULL,
 );
 
 -------------------------------------------------------------------------------------
 ----------------------------------CREANDO LAS PKS------------------------------------
 -------------------------------------------------------------------------------------
 
-ALTER TABLE PEPITO.Rol ADD CONSTRAINT pk_id_rol PRIMARY KEY ( id_rol );
-ALTER TABLE PEPITO.Funcionalidad ADD CONSTRAINT pk_id_funcionalidad PRIMARY KEY ( id_funcionalidad );
-ALTER TABLE PEPITO.FuncionalidadXRol ADD CONSTRAINT pk_funcionalidad_rol PRIMARY KEY ( id_rol,id_funcionalidad  );
-ALTER TABLE PEPITO.Usuario ADD CONSTRAINT pk_id_usuario PRIMARY KEY ( id_usuario );
-ALTER TABLE PEPITO.Administrador ADD CONSTRAINT pk_id_administrador PRIMARY KEY ( id_usuario );
-ALTER TABLE PEPITO.Cliente ADD CONSTRAINT pk_id_cliente PRIMARY KEY ( id_usuario );
-ALTER TABLE PEPITO.Empresa ADD CONSTRAINT pk_id_empresa PRIMARY KEY ( id_usuario );
-ALTER TABLE PEPITO.UsuarioXRol ADD CONSTRAINT pk_usuario_rol PRIMARY KEY ( id_usuario,id_rol );
-ALTER TABLE PEPITO.Rubro ADD CONSTRAINT pk_id_rubro PRIMARY KEY ( id_rubro );
-ALTER TABLE PEPITO.RubroXPublicacion ADD CONSTRAINT pk_rubro_publicacion PRIMARY KEY ( id_rubro, id_publicacion );
-ALTER TABLE PEPITO.TipoPublicacion ADD CONSTRAINT pk_id_tipo_publicacion PRIMARY KEY ( id_tipo_publicacion );
-ALTER TABLE PEPITO.VisibilidadPublicacion ADD CONSTRAINT pk_id_visibilidad PRIMARY KEY ( id_visibilidad );
-ALTER TABLE PEPITO.EstadoPublicacion ADD CONSTRAINT pk_id_estado PRIMARY KEY ( id_estado );
-ALTER TABLE PEPITO.Publicacion ADD CONSTRAINT pk_id_publicacion PRIMARY KEY ( id_publicacion );
-ALTER TABLE PEPITO.Pregunta ADD CONSTRAINT pk_id_pregunta PRIMARY KEY ( id_pregunta );
-ALTER TABLE PEPITO.Compra ADD CONSTRAINT pk_id_compra PRIMARY KEY (id_compra);
-ALTER TABLE PEPITO.Oferta ADD CONSTRAINT pk_id_oferta PRIMARY KEY (id_oferta);
-ALTER TABLE PEPITO.CalificacionPublicacion ADD CONSTRAINT pk_id_calificacion_publicacion PRIMARY KEY(id_publicacion);
-ALTER TABLE PEPITO.Factura ADD CONSTRAINT pk_nro_factura PRIMARY KEY (nro_factura);
-ALTER TABLE PEPITO.ItemFactura ADD CONSTRAINT pk_item_factura PRIMARY KEY (nro_factura, id_publicacion);
-
+ALTER TABLE DATA_GROUP.Rol ADD CONSTRAINT pk_id_rol PRIMARY KEY ( id_rol );
+ALTER TABLE DATA_GROUP.Funcionalidad ADD CONSTRAINT pk_id_funcionalidad PRIMARY KEY ( id_funcionalidad );
+ALTER TABLE DATA_GROUP.FuncionalidadXRol ADD CONSTRAINT pk_funcionalidad_rol PRIMARY KEY ( id_rol,id_funcionalidad  );
+ALTER TABLE DATA_GROUP.Usuario ADD CONSTRAINT pk_id_usuario PRIMARY KEY ( id_usuario );
+ALTER TABLE DATA_GROUP.Administrador ADD CONSTRAINT pk_id_administrador PRIMARY KEY ( id_usuario );
+ALTER TABLE DATA_GROUP.Cliente ADD CONSTRAINT pk_id_cliente PRIMARY KEY ( id_tipo_documento, nro_documento );
+ALTER TABLE DATA_GROUP.Empresa ADD CONSTRAINT pk_id_empresa PRIMARY KEY ( cuit, razon_social );
+ALTER TABLE DATA_GROUP.UsuarioXRol ADD CONSTRAINT pk_usuario_rol PRIMARY KEY ( id_usuario,id_rol );
+ALTER TABLE DATA_GROUP.Rubro ADD CONSTRAINT pk_id_rubro PRIMARY KEY ( id_rubro );
+ALTER TABLE DATA_GROUP.RubroXPublicacion ADD CONSTRAINT pk_rubro_publicacion PRIMARY KEY ( id_rubro, id_publicacion );
+ALTER TABLE DATA_GROUP.TipoPublicacion ADD CONSTRAINT pk_id_tipo_publicacion PRIMARY KEY ( id_tipo_publicacion );
+ALTER TABLE DATA_GROUP.VisibilidadPublicacion ADD CONSTRAINT pk_id_visibilidad PRIMARY KEY ( id_visibilidad );
+ALTER TABLE DATA_GROUP.EstadoPublicacion ADD CONSTRAINT pk_id_estado PRIMARY KEY ( id_estado );
+ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT pk_id_publicacion PRIMARY KEY ( id_publicacion );
+ALTER TABLE DATA_GROUP.Pregunta ADD CONSTRAINT pk_id_pregunta PRIMARY KEY ( id_pregunta );
+ALTER TABLE DATA_GROUP.Compra ADD CONSTRAINT pk_id_compra PRIMARY KEY (id_compra);
+ALTER TABLE DATA_GROUP.Oferta ADD CONSTRAINT pk_id_oferta PRIMARY KEY (id_oferta);
+ALTER TABLE DATA_GROUP.CalificacionPublicacion ADD CONSTRAINT pk_id_calificacion_publicacion PRIMARY KEY(id_publicacion);
+ALTER TABLE DATA_GROUP.Factura ADD CONSTRAINT pk_nro_factura PRIMARY KEY (nro_factura);
+ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT pk_item_factura PRIMARY KEY (nro_factura, id_publicacion);
+ALTER TABLE DATA_GROUP.TipoDocumento ADD CONSTRAINT pk_tipo_documento PRIMARY KEY (id_tipo_documento);
 
 -------------------------------------------------------------------------------------
 ----------------------------------CREANDO LAS FKS------------------------------------
 -------------------------------------------------------------------------------------
 
 --Roles, funcionalidades, usuarios
-ALTER TABLE PEPITO.FuncionalidadXRol ADD CONSTRAINT fk_FuncionalidadXRol_to_Funcionalidad
-FOREIGN KEY (id_funcionalidad) REFERENCES PEPITO.Funcionalidad (id_funcionalidad);
+ALTER TABLE DATA_GROUP.FuncionalidadXRol ADD CONSTRAINT fk_FuncionalidadXRol_to_Funcionalidad
+FOREIGN KEY (id_funcionalidad) REFERENCES DATA_GROUP.Funcionalidad (id_funcionalidad);
 
-ALTER TABLE PEPITO.FuncionalidadXRol ADD CONSTRAINT fk_FuncionalidadXRol_to_Rol
-FOREIGN KEY (id_rol) REFERENCES PEPITO.Rol (id_rol);
+ALTER TABLE DATA_GROUP.FuncionalidadXRol ADD CONSTRAINT fk_FuncionalidadXRol_to_Rol
+FOREIGN KEY (id_rol) REFERENCES DATA_GROUP.Rol (id_rol);
 
-ALTER TABLE PEPITO.Administrador ADD CONSTRAINT fk_Administrador_to_Usuario
-FOREIGN KEY (id_usuario) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Administrador ADD CONSTRAINT fk_Administrador_to_Usuario
+FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
-ALTER TABLE PEPITO.Cliente ADD CONSTRAINT fk_Cliente_to_Usuario
-FOREIGN KEY (id_usuario) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Cliente ADD CONSTRAINT fk_Cliente_to_Usuario
+FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
-ALTER TABLE PEPITO.Empresa ADD CONSTRAINT fk_Empresa_to_Usuario
-FOREIGN KEY (id_usuario) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Cliente ADD CONSTRAINT fk_Cliente_to_TipoDocumento
+FOREIGN KEY (id_tipo_documento) REFERENCES DATA_GROUP.TipoDocumento(id_tipo_documento);
 
-ALTER TABLE PEPITO.UsuarioXRol ADD CONSTRAINT fk_UsuarioXRol_to_Usuario
-FOREIGN KEY (id_usuario) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Empresa ADD CONSTRAINT fk_Empresa_to_Usuario
+FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
-ALTER TABLE PEPITO.UsuarioXRol ADD CONSTRAINT fk_UsuarioXRol_to_Rol
-FOREIGN KEY (id_rol) REFERENCES PEPITO.Rol (id_rol);
+ALTER TABLE DATA_GROUP.UsuarioXRol ADD CONSTRAINT fk_UsuarioXRol_to_Usuario
+FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
---Publicacoin
-ALTER TABLE PEPITO.Publicacion ADD CONSTRAINT fk_Publicacion_to_TipoPublicacion
-FOREIGN KEY (id_tipo_publicacion) REFERENCES PEPITO.TipoPublicacion (id_tipo_publicacion);
+ALTER TABLE DATA_GROUP.UsuarioXRol ADD CONSTRAINT fk_UsuarioXRol_to_Rol
+FOREIGN KEY (id_rol) REFERENCES DATA_GROUP.Rol (id_rol);
 
-ALTER TABLE PEPITO.Publicacion ADD CONSTRAINT fk_Publicacion_to_EstadoPublicacion
-FOREIGN KEY (id_estado) REFERENCES PEPITO.EstadoPublicacion (id_estado);
+--Publicacion
+ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT fk_Publicacion_to_TipoPublicacion
+FOREIGN KEY (id_tipo_publicacion) REFERENCES DATA_GROUP.TipoPublicacion (id_tipo_publicacion);
 
-ALTER TABLE PEPITO.Publicacion ADD CONSTRAINT fk_Publicacion_to_VisibilidadPublicacion
-FOREIGN KEY (id_visibilidad) REFERENCES PEPITO.VisibilidadPublicacion (id_visibilidad);
+ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT fk_Publicacion_to_EstadoPublicacion
+FOREIGN KEY (id_estado) REFERENCES DATA_GROUP.EstadoPublicacion (id_estado);
 
-ALTER TABLE PEPITO.Publicacion ADD CONSTRAINT fk_Publicacion_to_Usuario
-FOREIGN KEY (id_usuario_publicador) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT fk_Publicacion_to_VisibilidadPublicacion
+FOREIGN KEY (id_visibilidad) REFERENCES DATA_GROUP.VisibilidadPublicacion (id_visibilidad);
+
+ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT fk_Publicacion_to_Usuario
+FOREIGN KEY (id_usuario_publicador) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
 --Rubro x publicacion
-ALTER TABLE PEPITO.RubroXPublicacion ADD CONSTRAINT fk_RubroXPublicacion_to_Rubro
-FOREIGN KEY (id_rubro) REFERENCES PEPITO.Rubro (id_rubro);
+ALTER TABLE DATA_GROUP.RubroXPublicacion ADD CONSTRAINT fk_RubroXPublicacion_to_Rubro
+FOREIGN KEY (id_rubro) REFERENCES DATA_GROUP.Rubro (id_rubro);
 
-ALTER TABLE PEPITO.RubroXPublicacion ADD CONSTRAINT fk_RubroXPublicacion_to_Publicacion
-FOREIGN KEY (id_publicacion) REFERENCES PEPITO.Publicacion (id_publicacion);
+ALTER TABLE DATA_GROUP.RubroXPublicacion ADD CONSTRAINT fk_RubroXPublicacion_to_Publicacion
+FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
 
 --Preguntas
-ALTER TABLE PEPITO.Pregunta ADD CONSTRAINT fk_Pregunta_to_Publicacion
-FOREIGN KEY (id_publicacion) REFERENCES PEPITO.Publicacion (id_publicacion);
+ALTER TABLE DATA_GROUP.Pregunta ADD CONSTRAINT fk_Pregunta_to_Publicacion
+FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
 
-ALTER TABLE PEPITO.Pregunta ADD CONSTRAINT fk_Pregunta_to_Usuario
-FOREIGN KEY (id_usuario) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Pregunta ADD CONSTRAINT fk_Pregunta_to_Usuario
+FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
 --Compra
-ALTER TABLE PEPITO.Compra ADD CONSTRAINT fk_Compra_to_Publicacion 
-FOREIGN KEY (id_publicacion) REFERENCES PEPITO.Publicacion (id_publicacion);
+ALTER TABLE DATA_GROUP.Compra ADD CONSTRAINT fk_Compra_to_Publicacion 
+FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
 
-ALTER TABLE PEPITO.Compra ADD CONSTRAINT fk_Compra_to_Usuario 
-FOREIGN KEY (id_usuario_comprador) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Compra ADD CONSTRAINT fk_Compra_to_Usuario 
+FOREIGN KEY (id_usuario_comprador) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
 --CalificacionPublicacion
-ALTER TABLE PEPITO.CalificacionPublicacion ADD CONSTRAINT fk_CalificacionPublicacion_to_Publicacion 
-FOREIGN KEY (id_publicacion) REFERENCES PEPITO.Publicacion (id_publicacion);
+ALTER TABLE DATA_GROUP.CalificacionPublicacion ADD CONSTRAINT fk_CalificacionPublicacion_to_Publicacion 
+FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
 
-ALTER TABLE PEPITO.CalificacionPublicacion  ADD CONSTRAINT fk_CalificacionPublicacion_to_Usuario 
-FOREIGN KEY (id_usuario) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.CalificacionPublicacion  ADD CONSTRAINT fk_CalificacionPublicacion_to_Usuario 
+FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
 --Oferta
-ALTER TABLE PEPITO.Oferta ADD CONSTRAINT fk_Oferta_to_Publicacion 
-FOREIGN KEY (id_publicacion) REFERENCES PEPITO.Publicacion (id_publicacion);
+ALTER TABLE DATA_GROUP.Oferta ADD CONSTRAINT fk_Oferta_to_Publicacion 
+FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
 
-ALTER TABLE PEPITO.Oferta ADD CONSTRAINT fk_Oferta_to_Usuario 
-FOREIGN KEY (id_usuario_ofertador) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Oferta ADD CONSTRAINT fk_Oferta_to_Usuario 
+FOREIGN KEY (id_usuario_ofertador) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
 --Facturas
-ALTER TABLE PEPITO.Factura ADD CONSTRAINT fk_Factura_to_Usuario 
-FOREIGN KEY (id_vendedor) REFERENCES PEPITO.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Factura ADD CONSTRAINT fk_Factura_to_Usuario 
+FOREIGN KEY (id_vendedor) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
-ALTER TABLE PEPITO.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Publicacion 
-FOREIGN KEY (id_publicacion) REFERENCES PEPITO.Publicacion ( id_publicacion );
+ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Publicacion 
+FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion ( id_publicacion );
 
-ALTER TABLE PEPITO.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Factura 
-FOREIGN KEY (nro_factura) REFERENCES PEPITO.Factura ( nro_factura );
+ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Factura 
+FOREIGN KEY (nro_factura) REFERENCES DATA_GROUP.Factura ( nro_factura );
 
 
 -------------------------------------------------------------------------------------
@@ -404,32 +333,37 @@ FOREIGN KEY (nro_factura) REFERENCES PEPITO.Factura ( nro_factura );
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
 
+--------------------------------------------------------
+----------------------TipoDocumento---------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.TipoDocumento(descripcion)
+VALUES ('DNI'), ('LC'), ('LE'), ('CUIT');
 
 --------------------------------------------------------
 --------------------EstadoPublicacion-------------------
 --------------------------------------------------------
-INSERT INTO PEPITO.EstadoPublicacion(descripcion)
+INSERT INTO DATA_GROUP.EstadoPublicacion(descripcion)
 VALUES ('Publicada'),('Borrador'),('Pausada'),('Finalizada');
 --Activa=Publicada, en la maestra aparece como publicada.
 
 --------------------------------------------------------
 ------------------VisibilidadPublicacion----------------
 --------------------------------------------------------
-INSERT INTO PEPITO.VisibilidadPublicacion(id_visibilidad, descripcion, precio, porcentaje)
+INSERT INTO DATA_GROUP.VisibilidadPublicacion(id_visibilidad, descripcion, precio, porcentaje)
 SELECT DISTINCT Publicacion_Visibilidad_Cod, Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Precio, Publicacion_Visibilidad_Porcentaje
 FROM gd_esquema.Maestra;
 
 --------------------------------------------------------
 ------------------------Rol-----------------------------
 --------------------------------------------------------
-INSERT INTO PEPITO.Rol(nombre)
+INSERT INTO DATA_GROUP.Rol(nombre)
 VALUES ('Administrador General'),('Cliente'),('Empresa');
 
 --------------------------------------------------------
 ----------------------Funcionalidad---------------------
 --------------------------------------------------------
 
-INSERT INTO PEPITO.Funcionalidad(nombre)
+INSERT INTO DATA_GROUP.Funcionalidad(nombre)
 VALUES ('ABM de Rol'), ('Registro de Usuario'), ('ABM de Cliente'), ('ABM de Empresa'), 
 	   ('ABM de visibilidad de publicacion'), ('Generar Publicacion'), ('Editar Publicacion'), 
 	   ('Gestión de Preguntas'), ('Comprar/Ofertar'), ('Historial de Cliente'), 
@@ -439,39 +373,91 @@ VALUES ('ABM de Rol'), ('Registro de Usuario'), ('ABM de Cliente'), ('ABM de Emp
 -------------------FuncionalidadXRol--------------------
 --------------------------------------------------------
 --Rol Administrador General
-INSERT INTO PEPITO.FuncionalidadXRol(id_rol, id_funcionalidad)
+INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
 VALUES (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10), (1,11), (1,12);
 --Rol Cliente
-INSERT INTO PEPITO.FuncionalidadXRol(id_rol, id_funcionalidad)
+INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
 VALUES (2,6), (2,7), (2,8), (2,9), (2,10);
 --Rol Empresa
-INSERT INTO PEPITO.FuncionalidadXRol(id_rol, id_funcionalidad)
+INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
 VALUES  (3,6), (3,7), (3,8), (3,9), (3,10);
 --------------------------------------------------------
 ------------------------Rubro---------------------------
 --------------------------------------------------------
 
-INSERT INTO PEPITO.Rubro(descripcion)
+INSERT INTO DATA_GROUP.Rubro(descripcion)
 VALUES ('Rubro1'), ('Rubro2'), ('Rubro3'), ('Rubro4');
 
 --------------------------------------------------------
 ---------------------TipoPublicacion--------------------
 --------------------------------------------------------
 
-INSERT INTO PEPITO.TipoPublicacion(descripcion)
+INSERT INTO DATA_GROUP.TipoPublicacion(descripcion)
 VALUES ('Compra inmediata'), ('Subasta');
 
 --------------------------------------------------------
-------------------Usuario Administrador-----------------
+-------------------------Usuarios-----------------------
 --------------------------------------------------------
+INSERT INTO DATA_GROUP.Usuario(username, contrasenia, tipo_usuario)
+SELECT DISTINCT CONVERT(nvarchar, Publ_Cli_Dni), 'w23e', 'CLI'
+FROM gd_esquema.Maestra
+WHERE Publ_Cli_Dni IS NOT NULL
+UNION
+SELECT DISTINCT CONVERT(nvarchar, Publ_Empresa_Cuit), 'w23e', 'EMP'
+FROM gd_esquema.Maestra
+WHERE Publ_Empresa_Cuit IS NOT NULL
 
-INSERT INTO PEPITO.Usuario(username, contrasenia, tipo_usuario)
+INSERT INTO DATA_GROUP.Usuario(username, contrasenia, tipo_usuario)
 VALUES ('admin','w23e', 'ADM'); 
 
-INSERT INTO PEPITO.Administrador(id_usuario)
+--------------------------------------------------------
+----------------------Administrador---------------------
+--------------------------------------------------------
+
+INSERT INTO DATA_GROUP.Administrador(id_usuario)
 SELECT U.id_usuario
-FROM PEPITO.Usuario U
-WHERE U.tipo_usuario='ADM' AND U.username ='admin' AND U.contrasenia='w23e' ;
+FROM DATA_GROUP.Usuario U
+WHERE U.tipo_usuario='ADM' AND U.username ='admin' AND U.contrasenia='w23e';
+
+--------------------------------------------------------
+-------------------------Cliente------------------------
+--------------------------------------------------------
+
+INSERT INTO DATA_GROUP.Cliente(nro_documento, id_tipo_documento, id_usuario, apellido, nombre, fecha_nacimiento, mail, dom_calle, nro_calle, piso, depto, cod_postal)
+SELECT DISTINCT maes.Publ_Cli_Dni, 1, usu.id_usuario, maes.Publ_Cli_Apeliido, maes.Publ_Cli_Nombre, maes.Publ_Cli_Fecha_Nac, maes.Publ_Cli_Mail, Publ_Cli_Dom_Calle, Publ_Cli_Nro_Calle, Publ_Cli_Piso, Publ_Cli_Depto, Publ_Cli_Cod_Postal
+FROM gd_esquema.Maestra maes
+JOIN DATA_GROUP.Usuario usu
+ON usu.tipo_usuario='CLI' AND usu.username=CAST(maes.Publ_Cli_Dni AS NVARCHAR(255));
+
+--------------------------------------------------------
+-------------------------Empresa------------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Empresa(razon_social, cuit, id_usuario, fecha_creacion, mail, dom_calle, nro_calle, piso, depto, cod_postal)
+SELECT DISTINCT m.Publ_Empresa_Razon_Social, m.Publ_Empresa_Cuit, u.id_usuario, m.Publ_Empresa_Fecha_Creacion, m.Publ_Empresa_Mail, m.Publ_Empresa_Dom_Calle, m.Publ_Empresa_Nro_Calle, m.Publ_Empresa_Piso, m.Publ_Empresa_Depto, m.Publ_Empresa_Cod_Postal
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Usuario u
+ON u.tipo_usuario='EMP' AND u.username=CAST(m.Publ_Empresa_Cuit AS VARCHAR(255))
+WHERE m.Publ_Empresa_Cuit is not null;
+
+--------------------------------------------------------
+------------------------RolXUsuario---------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.UsuarioXRol(id_usuario, id_rol)
+SELECT DISTINCT c.id_usuario, 2
+FROM DATA_GROUP.Cliente c
+UNION
+SELECT DISTINCT e.id_usuario, 3
+FROM DATA_GROUP.Empresa e
+UNION
+SELECT DISTINCT a.id_usuario, 1
+FROM DATA_GROUP.Administrador a;
+
+
+
+
+
+
+
 
 
 --Completo la transaccion
