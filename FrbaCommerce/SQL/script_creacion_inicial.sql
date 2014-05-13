@@ -36,26 +36,13 @@ CREATE TABLE DATA_GROUP.UsuarioXRol (
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
-IF OBJECT_ID('DATA_GROUP.RubroXPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.RubroXPublicacion;
-CREATE TABLE DATA_GROUP.RubroXPublicacion(
-	id_rubro NUMERIC(18, 0) NOT NULL, 
-	id_publicacion NUMERIC(18, 0) NOT NULL, 
-	habilitada bit DEFAULT 1 NOT NULL,
-);
-
-IF OBJECT_ID('DATA_GROUP.CalificacionPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.CalificacionPublicacion;
-CREATE TABLE DATA_GROUP.CalificacionPublicacion(
-	id_publicacion NUMERIC(18, 0) NOT NULL,
-	id_usuario NUMERIC(18, 0) NOT NULL,
-	estrellas_calificacion NUMERIC(18, 0),
-	detalle_calificacion nvarchar(255),
-);
-
+--En el modelo de datos que nos dieron ustedes se supone que todas las compras ya fueron facturadas? O hay compras sin facturar?
 IF OBJECT_ID('DATA_GROUP.Compra', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Compra;
 CREATE TABLE DATA_GROUP.Compra (
 	id_compra NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
 	id_publicacion NUMERIC(18, 0) NOT NULL,
 	id_usuario_comprador NUMERIC(18, 0) NOT NULL,
+	id_calificacion NUMERIC(18, 0),
 	fecha datetime NOT NULL,
 	cantidad NUMERIC(18, 0) NOT NULL,
 );
@@ -67,6 +54,13 @@ CREATE TABLE DATA_GROUP.Oferta(
 	id_usuario_ofertador NUMERIC(18, 0) NOT NULL,
 	fecha datetime NOT NULL,
 	monto NUMERIC(18, 2) NOT NULL,
+);
+
+IF OBJECT_ID('DATA_GROUP.CalificacionPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.CalificacionPublicacion;
+CREATE TABLE DATA_GROUP.CalificacionPublicacion(
+	id_calificacion NUMERIC(18, 0) NOT NULL,
+	estrellas_calificacion NUMERIC(18, 0),
+	detalle_calificacion nvarchar(255),
 );
 
 IF OBJECT_ID('DATA_GROUP.ItemFactura', 'U') IS NOT NULL DROP TABLE DATA_GROUP.ItemFactura;
@@ -99,16 +93,18 @@ CREATE TABLE DATA_GROUP.Pregunta(
 
 IF OBJECT_ID('DATA_GROUP.Publicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Publicacion;
 CREATE TABLE DATA_GROUP.Publicacion(
-	id_publicacion NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
+	id_publicacion NUMERIC(18,0) NOT NULL,
 	descripcion nvarchar(255),
 	stock NUMERIC(18,0),
 	fecha_inicio datetime,
 	fecha_vencimiento datetime,
 	precio NUMERIC(18,2),
+	permite_preguntas bit DEFAULT 1 NOT NULL,
 	id_tipo_publicacion NUMERIC(18,0) NOT NULL,
 	id_visibilidad NUMERIC(18,0) NOT NULL, 
 	id_estado NUMERIC(18,0) NOT NULL, 
 	id_usuario_publicador NUMERIC(18,0) NOT NULL,
+	id_rubro NUMERIC(18, 0),
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
@@ -200,12 +196,11 @@ CREATE TABLE DATA_GROUP.TipoPublicacion(
 
 IF OBJECT_ID('DATA_GROUP.VisibilidadPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.VisibilidadPublicacion;
 CREATE TABLE DATA_GROUP.VisibilidadPublicacion(
-	id_visibilidad NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
+	id_visibilidad NUMERIC(18,0) NOT NULL,
 	descripcion nvarchar(255) NOT NULL,
 	precio NUMERIC(18, 2) NOT NULL,
 	porcentaje NUMERIC(18, 2) NOT NULL,
 );
-SET IDENTITY_INSERT DATA_GROUP.VisibilidadPublicacion ON
 
 IF OBJECT_ID('DATA_GROUP.EstadoPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.EstadoPublicacion;
 CREATE TABLE DATA_GROUP.EstadoPublicacion(
@@ -226,7 +221,6 @@ ALTER TABLE DATA_GROUP.Cliente ADD CONSTRAINT pk_id_cliente PRIMARY KEY ( id_tip
 ALTER TABLE DATA_GROUP.Empresa ADD CONSTRAINT pk_id_empresa PRIMARY KEY ( cuit, razon_social );
 ALTER TABLE DATA_GROUP.UsuarioXRol ADD CONSTRAINT pk_usuario_rol PRIMARY KEY ( id_usuario,id_rol );
 ALTER TABLE DATA_GROUP.Rubro ADD CONSTRAINT pk_id_rubro PRIMARY KEY ( id_rubro );
-ALTER TABLE DATA_GROUP.RubroXPublicacion ADD CONSTRAINT pk_rubro_publicacion PRIMARY KEY ( id_rubro, id_publicacion );
 ALTER TABLE DATA_GROUP.TipoPublicacion ADD CONSTRAINT pk_id_tipo_publicacion PRIMARY KEY ( id_tipo_publicacion );
 ALTER TABLE DATA_GROUP.VisibilidadPublicacion ADD CONSTRAINT pk_id_visibilidad PRIMARY KEY ( id_visibilidad );
 ALTER TABLE DATA_GROUP.EstadoPublicacion ADD CONSTRAINT pk_id_estado PRIMARY KEY ( id_estado );
@@ -234,9 +228,9 @@ ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT pk_id_publicacion PRIMARY KEY 
 ALTER TABLE DATA_GROUP.Pregunta ADD CONSTRAINT pk_id_pregunta PRIMARY KEY ( id_pregunta );
 ALTER TABLE DATA_GROUP.Compra ADD CONSTRAINT pk_id_compra PRIMARY KEY (id_compra);
 ALTER TABLE DATA_GROUP.Oferta ADD CONSTRAINT pk_id_oferta PRIMARY KEY (id_oferta);
-ALTER TABLE DATA_GROUP.CalificacionPublicacion ADD CONSTRAINT pk_id_calificacion_publicacion PRIMARY KEY(id_publicacion);
+ALTER TABLE DATA_GROUP.CalificacionPublicacion ADD CONSTRAINT pk_id_calificacion_publicacion PRIMARY KEY(id_calificacion);
 ALTER TABLE DATA_GROUP.Factura ADD CONSTRAINT pk_nro_factura PRIMARY KEY (nro_factura);
-ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT pk_item_factura PRIMARY KEY (nro_factura, id_publicacion);
+--ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT pk_item_factura PRIMARY KEY ( id_item );
 ALTER TABLE DATA_GROUP.TipoDocumento ADD CONSTRAINT pk_tipo_documento PRIMARY KEY (id_tipo_documento);
 
 -------------------------------------------------------------------------------------
@@ -281,12 +275,8 @@ FOREIGN KEY (id_visibilidad) REFERENCES DATA_GROUP.VisibilidadPublicacion (id_vi
 ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT fk_Publicacion_to_Usuario
 FOREIGN KEY (id_usuario_publicador) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
---Rubro x publicacion
-ALTER TABLE DATA_GROUP.RubroXPublicacion ADD CONSTRAINT fk_RubroXPublicacion_to_Rubro
+ALTER TABLE DATA_GROUP.Publicacion ADD CONSTRAINT fk_Publicacion_to_Rubro
 FOREIGN KEY (id_rubro) REFERENCES DATA_GROUP.Rubro (id_rubro);
-
-ALTER TABLE DATA_GROUP.RubroXPublicacion ADD CONSTRAINT fk_RubroXPublicacion_to_Publicacion
-FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
 
 --Preguntas
 ALTER TABLE DATA_GROUP.Pregunta ADD CONSTRAINT fk_Pregunta_to_Publicacion
@@ -302,12 +292,8 @@ FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
 ALTER TABLE DATA_GROUP.Compra ADD CONSTRAINT fk_Compra_to_Usuario 
 FOREIGN KEY (id_usuario_comprador) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
---CalificacionPublicacion
-ALTER TABLE DATA_GROUP.CalificacionPublicacion ADD CONSTRAINT fk_CalificacionPublicacion_to_Publicacion 
-FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion (id_publicacion);
-
-ALTER TABLE DATA_GROUP.CalificacionPublicacion  ADD CONSTRAINT fk_CalificacionPublicacion_to_Usuario 
-FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario);
+ALTER TABLE DATA_GROUP.Compra ADD CONSTRAINT fk_Compra_to_CalificacionPublicacion 
+FOREIGN KEY (id_calificacion) REFERENCES DATA_GROUP.CalificacionPublicacion (id_calificacion);
 
 --Oferta
 ALTER TABLE DATA_GROUP.Oferta ADD CONSTRAINT fk_Oferta_to_Publicacion 
@@ -386,7 +372,8 @@ VALUES  (3,6), (3,7), (3,8), (3,9), (3,10);
 --------------------------------------------------------
 
 INSERT INTO DATA_GROUP.Rubro(descripcion)
-VALUES ('Rubro1'), ('Rubro2'), ('Rubro3'), ('Rubro4');
+SELECT DISTINCT Publicacion_Rubro_Descripcion
+FROM gd_esquema.Maestra;
 
 --------------------------------------------------------
 ---------------------TipoPublicacion--------------------
@@ -453,12 +440,76 @@ SELECT DISTINCT a.id_usuario, 1
 FROM DATA_GROUP.Administrador a;
 
 
+--------------------------------------------------------
+------------------------Publicacion---------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Publicacion (id_publicacion, descripcion, stock, fecha_inicio, fecha_vencimiento, precio, id_tipo_publicacion, id_visibilidad, id_estado, id_usuario_publicador, id_rubro)
+SELECT DISTINCT m.Publicacion_Cod, 
+				m.Publicacion_Descripcion, 
+				m.Publicacion_Stock, 
+				m.Publicacion_Fecha, 
+				m.Publicacion_Fecha_Venc, 
+				m.Publicacion_Precio, 
+				case m.Publicacion_Tipo WHEN 'Compra Inmediata' THEN 1 WHEN 'Subasta' THEN 2 END, 
+				m.Publicacion_Visibilidad_Cod,
+				case WHEN m.Publicacion_Fecha_Venc > CAST('20140618' as datetime) THEN 1 ELSE 4 END,
+				u.id_usuario, 
+				r.id_rubro
+FROM gd_esquema.Maestra m
+INNER JOIN DATA_GROUP.Usuario u
+ON CONVERT(nvarchar, m.Publ_Cli_Dni)=u.username OR CONVERT(nvarchar, m.Publ_Empresa_Cuit)=u.username
+INNER JOIN DATA_GROUP.Rubro r
+ON m.Publicacion_Rubro_Descripcion=r.descripcion
+WHERE m.Publicacion_Cod is not null;
 
+--------------------------------------------------------
+-----------------CalificacionPublicacion----------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.CalificacionPublicacion(id_calificacion, estrellas_calificacion, detalle_calificacion)
+SELECT DISTINCT m.Calificacion_Codigo, m.Calificacion_Cant_Estrellas, m.Calificacion_Descripcion
+FROM gd_esquema.Maestra m
+WHERE m.Calificacion_Codigo is not null;
 
+--------------------------------------------------------
+-------------------------Compras------------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Compra(fecha, cantidad, id_calificacion, id_usuario_comprador, id_publicacion)
+SELECT m.Compra_Fecha, m.Compra_Cantidad, m.Calificacion_Codigo, u.id_usuario, m.Publicacion_Cod
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Usuario u
+ON u.username=CAST(m.Cli_Dni as nvarchar(255))
+WHERE m.Compra_Fecha is not null AND
+		m.Cli_Dni is not null AND
+		m.Publicacion_Cod is not null;
+		
+--------------------------------------------------------
+-------------------------Ofertas------------------------
+--------------------------------------------------------		
+INSERT INTO DATA_GROUP.Oferta(fecha, monto, id_publicacion, id_usuario_ofertador)
+SELECT m.Oferta_Fecha, m.Oferta_Monto, m.Publicacion_Cod, u.id_usuario
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Usuario u
+ON u.username=CAST(m.Cli_Dni as nvarchar(255))
+WHERE m.Oferta_Fecha is not null and
+		m.Cli_Dni is not null;
+		
+--------------------------------------------------------
+------------------------Facturas------------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Factura(nro_factura, fecha, forma_pago_descripcion, total, id_vendedor)
+SELECT DISTINCT m.Factura_Nro, m.Factura_Fecha, m.Forma_Pago_Desc, m.Factura_Total, p.id_usuario_publicador
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Publicacion p
+ON m.Publicacion_Cod=p.id_publicacion
+WHERE m.Factura_Nro is not null;
 
-
-
-
+--------------------------------------------------------
+----------------------ItemFactura-----------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.ItemFactura(cantidad, monto, id_publicacion, nro_factura)
+SELECT m.Item_Factura_Cantidad, m.Item_Factura_Monto, m.Publicacion_Cod, m.Factura_Nro
+FROM gd_esquema.Maestra m
+WHERE m.Factura_Nro is not null;
 
 --Completo la transaccion
 COMMIT
