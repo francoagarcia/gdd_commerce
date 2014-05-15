@@ -30,5 +30,10 @@ namespace FrbaCommerce.Registro_de_Usuario
         {
 
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

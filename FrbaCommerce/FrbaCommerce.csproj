@@ -117,11 +117,11 @@
     <Compile Include="Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.cs">
+    <Compile Include="Generar Publicacion\Generar publicación.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generar Publicacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Publicacion\Generar publicación.Designer.cs">
+      <DependentUpon>Generar publicación.cs</DependentUpon>
     </Compile>
     <Compile Include="Gestion de Preguntas\Form1.cs">
       <SubType>Form</SubType>
@@ -160,6 +160,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Publicacion\Generar publicación.resx">
+      <DependentUpon>Generar publicación.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
