@@ -1,6 +1,6 @@
-﻿namespace FrbaCommerce.Editar_Publicacion
+﻿namespace FrbaCommerce.Comprar_Ofertar
 {
-    partial class Form1
+    partial class Form2
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Form2
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.Name = "Form2";
+            this.Text = "Datos del Vendedor";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
