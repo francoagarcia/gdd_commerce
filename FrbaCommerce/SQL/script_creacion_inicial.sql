@@ -111,14 +111,14 @@ CREATE TABLE DATA_GROUP.Publicacion(
 IF OBJECT_ID('DATA_GROUP.Rol', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Rol;
 CREATE TABLE DATA_GROUP.Rol(
 	id_rol NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
-	nombre varchar(255) NOT NULL,
+	nombre nvarchar(255) NOT NULL,
 	habilitada bit DEFAULT 1 NOT NULL, 
 );
 
 IF OBJECT_ID('DATA_GROUP.Funcionalidad', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Funcionalidad;
 CREATE TABLE DATA_GROUP.Funcionalidad (
 	id_funcionalidad NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
-	nombre varchar(255) NOT NULL,
+	nombre nvarchar(255) NOT NULL,
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
@@ -140,12 +140,12 @@ CREATE TABLE DATA_GROUP.Cliente (
 	nro_calle NUMERIC(18, 0),
 	piso NUMERIC(18,0),      
 	depto nvarchar(50),      
-	localidad varchar(255),
+	localidad nvarchar(255),
 	cod_postal nvarchar(50),
 	mail nvarchar(255),
 	fecha_nacimiento datetime,
 	sexo bit DEFAULT NULL,
-	habilitada bit DEFAULT 1,
+	--habilitada bit DEFAULT 1,
 );
 
 IF OBJECT_ID('DATA_GROUP.Empresa', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Empresa;
@@ -173,7 +173,7 @@ CREATE TABLE DATA_GROUP.Usuario (
 	telefono NUMERIC(18,0),
 	intentos_login NUMERIC(1, 0) DEFAULT 0, 
 	tipo_usuario nvarchar(3), 
-	habilitada bit DEFAULT 1,
+	habilitada bit DEFAULT 1
 );
 
 IF OBJECT_ID('DATA_GROUP.TipoDocumento', 'U') IS NOT NULL DROP TABLE DATA_GROUP.TipoDocumento;
@@ -423,7 +423,7 @@ INSERT INTO DATA_GROUP.Empresa(razon_social, cuit, id_usuario, fecha_creacion, m
 SELECT DISTINCT m.Publ_Empresa_Razon_Social, m.Publ_Empresa_Cuit, u.id_usuario, m.Publ_Empresa_Fecha_Creacion, m.Publ_Empresa_Mail, m.Publ_Empresa_Dom_Calle, m.Publ_Empresa_Nro_Calle, m.Publ_Empresa_Piso, m.Publ_Empresa_Depto, m.Publ_Empresa_Cod_Postal
 FROM gd_esquema.Maestra m
 JOIN DATA_GROUP.Usuario u
-ON u.tipo_usuario='EMP' AND u.username=CAST(m.Publ_Empresa_Cuit AS VARCHAR(255))
+ON u.tipo_usuario='EMP' AND u.username=CAST(m.Publ_Empresa_Cuit AS NVARCHAR(255))
 WHERE m.Publ_Empresa_Cuit is not null;
 
 --------------------------------------------------------
