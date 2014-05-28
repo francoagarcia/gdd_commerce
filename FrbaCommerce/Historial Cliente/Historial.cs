@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaCommerce.Listado_Estadistico
+namespace FrbaCommerce.Historial_Cliente
 {
-    public partial class Form1 : Form
+    public partial class Historial : Form
     {
-        public Form1()
+        public Historial()
         {
             InitializeComponent();
         }
