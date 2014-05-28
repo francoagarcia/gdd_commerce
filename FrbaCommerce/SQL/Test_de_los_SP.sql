@@ -110,6 +110,34 @@ WHERE id_tipo_documento=1 AND nro_documento=37510337
 DELETE FROM DATA_GROUP.Usuario
 WHERE username=@nombre_usuario	
 
+
+PRINT '---------------Test de inhabilitar cliente------------------'
+
+EXEC DATA_GROUP.deshabilitarCliente @tipo_documento='DNI', @nro_documento=8064359
+
+DECLARE @bit_habilitado bit
+SET @bit_habilitado = ( SELECT u.habilitada
+						FROM DATA_GROUP.Usuario u
+						JOIN DATA_GROUP.Cliente c
+						ON u.id_usuario=c.id_usuario AND c.nro_documento=8064359 AND c.id_tipo_documento=1)
+IF @bit_habilitado=0
+	PRINT 'Se inhabilitó correctamente al cliente'
+ELSE
+	PRINT 'No se inhabilitó un carajo.'
+
+PRINT '---------------Test de habilitar a un cliente------------------'
+
+EXEC DATA_GROUP.habilitarCliente @tipo_documento='DNI', @nro_documento=8064359
+
+SET @bit_habilitado = ( SELECT u.habilitada
+						FROM DATA_GROUP.Usuario u
+						JOIN DATA_GROUP.Cliente c
+						ON u.id_usuario=c.id_usuario AND c.nro_documento=8064359 AND c.id_tipo_documento=1)
+IF @bit_habilitado=1
+	PRINT 'Ahora se volvio a habilitar al cliente'
+ELSE
+	PRINT 'No se habilitó un carajo.'
+
 	
 	
 ---------------------------------------------------------------------
@@ -181,6 +209,8 @@ WHERE cuit='03-99999999-99'
 DELETE FROM DATA_GROUP.Usuario
 WHERE username=@username_nuevo
 	
+	
+
 	
 	
 	

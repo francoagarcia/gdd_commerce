@@ -200,6 +200,7 @@ CREATE TABLE DATA_GROUP.VisibilidadPublicacion(
 	descripcion nvarchar(255) NOT NULL,
 	precio NUMERIC(18, 2) NOT NULL,
 	porcentaje NUMERIC(18, 2) NOT NULL,
+	habilitada bit DEFAULT 1
 );
 
 IF OBJECT_ID('DATA_GROUP.EstadoPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.EstadoPublicacion;
