@@ -12,13 +12,25 @@ using FrbaCommerce.Generics.Enums;
 using FrbaCommerce.Generics;
 using FrbaCommerce.DataAccess;
 using FrbaCommerce.GUIMethods;
+using FrbaCommerce.Entidades;
 
 namespace FrbaCommerce.Vistas.Login
 {
     public partial class Login : Form
     {
+
+        #region [Atributos(private)]
+        private bool rol_seleccionado;
+        #endregion
+
+        #region [Propiedades(public)]
+        public Usuario UsuarioIniciado { get; private set; }
+        public Rol RolUsuarioIniciado { get; private set; }
+        #endregion
+
         public Login()
         {
+            this.rol_seleccionado = true;
             InitializeComponent();
         }
 
@@ -27,6 +39,30 @@ namespace FrbaCommerce.Vistas.Login
             {
                 if (this.realizar_login())
                 {
+                    IList<Rol> roles_usuario = RolDB.ObtenerRoles(this.textBoxUsername.Text);
+
+                    if (roles_usuario.Count > 1 && rol_seleccionado)
+                    {
+                        this.textBoxUsername.Enabled = false;
+                        this.textBoxPassword.Enabled = false;
+                        this.labelRol.Visible = true;
+                        this.comboBoxRol.Visible = true;
+                        this.comboBoxRol.DataSource = roles_usuario;
+                        this.comboBoxRol.SelectedIndex = 0;
+
+                        MessageDialog.MensajeInformativo(this, "Seleccione un rol");
+                        rol_seleccionado = false;
+                    }
+                    else if (roles_usuario.Count > 1 && !rol_seleccionado)
+                    {
+                        this.RolUsuarioIniciado = (Rol)this.comboBoxRol.SelectedItem;
+                        this.obtenerUsuarioLogueadoCorrectamente();
+                    }
+                    else
+                    {
+                        this.RolUsuarioIniciado = roles_usuario.First();
+                        this.obtenerUsuarioLogueadoCorrectamente();
+                    }
                     
                 }
             }
@@ -36,6 +72,12 @@ namespace FrbaCommerce.Vistas.Login
                 this.limpiarTextBoxes();
             }
         
+        }
+
+        private void obtenerUsuarioLogueadoCorrectamente(){
+
+            this.UsuarioIniciado = UsuarioDB.ObtenerPorUsername(this.textBoxUsername.Text);
+            this.Close();
         }
 
         private void limpiarTextBoxes() {
@@ -49,8 +91,6 @@ namespace FrbaCommerce.Vistas.Login
 
             IdentificacionUsuario resultadoLogin = this.ValidarLogin(this.textBoxUsername.Text, password_hash);
 
-            string[] lines3 = { Convert.ToString(resultadoLogin) };
-            System.IO.File.WriteAllLines(@"C:\Franco\pene.txt", lines3);
             if (loginSuccess(resultadoLogin))
             {
                 return true;
@@ -63,14 +103,14 @@ namespace FrbaCommerce.Vistas.Login
 
         }
 
-        private bool loginSuccess(IdentificacionUsuario resultadoLogin) {
+        protected bool loginSuccess(IdentificacionUsuario resultadoLogin) {
             return resultadoLogin == 0;
         }
 
         private IdentificacionUsuario ValidarLogin(string username, string hashPassword)
         {
             IdentificacionUsuario identificacion;
-            int codigoRetorno = UsuarioDB.RealizarIdentificacion(username, hashPassword);
+            int codigoRetorno = UsuarioDB.RealizarLogin(username, hashPassword);
             switch (codigoRetorno)
             {
                 case -2:
@@ -98,7 +138,7 @@ namespace FrbaCommerce.Vistas.Login
                 case IdentificacionUsuario.UsuarioBloqueado:
                     return "El usuario ha sido bloqueado por reiterados intentos erróneos de login";
                 case IdentificacionUsuario.UsuarioInvalido:
-                    return "El usuario, el rol o la contraseña son inválidos";
+                    return "El usuario o la contraseña son inválidos";
                 default:
                     return "Error al querer identificar";
             }
@@ -107,6 +147,11 @@ namespace FrbaCommerce.Vistas.Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             this.login();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
    
     }

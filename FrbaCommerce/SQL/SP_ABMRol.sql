@@ -109,4 +109,24 @@ BEGIN
 END
 GO
 
+
+IF OBJECT_ID('DATA_GROUP.getRolesDeUsuario') is not null
+	DROP PROCEDURE DATA_GROUP.getRolesDeUsuario
+	GO
+CREATE PROCEDURE DATA_GROUP.getRolesDeUsuario 
+	@username nvarchar(255)
+AS
+BEGIN
+
+	SELECT r.id_rol, r.nombre, r.habilitada
+	FROM DATA_GROUP.Rol r
+	INNER JOIN DATA_GROUP.UsuarioXRol ur
+	ON r.id_rol=ur.id_rol
+	INNER JOIN DATA_GROUP.Usuario u
+	ON u.id_usuario=ur.id_usuario AND u.username=@username
+	WHERE r.habilitada=1 AND u.habilitada=1
+
+END
+GO
+
 	

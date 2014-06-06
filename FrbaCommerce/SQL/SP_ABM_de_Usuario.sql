@@ -30,18 +30,20 @@ BEGIN
 END
 GO
 
-----------------------Get usuario--------------------------
-IF OBJECT_ID('DATA_GROUP.getUsuario') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.getUsuario
+----------------------Gets de usuario--------------------------
+If OBJECT_ID('DATA_GROUP.getUsuarioByUsername') is not null
+	DROP PROCEDURE DATA_GROUP.getUsuarioByUsername
 	GO
-CREATE PROCEDURE DATA_GROUP.getUsuario
-@username nvarchar(255)
+CREATE PROCEDURE DATA_GROUP.getUsuarioByUsername(
+	@username nvarchar(255))
 AS
 BEGIN
-	SELECT u.username, u.id_usuario, u.contrasenia, u.intentos_login, u.habilitada
+
+	SELECT u.id_usuario, u.username, u.contrasenia, u.intentos_login, u.habilitada
 	FROM DATA_GROUP.Usuario u
-	WHERE u.username=@username AND u.habilitada=1;
-END
+	WHERE u.username=@username AND u.habilitada=1
+
+ END
 GO
 
 
