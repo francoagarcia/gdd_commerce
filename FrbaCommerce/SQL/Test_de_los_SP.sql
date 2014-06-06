@@ -11,38 +11,7 @@ SET @username_correcto = '58-32419179-67'
 SET @contrasenia_correcta = 'w23e'
 SET @contrasenia_incorrecta = 'contrasenia mala'
 
-PRINT '---------------Test de login correcto------------------'
 
-EXEC DATA_GROUP.SP_login @username_login=@username_correcto, @contrasenia=@contrasenia_correcta, @id_usuario=@id_usuario_correcto_output OUTPUT;
-
-IF @id_usuario_correcto_output is null
-	BEGIN
-		PRINT 'El usuario o contraseña es incorrecto'
-	END
-ELSE
-	BEGIN
-		PRINT 'El usuario se logueó correctamente'
-		PRINT @id_usuario_correcto_output
-	END
-	
-PRINT '---------------Test de login incorrecto------------------'
-
-
-EXEC DATA_GROUP.SP_login @username_login=@username_correcto, @contrasenia=@contrasenia_incorrecta, @id_usuario=@id_usuario_incorrecto_output OUTPUT;
-
-IF @id_usuario_incorrecto_output is null
-	BEGIN
-		PRINT 'El usuario o contraseña es incorrecto'
-		DECLARE @cantidad_de_intentos numeric(18, 0)
-		SET @cantidad_de_intentos = (SELECT intentos_login FROM DATA_GROUP.Usuario WHERE username=@username_correcto)
-		PRINT STR(@cantidad_de_intentos)+' es el numero de intentos.'
-	END
-ELSE
-	BEGIN
-		PRINT 'El usuario se logueó correctamente'
-		PRINT @id_usuario_incorrecto_output
-	END
-	
 ---------------------------------------------------------------------
 ------------------------TESTS SP_ABMCliente--------------------------
 ---------------------------------------------------------------------

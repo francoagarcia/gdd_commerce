@@ -15,6 +15,36 @@ BEGIN
 END
 GO
 
+---------------Setear cantidad de intentos-----------
+IF OBJECT_ID('DATA_GROUP.setCantidadIntentos') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.setCantidadIntentos
+	GO
+CREATE PROCEDURE DATA_GROUP.setCantidadIntentos
+@username nvarchar(255),
+@cantidad int
+AS
+BEGIN
+	UPDATE DATA_GROUP.Usuario
+	SET intentos_login=@cantidad
+	WHERE username=@username
+END
+GO
+
+----------------------Get usuario--------------------------
+IF OBJECT_ID('DATA_GROUP.getUsuario') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.getUsuario
+	GO
+CREATE PROCEDURE DATA_GROUP.getUsuario
+@username nvarchar(255)
+AS
+BEGIN
+	SELECT u.username, u.id_usuario, u.contrasenia, u.intentos_login, u.habilitada
+	FROM DATA_GROUP.Usuario u
+	WHERE u.username=@username AND u.habilitada=1;
+END
+GO
+
+
 ----------------------MODIFICAR USUARIO--------------------------
 IF OBJECT_ID('DATA_GROUP.modificarUsuario') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.modificarUsuario
@@ -61,3 +91,4 @@ BEGIN
 	WHERE username=@username
 END
 GO
+

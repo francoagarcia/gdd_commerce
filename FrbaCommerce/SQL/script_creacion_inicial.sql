@@ -170,8 +170,8 @@ CREATE TABLE DATA_GROUP.Usuario (
 	id_usuario NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
 	username nvarchar(255),
 	contrasenia nvarchar(255),
-	telefono NUMERIC(18,0),
-	intentos_login NUMERIC(1, 0) DEFAULT 0, 
+	telefono nvarchar(255),
+	intentos_login int DEFAULT 0, 
 	tipo_usuario nvarchar(3), 
 	habilitada bit DEFAULT 1
 );
@@ -386,17 +386,17 @@ VALUES ('Compra inmediata'), ('Subasta');
 --------------------------------------------------------
 -------------------------Usuarios-----------------------
 --------------------------------------------------------
-INSERT INTO DATA_GROUP.Usuario(username, contrasenia, tipo_usuario)
-SELECT DISTINCT CONVERT(nvarchar, Publ_Cli_Dni), 'w23e', 'CLI'
+INSERT INTO DATA_GROUP.Usuario(username, contrasenia, tipo_usuario)	--pass_cli_migrados
+SELECT DISTINCT LTRIM(RTRIM(CONVERT(nvarchar(255), Publ_Cli_Dni))), 'b34d9e1f824369575b069ae374f616b5e8e50b248cfb1a9fb19ec9a7a119ce5b', 'CLI'
 FROM gd_esquema.Maestra
 WHERE Publ_Cli_Dni IS NOT NULL
-UNION
-SELECT DISTINCT CONVERT(nvarchar, Publ_Empresa_Cuit), 'w23e', 'EMP'
+UNION																		--pass: pass_emp_migrados
+SELECT DISTINCT LTRIM(RTRIM(CONVERT(nvarchar(255), Publ_Empresa_Cuit))), 'ef9e14d5e625e301a7daa1163c515578f6c37891d63eb1a9139fc4af530c70b4', 'EMP'
 FROM gd_esquema.Maestra
 WHERE Publ_Empresa_Cuit IS NOT NULL
 
 INSERT INTO DATA_GROUP.Usuario(username, contrasenia, tipo_usuario)
-VALUES ('admin','w23e', 'ADM'); 
+VALUES ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'ADM'); 
 
 --------------------------------------------------------
 ----------------------Administrador---------------------
@@ -405,7 +405,7 @@ VALUES ('admin','w23e', 'ADM');
 INSERT INTO DATA_GROUP.Administrador(id_usuario)
 SELECT U.id_usuario
 FROM DATA_GROUP.Usuario U
-WHERE U.tipo_usuario='ADM' AND U.username ='admin' AND U.contrasenia='w23e';
+WHERE U.tipo_usuario='ADM' AND U.username ='admin' AND U.contrasenia='e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7';
 
 --------------------------------------------------------
 -------------------------Cliente------------------------
