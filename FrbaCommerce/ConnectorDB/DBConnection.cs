@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlClient;
+using FrbaCommerce.Generics;
 
 namespace FrbaCommerce.ConnectorDB
 {
@@ -21,9 +22,11 @@ namespace FrbaCommerce.ConnectorDB
         {
             get
             {
-                if (persistentConnection == null)
+                if (persistentConnection == null) //osea que no hay conexion
                 {
-                    persistentConnection = new SqlConnection("Server=localhost\\SQLSERVER2008;Database=GD1C2014;User Id=gd;Password=gd2014");
+                    string connectionString = AppConfigReader.Get("connection_string");
+                    persistentConnection = new SqlConnection(connectionString);
+                    //persistentConnection = new SqlConnection("Server=localhost\\SQLSERVER2008;Database=GD1C2014;User Id=gd;Password=gd2014");
                 }
                 return persistentConnection;
             }

@@ -119,6 +119,7 @@ IF OBJECT_ID('DATA_GROUP.Funcionalidad', 'U') IS NOT NULL DROP TABLE DATA_GROUP.
 CREATE TABLE DATA_GROUP.Funcionalidad (
 	id_funcionalidad NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
 	nombre nvarchar(255) NOT NULL,
+	nombreVar nvarchar(255) NULL,
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
@@ -351,23 +352,33 @@ VALUES ('Administrador General'),('Cliente'),('Empresa');
 --------------------------------------------------------
 
 INSERT INTO DATA_GROUP.Funcionalidad(nombre)
-VALUES ('ABM de Rol'), ('Registro de Usuario'), ('ABM de Cliente'), ('ABM de Empresa'), 
-	   ('ABM de visibilidad de publicacion'), ('Generar Publicacion'), ('Editar Publicacion'), 
-	   ('Gestión de Preguntas'), ('Comprar/Ofertar'), ('Historial de Cliente'), 
-	   ('Facturar Publicaciones'), ('Listado Estadístico');
+VALUES  ('ABM de Rol'), --1
+		('Registro de Usuario'), --2
+		('ABM de Cliente'), --3
+		('ABM de Empresa'), --4
+		('ABM de Rubro'), --5
+	    ('ABM de Visibilidad de Publicacion'), --6
+		('Nueva Publicacion'), --7
+		('Editar Publicacion'), --8
+	    ('Gestion de Preguntas'), --9
+		('Comprar/Ofertar'), --10
+		('Historial de Operaciones'), --11
+		('Calificar al Vendedor'), --12
+	    ('Facturar Publicaciones'), --13
+		('Listado Estadistico'); --14
 	   
 --------------------------------------------------------
 -------------------FuncionalidadXRol--------------------
 --------------------------------------------------------
 --Rol Administrador General
 INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
-VALUES (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10), (1,11), (1,12);
+VALUES (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10), (1,11), (1,12), (1,13), (1, 14);
 --Rol Cliente
 INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
-VALUES (2,6), (2,7), (2,8), (2,9), (2,10);
+VALUES (2,7), (2,8), (2,9), (2,10), (2,11), (2, 12), (2, 14);
 --Rol Empresa
 INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
-VALUES  (3,6), (3,7), (3,8), (3,9), (3,10);
+VALUES  (3,7), (3,8), (3,9), (3, 11), (2, 14);
 --------------------------------------------------------
 ------------------------Rubro---------------------------
 --------------------------------------------------------

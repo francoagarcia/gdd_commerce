@@ -149,6 +149,24 @@ namespace FrbaCommerce.Vistas.Login
             this.login();
         }
 
+        private void tbUsuario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.Login_KeyPress(sender, e);
+        }
+
+        private void tbPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void Login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Convert.ToInt32(e.KeyChar) == 13 || Convert.ToInt32(e.KeyChar) == 10)
+            {
+                this.login();
+            }
+        }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();

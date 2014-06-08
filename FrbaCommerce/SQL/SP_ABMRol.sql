@@ -68,19 +68,14 @@ END
 GO
 
 
-IF OBJECT_ID('DATA_GROUP.getTodosRoles') IS NOT NULL
-	DROP FUNCTION DATA_GROUP.getTodosRoles
+IF OBJECT_ID('DATA_GROUP.getTodosLosRoles') is not null
+	DROP PROCEDURE DATA_GROUP.getTodosLosRoles
 	GO
-CREATE FUNCTION DATA_GROUP.getTodosRoles()
-	RETURNS @table_roles TABLE (id_rol numeric(18,0), nombre nvarchar(255))
+CREATE PROCEDURE DATA_GROUP.getTodosLosRoles
 AS
 BEGIN
-	INSERT INTO @table_roles 
-		SELECT R.id_rol, R.nombre
-		FROM DATA_GROUP.Rol R
-		WHERE habilitada=1
-	
-	RETURN 
+	select id_rol, nombre, habilitada
+	from DATA_GROUP.Rol
 END
 GO
 
