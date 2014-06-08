@@ -40,5 +40,15 @@ namespace FrbaCommerce.GUIMethods
         {
             return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe tener entre {1} y {2} caracteres", controlName, minSize, maxSize), "Error al validar");
         }
+
+        public static DialogResult MensajeVacio(string lugar)
+        {
+            return MessageBox.Show(string.Format("No ha ingresado ningun valor en el campo {0}.", lugar), "Completar");
+        }
+
+        public static DialogResult MensajeListaVacia()
+        {
+            return MessageBox.Show(string.Format("No ha ingresado ningun valor en la lista."), "Completar");
+        }
     }
 }

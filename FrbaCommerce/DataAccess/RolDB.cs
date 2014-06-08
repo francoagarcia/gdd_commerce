@@ -32,5 +32,65 @@ namespace FrbaCommerce.DataAccess
 
             return roles;
         }
+
+        public bool Crear_Rol(string rol) {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            var pRol = new SqlParameter("@nombreRolNuevo", SqlDbType.NVarChar, 255, "nombreRolNuevo");
+            pRol.Value = rol;
+            parametros.Add(pRol);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_crearRol", parametros);
+
+            return true;
+        }
+
+        public DataSet Mostrar_Roles() {
+
+            DataSet ds = (DataSet)HomeDB.ExecuteStoredProcedured("DATA_GROUP.getTodosLosRoles");
+        return ds;
+        }
+
+        public bool Modificar_Rol(string nombreV, string nombreN) {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            var pNombreVie = new SqlParameter("@nombreViejo ", SqlDbType.NVarChar, 255, "nombreViejo");
+            pNombreVie.Value = nombreN;
+            parametros.Add(pNombreVie);
+
+            var pNombreNue = new SqlParameter("@nombreNuevo  ", SqlDbType.NVarChar, 255, "nombreNuevo");
+            pNombreNue.Value = nombreN;
+            parametros.Add(pNombreNue);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_modificar_Rol");
+
+            return true;
+        }
+
+        public bool habilitar(string nom) {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            var pHabili = new SqlParameter("@nombreRol  ", SqlDbType.NVarChar, 255, "nombreRol");
+            pHabili.Value = nom;
+            parametros.Add(pHabili);
+
+            return true;
+        }
+
+        public bool deshabilitar(string nom)
+        {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            var pHabili = new SqlParameter("@nombreRol  ", SqlDbType.NVarChar, 255, "nombreRol");
+            pHabili.Value = nom;
+            parametros.Add(pHabili);
+
+            return true;
+        }
+
     }
 }

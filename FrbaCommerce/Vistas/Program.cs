@@ -6,6 +6,8 @@ using System.IO;
 using FrbaCommerce.Generics.Logger;
 using FrbaCommerce.Generics;
 using FrbaCommerce.GUIMethods;
+using FrbaCommerce.Vistas.Login;
+using FrbaCommerce.Vistas.ABM_Rol;
 
 namespace FrbaCommerce
 {

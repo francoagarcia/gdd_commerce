@@ -89,11 +89,17 @@
     <Compile Include="Vistas\Abm Empresa\AltaEmpresa.Designer.cs">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\ABM Rol\ABMRol.cs">
+    <Compile Include="Vistas\ABM Rol\Crear Rol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\ABM Rol\ABMRol.Designer.cs">
-      <DependentUpon>ABMRol.cs</DependentUpon>
+    <Compile Include="Vistas\ABM Rol\Crear Rol.Designer.cs">
+      <DependentUpon>Crear Rol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ABM Rol\Modificar un Rol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ABM Rol\Modificar un Rol.Designer.cs">
+      <DependentUpon>Modificar un Rol.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm Rubro\ABMRubro.cs">
       <SubType>Form</SubType>
@@ -205,8 +211,11 @@
     <EmbeddedResource Include="Vistas\Abm Empresa\AltaEmpresa.resx">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\ABM Rol\ABMRol.resx">
-      <DependentUpon>ABMRol.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\ABM Rol\Crear Rol.resx">
+      <DependentUpon>Crear Rol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ABM Rol\Modificar un Rol.resx">
+      <DependentUpon>Modificar un Rol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar Vendedor\Calificar.resx">
       <DependentUpon>Calificar.cs</DependentUpon>
