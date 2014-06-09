@@ -9,11 +9,16 @@ using System.Windows.Forms;
 
 namespace FrbaCommerce.Vistas.Abm_Visibilidad
 {
-    public partial class ABMVisibilidad : Form
+    public partial class Listado : Form
     {
-        public ABMVisibilidad()
+        public Listado()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
