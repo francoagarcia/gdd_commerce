@@ -146,8 +146,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listFunc;
-        private System.Windows.Forms.ListBox listFuncActivas;
+        //private System.Windows.Forms.ListBox listFunc;
+        //private System.Windows.Forms.ListBox listFuncActivas;
         private System.Windows.Forms.Button bAgregar1;
         private System.Windows.Forms.Button bQuitar1;
         private System.Windows.Forms.GroupBox ModificacionFunc1;

@@ -13,6 +13,7 @@ namespace FrbaCommerce.Entidades.Builder
 
         public Usuario Build(System.Data.DataRow row)
         {
+
             Usuario usuario = new Usuario();
             usuario.username = Convert.ToString(row["username"]);
             usuario.pass = Convert.ToString(row["contrasenia"]);

@@ -60,8 +60,19 @@
     <Compile Include="DataAccess\HistorialDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
     <Compile Include="DataAccess\VisibilidadDB.cs" />
+    <Compile Include="Domain\ClienteDomain.cs" />
+    <Compile Include="Domain\EmpresaDomain.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
+    <Compile Include="Entidades\Builder\BuilderFuncionalidad.cs" />
+    <Compile Include="Entidades\Funcionalidad.cs" />
     <Compile Include="Entidades\Rol.cs" />
+    <Compile Include="Generics\AppConfigReader.cs" />
+    <Compile Include="Generics\ContextoAplicacion.cs" />
+    <Compile Include="Generics\DateManager.cs" />
+    <Compile Include="Generics\IContexto.cs" />
+    <Compile Include="Generics\Logger\ILogger.cs" />
+    <Compile Include="Generics\Logger\LoggerFile.cs" />
+    <Compile Include="GUIMethods\MenuItemsHelper.cs" />
     <Compile Include="Vistas\Abm Cliente\AltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,14 +283,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="ConnectorDB\app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Vistas\Settings1.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -292,11 +298,7 @@
     <Compile Include="Vistas\Registro de Usuario\Registro_Usuario.Designer.cs">
       <DependentUpon>Registro_Usuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Settings1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings1.settings</DependentUpon>
-    </Compile>
+    <None Include="Vistas\App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

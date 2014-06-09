@@ -8,7 +8,6 @@ namespace FrbaCommerce.Generics
 {
     public static class Encryptation
     {
-
         static public string get_hash(string pass_ingresada)
         {
             byte[] pass_hash;

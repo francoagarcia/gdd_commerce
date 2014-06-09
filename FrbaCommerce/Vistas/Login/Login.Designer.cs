@@ -55,6 +55,7 @@
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(144, 20);
             this.textBoxUsername.TabIndex = 2;
+            this.textBoxUsername.Text = "admin";
             // 
             // labelUsuario
             // 
@@ -81,6 +82,7 @@
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(144, 20);
             this.textBoxPassword.TabIndex = 5;
+            this.textBoxPassword.Text = "w23e";
             // 
             // btnLogin
             // 
@@ -125,6 +127,7 @@
             this.Controls.Add(this.textBoxUsername);
             this.Controls.Add(this.btnCancelar);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
