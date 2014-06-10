@@ -172,10 +172,11 @@ namespace FrbaCommerce.Vistas.Login
             this.Close();
         }
 
-        private void Login_Load(object sender, EventArgs e)
+        private void btnRegistrarse_Click(object sender, EventArgs e)
         {
 
         }
-   
+
+       
     }
 }

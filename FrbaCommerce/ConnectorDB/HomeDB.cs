@@ -20,7 +20,8 @@ namespace FrbaCommerce.ConnectorDB
             DataSet ds = new DataSet();
 
             SqlConnection sqlConnection = DBConnection.getConnection;
-            sqlConnection.Open();
+            if(sqlConnection.State!= ConnectionState.Open)
+                sqlConnection.Open();
             using (SqlCommand sqlCommand = new SqlCommand(comando))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;

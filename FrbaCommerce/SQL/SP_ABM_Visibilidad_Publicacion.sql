@@ -66,3 +66,15 @@ BEGIN
 	
 END
 GO
+
+IF OBJECT_ID('DATA_GROUP.getTodasLasVisibilidades') is not null
+	DROP PROCEDURE DATA_GROUP.getTodasLasVisibilidades
+	GO
+CREATE PROCEDURE DATA_GROUP.getTodasLasVisibilidades
+AS
+BEGIN
+	select id_visibilidad, descripcion, precio, porcentaje
+	from DATA_GROUP.VisibilidadPublicacion
+	where habilitada=1;
+END
+GO

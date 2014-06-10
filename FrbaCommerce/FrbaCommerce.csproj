@@ -56,21 +56,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\ClienteDB.cs" />
+    <Compile Include="DataAccess\EmpresaDB.cs" />
+    <Compile Include="DataAccess\EntidadGeneralDB.cs" />
     <Compile Include="DataAccess\FuncionalidadDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
     <Compile Include="Domain\ClienteDomain.cs" />
     <Compile Include="Domain\EmpresaDomain.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
     <Compile Include="Entidades\Builder\BuilderFuncionalidad.cs" />
+    <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\Filtros\FiltroVisibilidadDePublicaciones.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Generics\AppConfigReader.cs" />
     <Compile Include="Generics\ContextoAplicacion.cs" />
     <Compile Include="Generics\DateManager.cs" />
+    <Compile Include="Generics\Enums\ListaSexo.cs" />
+    <Compile Include="Generics\Enums\TipoDeUsuario.cs" />
+    <Compile Include="Generics\Enums\TipoDocumento.cs" />
     <Compile Include="Generics\IContexto.cs" />
     <Compile Include="Generics\Logger\ILogger.cs" />
     <Compile Include="Generics\Logger\LoggerFile.cs" />
+    <Compile Include="GUIMethods\FormBase\FormBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIMethods\FormBase\FormBaseAlta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIMethods\NameVariableParser.cs" />
+    <Compile Include="GUIMethods\Validaciones\IValidador.cs" />
     <Compile Include="GUIMethods\MenuItemsHelper.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorCombobox.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorDateTimeFrom.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorDateTimeUntil.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorDateTimeUntilFrom.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorLista.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorMail.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorNumerico.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorString.cs" />
     <Compile Include="Vistas\Abm Cliente\AltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +226,12 @@
     <Compile Include="Entidades\Usuario.cs" />
     <Compile Include="Vistas\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUIMethods\FormBase\FormBase.resx">
+      <DependentUpon>FormBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIMethods\FormBase\FormBaseAlta.resx">
+      <DependentUpon>FormBaseAlta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Cliente\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +291,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Registro de Usuario\RegistroDeCliente.resx">
+      <DependentUpon>RegistroDeCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Registro de Usuario\RegistroDeEmpresa.resx">
+      <DependentUpon>RegistroDeEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Registro de Usuario\Registro_Usuario.resx">
       <DependentUpon>Registro_Usuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -278,6 +314,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Vistas\Registro de Usuario\RegistroDeCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Registro de Usuario\RegistroDeCliente.designer.cs">
+      <DependentUpon>RegistroDeCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Registro de Usuario\RegistroDeEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Registro de Usuario\RegistroDeEmpresa.designer.cs">
+      <DependentUpon>RegistroDeEmpresa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Registro de Usuario\Registro_Usuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +334,7 @@
     </Compile>
     <None Include="Vistas\App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

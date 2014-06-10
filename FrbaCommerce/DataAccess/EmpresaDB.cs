@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FrbaCommerce.Domain
+namespace FrbaCommerce.DataAccess
 {
-    class ClienteDomain
+    public class EmpresaDB
     {
     }
 }

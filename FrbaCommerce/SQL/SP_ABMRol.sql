@@ -23,6 +23,23 @@ END
 GO
 
 
+-----------------------------------------------------
+
+IF OBJECT_ID('DATA_GROUP.asociarRolAUsuario') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.asociarRolAUsuario
+	GO
+CREATE PROCEDURE DATA_GROUP.asociarRolAUsuario
+@id_rol numeric(18, 0),
+@id_usuario numeric(18, 0)
+AS
+BEGIN
+	INSERT INTO DATA_GROUP.UsuarioXRol(id_rol, id_usuario)
+	VALUES(@id_rol, @id_usuario);
+END
+GO
+
+-----------------------------------------------------
+
 IF OBJECT_ID('DATA_GROUP.SP_modificarRol') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.SP_modificarRol
 	GO

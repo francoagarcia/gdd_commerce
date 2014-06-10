@@ -119,7 +119,6 @@ IF OBJECT_ID('DATA_GROUP.Funcionalidad', 'U') IS NOT NULL DROP TABLE DATA_GROUP.
 CREATE TABLE DATA_GROUP.Funcionalidad (
 	id_funcionalidad NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
 	nombre nvarchar(255) NOT NULL,
-	nombreVar nvarchar(255) NULL,
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
@@ -169,10 +168,10 @@ CREATE TABLE DATA_GROUP.Empresa (
 IF OBJECT_ID('DATA_GROUP.Usuario', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Usuario;
 CREATE TABLE DATA_GROUP.Usuario (
 	id_usuario NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
-	username nvarchar(255),
-	contrasenia nvarchar(255),
-	telefono nvarchar(255),
-	intentos_login int DEFAULT 0, 
+	username nvarchar(255) NOT NULL UNIQUE,
+	contrasenia nvarchar(255) NOT NULL,
+	telefono numeric(18,0),
+	intentos_login int DEFAULT 0 NOT NULL, 
 	tipo_usuario nvarchar(3), 
 	habilitada bit DEFAULT 1
 );
@@ -378,7 +377,7 @@ INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
 VALUES (2,7), (2,8), (2,9), (2,10), (2,11), (2, 12), (2, 14);
 --Rol Empresa
 INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
-VALUES  (3,7), (3,8), (3,9), (3, 11), (2, 14);
+VALUES  (3,7), (3,8), (3,9), (3, 11), (3, 14);
 --------------------------------------------------------
 ------------------------Rubro---------------------------
 --------------------------------------------------------

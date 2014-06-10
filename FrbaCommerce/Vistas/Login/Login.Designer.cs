@@ -37,6 +37,7 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.labelRol = new System.Windows.Forms.Label();
             this.comboBoxRol = new System.Windows.Forms.ComboBox();
+            this.btnRegistrarse = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancelar
@@ -88,7 +89,7 @@
             // 
             this.btnLogin.Location = new System.Drawing.Point(39, 124);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(98, 25);
+            this.btnLogin.Size = new System.Drawing.Size(94, 25);
             this.btnLogin.TabIndex = 6;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -113,11 +114,22 @@
             this.comboBoxRol.TabIndex = 8;
             this.comboBoxRol.Visible = false;
             // 
+            // btnRegistrarse
+            // 
+            this.btnRegistrarse.Location = new System.Drawing.Point(39, 155);
+            this.btnRegistrarse.Name = "btnRegistrarse";
+            this.btnRegistrarse.Size = new System.Drawing.Size(213, 25);
+            this.btnRegistrarse.TabIndex = 9;
+            this.btnRegistrarse.Text = " Registrarse";
+            this.btnRegistrarse.UseVisualStyleBackColor = true;
+            this.btnRegistrarse.Click += new System.EventHandler(this.btnRegistrarse_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 169);
+            this.ClientSize = new System.Drawing.Size(297, 194);
+            this.Controls.Add(this.btnRegistrarse);
             this.Controls.Add(this.comboBoxRol);
             this.Controls.Add(this.labelRol);
             this.Controls.Add(this.btnLogin);
@@ -144,6 +156,7 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label labelRol;
         private System.Windows.Forms.ComboBox comboBoxRol;
+        private System.Windows.Forms.Button btnRegistrarse;
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using FrbaCommerce.Generics;
 
 namespace FrbaCommerce.GUIMethods
 {
@@ -49,6 +50,28 @@ namespace FrbaCommerce.GUIMethods
         public static DialogResult MensajeListaVacia()
         {
             return MessageBox.Show(string.Format("No ha ingresado ningun valor en la lista."), "Completar");
+        }
+
+        public static DialogResult MensajeValidacionDateTime(string controlName, DateTime until)
+        {
+            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe ser menor a la fecha {1}", controlName, DateManager.Format(until)), "Error al validar");
+        }
+
+        public static DialogResult MensajeValidacionDateTimeFrom(string controlName, DateTime from)
+        {
+            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe ser mayor a la fecha {1}", controlName, DateManager.Format(from)), "Error al validar");
+        }
+
+        public static DialogResult MensajeValidacionDateTime(string controlName, DateTime from, DateTime until)
+        {
+            var sUntil = DateManager.Format(until);
+            var sFrom = DateManager.Format(from);
+            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe ser mayor a {1} y menor a {2}", controlName, sFrom, sUntil), "Error al validar");
+        }
+
+        internal static void MensajeValidacionCombobox(string controlName)
+        {
+            MessageBox.Show(string.Format("Debe seleccionar un elemento del control {0}", controlName), "Error al validar");
         }
     }
 }

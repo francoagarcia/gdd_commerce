@@ -50,5 +50,25 @@ namespace FrbaCommerce.DataAccess
             return builder.Build(dataSet.Tables[0].Rows[0]);
 
         }
+
+        public static bool existeNombreDeUsuario(string username) {
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            var pNombre = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
+            pNombre.Value = username;
+            parametros.Add(pNombre);
+
+            int resultado = -1;
+            var pResultado = new SqlParameter("@resultado", SqlDbType.Bit);
+            pResultado.Value = resultado;
+            pResultado.Direction = ParameterDirection.Output;
+            parametros.Add(pResultado);
+
+            var dataSet = HomeDB.ExecuteStoredProcedured("DATA_GROUP.existeUsuario", parametros);
+
+            return ((bool)pResultado.Value);
+        }
+
     }
 }
