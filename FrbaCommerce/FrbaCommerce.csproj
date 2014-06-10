@@ -60,7 +60,9 @@
     <Compile Include="DataAccess\EmpresaDB.cs" />
     <Compile Include="DataAccess\EntidadGeneralDB.cs" />
     <Compile Include="DataAccess\FuncionalidadDB.cs" />
+    <Compile Include="DataAccess\HistorialDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
+    <Compile Include="DataAccess\VisibilidadDB.cs" />
     <Compile Include="Domain\ClienteDomain.cs" />
     <Compile Include="Domain\EmpresaDomain.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
@@ -131,11 +133,17 @@
     <Compile Include="Vistas\Abm Rubro\ABMRubro.Designer.cs">
       <DependentUpon>ABMRubro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Visibilidad\ABMVisibilidad.cs">
+    <Compile Include="Vistas\Abm Visibilidad\AltaVisibilidad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Visibilidad\ABMVisibilidad.Designer.cs">
-      <DependentUpon>ABMVisibilidad.cs</DependentUpon>
+    <Compile Include="Vistas\Abm Visibilidad\AltaVisibilidad.Designer.cs">
+      <DependentUpon>AltaVisibilidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm Visibilidad\Listado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm Visibilidad\Listado.Designer.cs">
+      <DependentUpon>Listado.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Calificar Vendedor\Calificar.cs">
       <SubType>Form</SubType>
@@ -246,6 +254,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ABM Rol\Modificar un Rol.resx">
       <DependentUpon>Modificar un Rol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Visibilidad\AltaVisibilidad.resx">
+      <DependentUpon>AltaVisibilidad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Visibilidad\Listado.resx">
+      <DependentUpon>Listado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar Vendedor\Calificar.resx">
       <DependentUpon>Calificar.cs</DependentUpon>

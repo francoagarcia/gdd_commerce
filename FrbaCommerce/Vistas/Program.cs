@@ -7,7 +7,7 @@ using FrbaCommerce.Generics.Logger;
 using FrbaCommerce.Generics;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.Vistas.Login;
-using FrbaCommerce.Vistas.ABM_Rol;
+using FrbaCommerce.Vistas.Historial_Cliente;
 
 namespace FrbaCommerce
 {
@@ -27,6 +27,9 @@ namespace FrbaCommerce
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
+            Application.Run(new Historial());
+=======
 
             try
             {
@@ -42,6 +45,7 @@ namespace FrbaCommerce
             {
                 ContextoActual.Logger.Finalizar();
             }
+>>>>>>> 23f8a3944da9304ebbe7f4bd047e4c5901338cba
         }
     }
 }
