@@ -58,17 +58,14 @@
   <ItemGroup>
     <Compile Include="DataAccess\ClienteDB.cs" />
     <Compile Include="DataAccess\EmpresaDB.cs" />
-    <Compile Include="DataAccess\EntidadGeneralDB.cs" />
     <Compile Include="DataAccess\FuncionalidadDB.cs" />
     <Compile Include="DataAccess\HistorialDB.cs" />
+    <Compile Include="DataAccess\ListadoDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
     <Compile Include="DataAccess\VisibilidadDB.cs" />
-    <Compile Include="Domain\ClienteDomain.cs" />
-    <Compile Include="Domain\EmpresaDomain.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
     <Compile Include="Entidades\Builder\BuilderFuncionalidad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
-    <Compile Include="Entidades\Filtros\FiltroVisibilidadDePublicaciones.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Generics\AppConfigReader.cs" />
@@ -349,6 +346,9 @@
     <None Include="Vistas\App.config" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Entidades\Filtros\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

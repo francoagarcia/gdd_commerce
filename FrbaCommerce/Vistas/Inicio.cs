@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Vistas.Abm_Cliente;
-using FrbaCommerce.Domain;
 using FrbaCommerce.Entidades;
 using FrbaCommerce.Vistas.Login;
 using FrbaCommerce.DataAccess;

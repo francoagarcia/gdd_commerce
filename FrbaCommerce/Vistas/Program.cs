@@ -8,6 +8,7 @@ using FrbaCommerce.Generics;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.Vistas.Login;
 using FrbaCommerce.Vistas.Historial_Cliente;
+using FrbaCommerce.Vistas.Listado_Estadistico;
 
 namespace FrbaCommerce
 {
@@ -27,14 +28,11 @@ namespace FrbaCommerce
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< HEAD
-            Application.Run(new Historial());
-=======
 
             try
             {
                 ContextoActual.Logger.Iniciar();
-                Application.Run(new FrbaCommerce.Vistas.Registro_de_Usuario.Registro_Usuario());
+                Application.Run(new Listado_Estadistico());
             }
             catch (Exception ex)
             {
@@ -45,7 +43,7 @@ namespace FrbaCommerce
             {
                 ContextoActual.Logger.Finalizar();
             }
->>>>>>> 23f8a3944da9304ebbe7f4bd047e4c5901338cba
+
         }
     }
 }

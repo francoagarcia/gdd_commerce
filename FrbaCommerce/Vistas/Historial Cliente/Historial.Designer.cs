@@ -127,6 +127,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Historial";
             this.Text = "Historial";
+            this.Load += new System.EventHandler(this.Historial_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
