@@ -34,17 +34,17 @@ namespace FrbaCommerce.GUIMethods
         }
         public static DialogResult MensajeValidacionNumerico(string controlName)
         {
-            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe ser numérico", controlName), "Error al validar");
+            return MessageBox.Show(string.Format("El valor ingresado en el campo '{0}' debe ser numérico", controlName), "Error al validar");
         }
 
         public static DialogResult MensajeValidacionString(string controlName, int minSize, int maxSize)
         {
-            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe tener entre {1} y {2} caracteres", controlName, minSize, maxSize), "Error al validar");
+            return MessageBox.Show(string.Format("El valor ingresado en el campo '{0}' debe tener entre '{1}' y '{2}' caracteres", controlName, minSize, maxSize), "Error al validar");
         }
 
         public static DialogResult MensajeVacio(string lugar)
         {
-            return MessageBox.Show(string.Format("No ha ingresado ningun valor en el campo {0}.", lugar), "Completar");
+            return MessageBox.Show(string.Format("No ha ingresado ningun valor en el campo '{0}'.", lugar), "Completar");
         }
 
         public static DialogResult MensajeListaVacia()
@@ -54,24 +54,24 @@ namespace FrbaCommerce.GUIMethods
 
         public static DialogResult MensajeValidacionDateTime(string controlName, DateTime until)
         {
-            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe ser menor a la fecha {1}", controlName, DateManager.Format(until)), "Error al validar");
+            return MessageBox.Show(string.Format("El valor ingresado en el campo '{0}' debe ser menor a la fecha '{1}'", controlName, DateManager.Format(until)), "Error al validar");
         }
 
         public static DialogResult MensajeValidacionDateTimeFrom(string controlName, DateTime from)
         {
-            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe ser mayor a la fecha {1}", controlName, DateManager.Format(from)), "Error al validar");
+            return MessageBox.Show(string.Format("El valor ingresado en el campo '{0}' debe ser mayor a la fecha {1}", controlName, DateManager.Format(from)), "Error al validar");
         }
 
         public static DialogResult MensajeValidacionDateTime(string controlName, DateTime from, DateTime until)
         {
             var sUntil = DateManager.Format(until);
             var sFrom = DateManager.Format(from);
-            return MessageBox.Show(string.Format("El valor ingresado en el campo {0} debe ser mayor a {1} y menor a {2}", controlName, sFrom, sUntil), "Error al validar");
+            return MessageBox.Show(string.Format("El valor ingresado en el campo '{0}' debe ser mayor a '{1}' y menor a '{2}'", controlName, sFrom, sUntil), "Error al validar");
         }
 
         internal static void MensajeValidacionCombobox(string controlName)
         {
-            MessageBox.Show(string.Format("Debe seleccionar un elemento del control {0}", controlName), "Error al validar");
+            MessageBox.Show(string.Format("Debe seleccionar un elemento del control '{0}'", controlName), "Error al validar");
         }
     }
 }

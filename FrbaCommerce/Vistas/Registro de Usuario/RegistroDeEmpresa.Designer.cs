@@ -31,29 +31,29 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_Ciudad = new System.Windows.Forms.TextBox();
+            this.tb_Localidad = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tb_Codigo_postal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tb_Departamento = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tb_Piso = new System.Windows.Forms.TextBox();
+            this.tb_Calle = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBoxDatosEmpresa = new System.Windows.Forms.GroupBox();
-            this.textBoxRazonSocial = new System.Windows.Forms.TextBox();
-            this.textBoxCUIT = new System.Windows.Forms.TextBox();
+            this.tb_Razon_Social = new System.Windows.Forms.TextBox();
+            this.tb_CUIT = new System.Windows.Forms.TextBox();
             this.lblMail = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.dpFechaNacimiento = new System.Windows.Forms.DateTimePicker();
+            this.tb_Correo_electronico = new System.Windows.Forms.TextBox();
+            this.dp_Fecha_de_creacion = new System.Windows.Forms.DateTimePicker();
             this.labelFechaCreacion = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_Nombre_de_contacto = new System.Windows.Forms.TextBox();
             this.lblNomDeContacto = new System.Windows.Forms.Label();
             this.lblCUIT = new System.Windows.Forms.Label();
             this.lblRazonSocial = new System.Windows.Forms.Label();
-            this.textBoxTelefono = new System.Windows.Forms.TextBox();
+            this.tb_Telefono = new System.Windows.Forms.TextBox();
             this.labelTelefono = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -62,9 +62,9 @@
             this.lblRol = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblUsuario = new System.Windows.Forms.Label();
-            this.comboBoxTipoDeUsuario = new System.Windows.Forms.ComboBox();
-            this.textBoxPass = new System.Windows.Forms.TextBox();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.cb_Tipo_de_usuario = new System.Windows.Forms.ComboBox();
+            this.tb_Contraseña = new System.Windows.Forms.TextBox();
+            this.tb_Username = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxDatosEmpresa.SuspendLayout();
@@ -74,7 +74,7 @@
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.groupBoxDatosEmpresa);
-            this.groupBox1.Controls.Add(this.textBoxTelefono);
+            this.groupBox1.Controls.Add(this.tb_Telefono);
             this.groupBox1.Controls.Add(this.labelTelefono);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.btnCancelar);
@@ -83,9 +83,9 @@
             this.groupBox1.Controls.Add(this.lblRol);
             this.groupBox1.Controls.Add(this.lblPassword);
             this.groupBox1.Controls.Add(this.lblUsuario);
-            this.groupBox1.Controls.Add(this.comboBoxTipoDeUsuario);
-            this.groupBox1.Controls.Add(this.textBoxPass);
-            this.groupBox1.Controls.Add(this.textBoxUsername);
+            this.groupBox1.Controls.Add(this.cb_Tipo_de_usuario);
+            this.groupBox1.Controls.Add(this.tb_Contraseña);
+            this.groupBox1.Controls.Add(this.tb_Username);
             this.groupBox1.Location = new System.Drawing.Point(12, 19);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(439, 529);
@@ -96,16 +96,16 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.textBox6);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.tb_Ciudad);
+            this.groupBox2.Controls.Add(this.tb_Localidad);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.Controls.Add(this.tb_Codigo_postal);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.textBox4);
+            this.groupBox2.Controls.Add(this.tb_Departamento);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.textBox5);
-            this.groupBox2.Controls.Add(this.textBox7);
+            this.groupBox2.Controls.Add(this.tb_Piso);
+            this.groupBox2.Controls.Add(this.tb_Calle);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Location = new System.Drawing.Point(13, 315);
             this.groupBox2.Name = "groupBox2";
@@ -123,19 +123,19 @@
             this.label6.TabIndex = 34;
             this.label6.Text = "Ciudad";
             // 
-            // textBox6
+            // tb_Ciudad
             // 
-            this.textBox6.Location = new System.Drawing.Point(87, 103);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(296, 20);
-            this.textBox6.TabIndex = 33;
+            this.tb_Ciudad.Location = new System.Drawing.Point(87, 103);
+            this.tb_Ciudad.Name = "tb_Ciudad";
+            this.tb_Ciudad.Size = new System.Drawing.Size(296, 20);
+            this.tb_Ciudad.TabIndex = 33;
             // 
-            // textBox1
+            // tb_Localidad
             // 
-            this.textBox1.Location = new System.Drawing.Point(87, 78);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(296, 20);
-            this.textBox1.TabIndex = 32;
+            this.tb_Localidad.Location = new System.Drawing.Point(87, 78);
+            this.tb_Localidad.Name = "tb_Localidad";
+            this.tb_Localidad.Size = new System.Drawing.Size(296, 20);
+            this.tb_Localidad.TabIndex = 32;
             // 
             // label1
             // 
@@ -146,12 +146,12 @@
             this.label1.TabIndex = 31;
             this.label1.Text = "Localidad";
             // 
-            // textBox2
+            // tb_Codigo_postal
             // 
-            this.textBox2.Location = new System.Drawing.Point(309, 52);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(74, 20);
-            this.textBox2.TabIndex = 30;
+            this.tb_Codigo_postal.Location = new System.Drawing.Point(309, 52);
+            this.tb_Codigo_postal.Name = "tb_Codigo_postal";
+            this.tb_Codigo_postal.Size = new System.Drawing.Size(74, 20);
+            this.tb_Codigo_postal.TabIndex = 30;
             // 
             // label2
             // 
@@ -162,12 +162,12 @@
             this.label2.TabIndex = 29;
             this.label2.Text = "Codigo postal";
             // 
-            // textBox4
+            // tb_Departamento
             // 
-            this.textBox4.Location = new System.Drawing.Point(188, 52);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(38, 20);
-            this.textBox4.TabIndex = 28;
+            this.tb_Departamento.Location = new System.Drawing.Point(188, 52);
+            this.tb_Departamento.Name = "tb_Departamento";
+            this.tb_Departamento.Size = new System.Drawing.Size(38, 20);
+            this.tb_Departamento.TabIndex = 28;
             // 
             // label3
             // 
@@ -187,19 +187,19 @@
             this.label4.TabIndex = 26;
             this.label4.Text = "Piso";
             // 
-            // textBox5
+            // tb_Piso
             // 
-            this.textBox5.Location = new System.Drawing.Point(65, 52);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(37, 20);
-            this.textBox5.TabIndex = 25;
+            this.tb_Piso.Location = new System.Drawing.Point(65, 52);
+            this.tb_Piso.Name = "tb_Piso";
+            this.tb_Piso.Size = new System.Drawing.Size(37, 20);
+            this.tb_Piso.TabIndex = 25;
             // 
-            // textBox7
+            // tb_Calle
             // 
-            this.textBox7.Location = new System.Drawing.Point(65, 26);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(318, 20);
-            this.textBox7.TabIndex = 24;
+            this.tb_Calle.Location = new System.Drawing.Point(65, 26);
+            this.tb_Calle.Name = "tb_Calle";
+            this.tb_Calle.Size = new System.Drawing.Size(318, 20);
+            this.tb_Calle.TabIndex = 24;
             // 
             // label5
             // 
@@ -212,13 +212,13 @@
             // 
             // groupBoxDatosEmpresa
             // 
-            this.groupBoxDatosEmpresa.Controls.Add(this.textBoxRazonSocial);
-            this.groupBoxDatosEmpresa.Controls.Add(this.textBoxCUIT);
+            this.groupBoxDatosEmpresa.Controls.Add(this.tb_Razon_Social);
+            this.groupBoxDatosEmpresa.Controls.Add(this.tb_CUIT);
             this.groupBoxDatosEmpresa.Controls.Add(this.lblMail);
-            this.groupBoxDatosEmpresa.Controls.Add(this.textBox12);
-            this.groupBoxDatosEmpresa.Controls.Add(this.dpFechaNacimiento);
+            this.groupBoxDatosEmpresa.Controls.Add(this.tb_Correo_electronico);
+            this.groupBoxDatosEmpresa.Controls.Add(this.dp_Fecha_de_creacion);
             this.groupBoxDatosEmpresa.Controls.Add(this.labelFechaCreacion);
-            this.groupBoxDatosEmpresa.Controls.Add(this.textBox3);
+            this.groupBoxDatosEmpresa.Controls.Add(this.tb_Nombre_de_contacto);
             this.groupBoxDatosEmpresa.Controls.Add(this.lblNomDeContacto);
             this.groupBoxDatosEmpresa.Controls.Add(this.lblCUIT);
             this.groupBoxDatosEmpresa.Controls.Add(this.lblRazonSocial);
@@ -229,19 +229,19 @@
             this.groupBoxDatosEmpresa.TabStop = false;
             this.groupBoxDatosEmpresa.Text = "Datos de empresa";
             // 
-            // textBoxRazonSocial
+            // tb_Razon_Social
             // 
-            this.textBoxRazonSocial.Location = new System.Drawing.Point(166, 27);
-            this.textBoxRazonSocial.Name = "textBoxRazonSocial";
-            this.textBoxRazonSocial.Size = new System.Drawing.Size(216, 20);
-            this.textBoxRazonSocial.TabIndex = 43;
+            this.tb_Razon_Social.Location = new System.Drawing.Point(166, 27);
+            this.tb_Razon_Social.Name = "tb_Razon_Social";
+            this.tb_Razon_Social.Size = new System.Drawing.Size(216, 20);
+            this.tb_Razon_Social.TabIndex = 43;
             // 
-            // textBoxCUIT
+            // tb_CUIT
             // 
-            this.textBoxCUIT.Location = new System.Drawing.Point(166, 53);
-            this.textBoxCUIT.Name = "textBoxCUIT";
-            this.textBoxCUIT.Size = new System.Drawing.Size(216, 20);
-            this.textBoxCUIT.TabIndex = 42;
+            this.tb_CUIT.Location = new System.Drawing.Point(166, 53);
+            this.tb_CUIT.Name = "tb_CUIT";
+            this.tb_CUIT.Size = new System.Drawing.Size(216, 20);
+            this.tb_CUIT.TabIndex = 42;
             // 
             // lblMail
             // 
@@ -252,19 +252,19 @@
             this.lblMail.TabIndex = 41;
             this.lblMail.Text = "Correo electrónico";
             // 
-            // textBox12
+            // tb_Correo_electronico
             // 
-            this.textBox12.Location = new System.Drawing.Point(166, 106);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(216, 20);
-            this.textBox12.TabIndex = 40;
+            this.tb_Correo_electronico.Location = new System.Drawing.Point(166, 106);
+            this.tb_Correo_electronico.Name = "tb_Correo_electronico";
+            this.tb_Correo_electronico.Size = new System.Drawing.Size(216, 20);
+            this.tb_Correo_electronico.TabIndex = 40;
             // 
-            // dpFechaNacimiento
+            // dp_Fecha_de_creacion
             // 
-            this.dpFechaNacimiento.Location = new System.Drawing.Point(166, 132);
-            this.dpFechaNacimiento.Name = "dpFechaNacimiento";
-            this.dpFechaNacimiento.Size = new System.Drawing.Size(216, 20);
-            this.dpFechaNacimiento.TabIndex = 39;
+            this.dp_Fecha_de_creacion.Location = new System.Drawing.Point(166, 132);
+            this.dp_Fecha_de_creacion.Name = "dp_Fecha_de_creacion";
+            this.dp_Fecha_de_creacion.Size = new System.Drawing.Size(216, 20);
+            this.dp_Fecha_de_creacion.TabIndex = 39;
             // 
             // labelFechaCreacion
             // 
@@ -275,12 +275,12 @@
             this.labelFechaCreacion.TabIndex = 38;
             this.labelFechaCreacion.Text = "Fecha de creación";
             // 
-            // textBox3
+            // tb_Nombre_de_contacto
             // 
-            this.textBox3.Location = new System.Drawing.Point(166, 80);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(216, 20);
-            this.textBox3.TabIndex = 31;
+            this.tb_Nombre_de_contacto.Location = new System.Drawing.Point(166, 80);
+            this.tb_Nombre_de_contacto.Name = "tb_Nombre_de_contacto";
+            this.tb_Nombre_de_contacto.Size = new System.Drawing.Size(216, 20);
+            this.tb_Nombre_de_contacto.TabIndex = 31;
             // 
             // lblNomDeContacto
             // 
@@ -309,12 +309,12 @@
             this.lblRazonSocial.TabIndex = 27;
             this.lblRazonSocial.Text = "Razon social";
             // 
-            // textBoxTelefono
+            // tb_Telefono
             // 
-            this.textBoxTelefono.Location = new System.Drawing.Point(175, 81);
-            this.textBoxTelefono.Name = "textBoxTelefono";
-            this.textBoxTelefono.Size = new System.Drawing.Size(216, 20);
-            this.textBoxTelefono.TabIndex = 27;
+            this.tb_Telefono.Location = new System.Drawing.Point(175, 81);
+            this.tb_Telefono.Name = "tb_Telefono";
+            this.tb_Telefono.Size = new System.Drawing.Size(216, 20);
+            this.tb_Telefono.TabIndex = 27;
             // 
             // labelTelefono
             // 
@@ -341,6 +341,7 @@
             this.btnCancelar.TabIndex = 15;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // labelInfoAsterizco
             // 
@@ -359,7 +360,7 @@
             this.btnRegistracion.TabIndex = 6;
             this.btnRegistracion.Text = "Confirmar";
             this.btnRegistracion.UseVisualStyleBackColor = true;
-            this.btnRegistracion.Click += new System.EventHandler(this.btnRegistracion_Click_1);
+            this.btnRegistracion.Click += new System.EventHandler(this.btnRegistracion_Click);
             // 
             // lblRol
             // 
@@ -388,32 +389,32 @@
             this.lblUsuario.TabIndex = 3;
             this.lblUsuario.Text = "Usuario";
             // 
-            // comboBoxTipoDeUsuario
+            // cb_Tipo_de_usuario
             // 
-            this.comboBoxTipoDeUsuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxTipoDeUsuario.FormattingEnabled = true;
-            this.comboBoxTipoDeUsuario.Items.AddRange(new object[] {
+            this.cb_Tipo_de_usuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Tipo_de_usuario.FormattingEnabled = true;
+            this.cb_Tipo_de_usuario.Items.AddRange(new object[] {
             "Cliente",
             "Empresa"});
-            this.comboBoxTipoDeUsuario.Location = new System.Drawing.Point(175, 108);
-            this.comboBoxTipoDeUsuario.Name = "comboBoxTipoDeUsuario";
-            this.comboBoxTipoDeUsuario.Size = new System.Drawing.Size(216, 21);
-            this.comboBoxTipoDeUsuario.TabIndex = 2;
+            this.cb_Tipo_de_usuario.Location = new System.Drawing.Point(175, 108);
+            this.cb_Tipo_de_usuario.Name = "cb_Tipo_de_usuario";
+            this.cb_Tipo_de_usuario.Size = new System.Drawing.Size(216, 21);
+            this.cb_Tipo_de_usuario.TabIndex = 2;
             // 
-            // textBoxPass
+            // tb_Contraseña
             // 
-            this.textBoxPass.Location = new System.Drawing.Point(175, 56);
-            this.textBoxPass.Name = "textBoxPass";
-            this.textBoxPass.PasswordChar = '*';
-            this.textBoxPass.Size = new System.Drawing.Size(216, 20);
-            this.textBoxPass.TabIndex = 1;
+            this.tb_Contraseña.Location = new System.Drawing.Point(175, 56);
+            this.tb_Contraseña.Name = "tb_Contraseña";
+            this.tb_Contraseña.PasswordChar = '*';
+            this.tb_Contraseña.Size = new System.Drawing.Size(216, 20);
+            this.tb_Contraseña.TabIndex = 1;
             // 
-            // textBoxUsername
+            // tb_Username
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(175, 30);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(216, 20);
-            this.textBoxUsername.TabIndex = 0;
+            this.tb_Username.Location = new System.Drawing.Point(175, 30);
+            this.tb_Username.Name = "tb_Username";
+            this.tb_Username.Size = new System.Drawing.Size(216, 20);
+            this.tb_Username.TabIndex = 0;
             // 
             // RegistroDeEmpresa
             // 
@@ -425,7 +426,7 @@
             this.MinimizeBox = false;
             this.Name = "RegistroDeEmpresa";
             this.Text = "Registrarme";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegistroDeEmpresa_FormClosing);
+            this.Load += new System.EventHandler(this.RegistroDeEmpresa_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -439,7 +440,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBoxTelefono;
+        private System.Windows.Forms.TextBox tb_Telefono;
         private System.Windows.Forms.Label labelTelefono;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnCancelar;
@@ -448,32 +449,32 @@
         private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblUsuario;
-        private System.Windows.Forms.ComboBox comboBoxTipoDeUsuario;
-        private System.Windows.Forms.TextBox textBoxPass;
-        private System.Windows.Forms.TextBox textBoxUsername;
+        private System.Windows.Forms.ComboBox cb_Tipo_de_usuario;
+        private System.Windows.Forms.TextBox tb_Contraseña;
+        private System.Windows.Forms.TextBox tb_Username;
         private System.Windows.Forms.GroupBox groupBoxDatosEmpresa;
-        private System.Windows.Forms.TextBox textBoxRazonSocial;
-        private System.Windows.Forms.TextBox textBoxCUIT;
+        private System.Windows.Forms.TextBox tb_Razon_Social;
+        private System.Windows.Forms.TextBox tb_CUIT;
         private System.Windows.Forms.Label lblMail;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.DateTimePicker dpFechaNacimiento;
+        private System.Windows.Forms.TextBox tb_Correo_electronico;
+        private System.Windows.Forms.DateTimePicker dp_Fecha_de_creacion;
         private System.Windows.Forms.Label labelFechaCreacion;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tb_Nombre_de_contacto;
         private System.Windows.Forms.Label lblNomDeContacto;
         private System.Windows.Forms.Label lblCUIT;
         private System.Windows.Forms.Label lblRazonSocial;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_Ciudad;
+        private System.Windows.Forms.TextBox tb_Localidad;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tb_Codigo_postal;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tb_Departamento;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox tb_Piso;
+        private System.Windows.Forms.TextBox tb_Calle;
         private System.Windows.Forms.Label label5;
     }
 }

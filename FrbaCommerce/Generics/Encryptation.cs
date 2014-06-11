@@ -11,7 +11,7 @@ namespace FrbaCommerce.Generics
         static public string get_hash(string pass_ingresada)
         {
             byte[] pass_hash;
-            //convierto pass en un array de bytes para poder usarla en las funciones de encriptacion
+            //convierto contrasenia en un array de bytes para poder usarla en las funciones de encriptacion
             byte[] pass_en_bytes = Encoding.UTF8.GetBytes(pass_ingresada);
             SHA256 shaManag = new SHA256Managed();
             //calculamos valor hash de la contraseña

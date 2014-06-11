@@ -9,7 +9,7 @@ namespace FrbaCommerce.Entidades
     {
         //public decimal id;
         public string username { get; set;}
-        public string pass { get; set; }
+        public string contrasenia { get; set; }
         public int cantidadIntentos { get; set; }
         public bool habilitado { get; set; }
 

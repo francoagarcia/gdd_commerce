@@ -32,16 +32,14 @@ namespace FrbaCommerce.GUIMethods.FormBase
         #region [Aceptar]
         protected virtual void Aceptar()
         {
-            DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Confirma la creación del registro?", MessageBoxButtons.YesNo);
-
-            if (dr == DialogResult.Yes)
+            if (base.Validar())
             {
-                if (base.Validar())
+                DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Confirma la creación del registro?", MessageBoxButtons.YesNo);
+                if (dr == DialogResult.Yes)
                 {
                     this.AccionAceptar();
                 }
             }
-
         }
 
         protected virtual void AccionAceptar()

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.Vistas.Abm_Cliente;
-using FrbaCommerce.Domain;
 using FrbaCommerce.Entidades;
 using FrbaCommerce.Vistas.Login;
 using FrbaCommerce.DataAccess;
@@ -19,8 +18,6 @@ namespace FrbaCommerce
 {
     public partial class Inicio : Form
     {
-        //ClienteDomain clienteDomain;
-        //EmpresaDomain empresaDomain;
         private MenuItemsHelper menuItems { get; set; }
         
         public Inicio()

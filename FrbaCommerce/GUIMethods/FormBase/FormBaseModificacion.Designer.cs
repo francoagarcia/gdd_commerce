@@ -1,6 +1,6 @@
-﻿namespace FrbaCommerce.Vistas.Abm_Empresa
+﻿namespace FrbaCommerce.GUIMethods.FormBase
 {
-    partial class AltaEmpresa
+    partial class FormBaseModificacion
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FormBaseModificacion
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "AltaEmpresa";
+            this.ClientSize = new System.Drawing.Size(269, 222);
+            this.Name = "FormBaseModificacion";
+            this.Text = "FormBaseModificacion";
+            this.Load += new System.EventHandler(this.FormBaseModificacion_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

@@ -36,7 +36,6 @@ CREATE TABLE DATA_GROUP.UsuarioXRol (
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
---En el modelo de datos que nos dieron ustedes se supone que todas las compras ya fueron facturadas? O hay compras sin facturar?
 IF OBJECT_ID('DATA_GROUP.Compra', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Compra;
 CREATE TABLE DATA_GROUP.Compra (
 	id_compra NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
@@ -197,7 +196,7 @@ CREATE TABLE DATA_GROUP.TipoPublicacion(
 IF OBJECT_ID('DATA_GROUP.VisibilidadPublicacion', 'U') IS NOT NULL DROP TABLE DATA_GROUP.VisibilidadPublicacion;
 CREATE TABLE DATA_GROUP.VisibilidadPublicacion(
 	id_visibilidad NUMERIC(18,0) NOT NULL,
-	descripcion nvarchar(255) NOT NULL,
+	descripcion nvarchar(255) NOT NULL UNIQUE,
 	precio NUMERIC(18, 2) NOT NULL,
 	porcentaje NUMERIC(18, 2) NOT NULL,
 	habilitada bit DEFAULT 1

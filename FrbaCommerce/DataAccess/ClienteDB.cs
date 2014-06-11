@@ -24,11 +24,6 @@ namespace FrbaCommerce.DataAccess
             return Convert.ToDecimal(idNuevoOUTPUT);
         }
 
-        public static bool existeDocumentoRepetidoDeCliente(TipoDocumento tipoDoc, decimal nro_documento) {
-
-            return true;
-        }
-
         private static IList<SqlParameter> GenerarParametrosCrear(Cliente clienteNuevo) {
 
             IList<SqlParameter> parametros = new List<SqlParameter>();

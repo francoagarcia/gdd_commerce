@@ -9,86 +9,137 @@ using System.Windows.Forms;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.DataAccess;
 using FrbaCommerce.Generics.Enums;
+using FrbaCommerce.GUIMethods.FormBase;
+using FrbaCommerce.Generics.Resultados;
+using FrbaCommerce.GUIMethods.Validaciones;
+using FrbaCommerce.Entidades;
+using FrbaCommerce.Generics;
+using System.Data.SqlClient;
 
 namespace FrbaCommerce.Vistas.Registro_de_Usuario
 {
-    public partial class RegistroDeEmpresa : Form
+    public partial class RegistroDeEmpresa : FormBaseAlta
     {
+        private EmpresaDB empresaDB;
+
         public RegistroDeEmpresa()
         {
             InitializeComponent();
-            this.comboBoxTipoDeUsuario.SelectedIndex = 1;
-            this.comboBoxTipoDeUsuario.Enabled = false;
+            this.empresaDB = new EmpresaDB();
+            this.cb_Tipo_de_usuario.SelectedIndex = 1;
+            this.cb_Tipo_de_usuario.Enabled = false;
         }
 
-        private void RegistroDeEmpresa_FormClosing(object sender, FormClosingEventArgs e)
+        #region [AccionAceptar]
+        private void btnRegistracion_Click(object sender, EventArgs e)
         {
-            this.Close();
+            base.Aceptar();
         }
 
-        private bool validacionesEnGeneral()
+        protected override void AccionAceptar() //Esta tambien sería abstracta
         {
-            if (!this.camposCompletos())
+            Usuario nuevaPosibleEmpresa = this.armarNueva();
+            this.AltaUsuario(nuevaPosibleEmpresa);
+
+        }
+
+        /*
+         * Tendríamos el metodo armarNueva() como abstract
+         * El metodo AccionAceptar como virtual
+         * El metodo CrearUsuario como virtual
+         * El metodo CrearUsuarioDB como abstract
+         */
+
+        private void AltaUsuario(Usuario empresaAlta)
+        {
+            bool insertSalioBien = this.CrearUsuario(empresaAlta); 
+            if (insertSalioBien == true)
             {
-                MessageDialog.MensajeError("Por favor ingrese todos los datos solicidatos");
+                MessageDialog.MensajeInformativo(this, "Se registro correctamente");
+                this.Close();
+            }
+        }
+
+        private bool CrearUsuario(Usuario empresa)
+        {
+            try
+            {
+                this.CrearUsuarioDB(empresa);
+            }
+            catch (SqlException ex)
+            {
+                MessageDialog.MensajeError(ex.Message);
                 return false;
             }
-            else if (this.existeNombreDeUsuario(this.textBoxUsername.Text))
+            catch (Exception ex)
             {
-                MessageDialog.MensajeError("EL nombre de usuario ya se encuentra registrado. Por favor ingrese otro");
+                MessageDialog.MensajeError(ex.Message);
                 return false;
             }
             return true;
         }
 
-        private bool camposCompletos()
-        {
-            foreach (Control groupBox in this.Controls)
-            {
-                if (groupBox is GroupBox)
-                {
-                    foreach (Control control in groupBox.Controls)
-                    {
-                        if (this.campoVacio(control))
-                            return false;
-                    }
-                }
-            }
-            return true;
-        }
+        private void CrearUsuarioDB(Usuario unUsuario) {
+            decimal id = this.empresaDB.nuevoCliente((Empresa)unUsuario);
+            ((Empresa)unUsuario).id_usuario = id;
+        } 
 
-        private bool campoVacio(Control control)
+        private Usuario armarNueva()
         {
-            return (this.textBoxEstaVacio(control) || this.comboBoxEstaVacio(control) || this.dateTimePickerEstaVacio(control));
-        }
+            Empresa empresa = new Empresa();
+            //Datos del usuario
+            empresa.id_usuario = 0; //no tiene ninguno asignado por ahora
+            empresa.username = this.tb_Username.Text;
+            empresa.contrasenia = Encryptation.get_hash(this.tb_Contraseña.Text);
+            empresa.telefono = this.tb_Telefono.Text;
 
-        private bool dateTimePickerEstaVacio(Control control)
+            //Datos particulares
+            empresa.mail = this.tb_Correo_electronico.Text;
+            empresa.nombre_de_contacto = this.tb_Nombre_de_contacto.Text;
+            empresa.razon_social = this.tb_Razon_Social.Text;
+            empresa.cuit = this.tb_CUIT.Text;           
+            empresa.fecha_creacion = this.dp_Fecha_de_creacion.Value;
+
+            //Domicilio
+            empresa.dom_calle = this.tb_Calle.Text;
+            empresa.piso = Convert.ToDecimal(this.tb_Piso.Text);
+            empresa.depto = this.tb_Departamento.Text;
+            empresa.localidad = this.tb_Localidad.Text;
+            empresa.cod_postal = this.tb_Codigo_postal.Text;
+            empresa.ciudad = this.tb_Ciudad.Text;
+
+            return empresa;
+        }
+        #endregion
+
+        #region [EventoLoad]
+        private void RegistroDeEmpresa_Load(object sender, EventArgs e)
         {
-            return (control is DateTimePicker && ((DateTimePicker)control).Value == null);
+            this.AgregarValidacion(new ValidadorString(this.tb_Nombre_de_contacto, 1, 255));
+            this.AgregarValidacion(new ValidadorString(this.tb_Contraseña, 1, 255));
+            this.AgregarValidacion(new ValidadorString(this.tb_Razon_Social, 1, 255));
+            this.AgregarValidacion(new ValidadorString(this.tb_CUIT, 1, 50));
+            this.AgregarValidacion(new ValidadorString(this.tb_Correo_electronico, 1, 50));
+            this.AgregarValidacion(new ValidadorString(this.tb_Calle, 1, 255));
+            this.AgregarValidacion(new ValidadorString(this.tb_Localidad, 1, 255));
+            this.AgregarValidacion(new ValidadorString(this.tb_Departamento, 1, 50));
+            this.AgregarValidacion(new ValidadorString(this.tb_Codigo_postal, 1, 50));
+            this.AgregarValidacion(new ValidadorString(this.tb_Ciudad, 1, 255));
+            this.AgregarValidacion(new ValidadorNumerico(this.tb_Telefono));
+            this.AgregarValidacion(new ValidadorNumerico(this.tb_Piso));
+            this.AgregarValidacion(new ValidadorMail(this.tb_Correo_electronico));
+            this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_de_creacion, DateManager.Ahora()));
         }
+        #endregion
 
-        private bool comboBoxEstaVacio(Control control)
+        #region [Accion Cancelar]
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
-            return (control is ComboBox && ((ComboBox)control).SelectedItem == null);
+            base.Cancelar();
         }
+        #endregion
 
-        private bool textBoxEstaVacio(Control control)
-        {
-            return (control is TextBox && String.IsNullOrEmpty(((TextBox)control).Text));
-        }
 
-        private bool existeNombreDeUsuario(string nombreDeUsuarioNuevo)
-        {
-            return UsuarioDB.existeNombreDeUsuario(nombreDeUsuarioNuevo);
-        }
-
-        private void btnRegistracion_Click_1(object sender, EventArgs e)
-        {
-            if (validacionesEnGeneral())
-            {
-
-            }
-        }
 
     }
 }

@@ -42,7 +42,7 @@ namespace FrbaCommerce.Generics
         public static DateTime Ahora()
         {
             var ahora = AppConfigReader.Get("DateTimeNow");
-            return DateTime.Parse(ahora);
+            return DateTime.Parse((string)ahora);
         }
     }
 }

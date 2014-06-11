@@ -44,7 +44,6 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
         {
             Cliente nuevoPosibleCliente = this.armarNuevoCliente();
             this.AltaCliente(nuevoPosibleCliente);
-
         }
 
         private void AltaCliente(Cliente clienteAlta) {
