@@ -8,6 +8,7 @@ using FrbaCommerce.Generics;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.Vistas.Login;
 using FrbaCommerce.Vistas.Historial_Cliente;
+using FrbaCommerce.Vistas.Listado_Estadistico;
 
 namespace FrbaCommerce
 {
