@@ -65,11 +65,13 @@
     <Compile Include="DataAccess\ListadoDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
     <Compile Include="DataAccess\VisibilidadDB.cs" />
+    <Compile Include="Entidades\Builder\BuilderCliente.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
     <Compile Include="Entidades\Builder\BuilderFuncionalidad.cs" />
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empresa.cs" />
+    <Compile Include="Entidades\Filtros\FiltroCliente.cs" />
     <Compile Include="Entidades\Filtros\FiltroVisibilidades.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
     <Compile Include="Entidades\Rol.cs" />
@@ -122,17 +124,29 @@
     <Compile Include="Vistas\Abm Cliente\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Cliente\SeleccionClientes.cs">
+    <Compile Include="Vistas\Abm Cliente\ListadoCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Cliente\SeleccionClientes.Designer.cs">
-      <DependentUpon>SeleccionClientes.cs</DependentUpon>
+    <Compile Include="Vistas\Abm Cliente\ListadoCliente.Designer.cs">
+      <DependentUpon>ListadoCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm Cliente\ModificacionCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm Cliente\ModificacionCliente.Designer.cs">
+      <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm Empresa\AltaEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Abm Empresa\AltaEmpresa.Designer.cs">
       <DependentUpon>AltaEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm Empresa\ListadoEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm Empresa\ListadoEmpresa.Designer.cs">
+      <DependentUpon>ListadoEmpresa.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\ABM Rol\Crear Rol.cs">
       <SubType>Form</SubType>
@@ -271,8 +285,11 @@
     <EmbeddedResource Include="GUIMethods\FormBase\FormBaseModificacion.resx">
       <DependentUpon>FormBaseModificacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Abm Cliente\SeleccionClientes.resx">
-      <DependentUpon>SeleccionClientes.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Abm Cliente\ListadoCliente.resx">
+      <DependentUpon>ListadoCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Cliente\ModificacionCliente.resx">
+      <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ABM Rol\Crear Rol.resx">
       <DependentUpon>Crear Rol.cs</DependentUpon>
@@ -377,9 +394,7 @@
     <None Include="Vistas\App.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Entidades\Filtros\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

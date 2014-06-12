@@ -32,7 +32,7 @@ namespace FrbaCommerce
             try
             {
                 ContextoActual.Logger.Iniciar();
-                Application.Run(new FrbaCommerce.Vistas.Abm_Visibilidad.ListadoVisibilidad());
+                Application.Run(new FrbaCommerce.Vistas.Abm_Cliente.ListadoCliente());
             }
             catch (Exception ex)
             {

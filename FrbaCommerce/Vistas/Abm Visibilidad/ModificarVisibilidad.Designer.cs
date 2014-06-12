@@ -145,7 +145,7 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "ModificarVisibilidad";
-            this.Text = "FRBA Commerce - Modificar visibilidad";
+            this.Text = "FRBA Commerce - Modificar clienteModif";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

@@ -20,9 +20,12 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
 {
     public partial class RegistroDeCliente : FormBaseAlta
     {
+        private ClienteDB clienteDB;
+
         public RegistroDeCliente()
         {
             InitializeComponent();
+            this.clienteDB = new ClienteDB();
             this.comboBox_Tipo_de_usuario.SelectedIndex = 0;
             this.comboBox_Tipo_de_usuario.Enabled = false;
         }
@@ -59,7 +62,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
         private bool CrearClienteDB(Cliente cliente) {
             try
             {
-                decimal id = ClienteDB.nuevoCliente(cliente);
+                decimal id = this.clienteDB.nuevoCliente(cliente);
                 cliente.id_usuario = id;
             }
             catch (SqlException ex)
@@ -82,7 +85,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             cliente.id_usuario = 0; //no tiene ninguno asignado por ahora
             cliente.username = this.textBox_Nombre_de_usuario.Text;
             cliente.contrasenia = Encryptation.get_hash(this.textBox_Contraseña.Text);
-            cliente.telefono = this.textBox_Telefono.Text;
+            cliente.telefono = Convert.ToDecimal(this.textBox_Telefono.Text);
             cliente.nombre = this.textBox_Nombre.Text;
             cliente.apellido = this.textBox_Apellido.Text;
             cliente.nro_documento = Convert.ToDecimal(this.textBox_Numero_de_documento.Text);
@@ -107,20 +110,20 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
         {
             this.AgregarValidacion(new ValidadorString(this.textBox_Nombre_de_usuario, 1, 255));
             this.AgregarValidacion(new ValidadorString(this.textBox_Contraseña, 1, 255));
+            this.AgregarValidacion(new ValidadorNumerico(this.textBox_Telefono));
+            this.AgregarValidacion(new ValidadorCombobox(this.comboBox_Tipo_de_documento));
+            this.AgregarValidacion(new ValidadorNumerico(this.textBox_Numero_de_documento));
             this.AgregarValidacion(new ValidadorString(this.textBox_Nombre, 1, 255));
             this.AgregarValidacion(new ValidadorString(this.textBox_Apellido, 1, 255));
             this.AgregarValidacion(new ValidadorString(this.textBox_Correo_electronico, 1, 255));
+            this.AgregarValidacion(new ValidadorMail(this.textBox_Correo_electronico));
+            this.AgregarValidacion(new ValidadorCombobox(this.comboBox_Sexo));
+            this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_de_nacimiento, DateManager.Ahora()));
             this.AgregarValidacion(new ValidadorString(this.textBox_Calle, 1, 255));
-            this.AgregarValidacion(new ValidadorString(this.textBox_Localidad, 1, 255));
+            this.AgregarValidacion(new ValidadorNumerico(this.textBox_Piso));
             this.AgregarValidacion(new ValidadorString(this.textBox_Departamento, 1, 50));
             this.AgregarValidacion(new ValidadorString(this.textBox_Codigo_postal, 1, 50));
-            this.AgregarValidacion(new ValidadorNumerico(this.textBox_Telefono));
-            this.AgregarValidacion(new ValidadorNumerico(this.textBox_Numero_de_documento));
-            this.AgregarValidacion(new ValidadorNumerico(this.textBox_Piso));
-            this.AgregarValidacion(new ValidadorCombobox(this.comboBox_Sexo));
-            this.AgregarValidacion(new ValidadorCombobox(this.comboBox_Tipo_de_documento));
-            this.AgregarValidacion(new ValidadorMail(this.textBox_Correo_electronico));
-            this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_de_nacimiento, DateManager.Ahora()));
+            this.AgregarValidacion(new ValidadorString(this.textBox_Localidad, 1, 255));
 
             this.cargarCombos();
         }

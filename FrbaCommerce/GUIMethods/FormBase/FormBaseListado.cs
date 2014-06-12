@@ -40,10 +40,15 @@ namespace FrbaCommerce.GUIMethods.FormBase
             this.btnSeleccionar.Visible = ModoSeleccion;
             this.btnAlta.Visible = !ModoSeleccion;
             this.btnModificacion.Visible = !ModoSeleccion;
-            this.btnBaja.Visible = !ModoSeleccion;
+            this.btn_Habilitacion.Visible = !ModoSeleccion;
 
             this.AccionIniciar();
             this.Filtrar();
+        }
+
+        protected virtual void AccionIniciar()
+        {
+
         }
         #endregion
 
@@ -76,18 +81,9 @@ namespace FrbaCommerce.GUIMethods.FormBase
             }
         }
 
-        protected virtual void AccionIniciar()
-        {
 
-        }
         protected virtual void AccionFiltrar()
         {
-        }
-
-        private void AgregarBotonSeleccionar()
-        {
-            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-            this.dgvBusqueda.Columns.Add(buttonColumn);
         }
         #endregion
 
@@ -131,22 +127,22 @@ namespace FrbaCommerce.GUIMethods.FormBase
             }
             else
             {
-                DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Está seguro que desea borrar el registro?", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Está seguro que desea realizar esto?", MessageBoxButtons.YesNo);
 
                 if (dr == DialogResult.Yes)
                 {
                     this.AccionBorrar();
-                    MessageDialog.MensajeInformativo(this, "El registro ha sido borrado");
                     this.Filtrar();
                 }
             }
         }
         protected virtual void AccionBorrar()
         {
-            throw new NotImplementedException("Implementar acción del botón Borrar");
+            //throw new NotImplementedException("Implementar acción del botón Borrar");
         }
         #endregion
 
+        #region [btnSeleccionar]
         protected virtual object Seleccionar()
         {
             object seleccionado = null;
@@ -158,6 +154,14 @@ namespace FrbaCommerce.GUIMethods.FormBase
 
             return seleccionado;
         }
+
+
+        private void AgregarBotonSeleccionar()
+        {
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+            this.dgvBusqueda.Columns.Add(buttonColumn);
+        }
+
         protected virtual void Salir()
         {
             Seleccionar();
@@ -177,6 +181,8 @@ namespace FrbaCommerce.GUIMethods.FormBase
             this.Seleccionar();
             this.Close();
         }
+
+        #endregion
 
     }
 }

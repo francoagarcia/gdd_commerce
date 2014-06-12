@@ -51,6 +51,33 @@ namespace FrbaCommerce.DataAccess
             return Convert.ToDecimal(idNuevoOUTPUT);
         }
 
+        public void inHabilitarVisibilidad(Visibilidad visi) {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter id_visibilidad = new SqlParameter("@id_visibilidad", SqlDbType.Decimal, 18, "id_visibilidad");
+            id_visibilidad.Value = visi.IdVisibilidad;
+            parametros.Add(id_visibilidad);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.inhabilitarVisibilidad", parametros);
+
+            visi.Habilitada = false;
+        }
+
+        public void habilitarVisibilidad(Visibilidad visi) {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter id_visibilidad = new SqlParameter("@id_visibilidad", SqlDbType.Decimal, 18, "id_visibilidad");
+            id_visibilidad.Value = visi.IdVisibilidad;
+            parametros.Add(id_visibilidad);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.habilitarVisibilidad", parametros);
+
+            visi.Habilitada = true;
+        
+        }
+
         public void modificarVisibilidad(Visibilidad visibilidadModificada) {
 
             List<SqlParameter> parametros = new List<SqlParameter>();

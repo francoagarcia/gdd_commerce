@@ -52,6 +52,7 @@ GO
 
 
 ----------------------MODIFICAR USUARIO--------------------------
+
 IF OBJECT_ID('DATA_GROUP.modificarUsuario') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.modificarUsuario
 	GO
@@ -62,11 +63,21 @@ CREATE PROCEDURE DATA_GROUP.modificarUsuario
 @telefono numeric(18, 0)
 AS
 BEGIN
-	UPDATE DATA_GROUP.Usuario
-	SET contrasenia=@contrasenia, telefono=@telefono, username=@username
-	WHERE id_usuario=@id_usuario
+	if @contrasenia!='123456'
+	BEGIN
+		UPDATE DATA_GROUP.Usuario
+		SET contrasenia=@contrasenia, telefono=@telefono, username=@username
+		WHERE id_usuario=@id_usuario
+	END
+	ELSE
+	BEGIN
+		UPDATE DATA_GROUP.Usuario
+		SET telefono=@telefono, username=@username
+		WHERE id_usuario=@id_usuario
+	END
 END
 GO
+
 
 ----------------------EXISTE USUARIO--------------------------
 IF OBJECT_ID('DATA_GROUP.existeUsuario') is not null
@@ -94,30 +105,29 @@ GO
 
 ----------------------HABILITACION DE USUARIO--------------------------
 
-IF OBJECT_ID('DATA_GROUP.habilitarUsuario') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.habilitarUsuario
+IF OBJECT_ID('DATA_GROUP.habilitarCliente') IS NOT NULL 
+	DROP PROCEDURE DATA_GROUP.habilitarCliente
 	GO
-CREATE PROCEDURE DATA_GROUP.habilitarUsuario
-@username numeric(18, 0)
+CREATE PROCEDURE DATA_GROUP.habilitarCliente
+@id_usuario numeric(18, 0)
 AS
 BEGIN
 	UPDATE DATA_GROUP.Usuario
 	SET habilitada=1
-	WHERE username=@username
+	WHERE id_usuario=@id_usuario
 END
 GO
 
 
-IF OBJECT_ID('DATA_GROUP.deshabilitarUsuario') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.deshabilitarUsuario
+IF OBJECT_ID('DATA_GROUP.inHabilitarCliente') IS NOT NULL 
+	DROP PROCEDURE DATA_GROUP.inHabilitarCliente
 	GO
-CREATE PROCEDURE DATA_GROUP.deshabilitarUsuario
-@username numeric(18, 0)
+CREATE PROCEDURE DATA_GROUP.inHabilitarCliente
+@id_usuario numeric(18, 0)
 AS
 BEGIN
 	UPDATE DATA_GROUP.Usuario
 	SET habilitada=0
-	WHERE username=@username
+	WHERE id_usuario=@id_usuario
 END
 GO
-

@@ -17,7 +17,7 @@ namespace FrbaCommerce.Entidades.Builder
             Usuario usuario = new Usuario();
             usuario.username = Convert.ToString(row["username"]);
             usuario.contrasenia = Convert.ToString(row["contrasenia"]);
-            usuario.habilitado = Convert.ToBoolean(row["habilitada"]);
+            usuario.habilitada = Convert.ToBoolean(row["habilitada"]);
             usuario.cantidadIntentos = Convert.ToInt32(row["intentos_login"]);
             return usuario;
         }

@@ -32,7 +32,7 @@ namespace FrbaCommerce.GUIMethods.FormBase
         }
 
         /// <summary>
-        /// Carga en la pantalla los datos de la entidad poniendo sus propiedades en los campos correspondientes
+        /// Carga en la pantalla los datos de la filtro poniendo sus propiedades en los campos correspondientes
         /// </summary>
         protected virtual void AccionIniciar()
         {

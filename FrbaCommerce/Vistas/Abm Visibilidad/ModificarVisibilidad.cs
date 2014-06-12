@@ -51,16 +51,16 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             if(resultadoUpdate==true)
                 base.Cancelar();
         }
-        #endregion
 
-        private bool ModificarVisibilidadDB() {
-
+        private bool ModificarVisibilidadDB()
+        {
             try
             {
                 this.armarVisibilidadModificada();
                 this.visibilidadDB.modificarVisibilidad(this.visibilidadEntidad);
             }
-            catch (SqlException exSQL) {
+            catch (SqlException exSQL)
+            {
                 MessageDialog.MensajeError(exSQL.Message);
                 return false;
             }
@@ -72,11 +72,13 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             return true;
         }
 
-        private void armarVisibilidadModificada() {
+        private void armarVisibilidadModificada()
+        {
             this.visibilidadEntidad.Descripcion = this.tb_Descripcion.Text;
             this.visibilidadEntidad.Porcentaje = Convert.ToDecimal(this.tb_Porcentaje.Text);
             this.visibilidadEntidad.Precio = Convert.ToDecimal(this.tb_Precio.Text);
         }
+        #endregion
 
         #region [Cancelar]
         private void button_Cancelar_Click(object sender, EventArgs e)

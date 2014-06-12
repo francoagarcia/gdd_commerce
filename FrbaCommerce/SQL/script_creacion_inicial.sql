@@ -143,7 +143,7 @@ CREATE TABLE DATA_GROUP.Cliente (
 	cod_postal nvarchar(50),
 	mail nvarchar(255),
 	fecha_nacimiento datetime,
-	sexo bit DEFAULT NULL,
+	sexo int DEFAULT 2, --0: masculino -> 1: femenino -> 2:indefinido
 	--habilitada bit DEFAULT 1,
 );
 

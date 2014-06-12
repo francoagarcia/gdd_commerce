@@ -49,6 +49,15 @@ namespace FrbaCommerce.Generics.Enums
         }
     }
 
+    public class Indefinido : Sexo
+    {
+        public Indefinido()
+        {
+            Id = 2;
+            Nombre = "Indefinido";
+        }
+    }
+
     public class ListaSexo
     {
         public IList<Sexo> Todos { get; set; }
@@ -58,6 +67,7 @@ namespace FrbaCommerce.Generics.Enums
             Todos = new List<Sexo>(2);
             Todos.Add(new Femenino());
             Todos.Add(new Masculino());
+            Todos.Add(new Indefinido());
         }
 
         public Sexo Obtener(int id)

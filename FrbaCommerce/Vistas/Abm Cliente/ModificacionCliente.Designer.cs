@@ -1,6 +1,6 @@
-﻿namespace FrbaCommerce.Vistas.Registro_de_Usuario
+﻿namespace FrbaCommerce.Vistas.Abm_Cliente
 {
-    partial class RegistroDeCliente
+    partial class ModificacionCliente
     {
         /// <summary>
         /// Variable del diseñador requerida.
@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.groupBox_Datos_de_usuario = new System.Windows.Forms.GroupBox();
-            this.textBox_Nombre_de_usuario = new System.Windows.Forms.TextBox();
+            this.tb_Nombre_de_usuario = new System.Windows.Forms.TextBox();
             this.lblUsuario = new System.Windows.Forms.Label();
-            this.textBox_Contraseña = new System.Windows.Forms.TextBox();
-            this.comboBox_Tipo_de_usuario = new System.Windows.Forms.ComboBox();
+            this.tb_Contraseña = new System.Windows.Forms.TextBox();
+            this.cb_Tipo_de_usuario = new System.Windows.Forms.ComboBox();
             this.lblContraseña = new System.Windows.Forms.Label();
-            this.textBox_Telefono = new System.Windows.Forms.TextBox();
+            this.tb_Telefono = new System.Windows.Forms.TextBox();
             this.labelTelefono = new System.Windows.Forms.Label();
             this.lblRol = new System.Windows.Forms.Label();
             this.groupBoxDatosCliente = new System.Windows.Forms.GroupBox();
-            this.comboBox_Tipo_de_documento = new System.Windows.Forms.ComboBox();
-            this.textBox_Numero_de_documento = new System.Windows.Forms.TextBox();
-            this.textBox_Nombre = new System.Windows.Forms.TextBox();
-            this.textBox_Apellido = new System.Windows.Forms.TextBox();
-            this.textBox_Correo_electronico = new System.Windows.Forms.TextBox();
+            this.cb_Tipo_de_documento = new System.Windows.Forms.ComboBox();
+            this.tb_Numero_de_documento = new System.Windows.Forms.TextBox();
+            this.tb_Nombre = new System.Windows.Forms.TextBox();
+            this.tb_Apellido = new System.Windows.Forms.TextBox();
+            this.tb_Correo_electronico = new System.Windows.Forms.TextBox();
             this.dp_Fecha_de_nacimiento = new System.Windows.Forms.DateTimePicker();
-            this.comboBox_Sexo = new System.Windows.Forms.ComboBox();
+            this.cb_Sexo = new System.Windows.Forms.ComboBox();
             this.lblMail = new System.Windows.Forms.Label();
             this.labelFechaNacimiento = new System.Windows.Forms.Label();
             this.lblNombre = new System.Windows.Forms.Label();
@@ -53,18 +53,18 @@
             this.lblNroDoc = new System.Windows.Forms.Label();
             this.lblTipoDoc = new System.Windows.Forms.Label();
             this.groupBoxDomicilioCliente = new System.Windows.Forms.GroupBox();
-            this.textBox_Calle = new System.Windows.Forms.TextBox();
-            this.textBox_Piso = new System.Windows.Forms.TextBox();
-            this.textBox_Departamento = new System.Windows.Forms.TextBox();
-            this.textBox_Codigo_postal = new System.Windows.Forms.TextBox();
-            this.textBox_Localidad = new System.Windows.Forms.TextBox();
+            this.tb_Calle = new System.Windows.Forms.TextBox();
+            this.tb_Piso = new System.Windows.Forms.TextBox();
+            this.tb_Departamento = new System.Windows.Forms.TextBox();
+            this.tb_Codigo_postal = new System.Windows.Forms.TextBox();
+            this.tb_Localidad = new System.Windows.Forms.TextBox();
             this.labelLocalidad = new System.Windows.Forms.Label();
             this.labelCodPostal = new System.Windows.Forms.Label();
             this.labelDepto = new System.Windows.Forms.Label();
             this.labelPiso = new System.Windows.Forms.Label();
             this.labelCalle = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnRegistracion = new System.Windows.Forms.Button();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
+            this.btn_Confirmar = new System.Windows.Forms.Button();
             this.labelInfoAsterizco = new System.Windows.Forms.Label();
             this.label_Ingrese_datos = new System.Windows.Forms.Label();
             this.groupBox_Datos_de_usuario.SuspendLayout();
@@ -74,12 +74,12 @@
             // 
             // groupBox_Datos_de_usuario
             // 
-            this.groupBox_Datos_de_usuario.Controls.Add(this.textBox_Nombre_de_usuario);
+            this.groupBox_Datos_de_usuario.Controls.Add(this.tb_Nombre_de_usuario);
             this.groupBox_Datos_de_usuario.Controls.Add(this.lblUsuario);
-            this.groupBox_Datos_de_usuario.Controls.Add(this.textBox_Contraseña);
-            this.groupBox_Datos_de_usuario.Controls.Add(this.comboBox_Tipo_de_usuario);
+            this.groupBox_Datos_de_usuario.Controls.Add(this.tb_Contraseña);
+            this.groupBox_Datos_de_usuario.Controls.Add(this.cb_Tipo_de_usuario);
             this.groupBox_Datos_de_usuario.Controls.Add(this.lblContraseña);
-            this.groupBox_Datos_de_usuario.Controls.Add(this.textBox_Telefono);
+            this.groupBox_Datos_de_usuario.Controls.Add(this.tb_Telefono);
             this.groupBox_Datos_de_usuario.Controls.Add(this.labelTelefono);
             this.groupBox_Datos_de_usuario.Controls.Add(this.lblRol);
             this.groupBox_Datos_de_usuario.Location = new System.Drawing.Point(26, 32);
@@ -89,12 +89,12 @@
             this.groupBox_Datos_de_usuario.TabStop = false;
             this.groupBox_Datos_de_usuario.Text = "Datos de usuarios";
             // 
-            // textBox_Nombre_de_usuario
+            // tb_Nombre_de_usuario
             // 
-            this.textBox_Nombre_de_usuario.Location = new System.Drawing.Point(161, 19);
-            this.textBox_Nombre_de_usuario.Name = "textBox_Nombre_de_usuario";
-            this.textBox_Nombre_de_usuario.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Nombre_de_usuario.TabIndex = 0;
+            this.tb_Nombre_de_usuario.Location = new System.Drawing.Point(161, 19);
+            this.tb_Nombre_de_usuario.Name = "tb_Nombre_de_usuario";
+            this.tb_Nombre_de_usuario.Size = new System.Drawing.Size(216, 20);
+            this.tb_Nombre_de_usuario.TabIndex = 0;
             // 
             // lblUsuario
             // 
@@ -105,25 +105,25 @@
             this.lblUsuario.TabIndex = 3;
             this.lblUsuario.Text = "Nombre de usuario";
             // 
-            // textBox_Contraseña
+            // tb_Contraseña
             // 
-            this.textBox_Contraseña.Location = new System.Drawing.Point(161, 45);
-            this.textBox_Contraseña.Name = "textBox_Contraseña";
-            this.textBox_Contraseña.PasswordChar = '*';
-            this.textBox_Contraseña.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Contraseña.TabIndex = 1;
+            this.tb_Contraseña.Location = new System.Drawing.Point(161, 45);
+            this.tb_Contraseña.Name = "tb_Contraseña";
+            this.tb_Contraseña.PasswordChar = '*';
+            this.tb_Contraseña.Size = new System.Drawing.Size(216, 20);
+            this.tb_Contraseña.TabIndex = 1;
             // 
-            // comboBox_Tipo_de_usuario
+            // cb_Tipo_de_usuario
             // 
-            this.comboBox_Tipo_de_usuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Tipo_de_usuario.FormattingEnabled = true;
-            this.comboBox_Tipo_de_usuario.Items.AddRange(new object[] {
+            this.cb_Tipo_de_usuario.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Tipo_de_usuario.FormattingEnabled = true;
+            this.cb_Tipo_de_usuario.Items.AddRange(new object[] {
             "Cliente",
             "Empresa"});
-            this.comboBox_Tipo_de_usuario.Location = new System.Drawing.Point(161, 96);
-            this.comboBox_Tipo_de_usuario.Name = "comboBox_Tipo_de_usuario";
-            this.comboBox_Tipo_de_usuario.Size = new System.Drawing.Size(216, 21);
-            this.comboBox_Tipo_de_usuario.TabIndex = 2;
+            this.cb_Tipo_de_usuario.Location = new System.Drawing.Point(161, 96);
+            this.cb_Tipo_de_usuario.Name = "cb_Tipo_de_usuario";
+            this.cb_Tipo_de_usuario.Size = new System.Drawing.Size(216, 21);
+            this.cb_Tipo_de_usuario.TabIndex = 2;
             // 
             // lblContraseña
             // 
@@ -134,12 +134,12 @@
             this.lblContraseña.TabIndex = 4;
             this.lblContraseña.Text = "Contraseña";
             // 
-            // textBox_Telefono
+            // tb_Telefono
             // 
-            this.textBox_Telefono.Location = new System.Drawing.Point(161, 70);
-            this.textBox_Telefono.Name = "textBox_Telefono";
-            this.textBox_Telefono.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Telefono.TabIndex = 27;
+            this.tb_Telefono.Location = new System.Drawing.Point(161, 70);
+            this.tb_Telefono.Name = "tb_Telefono";
+            this.tb_Telefono.Size = new System.Drawing.Size(216, 20);
+            this.tb_Telefono.TabIndex = 27;
             // 
             // labelTelefono
             // 
@@ -161,13 +161,13 @@
             // 
             // groupBoxDatosCliente
             // 
-            this.groupBoxDatosCliente.Controls.Add(this.comboBox_Tipo_de_documento);
-            this.groupBoxDatosCliente.Controls.Add(this.textBox_Numero_de_documento);
-            this.groupBoxDatosCliente.Controls.Add(this.textBox_Nombre);
-            this.groupBoxDatosCliente.Controls.Add(this.textBox_Apellido);
-            this.groupBoxDatosCliente.Controls.Add(this.textBox_Correo_electronico);
+            this.groupBoxDatosCliente.Controls.Add(this.cb_Tipo_de_documento);
+            this.groupBoxDatosCliente.Controls.Add(this.tb_Numero_de_documento);
+            this.groupBoxDatosCliente.Controls.Add(this.tb_Nombre);
+            this.groupBoxDatosCliente.Controls.Add(this.tb_Apellido);
+            this.groupBoxDatosCliente.Controls.Add(this.tb_Correo_electronico);
             this.groupBoxDatosCliente.Controls.Add(this.dp_Fecha_de_nacimiento);
-            this.groupBoxDatosCliente.Controls.Add(this.comboBox_Sexo);
+            this.groupBoxDatosCliente.Controls.Add(this.cb_Sexo);
             this.groupBoxDatosCliente.Controls.Add(this.lblMail);
             this.groupBoxDatosCliente.Controls.Add(this.labelFechaNacimiento);
             this.groupBoxDatosCliente.Controls.Add(this.lblNombre);
@@ -182,42 +182,42 @@
             this.groupBoxDatosCliente.TabStop = false;
             this.groupBoxDatosCliente.Text = "Datos de cliente";
             // 
-            // comboBox_Tipo_de_documento
+            // cb_Tipo_de_documento
             // 
-            this.comboBox_Tipo_de_documento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Tipo_de_documento.FormattingEnabled = true;
-            this.comboBox_Tipo_de_documento.Location = new System.Drawing.Point(167, 24);
-            this.comboBox_Tipo_de_documento.Name = "comboBox_Tipo_de_documento";
-            this.comboBox_Tipo_de_documento.Size = new System.Drawing.Size(216, 21);
-            this.comboBox_Tipo_de_documento.TabIndex = 29;
+            this.cb_Tipo_de_documento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Tipo_de_documento.FormattingEnabled = true;
+            this.cb_Tipo_de_documento.Location = new System.Drawing.Point(167, 24);
+            this.cb_Tipo_de_documento.Name = "cb_Tipo_de_documento";
+            this.cb_Tipo_de_documento.Size = new System.Drawing.Size(216, 21);
+            this.cb_Tipo_de_documento.TabIndex = 29;
             // 
-            // textBox_Numero_de_documento
+            // tb_Numero_de_documento
             // 
-            this.textBox_Numero_de_documento.Location = new System.Drawing.Point(167, 51);
-            this.textBox_Numero_de_documento.Name = "textBox_Numero_de_documento";
-            this.textBox_Numero_de_documento.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Numero_de_documento.TabIndex = 31;
+            this.tb_Numero_de_documento.Location = new System.Drawing.Point(167, 51);
+            this.tb_Numero_de_documento.Name = "tb_Numero_de_documento";
+            this.tb_Numero_de_documento.Size = new System.Drawing.Size(216, 20);
+            this.tb_Numero_de_documento.TabIndex = 31;
             // 
-            // textBox_Nombre
+            // tb_Nombre
             // 
-            this.textBox_Nombre.Location = new System.Drawing.Point(167, 77);
-            this.textBox_Nombre.Name = "textBox_Nombre";
-            this.textBox_Nombre.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Nombre.TabIndex = 35;
+            this.tb_Nombre.Location = new System.Drawing.Point(167, 77);
+            this.tb_Nombre.Name = "tb_Nombre";
+            this.tb_Nombre.Size = new System.Drawing.Size(216, 20);
+            this.tb_Nombre.TabIndex = 35;
             // 
-            // textBox_Apellido
+            // tb_Apellido
             // 
-            this.textBox_Apellido.Location = new System.Drawing.Point(167, 103);
-            this.textBox_Apellido.Name = "textBox_Apellido";
-            this.textBox_Apellido.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Apellido.TabIndex = 36;
+            this.tb_Apellido.Location = new System.Drawing.Point(167, 103);
+            this.tb_Apellido.Name = "tb_Apellido";
+            this.tb_Apellido.Size = new System.Drawing.Size(216, 20);
+            this.tb_Apellido.TabIndex = 36;
             // 
-            // textBox_Correo_electronico
+            // tb_Correo_electronico
             // 
-            this.textBox_Correo_electronico.Location = new System.Drawing.Point(167, 129);
-            this.textBox_Correo_electronico.Name = "textBox_Correo_electronico";
-            this.textBox_Correo_electronico.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Correo_electronico.TabIndex = 40;
+            this.tb_Correo_electronico.Location = new System.Drawing.Point(167, 129);
+            this.tb_Correo_electronico.Name = "tb_Correo_electronico";
+            this.tb_Correo_electronico.Size = new System.Drawing.Size(216, 20);
+            this.tb_Correo_electronico.TabIndex = 40;
             // 
             // dp_Fecha_de_nacimiento
             // 
@@ -226,14 +226,14 @@
             this.dp_Fecha_de_nacimiento.Size = new System.Drawing.Size(216, 20);
             this.dp_Fecha_de_nacimiento.TabIndex = 39;
             // 
-            // comboBox_Sexo
+            // cb_Sexo
             // 
-            this.comboBox_Sexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_Sexo.FormattingEnabled = true;
-            this.comboBox_Sexo.Location = new System.Drawing.Point(167, 155);
-            this.comboBox_Sexo.Name = "comboBox_Sexo";
-            this.comboBox_Sexo.Size = new System.Drawing.Size(216, 21);
-            this.comboBox_Sexo.TabIndex = 37;
+            this.cb_Sexo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Sexo.FormattingEnabled = true;
+            this.cb_Sexo.Location = new System.Drawing.Point(167, 155);
+            this.cb_Sexo.Name = "cb_Sexo";
+            this.cb_Sexo.Size = new System.Drawing.Size(216, 21);
+            this.cb_Sexo.TabIndex = 37;
             // 
             // lblMail
             // 
@@ -300,11 +300,11 @@
             // 
             // groupBoxDomicilioCliente
             // 
-            this.groupBoxDomicilioCliente.Controls.Add(this.textBox_Calle);
-            this.groupBoxDomicilioCliente.Controls.Add(this.textBox_Piso);
-            this.groupBoxDomicilioCliente.Controls.Add(this.textBox_Departamento);
-            this.groupBoxDomicilioCliente.Controls.Add(this.textBox_Codigo_postal);
-            this.groupBoxDomicilioCliente.Controls.Add(this.textBox_Localidad);
+            this.groupBoxDomicilioCliente.Controls.Add(this.tb_Calle);
+            this.groupBoxDomicilioCliente.Controls.Add(this.tb_Piso);
+            this.groupBoxDomicilioCliente.Controls.Add(this.tb_Departamento);
+            this.groupBoxDomicilioCliente.Controls.Add(this.tb_Codigo_postal);
+            this.groupBoxDomicilioCliente.Controls.Add(this.tb_Localidad);
             this.groupBoxDomicilioCliente.Controls.Add(this.labelLocalidad);
             this.groupBoxDomicilioCliente.Controls.Add(this.labelCodPostal);
             this.groupBoxDomicilioCliente.Controls.Add(this.labelDepto);
@@ -317,40 +317,40 @@
             this.groupBoxDomicilioCliente.TabStop = false;
             this.groupBoxDomicilioCliente.Text = "Domicilio";
             // 
-            // textBox_Calle
+            // tb_Calle
             // 
-            this.textBox_Calle.Location = new System.Drawing.Point(67, 26);
-            this.textBox_Calle.Name = "textBox_Calle";
-            this.textBox_Calle.Size = new System.Drawing.Size(318, 20);
-            this.textBox_Calle.TabIndex = 24;
+            this.tb_Calle.Location = new System.Drawing.Point(67, 26);
+            this.tb_Calle.Name = "tb_Calle";
+            this.tb_Calle.Size = new System.Drawing.Size(318, 20);
+            this.tb_Calle.TabIndex = 24;
             // 
-            // textBox_Piso
+            // tb_Piso
             // 
-            this.textBox_Piso.Location = new System.Drawing.Point(67, 52);
-            this.textBox_Piso.Name = "textBox_Piso";
-            this.textBox_Piso.Size = new System.Drawing.Size(37, 20);
-            this.textBox_Piso.TabIndex = 25;
+            this.tb_Piso.Location = new System.Drawing.Point(67, 52);
+            this.tb_Piso.Name = "tb_Piso";
+            this.tb_Piso.Size = new System.Drawing.Size(37, 20);
+            this.tb_Piso.TabIndex = 25;
             // 
-            // textBox_Departamento
+            // tb_Departamento
             // 
-            this.textBox_Departamento.Location = new System.Drawing.Point(190, 52);
-            this.textBox_Departamento.Name = "textBox_Departamento";
-            this.textBox_Departamento.Size = new System.Drawing.Size(38, 20);
-            this.textBox_Departamento.TabIndex = 28;
+            this.tb_Departamento.Location = new System.Drawing.Point(190, 52);
+            this.tb_Departamento.Name = "tb_Departamento";
+            this.tb_Departamento.Size = new System.Drawing.Size(38, 20);
+            this.tb_Departamento.TabIndex = 28;
             // 
-            // textBox_Codigo_postal
+            // tb_Codigo_postal
             // 
-            this.textBox_Codigo_postal.Location = new System.Drawing.Point(311, 52);
-            this.textBox_Codigo_postal.Name = "textBox_Codigo_postal";
-            this.textBox_Codigo_postal.Size = new System.Drawing.Size(74, 20);
-            this.textBox_Codigo_postal.TabIndex = 30;
+            this.tb_Codigo_postal.Location = new System.Drawing.Point(311, 52);
+            this.tb_Codigo_postal.Name = "tb_Codigo_postal";
+            this.tb_Codigo_postal.Size = new System.Drawing.Size(74, 20);
+            this.tb_Codigo_postal.TabIndex = 30;
             // 
-            // textBox_Localidad
+            // tb_Localidad
             // 
-            this.textBox_Localidad.Location = new System.Drawing.Point(89, 78);
-            this.textBox_Localidad.Name = "textBox_Localidad";
-            this.textBox_Localidad.Size = new System.Drawing.Size(296, 20);
-            this.textBox_Localidad.TabIndex = 32;
+            this.tb_Localidad.Location = new System.Drawing.Point(89, 78);
+            this.tb_Localidad.Name = "tb_Localidad";
+            this.tb_Localidad.Size = new System.Drawing.Size(296, 20);
+            this.tb_Localidad.TabIndex = 32;
             // 
             // labelLocalidad
             // 
@@ -397,23 +397,25 @@
             this.labelCalle.TabIndex = 24;
             this.labelCalle.Text = "Calle";
             // 
-            // btnCancelar
+            // btn_Cancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(53, 534);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(164, 23);
-            this.btnCancelar.TabIndex = 33;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Location = new System.Drawing.Point(53, 534);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(164, 23);
+            this.btn_Cancelar.TabIndex = 33;
+            this.btn_Cancelar.Text = "Cancelar";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);
             // 
-            // btnRegistracion
+            // btn_Confirmar
             // 
-            this.btnRegistracion.Location = new System.Drawing.Point(236, 534);
-            this.btnRegistracion.Name = "btnRegistracion";
-            this.btnRegistracion.Size = new System.Drawing.Size(182, 23);
-            this.btnRegistracion.TabIndex = 31;
-            this.btnRegistracion.Text = "Confirmar";
-            this.btnRegistracion.UseVisualStyleBackColor = true;
+            this.btn_Confirmar.Location = new System.Drawing.Point(236, 534);
+            this.btn_Confirmar.Name = "btn_Confirmar";
+            this.btn_Confirmar.Size = new System.Drawing.Size(182, 23);
+            this.btn_Confirmar.TabIndex = 31;
+            this.btn_Confirmar.Text = "Confirmar";
+            this.btn_Confirmar.UseVisualStyleBackColor = true;
+            this.btn_Confirmar.Click += new System.EventHandler(this.btn_Confirmar_Click);
             // 
             // labelInfoAsterizco
             // 
@@ -434,7 +436,7 @@
             this.label_Ingrese_datos.TabIndex = 37;
             this.label_Ingrese_datos.Text = "Complete los datos solicitados:";
             // 
-            // RegistroDeCliente
+            // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -443,14 +445,13 @@
             this.Controls.Add(this.groupBox_Datos_de_usuario);
             this.Controls.Add(this.groupBoxDatosCliente);
             this.Controls.Add(this.groupBoxDomicilioCliente);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnRegistracion);
+            this.Controls.Add(this.btn_Cancelar);
+            this.Controls.Add(this.btn_Confirmar);
             this.Controls.Add(this.labelInfoAsterizco);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "RegistroDeCliente";
+            this.Name = "ModificacionCliente";
             this.Text = "Nuevo cliente";
-            this.Load += new System.EventHandler(this.RegistroDeCliente_Load);
             this.groupBox_Datos_de_usuario.ResumeLayout(false);
             this.groupBox_Datos_de_usuario.PerformLayout();
             this.groupBoxDatosCliente.ResumeLayout(false);
@@ -465,22 +466,22 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox_Datos_de_usuario;
-        private System.Windows.Forms.TextBox textBox_Nombre_de_usuario;
+        private System.Windows.Forms.TextBox tb_Nombre_de_usuario;
         private System.Windows.Forms.Label lblUsuario;
-        private System.Windows.Forms.TextBox textBox_Contraseña;
-        private System.Windows.Forms.ComboBox comboBox_Tipo_de_usuario;
+        private System.Windows.Forms.TextBox tb_Contraseña;
+        private System.Windows.Forms.ComboBox cb_Tipo_de_usuario;
         private System.Windows.Forms.Label lblContraseña;
-        private System.Windows.Forms.TextBox textBox_Telefono;
+        private System.Windows.Forms.TextBox tb_Telefono;
         private System.Windows.Forms.Label labelTelefono;
         private System.Windows.Forms.Label lblRol;
         private System.Windows.Forms.GroupBox groupBoxDatosCliente;
-        private System.Windows.Forms.ComboBox comboBox_Tipo_de_documento;
-        private System.Windows.Forms.TextBox textBox_Numero_de_documento;
-        private System.Windows.Forms.TextBox textBox_Nombre;
-        private System.Windows.Forms.TextBox textBox_Apellido;
-        private System.Windows.Forms.TextBox textBox_Correo_electronico;
+        private System.Windows.Forms.ComboBox cb_Tipo_de_documento;
+        private System.Windows.Forms.TextBox tb_Numero_de_documento;
+        private System.Windows.Forms.TextBox tb_Nombre;
+        private System.Windows.Forms.TextBox tb_Apellido;
+        private System.Windows.Forms.TextBox tb_Correo_electronico;
         private System.Windows.Forms.DateTimePicker dp_Fecha_de_nacimiento;
-        private System.Windows.Forms.ComboBox comboBox_Sexo;
+        private System.Windows.Forms.ComboBox cb_Sexo;
         private System.Windows.Forms.Label lblMail;
         private System.Windows.Forms.Label labelFechaNacimiento;
         private System.Windows.Forms.Label lblNombre;
@@ -489,18 +490,18 @@
         private System.Windows.Forms.Label lblNroDoc;
         private System.Windows.Forms.Label lblTipoDoc;
         private System.Windows.Forms.GroupBox groupBoxDomicilioCliente;
-        private System.Windows.Forms.TextBox textBox_Calle;
-        private System.Windows.Forms.TextBox textBox_Piso;
-        private System.Windows.Forms.TextBox textBox_Departamento;
-        private System.Windows.Forms.TextBox textBox_Codigo_postal;
-        private System.Windows.Forms.TextBox textBox_Localidad;
+        private System.Windows.Forms.TextBox tb_Calle;
+        private System.Windows.Forms.TextBox tb_Piso;
+        private System.Windows.Forms.TextBox tb_Departamento;
+        private System.Windows.Forms.TextBox tb_Codigo_postal;
+        private System.Windows.Forms.TextBox tb_Localidad;
         private System.Windows.Forms.Label labelLocalidad;
         private System.Windows.Forms.Label labelCodPostal;
         private System.Windows.Forms.Label labelDepto;
         private System.Windows.Forms.Label labelPiso;
         private System.Windows.Forms.Label labelCalle;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button btnRegistracion;
+        private System.Windows.Forms.Button btn_Cancelar;
+        private System.Windows.Forms.Button btn_Confirmar;
         private System.Windows.Forms.Label labelInfoAsterizco;
         private System.Windows.Forms.Label label_Ingrese_datos;
 

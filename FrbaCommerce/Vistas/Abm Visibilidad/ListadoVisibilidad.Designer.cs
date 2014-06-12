@@ -34,22 +34,13 @@
             this.label_Porcentaje = new System.Windows.Forms.Label();
             this.tb_Precio = new System.Windows.Forms.TextBox();
             this.tb_Porcentaje = new System.Windows.Forms.TextBox();
-            this.buttonSeleccionarRegistro = new System.Windows.Forms.Button();
             this.gbAcciones.SuspendLayout();
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
-            // gbAcciones
-            // 
-            this.gbAcciones.Controls.Add(this.buttonSeleccionarRegistro);
-            this.gbAcciones.Controls.SetChildIndex(this.btnAlta, 0);
-            this.gbAcciones.Controls.SetChildIndex(this.btnModificacion, 0);
-            this.gbAcciones.Controls.SetChildIndex(this.btnBaja, 0);
-            this.gbAcciones.Controls.SetChildIndex(this.buttonSeleccionarRegistro, 0);
-            // 
             // btnBaja
             // 
-            this.btnBaja.TabIndex = 7;
+            this.btn_Habilitacion.TabIndex = 7;
             // 
             // btnModificacion
             // 
@@ -91,7 +82,7 @@
             this.label_Nombre_de_visibilidad.Name = "label_Nombre_de_visibilidad";
             this.label_Nombre_de_visibilidad.Size = new System.Drawing.Size(107, 13);
             this.label_Nombre_de_visibilidad.TabIndex = 2;
-            this.label_Nombre_de_visibilidad.Text = "Nombre de visibilidad";
+            this.label_Nombre_de_visibilidad.Text = "Nombre de clienteModif";
             // 
             // tb_Nombre_de_visibilidad
             // 
@@ -134,17 +125,6 @@
             this.tb_Porcentaje.TabIndex = 2;
             this.tb_Porcentaje.Text = "0";
             // 
-            // buttonSeleccionarRegistro
-            // 
-            this.buttonSeleccionarRegistro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSeleccionarRegistro.Location = new System.Drawing.Point(571, 18);
-            this.buttonSeleccionarRegistro.Name = "buttonSeleccionarRegistro";
-            this.buttonSeleccionarRegistro.Size = new System.Drawing.Size(75, 23);
-            this.buttonSeleccionarRegistro.TabIndex = 8;
-            this.buttonSeleccionarRegistro.Text = "Seleccionar";
-            this.buttonSeleccionarRegistro.UseVisualStyleBackColor = true;
-            this.buttonSeleccionarRegistro.Visible = false;
-            // 
             // ListadoVisibilidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,6 +147,5 @@
         private System.Windows.Forms.Label label_Porcentaje;
         private System.Windows.Forms.TextBox tb_Precio;
         private System.Windows.Forms.Label label_Precio;
-        private System.Windows.Forms.Button buttonSeleccionarRegistro;
     }
 }

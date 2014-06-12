@@ -21,6 +21,6 @@ namespace FrbaCommerce.Entidades
         public string mail { get; set; }
         public DateTime fecha_nacimiento { get; set; }
         public Sexo sexo { get; set; }
-        public string telefono { get; set; }
+        public decimal? telefono { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using FrbaCommerce.GUIMethods.Validaciones;
 using FrbaCommerce.Generics.Resultados;
 using FrbaCommerce.Entidades;
 using FrbaCommerce.DataAccess;
+using System.Data.SqlClient;
 
 namespace FrbaCommerce.Vistas.Abm_Visibilidad
 {
@@ -56,7 +57,34 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
         #region [AccionBorrar]
         protected override void AccionBorrar()
         {
-            MessageDialog.MensajeError("Todavia no lo implementé papilo");
+            Visibilidad seleccionado = this.EntidadSeleccionada as Visibilidad;
+            this.habilitacionDelRegistro(seleccionado);
+            this.Filtrar();
+        }
+
+        private void habilitacionDelRegistro(Visibilidad visibilidad) {
+            try
+            {
+                if (visibilidad.Habilitada)
+                {
+                    this.visibilidadDB.inHabilitarVisibilidad(visibilidad);
+
+                    visibilidad.Habilitada = false;
+                }
+                else
+                {
+                    this.visibilidadDB.habilitarVisibilidad(visibilidad);
+                    visibilidad.Habilitada = true;
+                }
+            }
+            catch (SqlException exSQL)
+            {
+                MessageDialog.MensajeError(exSQL.Message);
+            }
+            catch (Exception ex) 
+            {
+                MessageDialog.MensajeError(ex.Message);
+            }
         }
         #endregion
 
@@ -79,7 +107,7 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             this.dgvBusqueda.DataSource = resultado.Retorno;
 
             this.dgvBusqueda.Columns["IdVisibilidad"].Visible = false;
-            this.dgvBusqueda.Columns["Habilitada"].Visible = false;
+            //this.dgvBusqueda.Columns["Habilitada"].Visible = false;
         }
 
         private IResultado<IList<Visibilidad>> getVisibilidadesFiltradas(FiltroVisibilidades filtro)

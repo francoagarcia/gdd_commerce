@@ -30,7 +30,7 @@
         {
             this.gbAcciones = new System.Windows.Forms.GroupBox();
             this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.btnBaja = new System.Windows.Forms.Button();
+            this.btn_Habilitacion = new System.Windows.Forms.Button();
             this.btnModificacion = new System.Windows.Forms.Button();
             this.btnAlta = new System.Windows.Forms.Button();
             this.gbBusqueda = new System.Windows.Forms.GroupBox();
@@ -49,7 +49,7 @@
             this.gbAcciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.gbAcciones.Controls.Add(this.btnSeleccionar);
-            this.gbAcciones.Controls.Add(this.btnBaja);
+            this.gbAcciones.Controls.Add(this.btn_Habilitacion);
             this.gbAcciones.Controls.Add(this.btnModificacion);
             this.gbAcciones.Controls.Add(this.btnAlta);
             this.gbAcciones.Location = new System.Drawing.Point(11, 385);
@@ -70,15 +70,15 @@
             this.btnSeleccionar.UseVisualStyleBackColor = true;
             this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
-            // btnBaja
+            // btn_Habilitacion
             // 
-            this.btnBaja.Location = new System.Drawing.Point(169, 18);
-            this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(75, 23);
-            this.btnBaja.TabIndex = 5;
-            this.btnBaja.Text = "Baja";
-            this.btnBaja.UseVisualStyleBackColor = true;
-            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
+            this.btn_Habilitacion.Location = new System.Drawing.Point(169, 18);
+            this.btn_Habilitacion.Name = "btn_Habilitacion";
+            this.btn_Habilitacion.Size = new System.Drawing.Size(142, 23);
+            this.btn_Habilitacion.TabIndex = 5;
+            this.btn_Habilitacion.Text = "Habilitar/Deshabilitar";
+            this.btn_Habilitacion.UseVisualStyleBackColor = true;
+            this.btn_Habilitacion.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // btnModificacion
             // 
@@ -193,7 +193,7 @@
         #endregion
 
         protected System.Windows.Forms.GroupBox gbAcciones;
-        protected System.Windows.Forms.Button btnBaja;
+        protected System.Windows.Forms.Button btn_Habilitacion;
         protected System.Windows.Forms.Button btnModificacion;
         protected System.Windows.Forms.Button btnAlta;
         protected System.Windows.Forms.GroupBox gbBusqueda;

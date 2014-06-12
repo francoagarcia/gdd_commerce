@@ -85,7 +85,7 @@
             this.checkBoxHabilitado.Name = "checkBoxHabilitado";
             this.checkBoxHabilitado.Size = new System.Drawing.Size(73, 17);
             this.checkBoxHabilitado.TabIndex = 21;
-            this.checkBoxHabilitado.Text = "Habilitado";
+            this.checkBoxHabilitado.Text = "Habilitada";
             this.checkBoxHabilitado.UseVisualStyleBackColor = true;
             // 
             // labelComboRoles

@@ -135,7 +135,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AltaVisibilidad";
-            this.Text = "Alta de visibilidad de publicacion";
+            this.Text = "Alta de clienteModif de publicacion";
             this.Load += new System.EventHandler(this.AltaVisibilidad_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -25,45 +25,66 @@ CREATE PROCEDURE DATA_GROUP.nuevaEmpresa(
 AS
 BEGIN
 	BEGIN TRY
-		BEGIN TRAN
+	
+		DECLARE @telefonoRepetido numeric(18, 0);
 		
-		DECLARE @id_usuario_new numeric(18,0);
+		SET @telefonoRepetido = (SELECT TOP 1 telefono FROM DATA_GROUP.Usuario WHERE telefono is not null and telefono=@telefono_usuario)
 		
-		EXEC DATA_GROUP.nuevoUsuario @nombre_de_usuario, @contrasenia_usuario, @telefono_usuario, 'EMP', @id_usuario_new OUTPUT
-		
-		DECLARE @id_rol_for_new_user numeric(18) = (SELECT TOP 1 id_rol FROM DATA_GROUP.Rol WHERE nombre = 'Empresa')
-		
-		EXECUTE DATA_GROUP.asociarRolAUsuario @id_rol_for_new_user, @id_usuario_new
-		
-		-- Creo el registro del cliente
-		INSERT INTO DATA_GROUP.Empresa(cuit, 
-									   razon_social, 
-									   id_usuario, 
-									   mail, 
-									   dom_calle, 
-									   piso, 
-									   depto, 
-									   localidad, 
-									   cod_postal, 
-									   ciudad, 
-									   nombre_de_contacto, 
-									   fecha_creacion)
-		VALUES (@cuit, 
-			@razon_social, 
-			@id_usuario_new, 
-			@mail, 
-			@dom_calle, 
-			@piso, 
-			@depto, 
-			@localidad, 
-			@cod_postal, 
-			@ciudad, 
-			@nombre_de_contacto, 
-			@fecha_creacion)
-				
-		SET @id_usuario_agregado = SCOPE_IDENTITY();
+		if @telefonoRepetido is not null
+		BEGIN
+			
+			DECLARE @ErrorSeverityTelefono INT;
+			DECLARE @ErrorStateTelefono INT;
 
-		COMMIT TRAN
+			SELECT @ErrorSeverityTelefono = ERROR_SEVERITY(), @ErrorStateTelefono = ERROR_STATE();
+
+			RAISERROR ('Telefono ingresado ya se encuentra registrado en el sistema. Por favor ingrese otro', -- Message text.
+				   @ErrorSeverityTelefono, -- Severity.
+				   @ErrorStateTelefono -- State.
+				   );
+		END
+		ELSE
+		BEGIN
+			BEGIN TRAN
+			
+			DECLARE @id_usuario_new numeric(18,0);
+			
+			EXEC DATA_GROUP.nuevoUsuario @nombre_de_usuario, @contrasenia_usuario, @telefono_usuario, 'EMP', @id_usuario_new OUTPUT
+			
+			DECLARE @id_rol_for_new_user numeric(18) = (SELECT TOP 1 id_rol FROM DATA_GROUP.Rol WHERE nombre = 'Empresa')
+			
+			EXECUTE DATA_GROUP.asociarRolAUsuario @id_rol_for_new_user, @id_usuario_new
+			
+			-- Creo el registro del cliente
+			INSERT INTO DATA_GROUP.Empresa(cuit, 
+										   razon_social, 
+										   id_usuario, 
+										   mail, 
+										   dom_calle, 
+										   piso, 
+										   depto, 
+										   localidad, 
+										   cod_postal, 
+										   ciudad, 
+										   nombre_de_contacto, 
+										   fecha_creacion)
+			VALUES (@cuit, 
+				@razon_social, 
+				@id_usuario_new, 
+				@mail, 
+				@dom_calle, 
+				@piso, 
+				@depto, 
+				@localidad, 
+				@cod_postal, 
+				@ciudad, 
+				@nombre_de_contacto, 
+				@fecha_creacion)
+					
+			SET @id_usuario_agregado = SCOPE_IDENTITY();
+
+			COMMIT TRAN
+		END
 		
 	END TRY
 	BEGIN CATCH

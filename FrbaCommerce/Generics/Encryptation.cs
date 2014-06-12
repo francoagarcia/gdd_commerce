@@ -26,9 +26,5 @@ namespace FrbaCommerce.Generics
 
             return pass_string.ToString();
         }
-
-
-
-
     }
 }

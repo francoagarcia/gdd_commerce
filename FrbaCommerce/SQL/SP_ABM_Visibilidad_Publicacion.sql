@@ -45,36 +45,39 @@ BEGIN
 END
 GO
 
+
+
 IF OBJECT_ID('DATA_GROUP.inhabilitarVisibilidad') is not null
 	DROP PROCEDURE DATA_GROUP.inhabilitarVisibilidad
 	GO
 CREATE PROCEDURE DATA_GROUP.inhabilitarVisibilidad
-@descripcion nvarchar(255)
+@id_visibilidad numeric(18,0)
 AS
 BEGIN
 		
 	UPDATE DATA_GROUP.VisibilidadPublicacion
 	SET habilitada=0
-	WHERE descripcion=@descripcion
+	WHERE id_visibilidad=@id_visibilidad
 	
 END
 GO
 
 
-IF OBJECT_ID('DATA_GROUP.inhabilitarVisibilidad') is not null
+IF OBJECT_ID('DATA_GROUP.habilitarVisibilidad') is not null
 	DROP PROCEDURE DATA_GROUP.habilitarVisibilidad
 	GO
 CREATE PROCEDURE DATA_GROUP.habilitarVisibilidad
-@descripcion nvarchar(255)
+@id_visibilidad numeric(18,0)
 AS
 BEGIN
 		
 	UPDATE DATA_GROUP.VisibilidadPublicacion
 	SET habilitada=1
-	WHERE descripcion=@descripcion
+	WHERE id_visibilidad=@id_visibilidad
 	
 END
 GO
+
 
 IF OBJECT_ID('DATA_GROUP.getTodasLasVisibilidades') is not null
 	DROP PROCEDURE DATA_GROUP.getTodasLasVisibilidades

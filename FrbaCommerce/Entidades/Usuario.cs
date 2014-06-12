@@ -11,7 +11,7 @@ namespace FrbaCommerce.Entidades
         public string username { get; set;}
         public string contrasenia { get; set; }
         public int cantidadIntentos { get; set; }
-        public bool habilitado { get; set; }
+        public bool habilitada { get; set; }
 
         public Usuario()
         {
