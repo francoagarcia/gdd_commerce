@@ -7,7 +7,6 @@ namespace FrbaCommerce.Entidades
 {
     public class Empresa : Usuario
     {
-        public decimal id_usuario { get; set; }
         public string cuit { get; set; }
         public string razon_social { get; set; }
         public string nombre_de_contacto { get; set; }
@@ -18,7 +17,7 @@ namespace FrbaCommerce.Entidades
         public string cod_postal { get; set; }
         public string mail { get; set; }
         public DateTime fecha_creacion { get; set; }
-        public string telefono { get; set; }
+        public decimal telefono { get; set; }
         public string ciudad { get; set; }
     }
 }

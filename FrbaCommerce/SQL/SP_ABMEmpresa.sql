@@ -105,10 +105,12 @@ BEGIN
 END
 
 ---------------------------------Modificar Empresa-------------------------------
+
 IF OBJECT_ID('DATA_GROUP.modificarEmpresa') IS NOT NULL 
 	DROP PROCEDURE DATA_GROUP.modificarEmpresa
 	GO
 CREATE PROCEDURE DATA_GROUP.modificarEmpresa
+@id_usuario_a_modificar numeric(18,0),
 @cuit nvarchar(50), 
 @razon_social nvarchar(50), 
 @nombre_de_usuario nvarchar(255),
@@ -119,55 +121,64 @@ CREATE PROCEDURE DATA_GROUP.modificarEmpresa
 @piso numeric(18, 0),
 @depto nvarchar(50),
 @localidad nvarchar(255),
-@nro_calle numeric(18, 0),
 @cod_postal nvarchar(50),
 @ciudad nvarchar(255),
-@nombre_de_contacto nvarchar(255)
+@nombre_de_contacto nvarchar(255),
+@fecha_creacion datetime
 AS
 BEGIN
 	
-	DECLARE @id_user numeric(18, 0)
-	SELECT @id_user=id_usuario
-	FROM DATA_GROUP.Empresa
-	WHERE cuit=@cuit AND razon_social=@razon_social
+	BEGIN TRY
+		BEGIN TRAN
+		
+		EXEC DATA_GROUP.modificarUsuario @id_usuario=@id_usuario_a_modificar, @username=@nombre_de_usuario, @contrasenia=@contrasenia_usuario, @telefono=@telefono_usuario
+		
+		UPDATE DATA_GROUP.Empresa
+		SET razon_social = @razon_social,
+			cuit = @cuit,
+			fecha_creacion=@fecha_creacion,
+			mail=@mail, 
+			dom_calle=@dom_calle, 
+			piso=@piso, 
+			depto=@depto, 
+			localidad=@localidad,  
+			cod_postal=@cod_postal, 
+			ciudad=@ciudad, 
+			nombre_de_contacto=@nombre_de_contacto
+		WHERE id_usuario=@id_usuario_a_modificar
+
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
 	
-	EXEC DATA_GROUP.modificarUsuario @id_usuario=@id_user, @username=@nombre_de_usuario, @contrasenia=@contrasenia_usuario, @telefono=@telefono_usuario
-	
-	UPDATE DATA_GROUP.Empresa
-	SET 
-		mail=@mail, 
-		dom_calle=@dom_calle, 
-		piso=@piso, 
-		depto=@depto, 
-		localidad=@localidad, 
-		nro_calle=@nro_calle, 
-		cod_postal=@cod_postal, 
-		ciudad=@ciudad, 
-		nombre_de_contacto=@nombre_de_contacto
-	WHERE cuit=@cuit AND razon_social=@razon_social
-	
+		ROLLBACK TRAN
+
+		DECLARE @ErrorMessage NVARCHAR(4000);
+	    DECLARE @ErrorSeverity INT;
+		DECLARE @ErrorState INT;
+
+		SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+		RAISERROR (@ErrorMessage, -- Message text.
+               @ErrorSeverity, -- Severity.
+               @ErrorState -- State.
+               );
+	END CATCH
 END
-GO
 
 ---------------------------------Habilitacion de Empresa-------------------------------
 
 
-IF OBJECT_ID('DATA_GROUP.deshabilitarEmpresa') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.deshabilitarEmpresa
+IF OBJECT_ID('DATA_GROUP.inHabilitarEmpresa') IS NOT NULL 
+	DROP PROCEDURE DATA_GROUP.inHabilitarEmpresa
 	GO
-CREATE PROCEDURE DATA_GROUP.deshabilitarEmpresa
-@cuit nvarchar(50),
-@razon_social nvarchar(255)
+CREATE PROCEDURE DATA_GROUP.inHabilitarEmpresa
+@id_usuario numeric(18,0)
 AS
 BEGIN
-
-	DECLARE @id_usu_deshabilitado numeric(18, 0)
-	SET @id_usu_deshabilitado = (SELECT id_usuario FROM DATA_GROUP.Empresa WHERE cuit=@cuit AND razon_social=@razon_social)
-	
 	UPDATE DATA_GROUP.Usuario
 	SET habilitada=0
-	WHERE id_usuario=@id_usu_deshabilitado
-	
+	WHERE id_usuario=@id_usuario AND tipo_usuario='EMP'
 END
 GO
 
@@ -175,24 +186,59 @@ GO
 IF OBJECT_ID('DATA_GROUP.habilitarEmpresa') IS NOT NULL 
 	DROP PROCEDURE DATA_GROUP.habilitarEmpresa
 	GO
-
 CREATE PROCEDURE DATA_GROUP.habilitarEmpresa
-@cuit nvarchar(50),
-@razon_social nvarchar(255)
+@id_usuario numeric(18, 0)
 AS
 BEGIN
-
-	DECLARE @id_usu_deshabilitado numeric(18, 0)
-	SET @id_usu_deshabilitado = (SELECT id_usuario FROM DATA_GROUP.Empresa WHERE cuit=@cuit AND razon_social=@razon_social)
-	
 	UPDATE DATA_GROUP.Usuario
-	SET habilitada=0
-	WHERE id_usuario=@id_usu_deshabilitado
-	
+	SET habilitada=1
+	WHERE id_usuario=@id_usuario AND tipo_usuario='EMP'
 END
 GO
 
 
+---------------------------------Filtro de Empresa-------------------------------
+
+IF OBJECT_ID('DATA_GROUP.sp_empresa_filter') is not null
+	DROP PROCEDURE DATA_GROUP.sp_empresa_filter
+	GO
+CREATE PROCEDURE DATA_GROUP.sp_empresa_filter
+(
+	@CUIT nvarchar(50) = NULL, 
+	@razon_social nvarchar(255) = NULL, 
+	@mail nvarchar(50) = NULL, 
+	@habilitada bit = NULL
+)
+AS
+BEGIN
+
+	if @habilitada is null
+		SET @habilitada=1
+
+	SELECT  e.cuit,
+			e.razon_social, 
+			e.id_usuario, 
+			e.mail, 
+			e.dom_calle, 
+			e.piso, 
+			e.depto, 
+			e.localidad, 
+			e.cod_postal, 
+			e.ciudad, 
+			e.nombre_de_contacto, 
+			e.fecha_creacion,
+			u.telefono,
+			u.habilitada,
+			u.username
+	FROM DATA_GROUP.Empresa e
+	INNER JOIN DATA_GROUP.Usuario u
+	ON u.id_usuario = e.id_usuario AND u.tipo_usuario='EMP'
+	WHERE  ((@CUIT IS NULL) OR (e.cuit = @CUIT ))
+	  AND ((@razon_social IS NULL) OR ( e.razon_social like '%'+ @razon_social +'%'))
+	  AND ((@mail IS NULL) OR (e.mail like '%'+@mail+'%'))
+	  AND ((u.habilitada=@habilitada))
+END
+GO
 
 
 

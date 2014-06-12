@@ -67,6 +67,7 @@
             this.btn_Confirmar = new System.Windows.Forms.Button();
             this.labelInfoAsterizco = new System.Windows.Forms.Label();
             this.label_Ingrese_datos = new System.Windows.Forms.Label();
+            this.btn_Limpiar = new System.Windows.Forms.Button();
             this.groupBox_Datos_de_usuario.SuspendLayout();
             this.groupBoxDatosCliente.SuspendLayout();
             this.groupBoxDomicilioCliente.SuspendLayout();
@@ -401,7 +402,7 @@
             // 
             this.btn_Cancelar.Location = new System.Drawing.Point(53, 534);
             this.btn_Cancelar.Name = "btn_Cancelar";
-            this.btn_Cancelar.Size = new System.Drawing.Size(164, 23);
+            this.btn_Cancelar.Size = new System.Drawing.Size(114, 23);
             this.btn_Cancelar.TabIndex = 33;
             this.btn_Cancelar.Text = "Cancelar";
             this.btn_Cancelar.UseVisualStyleBackColor = true;
@@ -409,9 +410,9 @@
             // 
             // btn_Confirmar
             // 
-            this.btn_Confirmar.Location = new System.Drawing.Point(236, 534);
+            this.btn_Confirmar.Location = new System.Drawing.Point(297, 534);
             this.btn_Confirmar.Name = "btn_Confirmar";
-            this.btn_Confirmar.Size = new System.Drawing.Size(182, 23);
+            this.btn_Confirmar.Size = new System.Drawing.Size(114, 23);
             this.btn_Confirmar.TabIndex = 31;
             this.btn_Confirmar.Text = "Confirmar";
             this.btn_Confirmar.UseVisualStyleBackColor = true;
@@ -436,11 +437,22 @@
             this.label_Ingrese_datos.TabIndex = 37;
             this.label_Ingrese_datos.Text = "Complete los datos solicitados:";
             // 
+            // btn_Limpiar
+            // 
+            this.btn_Limpiar.Location = new System.Drawing.Point(173, 534);
+            this.btn_Limpiar.Name = "btn_Limpiar";
+            this.btn_Limpiar.Size = new System.Drawing.Size(114, 23);
+            this.btn_Limpiar.TabIndex = 38;
+            this.btn_Limpiar.Text = "Limpiar";
+            this.btn_Limpiar.UseVisualStyleBackColor = true;
+            this.btn_Limpiar.Click += new System.EventHandler(this.btn_Limpiar_Click);
+            // 
             // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 588);
+            this.Controls.Add(this.btn_Limpiar);
             this.Controls.Add(this.label_Ingrese_datos);
             this.Controls.Add(this.groupBox_Datos_de_usuario);
             this.Controls.Add(this.groupBoxDatosCliente);
@@ -504,6 +516,7 @@
         private System.Windows.Forms.Button btn_Confirmar;
         private System.Windows.Forms.Label labelInfoAsterizco;
         private System.Windows.Forms.Label label_Ingrese_datos;
+        private System.Windows.Forms.Button btn_Limpiar;
 
     }
 }

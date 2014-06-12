@@ -7,7 +7,7 @@ namespace FrbaCommerce.Entidades
 {
     public class Usuario
     {
-        //public decimal id;
+        public decimal id_usuario { get; set; }
         public string username { get; set;}
         public string contrasenia { get; set; }
         public int cantidadIntentos { get; set; }

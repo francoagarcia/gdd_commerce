@@ -105,10 +105,10 @@ GO
 
 ----------------------HABILITACION DE USUARIO--------------------------
 
-IF OBJECT_ID('DATA_GROUP.habilitarCliente') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.habilitarCliente
+IF OBJECT_ID('DATA_GROUP.habilitarUsuario') IS NOT NULL 
+	DROP PROCEDURE DATA_GROUP.habilitarUsuario
 	GO
-CREATE PROCEDURE DATA_GROUP.habilitarCliente
+CREATE PROCEDURE DATA_GROUP.habilitarUsuario
 @id_usuario numeric(18, 0)
 AS
 BEGIN
@@ -119,10 +119,10 @@ END
 GO
 
 
-IF OBJECT_ID('DATA_GROUP.inHabilitarCliente') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.inHabilitarCliente
+IF OBJECT_ID('DATA_GROUP.inHabilitarUsuario') IS NOT NULL 
+	DROP PROCEDURE DATA_GROUP.inHabilitarUsuario
 	GO
-CREATE PROCEDURE DATA_GROUP.inHabilitarCliente
+CREATE PROCEDURE DATA_GROUP.inHabilitarUsuario
 @id_usuario numeric(18, 0)
 AS
 BEGIN

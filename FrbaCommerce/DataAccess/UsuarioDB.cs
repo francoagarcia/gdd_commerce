@@ -36,6 +36,30 @@ namespace FrbaCommerce.DataAccess
             return (int)pResultado.Value;
         }
 
+        public void inHabilitarUsuario(Usuario usuarioBaja)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            id_usuario.Value = usuarioBaja.id_usuario;
+            parametros.Add(id_usuario);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.inHabilitarUsuario", parametros);
+            usuarioBaja.habilitada = false;
+        }
+
+        public void habilitarUsuario(Usuario usuarioBaja)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            id_usuario.Value = usuarioBaja.id_usuario;
+            parametros.Add(id_usuario);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.habilitarUsuario", parametros);
+            usuarioBaja.habilitada = true;
+        }
+
         public static Usuario ObtenerPorUsername(string username)
         {
             IList<SqlParameter> parametros = new List<SqlParameter>();

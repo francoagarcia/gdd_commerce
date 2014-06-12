@@ -14,46 +14,28 @@ namespace FrbaCommerce.DataAccess
 {
     public class ClienteDB : EntidadBaseDB<Cliente, FiltroCliente>
     {
+        private UsuarioDB usuarioDB;
+
          public ClienteDB() 
-            : base(new BuilderCliente(), "cliente") //Esto es para los filtros
-        {         
-        
+            : base(new BuilderCliente(), "cliente") 
+        {
+            this.usuarioDB = new UsuarioDB();
         }
 
          public void inHabilitarCliente(Cliente clienteBaja)
          {
-             List<SqlParameter> parametros = new List<SqlParameter>();
-
-             SqlParameter id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
-             id_usuario.Value = clienteBaja.id_usuario;
-             parametros.Add(id_usuario);
-
-             HomeDB.ExecuteStoredProcedured("DATA_GROUP.inHabilitarCliente", parametros);
-
-             clienteBaja.habilitada = false;
+             this.usuarioDB.inHabilitarUsuario(clienteBaja);
          }
 
          public void habilitarCliente(Cliente clienteBaja)
          {
-
-             List<SqlParameter> parametros = new List<SqlParameter>();
-
-             SqlParameter id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
-             id_usuario.Value = clienteBaja.id_usuario;
-             parametros.Add(id_usuario);
-
-             HomeDB.ExecuteStoredProcedured("DATA_GROUP.habilitarCliente", parametros);
-
-             clienteBaja.habilitada = true;
-
+             this.usuarioDB.habilitarUsuario(clienteBaja);
          }
-
 
         public void modificarCliente(Cliente cliente) {
             IList<SqlParameter> parametros = this.GenerarParametrosModificar(cliente);
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.modificarCliente", parametros);
         }
-
 
         public decimal nuevoCliente(Cliente clienteNuevo) {
 

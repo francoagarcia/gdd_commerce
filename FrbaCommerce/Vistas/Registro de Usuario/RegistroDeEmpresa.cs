@@ -80,7 +80,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
         }
 
         private void CrearUsuarioDB(Usuario unUsuario) {
-            decimal id = this.empresaDB.nuevoCliente((Empresa)unUsuario);
+            decimal id = this.empresaDB.nuevaEmpresa((Empresa)unUsuario);
             ((Empresa)unUsuario).id_usuario = id;
         } 
 
@@ -91,7 +91,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             empresa.id_usuario = 0; //no tiene ninguno asignado por ahora
             empresa.username = this.tb_Username.Text;
             empresa.contrasenia = Encryptation.get_hash(this.tb_Contraseña.Text);
-            empresa.telefono = this.tb_Telefono.Text;
+            empresa.telefono = Convert.ToDecimal(this.tb_Telefono.Text);
 
             //Datos particulares
             empresa.mail = this.tb_Correo_electronico.Text;

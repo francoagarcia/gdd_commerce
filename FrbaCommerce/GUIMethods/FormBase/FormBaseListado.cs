@@ -127,7 +127,7 @@ namespace FrbaCommerce.GUIMethods.FormBase
             }
             else
             {
-                DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Está seguro que desea realizar esto?", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Está seguro que quiere hacer eso?", MessageBoxButtons.YesNo);
 
                 if (dr == DialogResult.Yes)
                 {

@@ -200,9 +200,6 @@ END
 
 
 ----------------------HABILITACION DE CLIENTE--------------------------
-
-
-
 IF OBJECT_ID('DATA_GROUP.deshabilitarCliente') IS NOT NULL 
 	DROP PROCEDURE DATA_GROUP.deshabilitarCliente
 	GO

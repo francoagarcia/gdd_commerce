@@ -43,8 +43,6 @@ namespace FrbaCommerce.DataAccess
             DataSet ds = HomeDB.ExecuteStoredProcedured(_sp_filtrar, parametros);
 
             IList<T> todos = new List<T>(ds.Tables[0].Rows.Count);
-            string[] ca = { ds.Tables[0].Rows.Count.ToString() };
-                System.IO.File.WriteAllLines(@"C:/Franco/ca.cssdsw", ca);
             foreach (DataRow fila in ds.Tables[0].Rows)
             {
                 todos.Add(this._builder.Build(fila));

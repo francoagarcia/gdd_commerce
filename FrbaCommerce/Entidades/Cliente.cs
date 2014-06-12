@@ -10,7 +10,6 @@ namespace FrbaCommerce.Entidades
     {
         public TipoDocumento tipo_documento{get; set;}
         public decimal nro_documento {get; set;}
-        public decimal id_usuario { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string dom_calle { get; set; }

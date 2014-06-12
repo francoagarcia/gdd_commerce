@@ -152,6 +152,25 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             base.Cancelar();
         }
 
+        private void btn_Limpiar_Click(object sender, EventArgs e)
+        {
+            this.tb_Apellido.Text = "";
+            this.tb_Calle.Text = "";
+            this.tb_Codigo_postal.Text = "";
+            this.tb_Contraseña.Text = "";
+            this.tb_Correo_electronico.Text = "";
+            this.tb_Departamento.Text = "";
+            this.tb_Localidad.Text = "";
+            this.tb_Nombre.Text = "";
+            this.tb_Nombre_de_usuario.Text = "";
+            this.tb_Numero_de_documento.Text = "";
+            this.tb_Piso.Text = "";
+            this.tb_Telefono.Text = "";
+            this.dp_Fecha_de_nacimiento.Value = DateManager.Ahora();
+            this.cb_Sexo.SelectedIndex = 0;
+            this.cb_Tipo_de_documento.SelectedIndex = 0;
+        }
+
         
 
 
