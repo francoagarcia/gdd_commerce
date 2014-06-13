@@ -12,7 +12,6 @@ namespace FrbaCommerce.GUIMethods.FormBase
 {
     public partial class FormBaseListado : FormBase
     {
-
          public FormBaseListado(bool modoSeleccion)
             :base()
         {

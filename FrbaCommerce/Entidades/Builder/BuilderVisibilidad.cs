@@ -11,11 +11,11 @@ namespace FrbaCommerce.Entidades.Builder
         public Visibilidad Build(System.Data.DataRow row)
         {
             Visibilidad visibilidad = new Visibilidad();
-            visibilidad.IdVisibilidad = Convert.ToDecimal(row["id_visibilidad"]);
-            visibilidad.Descripcion = Convert.ToString(row["descripcion"]);
-            visibilidad.Precio = Convert.ToDecimal(row["precio"]);
-            visibilidad.Porcentaje = Convert.ToDecimal(row["porcentaje"]);
-            visibilidad.Habilitada = Convert.ToBoolean(row["habilitada"]);
+            visibilidad.id_visibilidad = Convert.ToDecimal(row["id_visibilidad"]);
+            visibilidad.descripcion = Convert.ToString(row["descripcion"]);
+            visibilidad.precio = Convert.ToDecimal(row["precio"]);
+            visibilidad.porcentaje = Convert.ToDecimal(row["porcentaje"]);
+            visibilidad.habilitada = Convert.ToBoolean(row["habilitada"]);
             return visibilidad;
         }
     }

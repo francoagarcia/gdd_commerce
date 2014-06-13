@@ -50,7 +50,6 @@ namespace FrbaCommerce.DataAccess
         #region Generadores de parametros
         private IList<SqlParameter> GenerarParametrosModificar(Empresa empresa)
         {
-
             IList<SqlParameter> parametros = new List<SqlParameter>();
 
             SqlParameter id_usuario_a_modificar = new SqlParameter("@id_usuario_a_modificar", System.Data.SqlDbType.Decimal, 18, "id_usuario");

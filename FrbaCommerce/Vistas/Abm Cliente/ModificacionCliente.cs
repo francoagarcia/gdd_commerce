@@ -90,7 +90,6 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         }
         #endregion
 
-
         #region [AccionAceptar]
 
         private void btn_Confirmar_Click(object sender, EventArgs e)

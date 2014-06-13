@@ -141,5 +141,10 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             comboBox_Tipo_de_documento.ValueMember = "Id";
         }
         #endregion
+
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            base.Cancelar();
+        }
     }
 }

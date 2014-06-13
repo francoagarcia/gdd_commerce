@@ -12,8 +12,9 @@ namespace FrbaCommerce.Entidades.Builder
         public Cliente Build(System.Data.DataRow row)
         {
             Cliente cli = new Cliente();
+            ListaTipoDocumento listaTipoDocumentos = new ListaTipoDocumento();
 
-            cli.tipo_documento = new ListaTipoDocumento().Obtener(Convert.ToInt32(row["id_tipo_documento"]));
+            cli.tipo_documento = (TipoDocumento)listaTipoDocumentos.Obtener( Convert.ToInt32(row["id_tipo_documento"])  );
             cli.nro_documento = Convert.ToDecimal(row["nro_documento"]);
             cli.id_usuario = Convert.ToDecimal(row["id_usuario"]);
             cli.username = Convert.ToString(row["username"]);

@@ -38,9 +38,9 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             this.AgregarValidacion(new ValidadorDecimal(this.tb_Precio));
             
 
-            this.tb_Descripcion.Text = this.visibilidadEntidad.Descripcion;
-            this.tb_Porcentaje.Text = this.visibilidadEntidad.Porcentaje.ToString();
-            this.tb_Precio.Text = this.visibilidadEntidad.Precio.ToString();
+            this.tb_Descripcion.Text = this.visibilidadEntidad.descripcion;
+            this.tb_Porcentaje.Text = this.visibilidadEntidad.porcentaje.ToString();
+            this.tb_Precio.Text = this.visibilidadEntidad.precio.ToString();
         }
         #endregion
 
@@ -74,9 +74,9 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
 
         private void armarVisibilidadModificada()
         {
-            this.visibilidadEntidad.Descripcion = this.tb_Descripcion.Text;
-            this.visibilidadEntidad.Porcentaje = Convert.ToDecimal(this.tb_Porcentaje.Text);
-            this.visibilidadEntidad.Precio = Convert.ToDecimal(this.tb_Precio.Text);
+            this.visibilidadEntidad.descripcion = this.tb_Descripcion.Text;
+            this.visibilidadEntidad.porcentaje = Convert.ToDecimal(this.tb_Porcentaje.Text);
+            this.visibilidadEntidad.precio = Convert.ToDecimal(this.tb_Precio.Text);
         }
         #endregion
 

@@ -139,6 +139,11 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
         }
         #endregion
 
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            base.Cancelar();
+        }
+
 
 
     }

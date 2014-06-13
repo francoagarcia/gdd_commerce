@@ -33,7 +33,12 @@ namespace FrbaCommerce
             try
             {
                 ContextoActual.Logger.Iniciar();
+<<<<<<< HEAD
                 Application.Run(new Historial());
+=======
+
+                Application.Run(new FrbaCommerce.Vistas.Registro_de_Usuario.RegistroDeUsuario());
+>>>>>>> bf07654bd494a0244793be195d33fd7f0cf2ccaf
             }
             catch (Exception ex)
             {

@@ -7,11 +7,11 @@ namespace FrbaCommerce.Entidades
 {
     public class Visibilidad
     {
-        public decimal IdVisibilidad { get; set; }
-        public string Descripcion { get; set; }
-        public decimal Precio { get; set; }
-        public decimal Porcentaje { get; set; }
-        public bool Habilitada { get; set; }
+        public decimal id_visibilidad { get; set; }
+        public string descripcion { get; set; }
+        public decimal precio { get; set; }
+        public decimal porcentaje { get; set; }
+        public bool habilitada { get; set; }
     }
     
 }

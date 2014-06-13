@@ -8,12 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 using FrbaCommerce.DataAccess;
 using FrbaCommerce.GUIMethods;
+using FrbaCommerce.Entidades;
 
 namespace FrbaCommerce.Vistas.ABM_Rol
 {
-    public partial class Modificar_un_Rol : Form
+    public partial class ModificarRol : Form
     {
-        public Modificar_un_Rol()
+
+        public ModificarRol()
         {
             InitializeComponent();
 
@@ -28,15 +30,7 @@ namespace FrbaCommerce.Vistas.ABM_Rol
 
             listBox1.DisplayMember = "nombre";
             listBox1.DataSource = ds.Tables[0];
-
-
         }
-
-        private void Modificar_un_Rol_Load(object sender, EventArgs e)
-        {
-
-        }
-
 
         public void ADD()
         {
@@ -131,9 +125,6 @@ namespace FrbaCommerce.Vistas.ABM_Rol
                         //habilito el rol
                         rol.habilitar(textBox1.Text);
                     }
-
-
-
                 }
             }
 

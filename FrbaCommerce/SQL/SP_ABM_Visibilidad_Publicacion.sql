@@ -91,9 +91,7 @@ BEGIN
 END
 GO
 
-
-
-
+---------------------------------------------------------------------
 
 IF OBJECT_ID('DATA_GROUP.sp_Visibilidad_filter') is not null
 	DROP PROCEDURE DATA_GROUP.sp_Visibilidad_filter
@@ -112,5 +110,20 @@ BEGIN
   AND ((@precio IS NULL) OR (@precio = precio ))
   AND ((@porcentaje IS NULL) OR ((@porcentaje = porcentaje)))
 
+END
+GO
+
+----------------------------------------------------------------------
+
+
+IF OBJECT_ID('DATA_GROUP.sp_Visibilidad_select_all') is not null
+	DROP PROCEDURE DATA_GROUP.sp_Visibilidad_select_all
+	GO
+CREATE PROCEDURE DATA_GROUP.sp_Visibilidad_select_all
+AS
+BEGIN
+	SELECT id_visibilidad, descripcion, precio, porcentaje, habilitada
+	FROM DATA_GROUP.VisibilidadPublicacion
+	WHERE habilitada = 1;
 END
 GO

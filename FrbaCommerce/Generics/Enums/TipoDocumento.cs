@@ -5,16 +5,8 @@ using System.Text;
 
 namespace FrbaCommerce.Generics.Enums
 {
-
-    public class TipoDocumento
+    public class TipoDocumento : TipoGenerico
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
-
-        public override string ToString()
-        {
-            return Nombre;
-        }
     }
 
     public class TipoDocumentoDNI : TipoDocumento
@@ -50,26 +42,19 @@ namespace FrbaCommerce.Generics.Enums
         }
     }
 
-    public class ListaTipoDocumento
+    public class ListaTipoDocumento : ListaTipoGenerico
     {
-        public IList<TipoDocumento> Todos { get; set; }
+        public ListaTipoDocumento() 
+            : base()
+        {            
+        }
 
-        public ListaTipoDocumento()
+        protected override void GenerarSubTipos()
         {
-            Todos = new List<TipoDocumento>();
             Todos.Add(new TipoDocumentoDNI());
             Todos.Add(new TipoDocumentoLC());
             Todos.Add(new TipoDocumentoLE());
             Todos.Add(new TipoDocumentoCUIT());
-        }
-
-        public TipoDocumento Obtener(int id)
-        {
-            return Todos.Where(t => t.Id == id).FirstOrDefault();
-        }
-        public TipoDocumento Obtener(string nombre)
-        {
-            return Todos.Where(t => t.Nombre == nombre).FirstOrDefault();
         }
     }
 }
