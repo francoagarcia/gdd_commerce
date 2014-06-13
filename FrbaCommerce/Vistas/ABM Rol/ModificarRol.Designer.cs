@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce.Vistas.ABM_Rol
 {
-    partial class Modificar_un_Rol
+    partial class ModificarRol
     {
         /// <summary>
         /// Required designer variable.
@@ -45,18 +45,18 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(18, 344);
+            this.button4.Location = new System.Drawing.Point(26, 378);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(74, 23);
+            this.button4.Size = new System.Drawing.Size(169, 23);
             this.button4.TabIndex = 29;
             this.button4.Text = "Cancelar";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(365, 344);
+            this.button3.Location = new System.Drawing.Point(300, 378);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(169, 23);
             this.button3.TabIndex = 28;
             this.button3.Text = "Modificar";
             this.button3.UseVisualStyleBackColor = true;
@@ -111,16 +111,16 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.listBox2);
             this.groupBox1.Controls.Add(this.listBox1);
-            this.groupBox1.Location = new System.Drawing.Point(18, 94);
+            this.groupBox1.Location = new System.Drawing.Point(12, 94);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(422, 235);
+            this.groupBox1.Size = new System.Drawing.Size(476, 269);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Asignacion de funcionalidades";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(170, 146);
+            this.button2.Location = new System.Drawing.Point(198, 144);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 31;
@@ -130,7 +130,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(170, 74);
+            this.button1.Location = new System.Drawing.Point(198, 77);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 30;
@@ -141,24 +141,24 @@
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(270, 24);
+            this.listBox2.Location = new System.Drawing.Point(288, 24);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(121, 186);
+            this.listBox2.Size = new System.Drawing.Size(169, 225);
             this.listBox2.TabIndex = 29;
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(23, 24);
+            this.listBox1.Location = new System.Drawing.Point(14, 24);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(120, 186);
+            this.listBox1.Size = new System.Drawing.Size(169, 225);
             this.listBox1.TabIndex = 28;
             // 
-            // Modificar_un_Rol
+            // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 377);
+            this.ClientSize = new System.Drawing.Size(500, 409);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -167,9 +167,10 @@
             this.Controls.Add(this.checkBoxHabilitado);
             this.Controls.Add(this.labelComboRoles);
             this.Controls.Add(this.comboBoxRoles);
-            this.Name = "Modificar_un_Rol";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "ModificarRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Modificar un Rol";
-            this.Load += new System.EventHandler(this.Modificar_un_Rol_Load);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

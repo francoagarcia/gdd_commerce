@@ -25,18 +25,18 @@ namespace FrbaCommerce.DataAccess
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             SqlParameter pDesc = new SqlParameter("@descripcion", SqlDbType.NVarChar, 255, "descripcion");
-            pDesc.Value = visibilidad.Descripcion;
+            pDesc.Value = visibilidad.descripcion;
             parametros.Add(pDesc);
 
             SqlParameter pPrec = new SqlParameter("@precio", SqlDbType.Decimal);
-            pPrec.Value = visibilidad.Precio;
+            pPrec.Value = visibilidad.precio;
             pPrec.SourceColumn = "precio";
             pPrec.Precision = 18;
             pPrec.Scale = 2;
             parametros.Add(pPrec);
 
             SqlParameter pPorc = new SqlParameter("@porcentaje", SqlDbType.Decimal);
-            pPorc.Value = visibilidad.Porcentaje;
+            pPorc.Value = visibilidad.porcentaje;
             pPorc.SourceColumn = "porcentaje";
             pPorc.Precision = 18;
             pPorc.Scale = 2;
@@ -47,7 +47,7 @@ namespace FrbaCommerce.DataAccess
             parametros.Add(idNuevoOUTPUT);     
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.nuevaVisibilidad", parametros);
-            visibilidad.IdVisibilidad = Convert.ToDecimal(idNuevoOUTPUT.Value);
+            visibilidad.id_visibilidad = Convert.ToDecimal(idNuevoOUTPUT.Value);
             return Convert.ToDecimal(idNuevoOUTPUT);
         }
 
@@ -56,12 +56,12 @@ namespace FrbaCommerce.DataAccess
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             SqlParameter id_visibilidad = new SqlParameter("@id_visibilidad", SqlDbType.Decimal, 18, "id_visibilidad");
-            id_visibilidad.Value = visi.IdVisibilidad;
+            id_visibilidad.Value = visi.id_visibilidad;
             parametros.Add(id_visibilidad);
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.inhabilitarVisibilidad", parametros);
 
-            visi.Habilitada = false;
+            visi.habilitada = false;
         }
 
         public void habilitarVisibilidad(Visibilidad visi) {
@@ -69,12 +69,12 @@ namespace FrbaCommerce.DataAccess
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             SqlParameter id_visibilidad = new SqlParameter("@id_visibilidad", SqlDbType.Decimal, 18, "id_visibilidad");
-            id_visibilidad.Value = visi.IdVisibilidad;
+            id_visibilidad.Value = visi.id_visibilidad;
             parametros.Add(id_visibilidad);
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.habilitarVisibilidad", parametros);
 
-            visi.Habilitada = true;
+            visi.habilitada = true;
         
         }
 
@@ -83,22 +83,22 @@ namespace FrbaCommerce.DataAccess
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             SqlParameter id_visibilidad = new SqlParameter("@id_visibilidad_a_modificar", SqlDbType.Decimal, 18, "id_visibilidad");
-            id_visibilidad.Value = visibilidadModificada.IdVisibilidad;
+            id_visibilidad.Value = visibilidadModificada.id_visibilidad;
             parametros.Add(id_visibilidad);
 
             SqlParameter pDesc = new SqlParameter("@descripcion", SqlDbType.NVarChar, 255, "descripcion");
-            pDesc.Value = visibilidadModificada.Descripcion;
+            pDesc.Value = visibilidadModificada.descripcion;
             parametros.Add(pDesc);
 
             SqlParameter pPrec = new SqlParameter("@precio", SqlDbType.Decimal);
-            pPrec.Value = visibilidadModificada.Precio;
+            pPrec.Value = visibilidadModificada.precio;
             pPrec.SourceColumn = "precio";
             pPrec.Precision = 18;
             pPrec.Scale = 2;
             parametros.Add(pPrec);
 
             SqlParameter pPorc = new SqlParameter("@porcentaje", SqlDbType.Decimal);
-            pPorc.Value = visibilidadModificada.Porcentaje;
+            pPorc.Value = visibilidadModificada.porcentaje;
             pPorc.SourceColumn = "porcentaje";
             pPorc.Precision = 18;
             pPorc.Scale = 2;

@@ -32,7 +32,8 @@ namespace FrbaCommerce
             try
             {
                 ContextoActual.Logger.Iniciar();
-                Application.Run(new FrbaCommerce.Vistas.Abm_Empresa.ListadoEmpresa());
+
+                Application.Run(new FrbaCommerce.Vistas.Registro_de_Usuario.RegistroDeUsuario());
             }
             catch (Exception ex)
             {

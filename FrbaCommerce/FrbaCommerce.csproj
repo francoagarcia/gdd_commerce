@@ -59,31 +59,45 @@
     <Compile Include="DataAccess\ClienteDB.cs" />
     <Compile Include="DataAccess\EmpresaDB.cs" />
     <Compile Include="DataAccess\EntidadBaseDB.cs" />
+    <Compile Include="DataAccess\EstadoPublicacionDB.cs" />
     <Compile Include="DataAccess\FuncionalidadDB.cs" />
     <Compile Include="DataAccess\HistorialDB.cs" />
     <Compile Include="DataAccess\IEntidadBaseDB.cs" />
     <Compile Include="DataAccess\ListadoDB.cs" />
+    <Compile Include="DataAccess\PublicacionDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
+    <Compile Include="DataAccess\RubroDB.cs" />
     <Compile Include="DataAccess\VisibilidadDB.cs" />
     <Compile Include="Entidades\Builder\BuilderCliente.cs" />
     <Compile Include="Entidades\Builder\BuilderEmpresa.cs" />
+    <Compile Include="Entidades\Builder\BuilderEstadoPublicacion.cs" />
+    <Compile Include="Entidades\Builder\BuilderPublicacion.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
     <Compile Include="Entidades\Builder\BuilderFuncionalidad.cs" />
+    <Compile Include="Entidades\Builder\BuilderRubro.cs" />
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empresa.cs" />
+    <Compile Include="Entidades\EstadoPublicacion.cs" />
     <Compile Include="Entidades\Filtros\FiltroCliente.cs" />
     <Compile Include="Entidades\Filtros\FiltroEmpresa.cs" />
+    <Compile Include="Entidades\Filtros\FiltroPublicacion.cs" />
     <Compile Include="Entidades\Filtros\FiltroVisibilidades.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
+    <Compile Include="Entidades\Publicacion.cs" />
     <Compile Include="Entidades\Rol.cs" />
+    <Compile Include="Entidades\Rubro.cs" />
     <Compile Include="Entidades\Visibilidad.cs" />
     <Compile Include="Generics\AppConfigReader.cs" />
     <Compile Include="Generics\ContextoAplicacion.cs" />
     <Compile Include="Generics\DateManager.cs" />
+    <Compile Include="Generics\Enums\ITipo.cs" />
     <Compile Include="Generics\Enums\ListaSexo.cs" />
     <Compile Include="Generics\Enums\TipoDeUsuario.cs" />
     <Compile Include="Generics\Enums\TipoDocumento.cs" />
+    <Compile Include="Generics\Enums\TipoEstados.cs" />
+    <Compile Include="Generics\Enums\TipoGenerico.cs" />
+    <Compile Include="Generics\Enums\TipoPublicacion.cs" />
     <Compile Include="Generics\IContexto.cs" />
     <Compile Include="Generics\Resultados\IResultado.cs" />
     <Compile Include="Generics\Logger\ILogger.cs" />
@@ -107,6 +121,12 @@
     </Compile>
     <Compile Include="GUIMethods\FormBase\FormBaseModificacion.Designer.cs">
       <DependentUpon>FormBaseModificacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIMethods\FormBase\FormBaseSeleccionTipo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIMethods\FormBase\FormBaseSeleccionTipo.Designer.cs">
+      <DependentUpon>FormBaseSeleccionTipo.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIMethods\NameVariableParser.cs" />
     <Compile Include="GUIMethods\Validaciones\IValidador.cs" />
@@ -156,17 +176,17 @@
     <Compile Include="Vistas\Abm Empresa\ModificarEmpresa.Designer.cs">
       <DependentUpon>ModificarEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\ABM Rol\Crear Rol.cs">
+    <Compile Include="Vistas\ABM Rol\AltaRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\ABM Rol\Crear Rol.Designer.cs">
-      <DependentUpon>Crear Rol.cs</DependentUpon>
+    <Compile Include="Vistas\ABM Rol\AltaRol.Designer.cs">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\ABM Rol\Modificar un Rol.cs">
+    <Compile Include="Vistas\ABM Rol\ModificarRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\ABM Rol\Modificar un Rol.Designer.cs">
-      <DependentUpon>Modificar un Rol.cs</DependentUpon>
+    <Compile Include="Vistas\ABM Rol\ModificarRol.Designer.cs">
+      <DependentUpon>ModificarRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm Rubro\ABMRubro.cs">
       <SubType>Form</SubType>
@@ -240,17 +260,23 @@
     <Compile Include="Generics\Encryptation.cs" />
     <Compile Include="Generics\Enums\IdentificacionUsuario.cs" />
     <Compile Include="GUIMethods\MessageDialog.cs" />
+    <Compile Include="Vistas\Generar Publicacion\SeleccionTipoPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Generar Publicacion\SeleccionTipoPublicacion.Designer.cs">
+      <DependentUpon>SeleccionTipoPublicacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Inicio.Designer.cs">
       <DependentUpon>Inicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Generar Publicacion\Generar_Publicacion.cs">
+    <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Generar Publicacion\Generar_Publicacion.Designer.cs">
-      <DependentUpon>Generar_Publicacion.cs</DependentUpon>
+    <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.Designer.cs">
+      <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Gestion de Preguntas\Pregunta.cs">
       <SubType>Form</SubType>
@@ -293,6 +319,9 @@
     <EmbeddedResource Include="GUIMethods\FormBase\FormBaseModificacion.resx">
       <DependentUpon>FormBaseModificacion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUIMethods\FormBase\FormBaseSeleccionTipo.resx">
+      <DependentUpon>FormBaseSeleccionTipo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Cliente\ListadoCliente.resx">
       <DependentUpon>ListadoCliente.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,11 +334,11 @@
     <EmbeddedResource Include="Vistas\Abm Empresa\ModificarEmpresa.resx">
       <DependentUpon>ModificarEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\ABM Rol\Crear Rol.resx">
-      <DependentUpon>Crear Rol.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\ABM Rol\AltaRol.resx">
+      <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\ABM Rol\Modificar un Rol.resx">
-      <DependentUpon>Modificar un Rol.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\ABM Rol\ModificarRol.resx">
+      <DependentUpon>ModificarRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Visibilidad\AltaVisibilidad.resx">
       <DependentUpon>AltaVisibilidad.cs</DependentUpon>
@@ -341,8 +370,8 @@
     <EmbeddedResource Include="Vistas\Facturar Publicaciones\Facturar.resx">
       <DependentUpon>Facturar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Generar Publicacion\Generar_Publicacion.resx">
-      <DependentUpon>Generar_Publicacion.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Generar Publicacion\GenerarPublicacion.resx">
+      <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Gestion de Preguntas\Pregunta.resx">
       <DependentUpon>Pregunta.cs</DependentUpon>
@@ -370,9 +399,6 @@
     <EmbeddedResource Include="Vistas\Registro de Usuario\RegistroDeEmpresa.resx">
       <DependentUpon>RegistroDeEmpresa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Registro de Usuario\Registro_Usuario.resx">
-      <DependentUpon>Registro_Usuario.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -399,11 +425,11 @@
     <Compile Include="Vistas\Registro de Usuario\RegistroDeEmpresa.designer.cs">
       <DependentUpon>RegistroDeEmpresa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Registro de Usuario\Registro_Usuario.cs">
+    <Compile Include="Vistas\Registro de Usuario\RegistroDeUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Registro de Usuario\Registro_Usuario.Designer.cs">
-      <DependentUpon>Registro_Usuario.cs</DependentUpon>
+    <Compile Include="Vistas\Registro de Usuario\RegistroDeUsuario.Designer.cs">
+      <DependentUpon>RegistroDeUsuario.cs</DependentUpon>
     </Compile>
     <None Include="Vistas\App.config" />
   </ItemGroup>

@@ -8,5 +8,6 @@ namespace FrbaCommerce.DataAccess
     public interface IEntidadBaseDB<T, W>
     {
         IList<T> Filtrar(W filtro);
+        IList<T> ObtenerTodos();
     }
 }

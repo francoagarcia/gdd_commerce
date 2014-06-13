@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce.Vistas.ABM_Rol
 {
-    partial class ABMRolC
+    partial class AltaRol
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             // 
             // bAgregar1
             // 
-            this.bAgregar1.Location = new System.Drawing.Point(177, 88);
+            this.bAgregar1.Location = new System.Drawing.Point(193, 88);
             this.bAgregar1.Name = "bAgregar1";
             this.bAgregar1.Size = new System.Drawing.Size(75, 23);
             this.bAgregar1.TabIndex = 2;
@@ -52,7 +52,7 @@
             // 
             // bQuitar1
             // 
-            this.bQuitar1.Location = new System.Drawing.Point(177, 154);
+            this.bQuitar1.Location = new System.Drawing.Point(193, 154);
             this.bQuitar1.Name = "bQuitar1";
             this.bQuitar1.Size = new System.Drawing.Size(75, 23);
             this.bQuitar1.TabIndex = 3;
@@ -68,7 +68,7 @@
             this.ModificacionFunc1.Controls.Add(this.bAgregar1);
             this.ModificacionFunc1.Location = new System.Drawing.Point(12, 63);
             this.ModificacionFunc1.Name = "ModificacionFunc1";
-            this.ModificacionFunc1.Size = new System.Drawing.Size(430, 231);
+            this.ModificacionFunc1.Size = new System.Drawing.Size(460, 286);
             this.ModificacionFunc1.TabIndex = 4;
             this.ModificacionFunc1.TabStop = false;
             this.ModificacionFunc1.Text = "Asignacion de Funcionalidades";
@@ -76,17 +76,17 @@
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(271, 41);
+            this.listBox2.Location = new System.Drawing.Point(274, 41);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(134, 173);
+            this.listBox2.Size = new System.Drawing.Size(169, 225);
             this.listBox2.TabIndex = 5;
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(22, 41);
+            this.listBox1.Location = new System.Drawing.Point(15, 41);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(135, 173);
+            this.listBox1.Size = new System.Drawing.Size(169, 225);
             this.listBox1.TabIndex = 4;
             // 
             // labelNomRol1
@@ -97,20 +97,19 @@
             this.labelNomRol1.Size = new System.Drawing.Size(83, 13);
             this.labelNomRol1.TabIndex = 8;
             this.labelNomRol1.Text = "Nombre del Rol:";
-            this.labelNomRol1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // textBoxNomRol1
             // 
             this.textBoxNomRol1.Location = new System.Drawing.Point(114, 21);
             this.textBoxNomRol1.Name = "textBoxNomRol1";
-            this.textBoxNomRol1.Size = new System.Drawing.Size(319, 20);
+            this.textBoxNomRol1.Size = new System.Drawing.Size(341, 20);
             this.textBoxNomRol1.TabIndex = 9;
             // 
             // buttonOK1
             // 
-            this.buttonOK1.Location = new System.Drawing.Point(367, 313);
+            this.buttonOK1.Location = new System.Drawing.Point(286, 355);
             this.buttonOK1.Name = "buttonOK1";
-            this.buttonOK1.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK1.Size = new System.Drawing.Size(169, 23);
             this.buttonOK1.TabIndex = 12;
             this.buttonOK1.Text = "Crear";
             this.buttonOK1.UseVisualStyleBackColor = true;
@@ -118,26 +117,28 @@
             // 
             // buttonCancelar1
             // 
-            this.buttonCancelar1.Location = new System.Drawing.Point(12, 313);
+            this.buttonCancelar1.Location = new System.Drawing.Point(27, 352);
             this.buttonCancelar1.Name = "buttonCancelar1";
-            this.buttonCancelar1.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancelar1.Size = new System.Drawing.Size(169, 23);
             this.buttonCancelar1.TabIndex = 13;
             this.buttonCancelar1.Text = "Cancelar";
             this.buttonCancelar1.UseVisualStyleBackColor = true;
+            this.buttonCancelar1.Click += new System.EventHandler(this.buttonCancelar1_Click);
             // 
-            // ABMRolC
+            // AltaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(459, 345);
+            this.ClientSize = new System.Drawing.Size(487, 387);
             this.Controls.Add(this.buttonCancelar1);
             this.Controls.Add(this.buttonOK1);
             this.Controls.Add(this.textBoxNomRol1);
             this.Controls.Add(this.labelNomRol1);
             this.Controls.Add(this.ModificacionFunc1);
-            this.Name = "ABMRolC";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Name = "AltaRol";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Crear Roles";
-            this.Load += new System.EventHandler(this.ABMRol_Load);
             this.ModificacionFunc1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

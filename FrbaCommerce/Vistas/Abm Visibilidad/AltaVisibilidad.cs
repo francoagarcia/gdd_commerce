@@ -57,7 +57,7 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             {
                 Visibilidad visi = this.armarVisibilidad();
                 decimal idNuevoVisibilidad = this.visibilidadDB.crearVisibilidad(visi);
-                visi.IdVisibilidad = idNuevoVisibilidad;
+                visi.id_visibilidad = idNuevoVisibilidad;
             } catch(Exception ex){
                 MessageDialog.MensajeError(ex.Message);
             }
@@ -65,11 +65,11 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
 
         private Visibilidad armarVisibilidad() {
             Visibilidad visi = new Visibilidad();
-            visi.Descripcion = tb_Descripcion.Text;
-            visi.Porcentaje = Convert.ToDecimal(tb_Porcentaje.Text);
-            visi.Precio = Convert.ToDecimal(tb_Precio.Text);
-            visi.IdVisibilidad = 0;
-            visi.Habilitada = true;
+            visi.descripcion = tb_Descripcion.Text;
+            visi.porcentaje = Convert.ToDecimal(tb_Porcentaje.Text);
+            visi.precio = Convert.ToDecimal(tb_Precio.Text);
+            visi.id_visibilidad = 0;
+            visi.habilitada = true;
             return visi;
         }
         #endregion

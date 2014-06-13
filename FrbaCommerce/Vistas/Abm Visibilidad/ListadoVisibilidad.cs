@@ -65,16 +65,16 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
         private void habilitacionDelRegistro(Visibilidad visibilidad) {
             try
             {
-                if (visibilidad.Habilitada)
+                if (visibilidad.habilitada)
                 {
                     this.visibilidadDB.inHabilitarVisibilidad(visibilidad);
 
-                    visibilidad.Habilitada = false;
+                    visibilidad.habilitada = false;
                 }
                 else
                 {
                     this.visibilidadDB.habilitarVisibilidad(visibilidad);
-                    visibilidad.Habilitada = true;
+                    visibilidad.habilitada = true;
                 }
             }
             catch (SqlException exSQL)
@@ -106,8 +106,8 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
 
             this.dgvBusqueda.DataSource = resultado.Retorno;
 
-            this.dgvBusqueda.Columns["IdVisibilidad"].Visible = false;
-            //this.dgvBusqueda.Columns["Habilitada"].Visible = false;
+            this.dgvBusqueda.Columns["id_visibilidad"].Visible = false;
+            //this.dgvBusqueda.Columns["habilitada"].Visible = false;
         }
 
         private IResultado<IList<Visibilidad>> getVisibilidadesFiltradas(FiltroVisibilidades filtro)

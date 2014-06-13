@@ -17,6 +17,7 @@ namespace FrbaCommerce.DataAccess
         
         protected IBuilder<T> _builder;
         protected string _sp_filtrar;
+        protected string _sp_obtener_todos;
         private string _nombreEntidad;
        
         #endregion
@@ -50,6 +51,19 @@ namespace FrbaCommerce.DataAccess
             return todos;
         }
 
+        public virtual IList<T> ObtenerTodos()
+        {
+            IList<T> todos = new List<T>();
+
+            DataSet ds = HomeDB.ExecuteStoredProcedured(_sp_obtener_todos);
+            foreach (DataRow registro in ds.Tables[0].Rows)
+            {
+                todos.Add(_builder.Build(registro));
+            }
+
+            return todos;
+        }
+
         #endregion
 
         #region [Generadores de nombres]
@@ -61,6 +75,7 @@ namespace FrbaCommerce.DataAccess
             string esquema = AppConfigReader.Get("BaseDeDatos_Esquema");
 
             _sp_filtrar = string.Format(AppConfigReader.Get("SP_Filtrar"), esquema, _nombreEntidad);
+            _sp_obtener_todos = string.Format(AppConfigReader.Get("SP_Obtener_Todos"), esquema, _nombreEntidad);
         }
 
         #endregion

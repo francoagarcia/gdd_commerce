@@ -12,9 +12,9 @@ using FrbaCommerce.GUIMethods;
 
 namespace FrbaCommerce.Vistas.ABM_Rol
 {
-    public partial class ABMRolC : Form
+    public partial class AltaRol : Form
     {
-        public ABMRolC()
+        public AltaRol()
         {
             InitializeComponent();
             
@@ -28,31 +28,6 @@ namespace FrbaCommerce.Vistas.ABM_Rol
         private void button1_Click(object sender, EventArgs e)
         {
             listBox2.Items.Clear();
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ABMRol_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listFunc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void bAgregar_Click(object sender, EventArgs e)
@@ -102,16 +77,23 @@ namespace FrbaCommerce.Vistas.ABM_Rol
         {
             if (listBox2.Items.Count > 0)
             {
-
                 if (textBoxNomRol1.Text != "")
                 {
-                    RolDB rol = new RolDB();
-                    rol.Crear_Rol(textBoxNomRol1.Text);
+                    try
+                    {
+                        RolDB rol = new RolDB();
+                        rol.Crear_Rol(textBoxNomRol1.Text);
 
-                    FuncionalidadDB fun = new FuncionalidadDB();
+                        FuncionalidadDB fun = new FuncionalidadDB();
 
-                    for (int i = 0; i < listBox2.Items.Count; i++)
-                        fun.funcionalidadXRol(textBoxNomRol1.Text, listBox2.GetItemText(listBox2.Items[i]));
+                        for (int i = 0; i < listBox2.Items.Count; i++)
+                            fun.funcionalidadXRol(textBoxNomRol1.Text, listBox2.GetItemText(listBox2.Items[i]));
+
+                        MessageDialog.MensajeInformativo(this, "El rol se creó correctamente");
+                    }
+                    catch (Exception ex) {
+                        MessageDialog.MensajeError(ex.Message);
+                    }
                 }
                 else
                 {
@@ -122,6 +104,11 @@ namespace FrbaCommerce.Vistas.ABM_Rol
             else {
                 MessageDialog.MensajeListaVacia();
             }
+        }
+
+        private void buttonCancelar1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }
