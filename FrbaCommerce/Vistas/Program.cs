@@ -9,6 +9,7 @@ using FrbaCommerce.GUIMethods;
 using FrbaCommerce.Vistas.Login;
 using FrbaCommerce.Vistas.Historial_Cliente;
 using FrbaCommerce.Vistas.Listado_Estadistico;
+using FrbaCommerce.Vistas.Gestion_de_Preguntas;
 
 namespace FrbaCommerce
 {
@@ -32,7 +33,7 @@ namespace FrbaCommerce
             try
             {
                 ContextoActual.Logger.Iniciar();
-                Application.Run(new FrbaCommerce.Vistas.Abm_Empresa.ListadoEmpresa());
+                Application.Run(new Historial());
             }
             catch (Exception ex)
             {

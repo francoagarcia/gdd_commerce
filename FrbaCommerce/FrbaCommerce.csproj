@@ -63,6 +63,7 @@
     <Compile Include="DataAccess\HistorialDB.cs" />
     <Compile Include="DataAccess\IEntidadBaseDB.cs" />
     <Compile Include="DataAccess\ListadoDB.cs" />
+    <Compile Include="DataAccess\PreguntasDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
     <Compile Include="DataAccess\VisibilidadDB.cs" />
     <Compile Include="Entidades\Builder\BuilderCliente.cs" />
