@@ -36,7 +36,7 @@ namespace FrbaCommerce.GUIMethods.FormBase
         #region [FormularioBaseListado_Load]
         private void FormularioBaseListado_Load(object sender, EventArgs e)
         {
-            this.btnSeleccionar.Visible = ModoSeleccion;
+            this.btn_Seleccionar.Visible = ModoSeleccion;
             this.btnAlta.Visible = !ModoSeleccion;
             this.btnModificacion.Visible = !ModoSeleccion;
             this.btn_Habilitacion.Visible = !ModoSeleccion;
@@ -153,7 +153,6 @@ namespace FrbaCommerce.GUIMethods.FormBase
 
             return seleccionado;
         }
-
 
         private void AgregarBotonSeleccionar()
         {

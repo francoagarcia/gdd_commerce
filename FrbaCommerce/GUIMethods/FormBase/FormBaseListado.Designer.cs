@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.gbAcciones = new System.Windows.Forms.GroupBox();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.btn_Seleccionar = new System.Windows.Forms.Button();
             this.btn_Habilitacion = new System.Windows.Forms.Button();
             this.btnModificacion = new System.Windows.Forms.Button();
             this.btnAlta = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@
             // 
             this.gbAcciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbAcciones.Controls.Add(this.btnSeleccionar);
+            this.gbAcciones.Controls.Add(this.btn_Seleccionar);
             this.gbAcciones.Controls.Add(this.btn_Habilitacion);
             this.gbAcciones.Controls.Add(this.btnModificacion);
             this.gbAcciones.Controls.Add(this.btnAlta);
@@ -59,16 +59,18 @@
             this.gbAcciones.TabStop = false;
             this.gbAcciones.Text = "Acciones";
             // 
-            // btnSeleccionar
+            // btn_Seleccionar
             // 
-            this.btnSeleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSeleccionar.Location = new System.Drawing.Point(571, 18);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
-            this.btnSeleccionar.TabIndex = 6;
-            this.btnSeleccionar.Text = "Seleccionar";
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            this.btn_Seleccionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Seleccionar.Enabled = false;
+            this.btn_Seleccionar.Location = new System.Drawing.Point(571, 18);
+            this.btn_Seleccionar.Name = "btn_Seleccionar";
+            this.btn_Seleccionar.Size = new System.Drawing.Size(75, 23);
+            this.btn_Seleccionar.TabIndex = 6;
+            this.btn_Seleccionar.Text = "Seleccionar";
+            this.btn_Seleccionar.UseVisualStyleBackColor = true;
+            this.btn_Seleccionar.Visible = false;
+            this.btn_Seleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // btn_Habilitacion
             // 
@@ -201,6 +203,6 @@
         protected System.Windows.Forms.GroupBox gbFiltros;
         protected System.Windows.Forms.Button btnLimpiar;
         protected System.Windows.Forms.Button btnFiltrar;
-        private System.Windows.Forms.Button btnSeleccionar;
+        protected System.Windows.Forms.Button btn_Seleccionar;
     }
 }

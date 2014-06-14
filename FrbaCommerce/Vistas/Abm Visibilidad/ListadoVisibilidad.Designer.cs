@@ -38,7 +38,7 @@
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnBaja
+            // btn_Habilitacion
             // 
             this.btn_Habilitacion.TabIndex = 7;
             // 
@@ -82,7 +82,7 @@
             this.label_Nombre_de_visibilidad.Name = "label_Nombre_de_visibilidad";
             this.label_Nombre_de_visibilidad.Size = new System.Drawing.Size(107, 13);
             this.label_Nombre_de_visibilidad.TabIndex = 2;
-            this.label_Nombre_de_visibilidad.Text = "Nombre de clienteModif";
+            this.label_Nombre_de_visibilidad.Text = "Nombre de visibilidad";
             // 
             // tb_Nombre_de_visibilidad
             // 

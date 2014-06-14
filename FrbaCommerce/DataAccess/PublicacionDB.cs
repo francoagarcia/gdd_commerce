@@ -21,6 +21,11 @@ namespace FrbaCommerce.DataAccess
         { 
         }
 
+        public void modificarPublicacion(Publicacion publiMod) {
+            IList<SqlParameter> parametros = this.GenerarParametrosModificar(publiMod);
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.modificarPublicacion", parametros);
+        }
+
         public decimal nuevaPublicacion(Publicacion publi) 
         {
             IList<SqlParameter> parametros = this.GenerarParametrosCrear(publi);
@@ -32,10 +37,113 @@ namespace FrbaCommerce.DataAccess
         }
 
         #region [Generadores de parametros]
-        protected override IList<SqlParameter> GenerarParametrosFiltrar(FiltroPublicacion entidad)
+        protected override IList<SqlParameter> GenerarParametrosFiltrar(FiltroPublicacion filtro)
         {
-            throw new NotImplementedException();
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter descripcion = new SqlParameter("@descripcion", System.Data.SqlDbType.NVarChar, 255, "descripcion");
+            descripcion.Value = filtro.descripcion;
+            parametros.Add(descripcion);
+
+            SqlParameter fecha_inicio = new SqlParameter("@fecha_inicio", System.Data.SqlDbType.DateTime);
+            if (filtro.fecha_inicio.HasValue)
+                fecha_inicio.Value = filtro.fecha_inicio;
+            fecha_inicio.SourceColumn = "fecha_inicio";
+            parametros.Add(fecha_inicio);
+
+            SqlParameter fecha_vencimiento = new SqlParameter("@fecha_vencimiento", System.Data.SqlDbType.DateTime);
+            if (filtro.fecha_vencimiento.HasValue)
+                fecha_vencimiento.Value = filtro.fecha_vencimiento;
+            fecha_vencimiento.SourceColumn = "fecha_vencimiento";
+            parametros.Add(fecha_vencimiento);
+
+            SqlParameter id_visibilidad = new SqlParameter("@id_visibilidad", System.Data.SqlDbType.Decimal, 18, "id_visibilidad");
+            if (filtro.visibilidad != null)
+                id_visibilidad.Value = filtro.visibilidad.id_visibilidad;
+            parametros.Add(id_visibilidad);
+
+            SqlParameter id_estado = new SqlParameter("@id_estado", System.Data.SqlDbType.Decimal, 18, "id_estado");
+            if (filtro.estado != null)
+                id_estado.Value = filtro.estado.id_estado;
+            parametros.Add(id_estado);
+
+            SqlParameter id_rubro = new SqlParameter("@id_rubro", System.Data.SqlDbType.Decimal, 18, "id_rubro");
+            if (filtro.rubro!=null)
+                id_rubro.Value = filtro.rubro.id_rubro;
+            parametros.Add(id_rubro);
+
+            SqlParameter id_tipo_publicacion = new SqlParameter("@id_tipo_publicacion", System.Data.SqlDbType.Decimal, 18, "id_tipo_publicacion");
+            if (filtro.tipo_publicacion!=null)
+                id_tipo_publicacion.Value = filtro.tipo_publicacion.Id;
+            parametros.Add(id_tipo_publicacion);
+
+            SqlParameter id_usuario_publicador = new SqlParameter("@id_usuario_publicador", System.Data.SqlDbType.Decimal, 18, "id_usuario_publicador");
+            id_usuario_publicador.Value = filtro.id_usuario_publicador;
+            parametros.Add(id_usuario_publicador);
+
+            return parametros;
         }
+
+        private IList<SqlParameter> GenerarParametrosModificar(Publicacion publiMod) {
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter id_publicacion_modificar = new SqlParameter("@id_publicacion_modificar", System.Data.SqlDbType.Decimal, 18, "id_publicacion");
+            id_publicacion_modificar.Value = publiMod.id_publicacion;
+            parametros.Add(id_publicacion_modificar);
+
+            SqlParameter descripcion = new SqlParameter("@descripcion", System.Data.SqlDbType.NVarChar, 255, "descripcion");
+            descripcion.Value = publiMod.descripcion;
+            parametros.Add(descripcion);
+
+            SqlParameter stock = new SqlParameter("@stock", System.Data.SqlDbType.Decimal);
+            stock.SourceColumn = "stock";
+            stock.Precision = 18;
+            stock.Scale = 2;
+            stock.Value = publiMod.stock;
+            parametros.Add(stock);
+
+            SqlParameter fecha_inicio = new SqlParameter("@fecha_inicio", System.Data.SqlDbType.DateTime);
+            fecha_inicio.SourceColumn = "fecha_inicio";
+            fecha_inicio.Value = publiMod.fecha_inicio;
+            parametros.Add(fecha_inicio);
+
+            SqlParameter fecha_vencimiento = new SqlParameter("@fecha_vencimiento", System.Data.SqlDbType.DateTime);
+            fecha_vencimiento.SourceColumn = "fecha_vencimiento";
+            fecha_vencimiento.Value = publiMod.fecha_vencimiento;
+            parametros.Add(fecha_vencimiento);
+
+            SqlParameter precio = new SqlParameter("@precio", System.Data.SqlDbType.Decimal);
+            precio.SourceColumn = "precio";
+            precio.Precision = 18;
+            precio.Scale = 2;
+            precio.Value = publiMod.precio;
+            parametros.Add(precio);
+
+            SqlParameter permite_preguntas = new SqlParameter("@permite_preguntas", System.Data.SqlDbType.Bit);
+            permite_preguntas.SourceColumn = "permite_preguntas";
+            permite_preguntas.Value = publiMod.permite_preguntas;
+            parametros.Add(permite_preguntas);
+
+            SqlParameter id_tipo_publicacion = new SqlParameter("@id_tipo_publicacion", System.Data.SqlDbType.Decimal, 18, "id_tipo_publicacion");
+            id_tipo_publicacion.Value = publiMod.tipo_publicacion.Id;
+            parametros.Add(id_tipo_publicacion);
+
+            SqlParameter id_visibilidad = new SqlParameter("@id_visibilidad", System.Data.SqlDbType.Decimal, 18, "id_visibilidad");
+            id_visibilidad.Value = publiMod.visibilidad.id_visibilidad;
+            parametros.Add(id_visibilidad);
+
+            SqlParameter id_estado = new SqlParameter("@id_estado", System.Data.SqlDbType.Decimal, 18, "id_estado");
+            id_estado.Value = publiMod.estado.id_estado;
+            parametros.Add(id_estado);
+
+            SqlParameter id_rubro = new SqlParameter("@id_rubro", System.Data.SqlDbType.Decimal, 18, "id_rubro");
+            id_rubro.Value = publiMod.rubro.id_rubro;
+            parametros.Add(id_rubro);
+
+            return parametros;
+        }
+
         private IList<SqlParameter> GenerarParametrosCrear(Publicacion publi) {
 
             IList<SqlParameter> parametros = new List<SqlParameter>();
