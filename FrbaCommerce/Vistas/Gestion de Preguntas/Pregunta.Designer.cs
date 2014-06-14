@@ -126,7 +126,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Pregunta";
             this.Text = "Preguntas";
-            this.Load += new System.EventHandler(this.Pregunta_Load);
+            
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
