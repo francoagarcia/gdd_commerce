@@ -151,5 +151,10 @@ namespace FrbaCommerce.Vistas.Abm_Empresa
 
         #endregion
 
+        private void btnModificacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

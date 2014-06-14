@@ -42,9 +42,5 @@ namespace FrbaCommerce.Vistas.Historial_Cliente
 
         }
 
-        private void Historial_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
