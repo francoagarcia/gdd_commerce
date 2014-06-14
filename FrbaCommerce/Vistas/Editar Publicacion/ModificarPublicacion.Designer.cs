@@ -1,6 +1,6 @@
-﻿namespace FrbaCommerce.Vistas.Generar_Publicacion
+﻿namespace FrbaCommerce.Vistas.Editar_Publicacion
 {
-    partial class GenerarPublicacion
+    partial class ModificarPublicacion
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_Atras = new System.Windows.Forms.Button();
             this.btn_Cancelar = new System.Windows.Forms.Button();
             this.btn_Limpiar = new System.Windows.Forms.Button();
             this.btn_Generar = new System.Windows.Forms.Button();
@@ -39,32 +38,21 @@
             this.nud_Precio = new System.Windows.Forms.NumericUpDown();
             this.chk_Permite_preguntas = new System.Windows.Forms.CheckBox();
             this.cb_Estado = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lbl_Estado = new System.Windows.Forms.Label();
             this.cb_Visibilidad = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lbl_Visibilidad = new System.Windows.Forms.Label();
+            this.lbl_Seleccion_de_rubros = new System.Windows.Forms.Label();
             this.list_Rubros = new System.Windows.Forms.CheckedListBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_Precio = new System.Windows.Forms.Label();
+            this.lbl_Fecha_de_vencimiento = new System.Windows.Forms.Label();
+            this.lbl_Fecha_de_inicio = new System.Windows.Forms.Label();
+            this.lbl_Stock = new System.Windows.Forms.Label();
             this.tb_Descripcion = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lbl_Descripcion = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Stock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Precio)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btn_Atras
-            // 
-            this.btn_Atras.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Atras.Location = new System.Drawing.Point(29, 436);
-            this.btn_Atras.Name = "btn_Atras";
-            this.btn_Atras.Size = new System.Drawing.Size(75, 23);
-            this.btn_Atras.TabIndex = 26;
-            this.btn_Atras.Text = "Atrás";
-            this.btn_Atras.UseVisualStyleBackColor = true;
-            this.btn_Atras.Click += new System.EventHandler(this.btn_Atras_Click);
             // 
             // btn_Cancelar
             // 
@@ -95,7 +83,7 @@
             this.btn_Generar.Name = "btn_Generar";
             this.btn_Generar.Size = new System.Drawing.Size(75, 23);
             this.btn_Generar.TabIndex = 23;
-            this.btn_Generar.Text = "Generar";
+            this.btn_Generar.Text = "Guardar";
             this.btn_Generar.UseVisualStyleBackColor = true;
             this.btn_Generar.Click += new System.EventHandler(this.btn_Generar_Click);
             // 
@@ -107,17 +95,18 @@
             this.groupBox1.Controls.Add(this.nud_Precio);
             this.groupBox1.Controls.Add(this.chk_Permite_preguntas);
             this.groupBox1.Controls.Add(this.cb_Estado);
-            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.lbl_Estado);
             this.groupBox1.Controls.Add(this.cb_Visibilidad);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.lbl_Visibilidad);
+            this.groupBox1.Controls.Add(this.lbl_Seleccion_de_rubros);
             this.groupBox1.Controls.Add(this.list_Rubros);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.lbl_Precio);
+            this.groupBox1.Controls.Add(this.lbl_Fecha_de_vencimiento);
+            this.groupBox1.Controls.Add(this.lbl_Fecha_de_inicio);
+            this.groupBox1.Controls.Add(this.lbl_Stock);
             this.groupBox1.Controls.Add(this.tb_Descripcion);
-            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.lbl_Descripcion);
+            this.groupBox1.Enabled = false;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -152,6 +141,7 @@
             this.nud_Stock.Size = new System.Drawing.Size(197, 21);
             this.nud_Stock.TabIndex = 27;
             this.nud_Stock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nud_Stock.ValueChanged += new System.EventHandler(this.nud_Stock_ValueChanged);
             // 
             // nud_Precio
             // 
@@ -193,14 +183,14 @@
             this.cb_Estado.Size = new System.Drawing.Size(197, 23);
             this.cb_Estado.TabIndex = 25;
             // 
-            // label9
+            // lbl_Estado
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 189);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(51, 15);
-            this.label9.TabIndex = 36;
-            this.label9.Text = "Estado :";
+            this.lbl_Estado.AutoSize = true;
+            this.lbl_Estado.Location = new System.Drawing.Point(16, 189);
+            this.lbl_Estado.Name = "lbl_Estado";
+            this.lbl_Estado.Size = new System.Drawing.Size(51, 15);
+            this.lbl_Estado.TabIndex = 36;
+            this.lbl_Estado.Text = "Estado :";
             // 
             // cb_Visibilidad
             // 
@@ -211,23 +201,23 @@
             this.cb_Visibilidad.Size = new System.Drawing.Size(197, 23);
             this.cb_Visibilidad.TabIndex = 24;
             // 
-            // label8
+            // lbl_Visibilidad
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 162);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(69, 15);
-            this.label8.TabIndex = 35;
-            this.label8.Text = "Visibilidad :";
+            this.lbl_Visibilidad.AutoSize = true;
+            this.lbl_Visibilidad.Location = new System.Drawing.Point(16, 162);
+            this.lbl_Visibilidad.Name = "lbl_Visibilidad";
+            this.lbl_Visibilidad.Size = new System.Drawing.Size(69, 15);
+            this.lbl_Visibilidad.TabIndex = 35;
+            this.lbl_Visibilidad.Text = "Visibilidad :";
             // 
-            // label7
+            // lbl_Seleccion_de_rubros
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(310, 162);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 15);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Selección de Rubros :";
+            this.lbl_Seleccion_de_rubros.AutoSize = true;
+            this.lbl_Seleccion_de_rubros.Location = new System.Drawing.Point(310, 162);
+            this.lbl_Seleccion_de_rubros.Name = "lbl_Seleccion_de_rubros";
+            this.lbl_Seleccion_de_rubros.Size = new System.Drawing.Size(127, 15);
+            this.lbl_Seleccion_de_rubros.TabIndex = 34;
+            this.lbl_Seleccion_de_rubros.Text = "Selección de Rubros :";
             // 
             // list_Rubros
             // 
@@ -241,41 +231,41 @@
             this.list_Rubros.TabIndex = 32;
             this.list_Rubros.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.list_Rubros_ItemCheck);
             // 
-            // label6
+            // lbl_Precio
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(16, 242);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 15);
-            this.label6.TabIndex = 33;
-            this.label6.Text = "Precio :";
+            this.lbl_Precio.AutoSize = true;
+            this.lbl_Precio.Location = new System.Drawing.Point(16, 242);
+            this.lbl_Precio.Name = "lbl_Precio";
+            this.lbl_Precio.Size = new System.Drawing.Size(48, 15);
+            this.lbl_Precio.TabIndex = 33;
+            this.lbl_Precio.Text = "Precio :";
             // 
-            // label5
+            // lbl_Fecha_de_vencimiento
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 294);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(70, 15);
-            this.label5.TabIndex = 30;
-            this.label5.Text = "Fecha Vto. :";
+            this.lbl_Fecha_de_vencimiento.AutoSize = true;
+            this.lbl_Fecha_de_vencimiento.Location = new System.Drawing.Point(16, 294);
+            this.lbl_Fecha_de_vencimiento.Name = "lbl_Fecha_de_vencimiento";
+            this.lbl_Fecha_de_vencimiento.Size = new System.Drawing.Size(70, 15);
+            this.lbl_Fecha_de_vencimiento.TabIndex = 30;
+            this.lbl_Fecha_de_vencimiento.Text = "Fecha Vto. :";
             // 
-            // label4
+            // lbl_Fecha_de_inicio
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 268);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 15);
-            this.label4.TabIndex = 29;
-            this.label4.Text = "Fecha Inicio :";
+            this.lbl_Fecha_de_inicio.AutoSize = true;
+            this.lbl_Fecha_de_inicio.Location = new System.Drawing.Point(16, 268);
+            this.lbl_Fecha_de_inicio.Name = "lbl_Fecha_de_inicio";
+            this.lbl_Fecha_de_inicio.Size = new System.Drawing.Size(79, 15);
+            this.lbl_Fecha_de_inicio.TabIndex = 29;
+            this.lbl_Fecha_de_inicio.Text = "Fecha Inicio :";
             // 
-            // label3
+            // lbl_Stock
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 216);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 15);
-            this.label3.TabIndex = 26;
-            this.label3.Text = "Stock :";
+            this.lbl_Stock.AutoSize = true;
+            this.lbl_Stock.Location = new System.Drawing.Point(16, 216);
+            this.lbl_Stock.Name = "lbl_Stock";
+            this.lbl_Stock.Size = new System.Drawing.Size(43, 15);
+            this.lbl_Stock.TabIndex = 26;
+            this.lbl_Stock.Text = "Stock :";
             // 
             // tb_Descripcion
             // 
@@ -289,28 +279,27 @@
             this.tb_Descripcion.Size = new System.Drawing.Size(636, 107);
             this.tb_Descripcion.TabIndex = 22;
             // 
-            // label2
+            // lbl_Descripcion
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 15);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "Descripción :";
+            this.lbl_Descripcion.AutoSize = true;
+            this.lbl_Descripcion.Location = new System.Drawing.Point(16, 21);
+            this.lbl_Descripcion.Name = "lbl_Descripcion";
+            this.lbl_Descripcion.Size = new System.Drawing.Size(78, 15);
+            this.lbl_Descripcion.TabIndex = 23;
+            this.lbl_Descripcion.Text = "Descripción :";
             // 
-            // GenerarPublicacion
+            // ModificarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 468);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btn_Atras);
             this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.btn_Limpiar);
             this.Controls.Add(this.btn_Generar);
-            this.Name = "GenerarPublicacion";
-            this.Text = "FRBA Commerce - Generar publicación";
-            this.Load += new System.EventHandler(this.GenerarPublicacion_Load);
+            this.Name = "ModificarPublicacion";
+            this.Text = "FRBA Commerce -Editar publicación";
+            this.Load += new System.EventHandler(this.ModificarPublicacion_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Stock)).EndInit();
@@ -321,7 +310,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_Atras;
         private System.Windows.Forms.Button btn_Cancelar;
         private System.Windows.Forms.Button btn_Limpiar;
         private System.Windows.Forms.Button btn_Generar;
@@ -332,16 +320,18 @@
         private System.Windows.Forms.NumericUpDown nud_Precio;
         private System.Windows.Forms.CheckBox chk_Permite_preguntas;
         private System.Windows.Forms.ComboBox cb_Estado;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lbl_Estado;
         private System.Windows.Forms.ComboBox cb_Visibilidad;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lbl_Visibilidad;
+        private System.Windows.Forms.Label lbl_Seleccion_de_rubros;
         private System.Windows.Forms.CheckedListBox list_Rubros;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_Precio;
+        private System.Windows.Forms.Label lbl_Fecha_de_vencimiento;
+        private System.Windows.Forms.Label lbl_Fecha_de_inicio;
+        private System.Windows.Forms.Label lbl_Stock;
         private System.Windows.Forms.TextBox tb_Descripcion;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_Descripcion;
+
+
     }
 }

@@ -28,125 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.gb_Elegir_historial = new System.Windows.Forms.GroupBox();
+            this.btn_Ver_historial_calificaciones = new System.Windows.Forms.Button();
+            this.btn_Ver_historial_de_ofertas = new System.Windows.Forms.Button();
+            this.btn_Ver_historial_de_compras = new System.Windows.Forms.Button();
+            this.gb_Elegir_historial.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // gb_Elegir_historial
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 19);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(261, 83);
-            this.dataGridView1.TabIndex = 0;
+            this.gb_Elegir_historial.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_Elegir_historial.Controls.Add(this.btn_Ver_historial_calificaciones);
+            this.gb_Elegir_historial.Controls.Add(this.btn_Ver_historial_de_ofertas);
+            this.gb_Elegir_historial.Controls.Add(this.btn_Ver_historial_de_compras);
+            this.gb_Elegir_historial.Location = new System.Drawing.Point(12, 12);
+            this.gb_Elegir_historial.Name = "gb_Elegir_historial";
+            this.gb_Elegir_historial.Size = new System.Drawing.Size(257, 245);
+            this.gb_Elegir_historial.TabIndex = 0;
+            this.gb_Elegir_historial.TabStop = false;
+            this.gb_Elegir_historial.Text = "Elija un historial para ver";
             // 
-            // groupBox1
+            // btn_Ver_historial_calificaciones
             // 
-            this.groupBox1.Controls.Add(this.dataGridView1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(297, 119);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Compras";
+            this.btn_Ver_historial_calificaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Ver_historial_calificaciones.Location = new System.Drawing.Point(29, 172);
+            this.btn_Ver_historial_calificaciones.Name = "btn_Ver_historial_calificaciones";
+            this.btn_Ver_historial_calificaciones.Size = new System.Drawing.Size(201, 42);
+            this.btn_Ver_historial_calificaciones.TabIndex = 5;
+            this.btn_Ver_historial_calificaciones.Text = "Ver Historial de Calificaciones";
+            this.btn_Ver_historial_calificaciones.UseVisualStyleBackColor = true;
+            this.btn_Ver_historial_calificaciones.Click += new System.EventHandler(this.btn_Ver_historial_calificaciones_Click);
             // 
-            // groupBox2
+            // btn_Ver_historial_de_ofertas
             // 
-            this.groupBox2.Controls.Add(this.dataGridView2);
-            this.groupBox2.Location = new System.Drawing.Point(13, 145);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(295, 112);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ofertas";
+            this.btn_Ver_historial_de_ofertas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Ver_historial_de_ofertas.Location = new System.Drawing.Point(29, 105);
+            this.btn_Ver_historial_de_ofertas.Name = "btn_Ver_historial_de_ofertas";
+            this.btn_Ver_historial_de_ofertas.Size = new System.Drawing.Size(201, 42);
+            this.btn_Ver_historial_de_ofertas.TabIndex = 4;
+            this.btn_Ver_historial_de_ofertas.Text = "Ver Historial de Ofertas";
+            this.btn_Ver_historial_de_ofertas.UseVisualStyleBackColor = true;
+            this.btn_Ver_historial_de_ofertas.Click += new System.EventHandler(this.btn_Ver_historial_de_ofertas_Click);
             // 
-            // dataGridView2
+            // btn_Ver_historial_de_compras
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(20, 22);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(259, 73);
-            this.dataGridView2.TabIndex = 0;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.dataGridView3);
-            this.groupBox3.Location = new System.Drawing.Point(13, 275);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(294, 112);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Calificaciones";
-            // 
-            // dataGridView3
-            // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(21, 19);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(257, 74);
-            this.dataGridView3.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(216, 393);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 24);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(13, 393);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(183, 20);
-            this.textBox1.TabIndex = 5;
+            this.btn_Ver_historial_de_compras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Ver_historial_de_compras.Location = new System.Drawing.Point(29, 41);
+            this.btn_Ver_historial_de_compras.Name = "btn_Ver_historial_de_compras";
+            this.btn_Ver_historial_de_compras.Size = new System.Drawing.Size(201, 42);
+            this.btn_Ver_historial_de_compras.TabIndex = 3;
+            this.btn_Ver_historial_de_compras.Text = "Ver Historial de compras";
+            this.btn_Ver_historial_de_compras.UseVisualStyleBackColor = true;
+            this.btn_Ver_historial_de_compras.Click += new System.EventHandler(this.btn_Ver_historial_de_compras_Click);
             // 
             // Historial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(321, 421);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(281, 269);
+            this.Controls.Add(this.gb_Elegir_historial);
             this.Name = "Historial";
-            this.Text = "Historial";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "FRBA Commerce - Historial";
+            this.gb_Elegir_historial.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox gb_Elegir_historial;
+        private System.Windows.Forms.Button btn_Ver_historial_calificaciones;
+        private System.Windows.Forms.Button btn_Ver_historial_de_ofertas;
+        private System.Windows.Forms.Button btn_Ver_historial_de_compras;
+
     }
 }

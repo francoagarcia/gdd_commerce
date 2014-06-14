@@ -9,6 +9,8 @@ using FrbaCommerce.GUIMethods;
 using FrbaCommerce.Vistas.Login;
 using FrbaCommerce.Vistas.Historial_Cliente;
 using FrbaCommerce.Vistas.Listado_Estadistico;
+using FrbaCommerce.Entidades;
+using FrbaCommerce.Generics.Enums;
 using FrbaCommerce.Vistas.Gestion_de_Preguntas;
 
 namespace FrbaCommerce
@@ -27,15 +29,23 @@ namespace FrbaCommerce
 
             ContextoActual = new ContextoAplicacion(filename, DateManager.Ahora());
 
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             try
             {
                 ContextoActual.Logger.Iniciar();
+<<<<<<< HEAD
 
                 Application.Run(new Historial());
 
+=======
+                Usuario usu = new Usuario();
+                usu.username = "33354435";
+                Application.Run(new FrbaCommerce.Vistas.Historial_Cliente.Historial(usu));
+>>>>>>> 4da0b17e094472d83afb1e6f6b5d49c19566f0fb
             }
             catch (Exception ex)
             {

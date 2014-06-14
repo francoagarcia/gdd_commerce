@@ -5,19 +5,19 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using FrbaCommerce.ConnectorDB;
+using FrbaCommerce.Entidades;
 
 namespace FrbaCommerce.DataAccess
 {
-    class HistorialDB
+    public class HistorialDB
     {
 
-        public DataSet pedir_Compras(string usuario)
+        public DataSet pedir_Compras(Usuario usuarioActual)
         {
-
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             var pUsuario = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
-            pUsuario.Value = usuario;
+            pUsuario.Value = usuarioActual.username;
             parametros.Add(pUsuario);
 
             DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getTodasComprasRealizadas", parametros);
@@ -26,13 +26,12 @@ namespace FrbaCommerce.DataAccess
         
         }
 
-        public DataSet pedir_Ofertas(string usuario)
+        public DataSet pedir_Ofertas(Usuario usuarioActual)
         {
-
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             var pUsuario = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
-            pUsuario.Value = usuario;
+            pUsuario.Value = usuarioActual.username;
             parametros.Add(pUsuario);
 
             DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getTodasLasOfertasRealizadas", parametros);
@@ -41,19 +40,17 @@ namespace FrbaCommerce.DataAccess
 
         }
 
-        public DataSet pedir_Calificaciones(string usuario)
+        public DataSet pedir_Calificaciones(Usuario usuarioActual)
         {
-
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             var pUsuario = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
-            pUsuario.Value = usuario;
+            pUsuario.Value = usuarioActual.username;
             parametros.Add(pUsuario);
 
             DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getCalificacionesDelUsuario", parametros);
 
             return ds;
-
         }
 
 

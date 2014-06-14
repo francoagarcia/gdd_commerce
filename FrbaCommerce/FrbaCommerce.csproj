@@ -60,6 +60,7 @@
     <Compile Include="DataAccess\ClienteDB.cs" />
     <Compile Include="DataAccess\EmpresaDB.cs" />
     <Compile Include="DataAccess\EntidadBaseDB.cs" />
+    <Compile Include="DataAccess\EstadisticasDB.cs" />
     <Compile Include="DataAccess\EstadoPublicacionDB.cs" />
     <Compile Include="DataAccess\FuncionalidadDB.cs" />
     <Compile Include="DataAccess\HistorialDB.cs" />
@@ -80,10 +81,12 @@
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empresa.cs" />
+    <Compile Include="Entidades\Estadistica.cs" />
     <Compile Include="Entidades\EstadoPublicacion.cs" />
     <Compile Include="Entidades\Filtros\FiltroCliente.cs" />
     <Compile Include="Entidades\Filtros\FiltroEmpresa.cs" />
     <Compile Include="Entidades\Filtros\FiltroPublicacion.cs" />
+    <Compile Include="Entidades\Filtros\FiltroRubros.cs" />
     <Compile Include="Entidades\Filtros\FiltroVisibilidades.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
     <Compile Include="Entidades\Publicacion.cs" />
@@ -190,11 +193,11 @@
     <Compile Include="Vistas\ABM Rol\ModificarRol.Designer.cs">
       <DependentUpon>ModificarRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Rubro\ABMRubro.cs">
+    <Compile Include="Vistas\Abm Rubro\ListadoRubros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Rubro\ABMRubro.Designer.cs">
-      <DependentUpon>ABMRubro.cs</DependentUpon>
+    <Compile Include="Vistas\Abm Rubro\ListadoRubros.Designer.cs">
+      <DependentUpon>ListadoRubros.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm Visibilidad\AltaVisibilidad.cs">
       <SubType>Form</SubType>
@@ -234,23 +237,23 @@
     </Compile>
     <Compile Include="DataAccess\UsuarioDB.cs" />
     <Compile Include="ConnectorDB\DBConnection.cs" />
-    <Compile Include="Vistas\Editar Publicacion\Buscar_Publicacion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Editar Publicacion\Buscar_Publicacion.Designer.cs">
-      <DependentUpon>Buscar_Publicacion.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\Comprar Ofertar\CompraOferta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Comprar Ofertar\CompraOferta.Designer.cs">
       <DependentUpon>CompraOferta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Editar Publicacion\Editar_Publicación.cs">
+    <Compile Include="Vistas\Editar Publicacion\ListadoPublicacionesDeVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Editar Publicacion\Editar_Publicación.Designer.cs">
-      <DependentUpon>Editar_Publicación.cs</DependentUpon>
+    <Compile Include="Vistas\Editar Publicacion\ListadoPublicacionesDeVendedor.Designer.cs">
+      <DependentUpon>ListadoPublicacionesDeVendedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Editar Publicacion\ModificarPublicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Editar Publicacion\ModificarPublicacion.Designer.cs">
+      <DependentUpon>ModificarPublicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Facturar Publicaciones\Facturar.cs">
       <SubType>Form</SubType>
@@ -267,6 +270,30 @@
     </Compile>
     <Compile Include="Vistas\Generar Publicacion\SeleccionTipoPublicacion.Designer.cs">
       <DependentUpon>SeleccionTipoPublicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.Designer.cs">
+      <DependentUpon>HistorialDeCalificaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCompras.Designer.cs">
+      <DependentUpon>HistorialDeCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeOfertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeOfertas.Designer.cs">
+      <DependentUpon>HistorialDeOfertas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialGenerico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialGenerico.Designer.cs">
+      <DependentUpon>HistorialGenerico.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Inicio.cs">
       <SubType>Form</SubType>
@@ -342,6 +369,9 @@
     <EmbeddedResource Include="Vistas\ABM Rol\ModificarRol.resx">
       <DependentUpon>ModificarRol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Rubro\ListadoRubros.resx">
+      <DependentUpon>ListadoRubros.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Visibilidad\AltaVisibilidad.resx">
       <DependentUpon>AltaVisibilidad.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,11 +393,11 @@
     <EmbeddedResource Include="Vistas\Comprar Ofertar\Oferta.resx">
       <DependentUpon>Oferta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Editar Publicacion\Buscar_Publicacion.resx">
-      <DependentUpon>Buscar_Publicacion.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Editar Publicacion\ListadoPublicacionesDeVendedor.resx">
+      <DependentUpon>ListadoPublicacionesDeVendedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Editar Publicacion\Editar_Publicación.resx">
-      <DependentUpon>Editar_Publicación.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Editar Publicacion\ModificarPublicacion.resx">
+      <DependentUpon>ModificarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Facturar Publicaciones\Facturar.resx">
       <DependentUpon>Facturar.cs</DependentUpon>
@@ -380,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Historial Cliente\Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Historial Cliente\HistorialGenerico.resx">
+      <DependentUpon>HistorialGenerico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>
