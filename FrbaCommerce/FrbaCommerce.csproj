@@ -59,6 +59,7 @@
     <Compile Include="DataAccess\ClienteDB.cs" />
     <Compile Include="DataAccess\EmpresaDB.cs" />
     <Compile Include="DataAccess\EntidadBaseDB.cs" />
+    <Compile Include="DataAccess\EstadisticasDB.cs" />
     <Compile Include="DataAccess\EstadoPublicacionDB.cs" />
     <Compile Include="DataAccess\FuncionalidadDB.cs" />
     <Compile Include="DataAccess\HistorialDB.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Empresa.cs" />
+    <Compile Include="Entidades\Estadistica.cs" />
     <Compile Include="Entidades\EstadoPublicacion.cs" />
     <Compile Include="Entidades\Filtros\FiltroCliente.cs" />
     <Compile Include="Entidades\Filtros\FiltroEmpresa.cs" />
@@ -268,6 +270,30 @@
     <Compile Include="Vistas\Generar Publicacion\SeleccionTipoPublicacion.Designer.cs">
       <DependentUpon>SeleccionTipoPublicacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.Designer.cs">
+      <DependentUpon>HistorialDeCalificaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeCompras.Designer.cs">
+      <DependentUpon>HistorialDeCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeOfertas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialDeOfertas.Designer.cs">
+      <DependentUpon>HistorialDeOfertas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialGenerico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Historial Cliente\HistorialGenerico.Designer.cs">
+      <DependentUpon>HistorialGenerico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Inicio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -383,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Historial Cliente\Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Historial Cliente\HistorialGenerico.resx">
+      <DependentUpon>HistorialGenerico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Inicio.resx">
       <DependentUpon>Inicio.cs</DependentUpon>

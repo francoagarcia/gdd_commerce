@@ -37,8 +37,9 @@ namespace FrbaCommerce
             try
             {
                 ContextoActual.Logger.Iniciar();
-
-                Application.Run(new FrbaCommerce.Vistas.Editar_Publicacion.ListadoPublicacionesDeVendedor());
+                Usuario usu = new Usuario();
+                usu.username = "33354435";
+                Application.Run(new FrbaCommerce.Vistas.Historial_Cliente.Historial(usu));
             }
             catch (Exception ex)
             {

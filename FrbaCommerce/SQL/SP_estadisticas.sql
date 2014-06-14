@@ -1,11 +1,28 @@
 
+
+
+IF OBJECT_ID('DATA_GROUP.getTodosAnios') is not null
+	DROP PROCEDURE DATA_GROUP.getTodosAnios
+	GO
+CREATE PROCEDURE DATA_GROUP.getTodosAnios
+AS
+BEGIN
+	SELECT DISTINCT YEAR(fecha) anio
+	FROM DATA_GROUP.Compra
+END
+
+
+
+
+
+
 IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
 	GO
 CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
 @anio int,
-@mes int,
 @trimestre int,
+@mes int,
 @visibilidad_desc nvarchar(255)
 AS
 BEGIN
@@ -31,7 +48,9 @@ IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMayorFacturacion') IS NOT NULL
 	GO
 CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMayorFacturacion
 @anio int, 
-@trimestre int
+@trimestre int,
+@mes int = NULL,
+@visibilidad_desc nvarchar(255) = NULL
 AS
 BEGIN
 	SELECT top 5 f.id_vendedor, SUM(f.total) Facturacion
@@ -51,7 +70,9 @@ IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMayorCalificaciones') IS NOT NULL
 	GO
 CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMayorCalificaciones
 @anio int, 
-@trimestre int
+@trimestre int,
+@mes int = NULL,
+@visibilidad_desc nvarchar(255) = NULL
 AS
 BEGIN
 	SELECT TOP 5 p.id_usuario_publicador Vendedor, AVG(cal.estrellas_calificacion) Calificaciones
@@ -73,7 +94,9 @@ IF OBJECT_ID('DATA_GROUP.getTop5ClientesConMasPublicacionesSinCalificar') IS NOT
 	GO
 CREATE PROCEDURE DATA_GROUP.getTop5ClientesConMasPublicacionesSinCalificar
 @anio int,
-@trimestre int
+@trimestre int,
+@mes int = NULL,
+@visibilidad_desc nvarchar(255) = NULL
 AS
 BEGIN
 	SELECT TOP 5 com.id_usuario_comprador, COUNT(*) CantidadPublicaciones
