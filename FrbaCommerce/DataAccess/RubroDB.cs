@@ -8,6 +8,8 @@ using FrbaCommerce.Entidades.Filtros;
 using System.Data.SqlTypes;
 using System.Data;
 using System.Data.SqlClient;
+using FrbaCommerce.ConnectorDB;
+
 
 namespace FrbaCommerce.DataAccess
 {
@@ -27,6 +29,12 @@ namespace FrbaCommerce.DataAccess
             parametros.Add(descripcion);
 
             return parametros;
+        }
+
+        public DataSet dame_Rubros() {
+
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getRubros");
+            return ds;
         }
     }
 }

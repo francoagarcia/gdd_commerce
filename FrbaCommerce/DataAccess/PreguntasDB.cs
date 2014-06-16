@@ -55,5 +55,27 @@ namespace FrbaCommerce.DataAccess
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.getRespuestas", parametros);
         }
+
+        public void guarda_Pregunta(string pre, decimal id_pub, decimal id_usu)
+        {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            var pid_Pub = new SqlParameter("@id_pub", SqlDbType.Decimal, 18, "id_pub");
+            pid_Pub.Value = id_pub;
+            parametros.Add(pid_Pub);
+
+            var pid_Usu = new SqlParameter("@id_usu", SqlDbType.Decimal, 18, "id_usu");
+            pid_Usu.Value = id_usu;
+            parametros.Add(pid_Usu);
+
+            var pPregunta = new SqlParameter("@pregunta", SqlDbType.NVarChar, 400, "pregunta");
+            pPregunta.Value = pre;
+            parametros.Add(pPregunta);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_agregrarPregunta", parametros);
+        }
+
+
     }
 }

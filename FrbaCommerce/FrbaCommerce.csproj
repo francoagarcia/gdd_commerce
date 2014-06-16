@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\CalificacionesDB.cs" />
     <Compile Include="DataAccess\ClienteDB.cs" />
+    <Compile Include="DataAccess\ComprarOfertarDB.cs" />
     <Compile Include="DataAccess\EmpresaDB.cs" />
     <Compile Include="DataAccess\EntidadBaseDB.cs" />
     <Compile Include="DataAccess\EstadisticasDB.cs" />
