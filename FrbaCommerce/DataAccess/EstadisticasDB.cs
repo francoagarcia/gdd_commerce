@@ -68,7 +68,7 @@ namespace FrbaCommerce.DataAccess
                 mes.Value = est.mes;
             parametros.Add(mes);
 
-            var visibilidad_desc = new SqlParameter("@visibilidad_desc", SqlDbType.Int);
+            var visibilidad_desc = new SqlParameter("@visibilidad_desc", SqlDbType.NVarChar,255);
             if (est.visibilidad != null)
             {
                 visibilidad_desc.SourceColumn = "descripcion";

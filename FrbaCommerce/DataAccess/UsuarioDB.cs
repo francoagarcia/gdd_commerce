@@ -94,5 +94,19 @@ namespace FrbaCommerce.DataAccess
             return ((bool)pResultado.Value);
         }
 
+        public DataSet dame_TusDatos(decimal usu)
+        {
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+
+            var pU = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            pU.Value = usu;
+            parametros.Add(pU);
+
+
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getCliente", parametros);
+
+            return ds;
+        }
     }
 }

@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             this.gb_Opciones_estadisticas = new System.Windows.Forms.GroupBox();
+            this.lbl_Visibilidad = new System.Windows.Forms.Label();
+            this.cb_Visibilidad = new System.Windows.Forms.ComboBox();
+            this.lbl_Mes = new System.Windows.Forms.Label();
+            this.cb_Mes = new System.Windows.Forms.ComboBox();
+            this.cb_Vista = new System.Windows.Forms.ComboBox();
+            this.cb_Trimestre = new System.Windows.Forms.ComboBox();
+            this.lbl_Año = new System.Windows.Forms.Label();
             this.btn_Consultar = new System.Windows.Forms.Button();
             this.cb_Año = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_Trimestre = new System.Windows.Forms.Label();
             this.gb_Resultado = new System.Windows.Forms.GroupBox();
             this.dgv_Resultado = new System.Windows.Forms.DataGridView();
-            this.lbl_Año = new System.Windows.Forms.Label();
-            this.cb_Trimestre = new System.Windows.Forms.ComboBox();
-            this.cb_Vista = new System.Windows.Forms.ComboBox();
-            this.lbl_Mes = new System.Windows.Forms.Label();
-            this.cb_Mes = new System.Windows.Forms.ComboBox();
-            this.lbl_Visibilidad = new System.Windows.Forms.Label();
-            this.cb_Visibilidad = new System.Windows.Forms.ComboBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.gb_Opciones_estadisticas.SuspendLayout();
             this.gb_Resultado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Resultado)).BeginInit();
@@ -51,6 +52,7 @@
             // 
             this.gb_Opciones_estadisticas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_Opciones_estadisticas.Controls.Add(this.textBox1);
             this.gb_Opciones_estadisticas.Controls.Add(this.lbl_Visibilidad);
             this.gb_Opciones_estadisticas.Controls.Add(this.cb_Visibilidad);
             this.gb_Opciones_estadisticas.Controls.Add(this.lbl_Mes);
@@ -68,6 +70,85 @@
             this.gb_Opciones_estadisticas.TabIndex = 0;
             this.gb_Opciones_estadisticas.TabStop = false;
             this.gb_Opciones_estadisticas.Text = "Complete todas las opciones de estadísticas";
+            // 
+            // lbl_Visibilidad
+            // 
+            this.lbl_Visibilidad.AutoSize = true;
+            this.lbl_Visibilidad.Location = new System.Drawing.Point(149, 54);
+            this.lbl_Visibilidad.Name = "lbl_Visibilidad";
+            this.lbl_Visibilidad.Size = new System.Drawing.Size(53, 13);
+            this.lbl_Visibilidad.TabIndex = 11;
+            this.lbl_Visibilidad.Text = "Visibilidad";
+            this.lbl_Visibilidad.Visible = false;
+            // 
+            // cb_Visibilidad
+            // 
+            this.cb_Visibilidad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Visibilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Visibilidad.FormattingEnabled = true;
+            this.cb_Visibilidad.Location = new System.Drawing.Point(203, 51);
+            this.cb_Visibilidad.Name = "cb_Visibilidad";
+            this.cb_Visibilidad.Size = new System.Drawing.Size(115, 21);
+            this.cb_Visibilidad.TabIndex = 10;
+            this.cb_Visibilidad.Visible = false;
+            this.cb_Visibilidad.SelectedIndexChanged += new System.EventHandler(this.cb_Visibilidad_SelectedIndexChanged);
+            // 
+            // lbl_Mes
+            // 
+            this.lbl_Mes.AutoSize = true;
+            this.lbl_Mes.Location = new System.Drawing.Point(6, 54);
+            this.lbl_Mes.Name = "lbl_Mes";
+            this.lbl_Mes.Size = new System.Drawing.Size(27, 13);
+            this.lbl_Mes.TabIndex = 9;
+            this.lbl_Mes.Text = "Mes";
+            this.lbl_Mes.Visible = false;
+            // 
+            // cb_Mes
+            // 
+            this.cb_Mes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Mes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Mes.FormattingEnabled = true;
+            this.cb_Mes.Location = new System.Drawing.Point(38, 51);
+            this.cb_Mes.Name = "cb_Mes";
+            this.cb_Mes.Size = new System.Drawing.Size(103, 21);
+            this.cb_Mes.TabIndex = 8;
+            this.cb_Mes.Visible = false;
+            this.cb_Mes.SelectedIndexChanged += new System.EventHandler(this.cb_Mes_SelectedIndexChanged);
+            // 
+            // cb_Vista
+            // 
+            this.cb_Vista.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Vista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Vista.FormattingEnabled = true;
+            this.cb_Vista.Location = new System.Drawing.Point(360, 24);
+            this.cb_Vista.Name = "cb_Vista";
+            this.cb_Vista.Size = new System.Drawing.Size(302, 21);
+            this.cb_Vista.TabIndex = 7;
+            this.cb_Vista.SelectedIndexChanged += new System.EventHandler(this.cb_Vista_SelectedIndexChanged);
+            // 
+            // cb_Trimestre
+            // 
+            this.cb_Trimestre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Trimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Trimestre.FormattingEnabled = true;
+            this.cb_Trimestre.Location = new System.Drawing.Point(203, 24);
+            this.cb_Trimestre.Name = "cb_Trimestre";
+            this.cb_Trimestre.Size = new System.Drawing.Size(115, 21);
+            this.cb_Trimestre.TabIndex = 6;
+            this.cb_Trimestre.SelectedIndexChanged += new System.EventHandler(this.cb_Trimestre_SelectedIndexChanged);
+            // 
+            // lbl_Año
+            // 
+            this.lbl_Año.AutoSize = true;
+            this.lbl_Año.Location = new System.Drawing.Point(6, 27);
+            this.lbl_Año.Name = "lbl_Año";
+            this.lbl_Año.Size = new System.Drawing.Size(26, 13);
+            this.lbl_Año.TabIndex = 5;
+            this.lbl_Año.Text = "Año";
             // 
             // btn_Consultar
             // 
@@ -135,84 +216,12 @@
             this.dgv_Resultado.Size = new System.Drawing.Size(653, 241);
             this.dgv_Resultado.TabIndex = 0;
             // 
-            // lbl_Año
+            // textBox1
             // 
-            this.lbl_Año.AutoSize = true;
-            this.lbl_Año.Location = new System.Drawing.Point(6, 27);
-            this.lbl_Año.Name = "lbl_Año";
-            this.lbl_Año.Size = new System.Drawing.Size(26, 13);
-            this.lbl_Año.TabIndex = 5;
-            this.lbl_Año.Text = "Año";
-            // 
-            // cb_Trimestre
-            // 
-            this.cb_Trimestre.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Trimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Trimestre.FormattingEnabled = true;
-            this.cb_Trimestre.Location = new System.Drawing.Point(203, 24);
-            this.cb_Trimestre.Name = "cb_Trimestre";
-            this.cb_Trimestre.Size = new System.Drawing.Size(115, 21);
-            this.cb_Trimestre.TabIndex = 6;
-            this.cb_Trimestre.SelectedIndexChanged += new System.EventHandler(this.cb_Trimestre_SelectedIndexChanged);
-            // 
-            // cb_Vista
-            // 
-            this.cb_Vista.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Vista.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Vista.FormattingEnabled = true;
-            this.cb_Vista.Location = new System.Drawing.Point(360, 24);
-            this.cb_Vista.Name = "cb_Vista";
-            this.cb_Vista.Size = new System.Drawing.Size(302, 21);
-            this.cb_Vista.TabIndex = 7;
-            this.cb_Vista.SelectedIndexChanged += new System.EventHandler(this.cb_Vista_SelectedIndexChanged);
-            // 
-            // lbl_Mes
-            // 
-            this.lbl_Mes.AutoSize = true;
-            this.lbl_Mes.Location = new System.Drawing.Point(6, 54);
-            this.lbl_Mes.Name = "lbl_Mes";
-            this.lbl_Mes.Size = new System.Drawing.Size(27, 13);
-            this.lbl_Mes.TabIndex = 9;
-            this.lbl_Mes.Text = "Mes";
-            this.lbl_Mes.Visible = false;
-            // 
-            // cb_Mes
-            // 
-            this.cb_Mes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Mes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Mes.FormattingEnabled = true;
-            this.cb_Mes.Location = new System.Drawing.Point(38, 51);
-            this.cb_Mes.Name = "cb_Mes";
-            this.cb_Mes.Size = new System.Drawing.Size(103, 21);
-            this.cb_Mes.TabIndex = 8;
-            this.cb_Mes.Visible = false;
-            this.cb_Mes.SelectedIndexChanged += new System.EventHandler(this.cb_Mes_SelectedIndexChanged);
-            // 
-            // lbl_Visibilidad
-            // 
-            this.lbl_Visibilidad.AutoSize = true;
-            this.lbl_Visibilidad.Location = new System.Drawing.Point(149, 54);
-            this.lbl_Visibilidad.Name = "lbl_Visibilidad";
-            this.lbl_Visibilidad.Size = new System.Drawing.Size(53, 13);
-            this.lbl_Visibilidad.TabIndex = 11;
-            this.lbl_Visibilidad.Text = "Visibilidad";
-            this.lbl_Visibilidad.Visible = false;
-            // 
-            // cb_Visibilidad
-            // 
-            this.cb_Visibilidad.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_Visibilidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Visibilidad.FormattingEnabled = true;
-            this.cb_Visibilidad.Location = new System.Drawing.Point(203, 51);
-            this.cb_Visibilidad.Name = "cb_Visibilidad";
-            this.cb_Visibilidad.Size = new System.Drawing.Size(115, 21);
-            this.cb_Visibilidad.TabIndex = 10;
-            this.cb_Visibilidad.Visible = false;
-            this.cb_Visibilidad.SelectedIndexChanged += new System.EventHandler(this.cb_Visibilidad_SelectedIndexChanged);
+            this.textBox1.Location = new System.Drawing.Point(404, 69);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 12;
             // 
             // Listado_Estadistico
             // 
@@ -249,6 +258,7 @@
         private System.Windows.Forms.Label lbl_Año;
         private System.Windows.Forms.Label lbl_Visibilidad;
         private System.Windows.Forms.ComboBox cb_Visibilidad;
+        private System.Windows.Forms.TextBox textBox1;
 
     }
 }

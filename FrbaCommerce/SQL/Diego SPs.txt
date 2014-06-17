@@ -176,11 +176,11 @@ CREATE PROCEDURE DATA_GROUP.filtro_ComprasFalso2
 AS
 BEGIN
 	
-	SELECT Ti.descripcion, Pu.id_publicacion, Pu.descripcion, Pu.permite_preguntas
+	SELECT Ti.id_tipo_publicacion, Ti.descripcion, Pu.id_publicacion ,Pu.descripcion, Pu.id_usuario_publicador, Pu.stock, Pu.precio,Pu.permite_preguntas
 	FROM DATA_GROUP.Publicacion Pu
 	JOIN DATA_GROUP.Rubro Ru ON Pu.id_rubro = Ru.id_rubro
 	JOIN DATA_GROUP.TipoPublicacion Ti ON Ti.id_tipo_publicacion = Pu.id_tipo_publicacion
-	WHERE ( Pu.descripcion like '%'+ @descripcion +'%') AND (Ru.descripcion like '%'+ @rubro +'%') )
+	WHERE ( Pu.descripcion like '%'+ @descripcion +'%') AND (Ru.descripcion like '%'+ @rubro +'%') 
 END
 GO
 
@@ -197,5 +197,37 @@ BEGIN
 	INSERT INTO DATA_GROUP.Pregunta(id_publicacion, id_usuario, pregunta, fecha_pregunta)
 	VALUES (@id_pub, @id_usu, @pregunta, GETDATE())
 	
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.getCliente') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.getCliente
+	GO
+CREATE PROCEDURE DATA_GROUP.getCliente
+@id_usuario numeric(18, 0)
+AS
+BEGIN
+	
+	SELECT username, telefono
+	FROM DATA_GROUP.Usuario 
+	WHERE id_usuario = @id_usuario
+	
+	
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.SP_agregrarCompra') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_agregrarCompra
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_agregrarCompra
+@id_pub numeric(18, 0),
+@id_usu numeric(18, 0),
+@cant numeric(18, 0)
+AS
+BEGIN	
+	INSERT INTO DATA_GROUP.Compra(id_publicacion, id_usuario_comprador, fecha, cantidad)
+	VALUES (@id_pub, @id_usu, GETDATE(), @cant)
 END
 GO

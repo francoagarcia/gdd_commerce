@@ -112,6 +112,32 @@ END
 GO
 
 
+ALTERNATIVA
+
+IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
+	GO
+CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
+@anio int,
+@trimestre int,
+@mes int,
+@visibilidad_desc nvarchar(255)
+AS
+BEGIN
+
+	SELECT top 5 p.id_usuario_publicador, SUM(p.stock) CantidadNoVendidaTotal
+	FROM DATA_GROUP.Publicacion p
+	JOIN DATA_GROUP.VisibilidadPublicacion v ON p.id_visibilidad=v.id_visibilidad
+	WHERE YEAR(p.fecha_inicio)=@anio
+		AND v.descripcion=@visibilidad_desc
+		AND MONTH(p.fecha_inicio)=@mes
+		AND MONTH(p.fecha_inicio)>(@trimestre-1)*3 AND MONTH(p.fecha_inicio)<=@trimestre*3	
+	GROUP BY p.id_usuario_publicador, p.fecha_inicio, p.id_visibilidad
+	ORDER BY CantidadNoVendidaTotal DESC, p.fecha_inicio ASC, p.id_visibilidad ASC
+	
+END
+GO
+
 
 
 
