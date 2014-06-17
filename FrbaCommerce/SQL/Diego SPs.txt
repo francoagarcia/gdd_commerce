@@ -231,3 +231,53 @@ BEGIN
 	VALUES (@id_pub, @id_usu, GETDATE(), @cant)
 END
 GO
+
+
+
+IF OBJECT_ID('DATA_GROUP.SP_actualizarPublicacion') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_actualizarPublicacion
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_actualizarPublicacion
+@id_pub numeric(18, 0),
+@stk numeric(18, 0)
+AS
+BEGIN
+	UPDATE DATA_GROUP.Publicacion
+	SET stock = @stk
+	WHERE id_publicacion = @id_pub
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.SP_agregrarOferta') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_agregrarOferta
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_agregrarOferta
+@id_pub numeric(18, 0),
+@id_usu numeric(18, 0),
+@mont numeric(18, 0)
+AS
+BEGIN	
+	INSERT INTO DATA_GROUP.Oferta(id_publicacion, id_usuario_ofertador, fecha, monto)
+	VALUES (@id_pub, @id_usu, GETDATE(), @mont)
+END
+GO
+
+
+
+IF OBJECT_ID('DATA_GROUP.getOfertaMayor') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.getOfertaMayor
+	GO
+CREATE PROCEDURE DATA_GROUP.getOfertaMayor
+@id_pub numeric(18, 0)
+AS
+BEGIN
+	
+	SELECT top 1 monto
+	FROM DATA_GROUP.Oferta
+	WHERE id_publicacion = @id_pub
+	ORDER BY monto DESC
+	
+END
+GO
+
