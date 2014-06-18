@@ -160,6 +160,7 @@ BEGIN
 	JOIN DATA_GROUP.Rubro Ru ON Pu.id_rubro = Ru.id_rubro
 	JOIN DATA_GROUP.TipoPublicacion Ti ON Ti.id_tipo_publicacion = Pu.id_tipo_publicacion
 	WHERE ( Pu.descripcion like '%'+ @descripcion +'%') AND (Ru.descripcion like '%'+ @rubro +'%') AND (Pu.habilitada = 1) AND (Pu.stock > 0) AND (Pu.fecha_vencimiento < DateAdd(DD, 0, GETDATE()))
+	ORDER BY Pu.id_visibilidad
 END
 GO
 
