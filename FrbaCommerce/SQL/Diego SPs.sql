@@ -160,6 +160,7 @@ BEGIN
 	JOIN DATA_GROUP.Rubro Ru ON Pu.id_rubro = Ru.id_rubro
 	JOIN DATA_GROUP.TipoPublicacion Ti ON Ti.id_tipo_publicacion = Pu.id_tipo_publicacion
 	WHERE ( Pu.descripcion like '%'+ @descripcion +'%') AND (Ru.descripcion like '%'+ @rubro +'%') AND (Pu.habilitada = 1) AND (Pu.stock > 0) AND (Pu.fecha_vencimiento < DateAdd(DD, 0, GETDATE()))
+	ORDER BY Pu.id_visibilidad
 END
 GO
 
@@ -233,3 +234,51 @@ END
 GO
 
 */
+
+
+IF OBJECT_ID('DATA_GROUP.SP_actualizarPublicacion') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_actualizarPublicacion
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_actualizarPublicacion
+@id_pub numeric(18, 0),
+@stk numeric(18, 0)
+AS
+BEGIN
+	UPDATE DATA_GROUP.Publicacion
+	SET stock = @stk
+	WHERE id_publicacion = @id_pub
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.SP_agregrarOferta') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_agregrarOferta
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_agregrarOferta
+@id_pub numeric(18, 0),
+@id_usu numeric(18, 0),
+@mont numeric(18, 0)
+AS
+BEGIN	
+	INSERT INTO DATA_GROUP.Oferta(id_publicacion, id_usuario_ofertador, fecha, monto)
+	VALUES (@id_pub, @id_usu, GETDATE(), @mont)
+END
+GO
+
+
+
+IF OBJECT_ID('DATA_GROUP.getOfertaMayor') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.getOfertaMayor
+	GO
+CREATE PROCEDURE DATA_GROUP.getOfertaMayor
+@id_pub numeric(18, 0)
+AS
+BEGIN
+	
+	SELECT top 1 monto
+	FROM DATA_GROUP.Oferta
+	WHERE id_publicacion = @id_pub
+	ORDER BY monto DESC
+	
+END
+GO
