@@ -41,7 +41,10 @@ namespace FrbaCommerce
 
                 Usuario usu = new Usuario();
                 usu.username = "33354435";
-                Application.Run(new FrbaCommerce.Vistas.Comprar_Ofertar.CompraOferta(usu));
+                usu.id_usuario = 1;
+                usu.habilitada = true;
+                Application.Run(new FrbaCommerce.Vistas.Facturar_Publicaciones.FacturarPublicaciones());
+                //Application.Run(new FrbaCommerce.Vistas.Facturar_Publicaciones.ListadoUsuarios());
 
             }
             catch (Exception ex)

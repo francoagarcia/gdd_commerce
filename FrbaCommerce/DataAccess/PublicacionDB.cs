@@ -78,7 +78,8 @@ namespace FrbaCommerce.DataAccess
             parametros.Add(id_tipo_publicacion);
 
             SqlParameter id_usuario_publicador = new SqlParameter("@id_usuario_publicador", System.Data.SqlDbType.Decimal, 18, "id_usuario_publicador");
-            id_usuario_publicador.Value = filtro.id_usuario_publicador;
+            if(filtro.id_usuario_publicador!=0)
+                id_usuario_publicador.Value = filtro.id_usuario_publicador;
             parametros.Add(id_usuario_publicador);
 
             return parametros;

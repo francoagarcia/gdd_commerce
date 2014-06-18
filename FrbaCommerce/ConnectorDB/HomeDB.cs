@@ -59,7 +59,6 @@ namespace FrbaCommerce.ConnectorDB
 
                 SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
                 adapter.Fill(ds, scrollVal, 5, "descripcion");
-
             }
             sqlConnection.Close();
             return ds;

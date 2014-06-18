@@ -17,7 +17,7 @@ namespace FrbaCommerce.Entidades
         public string cod_postal { get; set; }
         public string mail { get; set; }
         public DateTime fecha_creacion { get; set; }
-        public decimal telefono { get; set; }
+        //public decimal telefono { get; set; }
         public string ciudad { get; set; }
     }
 }

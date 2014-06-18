@@ -58,7 +58,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\CalificacionesDB.cs" />
     <Compile Include="DataAccess\ClienteDB.cs" />
-    <Compile Include="DataAccess\ComprarOfertarDB.cs" />
+    <Compile Include="DataAccess\ComprarDB.cs" />
     <Compile Include="DataAccess\EmpresaDB.cs" />
     <Compile Include="DataAccess\EntidadBaseDB.cs" />
     <Compile Include="DataAccess\EstadisticasDB.cs" />
@@ -67,6 +67,7 @@
     <Compile Include="DataAccess\HistorialDB.cs" />
     <Compile Include="DataAccess\IEntidadBaseDB.cs" />
     <Compile Include="DataAccess\ListadoDB.cs" />
+    <Compile Include="DataAccess\OfertarDB.cs" />
     <Compile Include="DataAccess\PreguntasDB.cs" />
     <Compile Include="DataAccess\PublicacionDB.cs" />
     <Compile Include="DataAccess\RolDB.cs" />
@@ -75,12 +76,15 @@
     <Compile Include="Entidades\Builder\BuilderCliente.cs" />
     <Compile Include="Entidades\Builder\BuilderEmpresa.cs" />
     <Compile Include="Entidades\Builder\BuilderEstadoPublicacion.cs" />
+    <Compile Include="Entidades\Builder\BuilderPreguntas.cs" />
     <Compile Include="Entidades\Builder\BuilderPublicacion.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
     <Compile Include="Entidades\Builder\BuilderFuncionalidad.cs" />
     <Compile Include="Entidades\Builder\BuilderRubro.cs" />
+    <Compile Include="Entidades\Builder\BuilderUsuarioFactura.cs" />
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
     <Compile Include="Entidades\Cliente.cs" />
+    <Compile Include="Entidades\Compra.cs" />
     <Compile Include="Entidades\Empresa.cs" />
     <Compile Include="Entidades\Estadistica.cs" />
     <Compile Include="Entidades\EstadoPublicacion.cs" />
@@ -88,8 +92,11 @@
     <Compile Include="Entidades\Filtros\FiltroEmpresa.cs" />
     <Compile Include="Entidades\Filtros\FiltroPublicacion.cs" />
     <Compile Include="Entidades\Filtros\FiltroRubros.cs" />
+    <Compile Include="Entidades\Filtros\FiltroUsuario.cs" />
     <Compile Include="Entidades\Filtros\FiltroVisibilidades.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
+    <Compile Include="Entidades\Oferta.cs" />
+    <Compile Include="Entidades\Preguntas.cs" />
     <Compile Include="Entidades\Publicacion.cs" />
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\Rubro.cs" />
@@ -97,6 +104,7 @@
     <Compile Include="Generics\AppConfigReader.cs" />
     <Compile Include="Generics\ContextoAplicacion.cs" />
     <Compile Include="Generics\DateManager.cs" />
+    <Compile Include="Generics\Enums\FormaDePago.cs" />
     <Compile Include="Generics\Enums\ITipo.cs" />
     <Compile Include="Generics\Enums\ListaSexo.cs" />
     <Compile Include="Generics\Enums\TipoDeUsuario.cs" />
@@ -134,6 +142,7 @@
     <Compile Include="GUIMethods\FormBase\FormBaseSeleccionTipo.Designer.cs">
       <DependentUpon>FormBaseSeleccionTipo.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIMethods\GrillaPaginada.cs" />
     <Compile Include="GUIMethods\NameVariableParser.cs" />
     <Compile Include="GUIMethods\Validaciones\IValidador.cs" />
     <Compile Include="GUIMethods\MenuItemsHelper.cs" />
@@ -224,25 +233,37 @@
     <Compile Include="Vistas\Calificar Vendedor\Calificar.Designer.cs">
       <DependentUpon>Calificar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Comprar Ofertar\Compra.cs">
+    <Compile Include="Vistas\Comprar Ofertar\AltaCompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Comprar Ofertar\Compra.Designer.cs">
-      <DependentUpon>Compra.cs</DependentUpon>
+    <Compile Include="Vistas\Comprar Ofertar\AltaCompra.Designer.cs">
+      <DependentUpon>AltaCompra.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Comprar Ofertar\Oferta.cs">
+    <Compile Include="Vistas\Comprar Ofertar\LisadoPublicacionesCompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Comprar Ofertar\Oferta.Designer.cs">
-      <DependentUpon>Oferta.cs</DependentUpon>
+    <Compile Include="Vistas\Comprar Ofertar\LisadoPublicacionesCompra.Designer.cs">
+      <DependentUpon>LisadoPublicacionesCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\AltaOferta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\AltaOferta.Designer.cs">
+      <DependentUpon>AltaOferta.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\UsuarioDB.cs" />
     <Compile Include="ConnectorDB\DBConnection.cs" />
-    <Compile Include="Vistas\Comprar Ofertar\CompraOferta.cs">
+    <Compile Include="Vistas\Comprar Ofertar\PreguntaRespuestaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Comprar Ofertar\CompraOferta.Designer.cs">
-      <DependentUpon>CompraOferta.cs</DependentUpon>
+    <Compile Include="Vistas\Comprar Ofertar\PreguntaRespuestaView.Designer.cs">
+      <DependentUpon>PreguntaRespuestaView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\PublicacionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\PublicacionView.Designer.cs">
+      <DependentUpon>PublicacionView.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Editar Publicacion\ListadoPublicacionesDeVendedor.cs">
       <SubType>Form</SubType>
@@ -256,21 +277,33 @@
     <Compile Include="Vistas\Editar Publicacion\ModificarPublicacion.Designer.cs">
       <DependentUpon>ModificarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Facturar Publicaciones\Facturar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Facturar Publicaciones\Facturar.Designer.cs">
-      <DependentUpon>Facturar.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConnectorDB\HomeDB.cs" />
     <Compile Include="Generics\Encryptation.cs" />
     <Compile Include="Generics\Enums\IdentificacionUsuario.cs" />
     <Compile Include="GUIMethods\MessageDialog.cs" />
+    <Compile Include="Vistas\Facturar Publicaciones\FacturarPublicaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Facturar Publicaciones\FacturarPublicaciones.Designer.cs">
+      <DependentUpon>FacturarPublicaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Facturar Publicaciones\ListadoUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Facturar Publicaciones\ListadoUsuarios.Designer.cs">
+      <DependentUpon>ListadoUsuarios.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Generar Publicacion\SeleccionTipoPublicacion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Generar Publicacion\SeleccionTipoPublicacion.Designer.cs">
       <DependentUpon>SeleccionTipoPublicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\AltaPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\AltaPregunta.Designer.cs">
+      <DependentUpon>AltaPregunta.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.cs">
       <SubType>Form</SubType>
@@ -385,14 +418,20 @@
     <EmbeddedResource Include="Vistas\Calificar Vendedor\Calificar.resx">
       <DependentUpon>Calificar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Comprar Ofertar\Compra.resx">
-      <DependentUpon>Compra.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaCompra.resx">
+      <DependentUpon>AltaCompra.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Comprar Ofertar\CompraOferta.resx">
-      <DependentUpon>CompraOferta.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\LisadoPublicacionesCompra.resx">
+      <DependentUpon>LisadoPublicacionesCompra.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Comprar Ofertar\Oferta.resx">
-      <DependentUpon>Oferta.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaOferta.resx">
+      <DependentUpon>AltaOferta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\PreguntaRespuestaView.resx">
+      <DependentUpon>PreguntaRespuestaView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\PublicacionView.resx">
+      <DependentUpon>PublicacionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Editar Publicacion\ListadoPublicacionesDeVendedor.resx">
       <DependentUpon>ListadoPublicacionesDeVendedor.cs</DependentUpon>
@@ -400,11 +439,17 @@
     <EmbeddedResource Include="Vistas\Editar Publicacion\ModificarPublicacion.resx">
       <DependentUpon>ModificarPublicacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Facturar Publicaciones\Facturar.resx">
-      <DependentUpon>Facturar.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Facturar Publicaciones\FacturarPublicaciones.resx">
+      <DependentUpon>FacturarPublicaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Facturar Publicaciones\ListadoUsuarios.resx">
+      <DependentUpon>ListadoUsuarios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Generar Publicacion\GenerarPublicacion.resx">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaPregunta.resx">
+      <DependentUpon>AltaPregunta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Gestion de Preguntas\Pregunta.resx">
       <DependentUpon>Pregunta.cs</DependentUpon>

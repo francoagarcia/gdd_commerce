@@ -44,6 +44,8 @@ CREATE TABLE DATA_GROUP.Compra (
 	id_calificacion NUMERIC(18, 0),
 	fecha datetime NOT NULL,
 	cantidad NUMERIC(18, 0) NOT NULL,
+	facturada bit DEFAULT 1, --1 es facturada, 0 no facturada
+	comision numeric(18,1) NOT NULL DEFAULT 0,
 );
 
 IF OBJECT_ID('DATA_GROUP.Oferta', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Oferta;
@@ -76,7 +78,8 @@ CREATE TABLE DATA_GROUP.Factura(
 	id_vendedor NUMERIC(18, 0) NOT NULL,
 	fecha datetime NOT NULL,
 	total NUMERIC(18, 2) NOT NULL,
-	forma_pago_descripcion nvarchar(255) NOT NULL,
+	id_forma_pago Numeric(18, 0) NOT NULL,
+	forma_pago_datos nvarchar(255) NOT NULL,
 );
 
 IF OBJECT_ID('DATA_GROUP.Pregunta', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Pregunta;
@@ -104,6 +107,7 @@ CREATE TABLE DATA_GROUP.Publicacion(
 	id_estado NUMERIC(18,0) NOT NULL, 
 	id_usuario_publicador NUMERIC(18,0) NOT NULL,
 	id_rubro NUMERIC(18, 0),
+	facturada bit DEFAULT 1,
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
@@ -208,6 +212,12 @@ CREATE TABLE DATA_GROUP.EstadoPublicacion(
 	descripcion nvarchar(255) NOT NULL,
 );
 
+IF OBJECT_ID('DATA_GROUP.FormaDePago', 'U') IS NOT NULL DROP TABLE DATA_GROUP.FormaDePago;
+CREATE TABLE DATA_GROUP.FormaDePago(
+	id_forma_pago NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
+	descripcion nvarchar(255) NOT NULL,
+);
+
 -------------------------------------------------------------------------------------
 ----------------------------------CREANDO LAS PKS------------------------------------
 -------------------------------------------------------------------------------------
@@ -232,6 +242,7 @@ ALTER TABLE DATA_GROUP.CalificacionPublicacion ADD CONSTRAINT pk_id_calificacion
 ALTER TABLE DATA_GROUP.Factura ADD CONSTRAINT pk_nro_factura PRIMARY KEY (nro_factura);
 --ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT pk_item_factura PRIMARY KEY ( id_item );
 ALTER TABLE DATA_GROUP.TipoDocumento ADD CONSTRAINT pk_tipo_documento PRIMARY KEY (id_tipo_documento);
+ALTER TABLE DATA_GROUP.FormaDePago ADD CONSTRAINT pk_id_forma_pagol PRIMARY KEY ( id_forma_pago );
 
 -------------------------------------------------------------------------------------
 ----------------------------------CREANDO LAS FKS------------------------------------
@@ -306,6 +317,9 @@ FOREIGN KEY (id_usuario_ofertador) REFERENCES DATA_GROUP.Usuario (id_usuario);
 ALTER TABLE DATA_GROUP.Factura ADD CONSTRAINT fk_Factura_to_Usuario 
 FOREIGN KEY (id_vendedor) REFERENCES DATA_GROUP.Usuario (id_usuario);
 
+ALTER TABLE DATA_GROUP.Factura ADD CONSTRAINT fk_Factura_to_FormaDePago
+FOREIGN KEY (id_forma_pago) REFERENCES DATA_GROUP.FormaDePago (id_forma_pago);
+
 ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Publicacion 
 FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion ( id_publicacion );
 
@@ -313,11 +327,18 @@ ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Factura
 FOREIGN KEY (nro_factura) REFERENCES DATA_GROUP.Factura ( nro_factura );
 
 
+
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
 ------------------------------------MIGRACION----------------------------------------
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
+
+--------------------------------------------------------
+----------------------FormaDePago-----------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.FormaDePago(descripcion)
+VALUES ('Contado'), ('Tarjeta de credito');
 
 --------------------------------------------------------
 ----------------------TipoDocumento---------------------
@@ -502,12 +523,12 @@ JOIN DATA_GROUP.Usuario u
 ON u.username=CAST(m.Cli_Dni as nvarchar(255))
 WHERE m.Oferta_Fecha is not null and
 		m.Cli_Dni is not null;
-		
+
 --------------------------------------------------------
 ------------------------Facturas------------------------
 --------------------------------------------------------
-INSERT INTO DATA_GROUP.Factura(nro_factura, fecha, forma_pago_descripcion, total, id_vendedor)
-SELECT DISTINCT m.Factura_Nro, m.Factura_Fecha, m.Forma_Pago_Desc, m.Factura_Total, p.id_usuario_publicador
+INSERT INTO DATA_GROUP.Factura(nro_factura, fecha, forma_pago_datos, total, id_vendedor, id_forma_pago)
+SELECT DISTINCT m.Factura_Nro, m.Factura_Fecha, m.Forma_Pago_Desc, m.Factura_Total, p.id_usuario_publicador, 1
 FROM gd_esquema.Maestra m
 JOIN DATA_GROUP.Publicacion p
 ON m.Publicacion_Cod=p.id_publicacion
@@ -522,4 +543,5 @@ FROM gd_esquema.Maestra m
 WHERE m.Factura_Nro is not null;
 
 --Completo la transaccion
+
 COMMIT

@@ -7,11 +7,33 @@ using System.Data.SqlClient;
 using FrbaCommerce.ConnectorDB;
 using FrbaCommerce.Entidades;
 using FrbaCommerce.Entidades.Builder;
+using FrbaCommerce.Entidades.Filtros;
 
 namespace FrbaCommerce.DataAccess
 {
-    public class UsuarioDB
+    public class UsuarioDB : EntidadBaseDB<Usuario, FiltroUsuario>
     {
+        public UsuarioDB()
+            : base(new BuilderUsuarioFactura(), "Usuario") //Esto es para los filtros
+        {
+        }
+
+        protected override IList<SqlParameter> GenerarParametrosFiltrar(FiltroUsuario entidad)
+        {
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter username = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
+            username.Value = entidad.username;
+            parametros.Add(username);
+
+            SqlParameter telefono = new SqlParameter("@telefono", System.Data.SqlDbType.Decimal, 18, "telefono");
+            if (entidad.telefono != null)
+                telefono.Value = entidad.telefono;
+            parametros.Add(telefono);
+
+            return parametros;
+        }
+
         public static int RealizarLogin(string nombre, string hashPassword)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();

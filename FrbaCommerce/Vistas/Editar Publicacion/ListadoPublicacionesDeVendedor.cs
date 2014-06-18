@@ -129,7 +129,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
         protected override void AccionFiltrar()
         {
             FiltroPublicacion filtro = this.armarFiltro();
-            IResultado<IList<Publicacion>> resultado = this.getVisibilidadesFiltradas(filtro);
+            IResultado<IList<Publicacion>> resultado = this.getPublicacionesFiltradas(filtro);
 
             if (!resultado.Correcto)
                 throw new ResultadoIncorrectoException<IList<Publicacion>>(resultado);
@@ -180,7 +180,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             return filtro;
         }
 
-        private IResultado<IList<Publicacion>> getVisibilidadesFiltradas(FiltroPublicacion filtro)
+        private IResultado<IList<Publicacion>> getPublicacionesFiltradas(FiltroPublicacion filtro)
         {
             Resultado<IList<Publicacion>> resultado = new Resultado<IList<Publicacion>>();
             try

@@ -131,3 +131,22 @@ BEGIN
 	WHERE id_usuario=@id_usuario
 END
 GO
+
+----------------------FILTRO USUARIO--------------------------
+
+
+IF OBJECT_ID('DATA_GROUP.sp_Usuario_filter') is not null
+	DROP PROCEDURE DATA_GROUP.sp_Usuario_filter
+	GO
+CREATE PROCEDURE DATA_GROUP.sp_Usuario_filter(
+	@username nvarchar(255) = NULL,
+	@telefono numeric(18, 0) = NULL
+)
+AS
+BEGIN
+	SELECT username, id_usuario, telefono, habilitada
+	FROM DATA_GROUP.Usuario
+	WHERE ((@username is null) OR (username like '%' + @username + '%'))
+		AND ((@telefono is null) OR (@telefono = telefono))
+END
+GO

@@ -117,6 +117,7 @@
             // 
             // dgvBusqueda
             // 
+            this.dgvBusqueda.AllowDrop = true;
             this.dgvBusqueda.AllowUserToAddRows = false;
             this.dgvBusqueda.AllowUserToDeleteRows = false;
             this.dgvBusqueda.AllowUserToOrderColumns = true;
@@ -125,6 +126,7 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBusqueda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvBusqueda.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvBusqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBusqueda.Location = new System.Drawing.Point(6, 19);
             this.dgvBusqueda.MultiSelect = false;
@@ -199,10 +201,10 @@
         protected System.Windows.Forms.Button btnModificacion;
         protected System.Windows.Forms.Button btnAlta;
         protected System.Windows.Forms.GroupBox gbBusqueda;
-        protected System.Windows.Forms.DataGridView dgvBusqueda;
         protected System.Windows.Forms.GroupBox gbFiltros;
         protected System.Windows.Forms.Button btnLimpiar;
         protected System.Windows.Forms.Button btnFiltrar;
         protected System.Windows.Forms.Button btn_Seleccionar;
+        protected System.Windows.Forms.DataGridView dgvBusqueda;
     }
 }

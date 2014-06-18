@@ -9,10 +9,20 @@ namespace FrbaCommerce.GUIMethods.FormBase
 {
     public class FormBaseAlta : FormBase
     {
+        private string messageAlta;
+
         #region [Constructor]
         public FormBaseAlta()
             : base()
         {
+            this.messageAlta = "¿Confirma la creación del registro?";
+            InitializeComponent();
+        }
+
+        public FormBaseAlta(string _messageAlta)
+            : base()
+        {
+            this.messageAlta = _messageAlta;
             InitializeComponent();
         }
 
@@ -34,7 +44,7 @@ namespace FrbaCommerce.GUIMethods.FormBase
         {
             if (base.Validar())
             {
-                DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Confirma la creación del registro?", MessageBoxButtons.YesNo);
+                DialogResult dr = MessageDialog.MensajeInformativo(this, this.messageAlta, MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
                     this.AccionAceptar();

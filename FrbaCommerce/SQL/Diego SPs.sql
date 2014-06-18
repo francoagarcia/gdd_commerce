@@ -127,7 +127,7 @@ GO
 
 
 
-///////////////////// COMPRAR-OFERTAR/////////////////
+--///////////////////// COMPRAR-OFERTAR/////////////////
 
 IF OBJECT_ID('DATA_GROUP.getRubros') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.getRubros
@@ -165,7 +165,7 @@ GO
 
 
 
-//hice este para testear las publicaciones, ya que no pude agregar alguna que no este vencida
+--//hice este para testear las publicaciones, ya que no pude agregar alguna que no este vencida
 
 IF OBJECT_ID('DATA_GROUP.filtro_ComprasFalso2') is not null
 	DROP PROCEDURE DATA_GROUP.filtro_ComprasFalso2
@@ -217,7 +217,7 @@ BEGIN
 END
 GO
 
-
+/* --este ya no va
 IF OBJECT_ID('DATA_GROUP.SP_agregrarCompra') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.SP_agregrarCompra
 	GO
@@ -231,3 +231,5 @@ BEGIN
 	VALUES (@id_pub, @id_usu, GETDATE(), @cant)
 END
 GO
+
+*/

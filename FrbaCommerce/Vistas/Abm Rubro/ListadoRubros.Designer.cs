@@ -34,6 +34,10 @@
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
+            // gbAcciones
+            // 
+            this.gbAcciones.Size = new System.Drawing.Size(428, 47);
+            // 
             // btn_Habilitacion
             // 
             this.btn_Habilitacion.Enabled = false;
@@ -46,20 +50,33 @@
             // 
             this.btnAlta.Enabled = false;
             // 
+            // gbBusqueda
+            // 
+            this.gbBusqueda.Size = new System.Drawing.Size(428, 254);
+            // 
             // gbFiltros
             // 
             this.gbFiltros.Controls.Add(this.lbl_Descripcion);
             this.gbFiltros.Controls.Add(this.tb_Descripcion);
+            this.gbFiltros.Size = new System.Drawing.Size(427, 106);
             this.gbFiltros.Controls.SetChildIndex(this.btnFiltrar, 0);
             this.gbFiltros.Controls.SetChildIndex(this.btnLimpiar, 0);
             this.gbFiltros.Controls.SetChildIndex(this.tb_Descripcion, 0);
             this.gbFiltros.Controls.SetChildIndex(this.lbl_Descripcion, 0);
             // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.Location = new System.Drawing.Point(346, 77);
+            // 
+            // btn_Seleccionar
+            // 
+            this.btn_Seleccionar.Location = new System.Drawing.Point(347, 18);
+            // 
             // tb_Descripcion
             // 
             this.tb_Descripcion.Location = new System.Drawing.Point(78, 37);
             this.tb_Descripcion.Name = "tb_Descripcion";
-            this.tb_Descripcion.Size = new System.Drawing.Size(494, 20);
+            this.tb_Descripcion.Size = new System.Drawing.Size(343, 20);
             this.tb_Descripcion.TabIndex = 2;
             // 
             // lbl_Descripcion
@@ -75,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 444);
+            this.ClientSize = new System.Drawing.Size(451, 444);
             this.Name = "ListadoRubros";
             this.Text = "FRBA Commerce - Listado de rubros";
             this.gbAcciones.ResumeLayout(false);

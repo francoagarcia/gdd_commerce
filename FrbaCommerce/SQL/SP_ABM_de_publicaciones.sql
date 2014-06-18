@@ -38,7 +38,9 @@ BEGIN
 												id_visibilidad, 
 												id_estado, 
 												id_usuario_publicador, 
-												id_rubro, habilitada)
+												id_rubro, 
+												habilitada,
+												facturada)
 			VALUES( @max_id,
 					@descripcion, 
 					@stock, 
@@ -51,7 +53,8 @@ BEGIN
 					@id_estado, 
 					@id_usuario_publicador, 
 					@id_rubro, 
-					@habilitada)
+					@habilitada,
+					0)
 					
 			SET @id_publicacion_nueva = @max_id
 			RETURN @id_publicacion_nueva
@@ -140,6 +143,8 @@ END
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+
+
 IF OBJECT_ID('DATA_GROUP.sp_publicacion_filter') is not null
 	DROP PROCEDURE DATA_GROUP.sp_publicacion_filter
 	GO
@@ -151,7 +156,7 @@ CREATE PROCEDURE DATA_GROUP.sp_publicacion_filter(
 	@id_estado numeric(18,0) = NULL,
 	@id_rubro numeric(18,0) = NULL,
 	@id_tipo_publicacion numeric(18,0) = NULL,
-	@id_usuario_publicador numeric(18,0)
+	@id_usuario_publicador numeric(18,0) = NULL
 )
 AS
 BEGIN
@@ -180,7 +185,7 @@ BEGIN
 	ON tipPub.id_tipo_publicacion=p.id_tipo_publicacion
 	INNER JOIN DATA_GROUP.VisibilidadPublicacion visi
 	ON visi.id_visibilidad=p.id_visibilidad
-	WHERE  p.id_usuario_publicador=@id_usuario_publicador
+	WHERE  ((@id_usuario_publicador IS NULL) OR (p.id_usuario_publicador=@id_usuario_publicador))
 	  AND ((@id_rubro IS NULL) OR (p.id_rubro = @id_rubro ))
 	  AND ((@id_estado IS NULL) OR (p.id_estado = @id_estado))
 	  AND ((@id_visibilidad IS NULL) OR (p.id_visibilidad = @id_visibilidad))
@@ -188,6 +193,7 @@ BEGIN
 	  AND ((@id_tipo_publicacion IS NULL) OR (p.id_tipo_publicacion=@id_tipo_publicacion))
 	  AND ((@fecha_inicio IS NULL) OR (p.fecha_inicio = @fecha_inicio))
 	  AND ((@fecha_vencimiento IS NULL) OR (p.fecha_vencimiento = @fecha_vencimiento))
+	ORDER BY p.id_visibilidad ASC
 
 END
 GO

@@ -5,11 +5,69 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using FrbaCommerce.ConnectorDB;
+using FrbaCommerce.Entidades;
+using FrbaCommerce.Entidades.Builder;
 
 namespace FrbaCommerce.DataAccess
 {
-    class PreguntasDB
+    public class PreguntasDB
     {
+        public IList<Preguntas> getPreguntasDeUnaPublicacion(Publicacion publi) 
+        {
+            IList<Preguntas> preguntas = new List<Preguntas>();
+            BuilderPreguntas builder = new BuilderPreguntas();
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter id_publicacion = new SqlParameter("@id_publicacion", SqlDbType.Decimal, 18, "id_publicacion");
+            id_publicacion.Value = publi.id_publicacion;
+            parametros.Add(id_publicacion);
+
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getRespuestasDeUnaPublicacion", parametros);
+
+            foreach (DataRow row in ds.Tables[0].Rows) {
+                preguntas.Add(builder.Build(row));
+            }
+            return preguntas;
+        }
+
+        public decimal nuevaPreguntaEnPublicacion(Preguntas preg)
+        {
+            IList<SqlParameter> parametros = this.GenerarParametrosCrear(preg);
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.nuevaPregunta", parametros);
+
+            var idNuevoOUTPUT = parametros.Where(p => p.ParameterName == "@id_pregunta").FirstOrDefault();
+            preg.id_pregunta = Convert.ToDecimal(idNuevoOUTPUT.Value);
+            return preg.id_pregunta;
+        }
+
+        private IList<SqlParameter> GenerarParametrosCrear(Preguntas preg) {
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            var id_pregunta = new SqlParameter("@id_pregunta", SqlDbType.Decimal, 18, "id_pregunta");
+            id_pregunta.Direction = ParameterDirection.Output;
+            parametros.Add(id_pregunta);
+
+            var id_publicacion = new SqlParameter("@id_publicacion", SqlDbType.Decimal, 18, "id_publicacion");
+            id_publicacion.Value = preg.id_publicacion;
+            parametros.Add(id_publicacion);
+
+            var id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            id_usuario.Value = preg.usuario.id_usuario;
+            parametros.Add(id_usuario);
+
+            var pregunta = new SqlParameter("@pregunta", SqlDbType.NVarChar, 255, "pregunta");
+            pregunta.Value = preg.pregunta;
+            parametros.Add(pregunta);
+
+            var fecha_pregunta = new SqlParameter("@fecha_pregunta", SqlDbType.DateTime);
+            fecha_pregunta.Value = preg.fecha_pregunta;
+            fecha_pregunta.SourceColumn = "fecha_pregunta";
+            parametros.Add(fecha_pregunta);
+
+            return parametros;
+        }
+
         public DataSet dame_Preguntas(string usuario)
         {
 
@@ -75,7 +133,6 @@ namespace FrbaCommerce.DataAccess
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_agregrarPregunta", parametros);
         }
-
 
     }
 }

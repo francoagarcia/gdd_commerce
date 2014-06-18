@@ -5,11 +5,45 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using FrbaCommerce.ConnectorDB;
+using FrbaCommerce.Entidades;
 
 namespace FrbaCommerce.DataAccess
 {
-    class ComprarOfertarDB
+    public class ComprarDB
     {
+
+        public decimal nuevaCompra(Compra comp) {
+            IList<SqlParameter> parametros = this.GenerarParametrosCrear(comp);
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.sp_nuevaCompra", parametros);
+
+            var idNuevoOUTPUT = parametros.Where(p => p.ParameterName == "@id_compra_nueva").FirstOrDefault();
+            comp.id_compra = Convert.ToDecimal(idNuevoOUTPUT.Value);
+            return comp.id_compra;
+        }
+
+        private IList<SqlParameter> GenerarParametrosCrear(Compra comp) {
+            
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            var id_publicacion = new SqlParameter("@id_publicacion", SqlDbType.Decimal, 18, "id_publicacion");
+            id_publicacion.Value = comp.publicacion.id_publicacion;
+            parametros.Add(id_publicacion);
+
+            var id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            id_usuario.Value = comp.usuario_comprador.id_usuario;
+            parametros.Add(id_usuario);
+
+            var cantidad = new SqlParameter("@cantidad", SqlDbType.Decimal, 18, "cantidad");
+            cantidad.Value = comp.cantidad;
+            parametros.Add(cantidad);
+
+            var id_compra_nueva = new SqlParameter("@id_compra_nueva", SqlDbType.Decimal, 18, "id_compra");
+            id_compra_nueva.Direction = ParameterDirection.Output;
+            parametros.Add(id_compra_nueva);
+
+            return parametros;
+        }
+
         public DataSet dame_Publicaciones(int scroll, string descrip, string rubro) {
 
             List<SqlParameter> parametros = new List<SqlParameter>();
