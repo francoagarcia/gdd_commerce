@@ -63,6 +63,7 @@
     <Compile Include="DataAccess\EntidadBaseDB.cs" />
     <Compile Include="DataAccess\EstadisticasDB.cs" />
     <Compile Include="DataAccess\EstadoPublicacionDB.cs" />
+    <Compile Include="DataAccess\FacturacionDB.cs" />
     <Compile Include="DataAccess\FuncionalidadDB.cs" />
     <Compile Include="DataAccess\HistorialDB.cs" />
     <Compile Include="DataAccess\IEntidadBaseDB.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Entidades\Builder\BuilderCliente.cs" />
     <Compile Include="Entidades\Builder\BuilderEmpresa.cs" />
     <Compile Include="Entidades\Builder\BuilderEstadoPublicacion.cs" />
+    <Compile Include="Entidades\Builder\BuilderItemPendiente.cs" />
     <Compile Include="Entidades\Builder\BuilderPreguntas.cs" />
     <Compile Include="Entidades\Builder\BuilderPublicacion.cs" />
     <Compile Include="Entidades\Builder\BuilderRol.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Entidades\Empresa.cs" />
     <Compile Include="Entidades\Estadistica.cs" />
     <Compile Include="Entidades\EstadoPublicacion.cs" />
+    <Compile Include="Entidades\Factura.cs" />
     <Compile Include="Entidades\Filtros\FiltroCliente.cs" />
     <Compile Include="Entidades\Filtros\FiltroEmpresa.cs" />
     <Compile Include="Entidades\Filtros\FiltroPublicacion.cs" />
@@ -95,6 +98,8 @@
     <Compile Include="Entidades\Filtros\FiltroUsuario.cs" />
     <Compile Include="Entidades\Filtros\FiltroVisibilidades.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
+    <Compile Include="Entidades\ItemFactura.cs" />
+    <Compile Include="Entidades\ItemPendiente.cs" />
     <Compile Include="Entidades\Oferta.cs" />
     <Compile Include="Entidades\Preguntas.cs" />
     <Compile Include="Entidades\Publicacion.cs" />

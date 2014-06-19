@@ -40,7 +40,7 @@
             // gbAcciones
             // 
             this.gbAcciones.Controls.Add(this.btn_Cancelar);
-            this.gbAcciones.Size = new System.Drawing.Size(359, 47);
+            this.gbAcciones.Size = new System.Drawing.Size(370, 47);
             this.gbAcciones.Controls.SetChildIndex(this.btnAlta, 0);
             this.gbAcciones.Controls.SetChildIndex(this.btnModificacion, 0);
             this.gbAcciones.Controls.SetChildIndex(this.btn_Habilitacion, 0);
@@ -64,7 +64,7 @@
             // 
             // gbBusqueda
             // 
-            this.gbBusqueda.Size = new System.Drawing.Size(359, 254);
+            this.gbBusqueda.Size = new System.Drawing.Size(370, 254);
             // 
             // gbFiltros
             // 
@@ -72,7 +72,7 @@
             this.gbFiltros.Controls.Add(this.tb_Telefono);
             this.gbFiltros.Controls.Add(this.lbl_Nombre_de_usuario);
             this.gbFiltros.Controls.Add(this.tb_Nombre_de_usuario);
-            this.gbFiltros.Size = new System.Drawing.Size(358, 106);
+            this.gbFiltros.Size = new System.Drawing.Size(369, 106);
             this.gbFiltros.Controls.SetChildIndex(this.btnFiltrar, 0);
             this.gbFiltros.Controls.SetChildIndex(this.btnLimpiar, 0);
             this.gbFiltros.Controls.SetChildIndex(this.tb_Nombre_de_usuario, 0);
@@ -82,11 +82,11 @@
             // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(277, 77);
+            this.btnFiltrar.Location = new System.Drawing.Point(288, 77);
             // 
             // btn_Seleccionar
             // 
-            this.btn_Seleccionar.Location = new System.Drawing.Point(278, 18);
+            this.btn_Seleccionar.Location = new System.Drawing.Point(289, 18);
             // 
             // lbl_Nombre_de_usuario
             // 
@@ -134,7 +134,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 444);
+            this.ClientSize = new System.Drawing.Size(393, 444);
             this.Name = "ListadoUsuarios";
             this.Text = "Frba Commerce - Listado de usuarios";
             this.gbAcciones.ResumeLayout(false);

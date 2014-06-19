@@ -1,11 +1,13 @@
 
 
-
-
+IF OBJECT_ID('DATA_GROUP.view_publicaciones_x_visibilidad') IS NOT NULL
+	DROP VIEW DATA_GROUP.view_publicaciones_x_visibilidad
+	GO
 CREATE VIEW DATA_GROUP.view_publicaciones_x_visibilidad(id_vendedor, id_visibilidad, cantidad)
 AS
 SELECT p.id_usuario_publicador, p.id_visibilidad, COUNT(p.id_visibilidad)
 FROM DATA_GROUP.Publicacion p
+WHERE p.id_visibilidad!=10006
 GROUP BY p.id_visibilidad, p.id_usuario_publicador
 GO
 
@@ -20,7 +22,7 @@ BEGIN
 	SELECT id_vendedor, id_visibilidad, cantidad 
 	FROM DATA_GROUP.view_publicaciones_x_visibilidad 
 	WHERE id_vendedor=@id_vendedor
-	ORDER BY id_vendedor ASC, id_visibilidad ASC
+	ORDER BY id_visibilidad ASC, id_vendedor ASC
 
 END
 GO

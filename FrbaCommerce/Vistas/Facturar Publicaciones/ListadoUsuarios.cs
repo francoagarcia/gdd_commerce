@@ -49,7 +49,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
 
             this.dgvBusqueda.DataSource = resultado.Retorno;
 
-            this.dgvBusqueda.Columns["id_usuario"].Visible = false;
+            //this.dgvBusqueda.Columns["id_usuario"].Visible = false;
             this.dgvBusqueda.Columns["cantidadIntentos"].Visible = false;
             this.dgvBusqueda.Columns["contrasenia"].Visible = false;
         }

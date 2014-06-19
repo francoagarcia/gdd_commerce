@@ -68,8 +68,10 @@ IF OBJECT_ID('DATA_GROUP.ItemFactura', 'U') IS NOT NULL DROP TABLE DATA_GROUP.It
 CREATE TABLE DATA_GROUP.ItemFactura(
 	nro_factura NUMERIC(18, 0) NOT NULL,
 	id_publicacion NUMERIC(18, 0) NOT NULL,
+	id_compra NUMERIC(18, 0) NOT NULL,
 	cantidad NUMERIC(18, 0) NOT NULL,
 	monto NUMERIC(18, 2) NOT NULL,
+	resumen nvarchar(255),
 );
 
 IF OBJECT_ID('DATA_GROUP.Factura', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Factura;
@@ -537,11 +539,10 @@ WHERE m.Factura_Nro is not null;
 --------------------------------------------------------
 ----------------------ItemFactura-----------------------
 --------------------------------------------------------
-INSERT INTO DATA_GROUP.ItemFactura(cantidad, monto, id_publicacion, nro_factura)
-SELECT m.Item_Factura_Cantidad, m.Item_Factura_Monto, m.Publicacion_Cod, m.Factura_Nro
+INSERT INTO DATA_GROUP.ItemFactura(cantidad, monto, id_publicacion, nro_factura, resumen, id_compra)
+SELECT m.Item_Factura_Cantidad, m.Item_Factura_Monto, m.Publicacion_Cod, m.Factura_Nro, "Factura de publicacion " + LTRIM(RTRIM(STR(m.Publicacion_Cod))), 0
 FROM gd_esquema.Maestra m
 WHERE m.Factura_Nro is not null;
-
 --Completo la transaccion
 
 COMMIT
