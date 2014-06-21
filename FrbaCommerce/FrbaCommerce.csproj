@@ -85,6 +85,7 @@
     <Compile Include="Entidades\Builder\BuilderRubro.cs" />
     <Compile Include="Entidades\Builder\BuilderUsuarioFactura.cs" />
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
+    <Compile Include="Entidades\Calificacion.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Compra.cs" />
     <Compile Include="Entidades\Empresa.cs" />
@@ -234,9 +235,11 @@
     </Compile>
     <Compile Include="Vistas\Calificar Vendedor\Calificar.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Vistas\Calificar Vendedor\Calificar.Designer.cs">
       <DependentUpon>Calificar.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Vistas\Comprar Ofertar\AltaCompra.cs">
       <SubType>Form</SubType>
@@ -422,6 +425,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Calificar Vendedor\Calificar.resx">
       <DependentUpon>Calificar.cs</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaCompra.resx">
       <DependentUpon>AltaCompra.cs</DependentUpon>
