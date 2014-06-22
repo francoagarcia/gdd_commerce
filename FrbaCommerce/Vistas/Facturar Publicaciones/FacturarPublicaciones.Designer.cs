@@ -85,6 +85,7 @@
             // 
             // btn_Limpiar
             // 
+            this.btn_Limpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Limpiar.Enabled = false;
             this.btn_Limpiar.Location = new System.Drawing.Point(443, 17);
             this.btn_Limpiar.Name = "btn_Limpiar";
@@ -96,6 +97,7 @@
             // 
             // btn_Generar
             // 
+            this.btn_Generar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Generar.Enabled = false;
             this.btn_Generar.Location = new System.Drawing.Point(571, 17);
             this.btn_Generar.Name = "btn_Generar";
@@ -239,7 +241,7 @@
             // 
             // lbl_Cantidad_de_items
             // 
-            this.lbl_Cantidad_de_items.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_Cantidad_de_items.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_Cantidad_de_items.AutoSize = true;
             this.lbl_Cantidad_de_items.Location = new System.Drawing.Point(273, 330);
             this.lbl_Cantidad_de_items.Name = "lbl_Cantidad_de_items";
@@ -261,7 +263,7 @@
             // 
             // tb_Cantidad_de_items
             // 
-            this.tb_Cantidad_de_items.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_Cantidad_de_items.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_Cantidad_de_items.BackColor = System.Drawing.SystemColors.Info;
             this.tb_Cantidad_de_items.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Cantidad_de_items.Location = new System.Drawing.Point(380, 327);
@@ -273,7 +275,7 @@
             // 
             // lbl_Total_a_facturar
             // 
-            this.lbl_Total_a_facturar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_Total_a_facturar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_Total_a_facturar.AutoSize = true;
             this.lbl_Total_a_facturar.Location = new System.Drawing.Point(273, 356);
             this.lbl_Total_a_facturar.Name = "lbl_Total_a_facturar";
@@ -283,7 +285,7 @@
             // 
             // tb_Total_a_facturar
             // 
-            this.tb_Total_a_facturar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_Total_a_facturar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tb_Total_a_facturar.BackColor = System.Drawing.SystemColors.Info;
             this.tb_Total_a_facturar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Total_a_facturar.Location = new System.Drawing.Point(380, 353);
@@ -311,7 +313,6 @@
             // 
             // btn_Seleccionar_usuario
             // 
-            this.btn_Seleccionar_usuario.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Seleccionar_usuario.Location = new System.Drawing.Point(489, 27);
             this.btn_Seleccionar_usuario.Name = "btn_Seleccionar_usuario";
             this.btn_Seleccionar_usuario.Size = new System.Drawing.Size(75, 23);

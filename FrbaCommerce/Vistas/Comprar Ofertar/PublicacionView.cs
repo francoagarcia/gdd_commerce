@@ -115,14 +115,14 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
         }
 
         private void AccionComprar() {
-            if (this.usuarioActual.habilitada)
+            if (this.usuarioActual.habilitada_comprar)
             {
                 AltaCompra frm = new AltaCompra(this.usuarioActual, this.publi);
                 DialogResult result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
                     this.publi.stock = this.publi.stock - frm.compra.cantidad;
-                    //Mostrar ventana de calificaciones
+                    this.Close();
                 }
                 this.AccionIniciar();
             }

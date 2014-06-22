@@ -43,6 +43,24 @@ namespace FrbaCommerce.DataAccess
             return fact.nro_factura;
         }
 
+        public IList<VisibilidadesFacturadas> getBonificados(Usuario usuario)
+        {
+            IList<VisibilidadesFacturadas> items = new List<VisibilidadesFacturadas>();
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            SqlParameter id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario_fact");
+            id_usuario.Value = usuario.id_usuario;
+            parametros.Add(id_usuario);
+
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getBonificados", parametros);
+            BuilderVisibilidadesFacturadas builder = new BuilderVisibilidadesFacturadas();
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                items.Add(builder.Build(row));
+            }
+            return items;
+        }
+
         public IList<ItemPendiente> getPendientesDeFacturar(Usuario usuario) 
         {
             IList<ItemPendiente> items = new List<ItemPendiente>();

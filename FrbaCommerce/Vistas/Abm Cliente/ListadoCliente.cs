@@ -39,10 +39,10 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         }
 
         private void CargarCombos() {
-            var sexos = new ListaSexo();
-            cb_Sexo.DataSource = sexos.Todos;
-            cb_Sexo.DisplayMember = "Nombre";
-            cb_Sexo.ValueMember = "Id";
+            //var sexos = new ListaSexo();
+            //cb_Sexo.DataSource = sexos.Todos;
+            //cb_Sexo.DisplayMember = "Nombre";
+            //cb_Sexo.ValueMember = "Id";
 
             var tipoDocumentos = new ListaTipoDocumento();
             cb_Tipo_de_documento.DataSource = tipoDocumentos.Todos;
@@ -117,29 +117,29 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             if (!string.IsNullOrEmpty(tb_Telefono.Text))
                 filtro.Telefono = Convert.ToDecimal(tb_Telefono.Text);
 
-            if (!string.IsNullOrEmpty(tb_Piso.Text))
-                filtro.Piso = Convert.ToDecimal(tb_Piso.Text);
+            //if (!string.IsNullOrEmpty(tb_Piso.Text))
+            //    filtro.Piso = Convert.ToDecimal(tb_Piso.Text);
 
             filtro.IdUsuario = 0;
             filtro.IdTipoDocumento = (TipoDocumento)cb_Tipo_de_documento.SelectedItem;
             filtro.Nombre = tb_Nombre.Text;
             filtro.Apellido = tb_Apellido.Text;
-            filtro.Calle = tb_Calle.Text;
-            filtro.Localidad = tb_Localidad.Text;
-            filtro.CodigoPostal = tb_Codigo_postal.Text;
-            filtro.Depto = tb_Departamento.Text;
+            //filtro.Calle = tb_Calle.Text;
+            //filtro.Localidad = tb_Localidad.Text;
+            //filtro.CodigoPostal = tb_Codigo_postal.Text;
+            //filtro.Depto = tb_Departamento.Text;
             filtro.Mail = tb_Mail.Text;
             filtro.Habilitada = chBox_Habilitados.Checked;
 
-            if (chSexo.Checked)
-            {
-                filtro.IdSexo = (Sexo)cb_Sexo.SelectedItem;
-            }
+            //if (chSexo.Checked)
+            //{
+            //    filtro.IdSexo = (Sexo)cb_Sexo.SelectedItem;
+            //}
 
-            if (chFechaNac.Checked)
-            {
-                filtro.FechaDeNacimiento = dtp_Fecha_de_nacimiento.Value;
-            }
+            //if (chFechaNac.Checked)
+            //{
+            //    filtro.FechaDeNacimiento = dtp_Fecha_de_nacimiento.Value;
+            //}
 
             return filtro;
 
@@ -184,14 +184,14 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         protected override void AccionLimpiar()
         {
             this.tb_Apellido.Text = "";
-            this.tb_Calle.Text = "";
-            this.tb_Codigo_postal.Text = "";
-            this.tb_Departamento.Text = "";
-            this.tb_Localidad.Text = "";
+            //this.tb_Calle.Text = "";
+            //this.tb_Codigo_postal.Text = "";
+            //this.tb_Departamento.Text = "";
+            //this.tb_Localidad.Text = "";
             this.tb_Mail.Text = "";
             this.tb_Nombre.Text = "";
             this.tb_Numero_de_Documento.Text = "";
-            this.tb_Piso.Text = "";
+            //this.tb_Piso.Text = "";
             this.tb_Telefono.Text = "";
         }
         #endregion
@@ -200,7 +200,7 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         private void ListadoCliente_Load(object sender, EventArgs e)
         {
             AccionLimpiar();
-            this.dtp_Fecha_de_nacimiento.Value = DateManager.Ahora();
+            //this.dtp_Fecha_de_nacimiento.Value = DateManager.Ahora();
             this.CargarCombos();
         }
         #endregion

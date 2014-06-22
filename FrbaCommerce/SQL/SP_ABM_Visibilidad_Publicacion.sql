@@ -10,6 +10,7 @@ CREATE PROCEDURE DATA_GROUP.nuevaVisibilidad
 @descripcion nvarchar(255),
 @precio numeric(18, 2),
 @porcentaje numeric(18, 2),
+@dias_vencimiento_publi numeric(18,0),
 @id_visibilidad_agregado numeric(18, 0) OUTPUT
 AS
 BEGIN
@@ -18,8 +19,8 @@ BEGIN
 		DECLARE @id_nuevo numeric(18, 0)
 		SET @id_nuevo=(SELECT MAX(id_visibilidad) FROM DATA_GROUP.VisibilidadPublicacion)+1
 		
-		INSERT INTO DATA_GROUP.VisibilidadPublicacion(id_visibilidad, descripcion, porcentaje, precio)
-		VALUES(@id_nuevo, @descripcion, @porcentaje, @precio)
+		INSERT INTO DATA_GROUP.VisibilidadPublicacion(id_visibilidad, descripcion, porcentaje, precio, dias_vencimiento_publi)
+		VALUES(@id_nuevo, @descripcion, @porcentaje, @precio, @dias_vencimiento_publi)
 		
 		SET @id_visibilidad_agregado = @id_nuevo;
 	COMMIT TRAN
@@ -34,13 +35,15 @@ CREATE PROCEDURE DATA_GROUP.modificarVisibilidad
 @id_visibilidad_a_modificar numeric(18,0),
 @descripcion nvarchar(255),
 @precio numeric(18, 2),
-@porcentaje numeric(18, 2)
+@porcentaje numeric(18, 2),
+@dias_vencimiento_publi numeric(18,0)
 AS
 BEGIN
 	UPDATE DATA_GROUP.VisibilidadPublicacion
 	SET descripcion=@descripcion, 
 		precio=@precio, 
-		porcentaje=@porcentaje
+		porcentaje=@porcentaje,
+		dias_vencimiento_publi=@dias_vencimiento_publi
 	WHERE id_visibilidad=@id_visibilidad_a_modificar;
 END
 GO
@@ -78,19 +81,6 @@ BEGIN
 END
 GO
 
-
-IF OBJECT_ID('DATA_GROUP.getTodasLasVisibilidades') is not null
-	DROP PROCEDURE DATA_GROUP.getTodasLasVisibilidades
-	GO
-CREATE PROCEDURE DATA_GROUP.getTodasLasVisibilidades
-AS
-BEGIN
-	select id_visibilidad, descripcion, precio, porcentaje
-	from DATA_GROUP.VisibilidadPublicacion
-	where habilitada=1;
-END
-GO
-
 ---------------------------------------------------------------------
 
 IF OBJECT_ID('DATA_GROUP.sp_Visibilidad_filter') is not null
@@ -104,11 +94,11 @@ CREATE PROCEDURE DATA_GROUP.sp_Visibilidad_filter(
 AS
 BEGIN
 
-	SELECT id_visibilidad, descripcion, precio, porcentaje, habilitada
+	SELECT id_visibilidad, descripcion, precio, porcentaje, habilitada, dias_vencimiento_publi
 	FROM DATA_GROUP.VisibilidadPublicacion
 	WHERE ((@descripcion IS NULL) OR (descripcion like '%' + @descripcion + '%'))
-  AND ((@precio IS NULL) OR (@precio = precio ))
-  AND ((@porcentaje IS NULL) OR ((@porcentaje = porcentaje)))
+		  AND ((@precio IS NULL) OR (@precio = precio ))
+		  AND ((@porcentaje IS NULL) OR ((@porcentaje = porcentaje)))
 
 END
 GO
@@ -122,7 +112,7 @@ IF OBJECT_ID('DATA_GROUP.sp_Visibilidad_select_all') is not null
 CREATE PROCEDURE DATA_GROUP.sp_Visibilidad_select_all
 AS
 BEGIN
-	SELECT id_visibilidad, descripcion, precio, porcentaje, habilitada
+	SELECT id_visibilidad, descripcion, precio, porcentaje, habilitada, dias_vencimiento_publi
 	FROM DATA_GROUP.VisibilidadPublicacion
 	WHERE habilitada = 1;
 END

@@ -48,9 +48,8 @@
             this.gb_Cantidad.Location = new System.Drawing.Point(12, 12);
             this.gb_Cantidad.Name = "gb_Cantidad";
             this.gb_Cantidad.Size = new System.Drawing.Size(286, 107);
-            this.gb_Cantidad.TabIndex = 0;
+            this.gb_Cantidad.TabIndex = 1;
             this.gb_Cantidad.TabStop = false;
-            this.gb_Cantidad.Text = "Comprar";
             // 
             // tb_Precio
             // 
@@ -74,7 +73,7 @@
             this.nud_Ingresar_cantidad.Location = new System.Drawing.Point(112, 25);
             this.nud_Ingresar_cantidad.Name = "nud_Ingresar_cantidad";
             this.nud_Ingresar_cantidad.Size = new System.Drawing.Size(153, 20);
-            this.nud_Ingresar_cantidad.TabIndex = 1;
+            this.nud_Ingresar_cantidad.TabIndex = 2;
             this.nud_Ingresar_cantidad.Value = new decimal(new int[] {
             1,
             0,
@@ -96,7 +95,7 @@
             this.btn_Comprar.Location = new System.Drawing.Point(174, 125);
             this.btn_Comprar.Name = "btn_Comprar";
             this.btn_Comprar.Size = new System.Drawing.Size(103, 23);
-            this.btn_Comprar.TabIndex = 2;
+            this.btn_Comprar.TabIndex = 5;
             this.btn_Comprar.Text = "Comprar";
             this.btn_Comprar.UseVisualStyleBackColor = true;
             this.btn_Comprar.Click += new System.EventHandler(this.btn_Comprar_Click);
@@ -106,7 +105,7 @@
             this.btn_Cancelar.Location = new System.Drawing.Point(31, 125);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(104, 23);
-            this.btn_Cancelar.TabIndex = 3;
+            this.btn_Cancelar.TabIndex = 4;
             this.btn_Cancelar.Text = "Cancelar";
             this.btn_Cancelar.UseVisualStyleBackColor = true;
             this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);

@@ -18,6 +18,24 @@ namespace FrbaCommerce.DataAccess
         {
         }
 
+        public bool puedeComprar(Usuario usuario) {
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            var id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            id_usuario.Value = usuario.id_usuario;
+            parametros.Add(id_usuario);
+
+            var puedeComprar = new SqlParameter("@puedeComprar", SqlDbType.Bit);
+            puedeComprar.Direction = ParameterDirection.Output;
+            parametros.Add(puedeComprar);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.puedeComprar", parametros);
+
+            var puedeComprarOUTPUT = parametros.Where(p => p.ParameterName == "@puedeComprar").FirstOrDefault();
+            bool puede_comprar = Convert.ToBoolean(puedeComprarOUTPUT.Value);
+            return puede_comprar;
+        }
+
         protected override IList<SqlParameter> GenerarParametrosFiltrar(FiltroUsuario entidad)
         {
             IList<SqlParameter> parametros = new List<SqlParameter>();
@@ -92,8 +110,15 @@ namespace FrbaCommerce.DataAccess
 
             var dataSet = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getUsuarioByUsername", parametros);
 
-            BuilderUsuario builder = new BuilderUsuario();
-            return builder.Build(dataSet.Tables[0].Rows[0]);
+            //BuilderUsuario builder = new BuilderUsuario();
+            //return builder.Build(dataSet.Tables[0].Rows[0]);
+            Usuario usuario = new Usuario();
+            usuario.username = Convert.ToString(dataSet.Tables[0].Rows[0]["username"]);
+            usuario.contrasenia = Convert.ToString(dataSet.Tables[0].Rows[0]["contrasenia"]);
+            usuario.habilitada = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["habilitada"]);
+            usuario.cantidadIntentos = Convert.ToInt32(dataSet.Tables[0].Rows[0]["intentos_login"]);
+            usuario.id_usuario = Convert.ToDecimal(dataSet.Tables[0].Rows[0]["id_usuario"]);
+            return usuario;
 
         }
 

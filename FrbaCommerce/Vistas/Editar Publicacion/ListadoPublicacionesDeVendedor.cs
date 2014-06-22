@@ -29,20 +29,6 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
         private Rubro rubroSeleccionado;
         private Usuario usuario_publicador;
 
-        public ListadoPublicacionesDeVendedor()
-        {
-            this.visiDB = new VisibilidadDB();
-            this.estadoDB = new EstadoPublicacionDB();
-            this.publiDB = new PublicacionDB();
-            this.usuario_publicador = new Usuario();
-            this.usuario_publicador.id_usuario = 1;
-            this.usuario_publicador.contrasenia = "pass_cli_migrados"; //TODO sacar esto despues lo dejo como prueba
-            this.usuario_publicador.username = "33354435";
-            this.usuario_publicador.habilitada = true;
-
-            InitializeComponent();
-        }
-
         public ListadoPublicacionesDeVendedor(Usuario usuario)
         {
             this.usuario_publicador = usuario;
@@ -148,7 +134,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             this.dgvBusqueda.Columns["rubro"].Visible = false;
             this.dgvBusqueda.Columns["habilitada"].Visible = false;
             this.dgvBusqueda.Columns["id_publicacion"].Visible = false;
-            this.dgvBusqueda.Columns["usuario_publicador"].Visible = false;
+            
 
             this.dgvBusqueda.Columns["descripcion"].HeaderText = "Descripcion";
             this.dgvBusqueda.Columns["stock"].HeaderText = "Stock";
@@ -157,6 +143,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             this.dgvBusqueda.Columns["precio"].HeaderText = "Precio";
             this.dgvBusqueda.Columns["permite_preguntas"].HeaderText = "Permite preguntas";
             this.dgvBusqueda.Columns["tipo_publicacion"].HeaderText = "Tipo de publicacion";
+            this.dgvBusqueda.Columns["usuario_publicador"].HeaderText = "Usuario que publicó";
         }
 
         private FiltroPublicacion armarFiltro(){
@@ -165,12 +152,13 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             filtro.descripcion = tb_Descripcion.Text;
             filtro.rubro = this.rubroSeleccionado;
 
-            filtro.tipo_publicacion = (TipoPublicacion)cb_Tipo_de_publicacion.SelectedItem;
+            if (cb_Tipo_de_publicacion.SelectedIndex != 0)
+                filtro.tipo_publicacion = (TipoPublicacion)cb_Tipo_de_publicacion.SelectedItem;
             if (cb_Visibilidad.SelectedIndex != 0)
                 filtro.visibilidad = (Visibilidad)cb_Visibilidad.SelectedItem;
             if(cb_Estado.SelectedIndex!=0)
                 filtro.estado = (EstadoPublicacion)cb_Estado.SelectedItem;
-            filtro.id_usuario_publicador = 1;//this.usuario_publicador.id_usuario; //TODO sacar esto despues lo dejo como prueba
+            filtro.id_usuario_publicador = this.usuario_publicador.id_usuario;
              
             if(this.chb_Fecha_inicio.Checked)
                 filtro.fecha_inicio = this.dp_Fecha_de_inicio.Value;

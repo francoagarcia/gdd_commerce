@@ -91,10 +91,11 @@
             // 
             // textBox_Nombre_de_usuario
             // 
+            this.textBox_Nombre_de_usuario.AcceptsTab = true;
             this.textBox_Nombre_de_usuario.Location = new System.Drawing.Point(161, 19);
             this.textBox_Nombre_de_usuario.Name = "textBox_Nombre_de_usuario";
             this.textBox_Nombre_de_usuario.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Nombre_de_usuario.TabIndex = 0;
+            this.textBox_Nombre_de_usuario.TabIndex = 1;
             // 
             // lblUsuario
             // 
@@ -107,11 +108,12 @@
             // 
             // textBox_Contraseña
             // 
+            this.textBox_Contraseña.AcceptsTab = true;
             this.textBox_Contraseña.Location = new System.Drawing.Point(161, 45);
             this.textBox_Contraseña.Name = "textBox_Contraseña";
             this.textBox_Contraseña.PasswordChar = '*';
             this.textBox_Contraseña.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Contraseña.TabIndex = 1;
+            this.textBox_Contraseña.TabIndex = 2;
             // 
             // comboBox_Tipo_de_usuario
             // 
@@ -123,7 +125,7 @@
             this.comboBox_Tipo_de_usuario.Location = new System.Drawing.Point(161, 96);
             this.comboBox_Tipo_de_usuario.Name = "comboBox_Tipo_de_usuario";
             this.comboBox_Tipo_de_usuario.Size = new System.Drawing.Size(216, 21);
-            this.comboBox_Tipo_de_usuario.TabIndex = 2;
+            this.comboBox_Tipo_de_usuario.TabIndex = 4;
             // 
             // lblContraseña
             // 
@@ -136,10 +138,11 @@
             // 
             // textBox_Telefono
             // 
+            this.textBox_Telefono.AcceptsTab = true;
             this.textBox_Telefono.Location = new System.Drawing.Point(161, 70);
             this.textBox_Telefono.Name = "textBox_Telefono";
             this.textBox_Telefono.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Telefono.TabIndex = 27;
+            this.textBox_Telefono.TabIndex = 3;
             // 
             // labelTelefono
             // 
@@ -189,42 +192,46 @@
             this.comboBox_Tipo_de_documento.Location = new System.Drawing.Point(167, 24);
             this.comboBox_Tipo_de_documento.Name = "comboBox_Tipo_de_documento";
             this.comboBox_Tipo_de_documento.Size = new System.Drawing.Size(216, 21);
-            this.comboBox_Tipo_de_documento.TabIndex = 29;
+            this.comboBox_Tipo_de_documento.TabIndex = 5;
             // 
             // textBox_Numero_de_documento
             // 
+            this.textBox_Numero_de_documento.AcceptsTab = true;
             this.textBox_Numero_de_documento.Location = new System.Drawing.Point(167, 51);
             this.textBox_Numero_de_documento.Name = "textBox_Numero_de_documento";
             this.textBox_Numero_de_documento.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Numero_de_documento.TabIndex = 31;
+            this.textBox_Numero_de_documento.TabIndex = 6;
             // 
             // textBox_Nombre
             // 
+            this.textBox_Nombre.AcceptsTab = true;
             this.textBox_Nombre.Location = new System.Drawing.Point(167, 77);
             this.textBox_Nombre.Name = "textBox_Nombre";
             this.textBox_Nombre.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Nombre.TabIndex = 35;
+            this.textBox_Nombre.TabIndex = 7;
             // 
             // textBox_Apellido
             // 
+            this.textBox_Apellido.AcceptsTab = true;
             this.textBox_Apellido.Location = new System.Drawing.Point(167, 103);
             this.textBox_Apellido.Name = "textBox_Apellido";
             this.textBox_Apellido.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Apellido.TabIndex = 36;
+            this.textBox_Apellido.TabIndex = 8;
             // 
             // textBox_Correo_electronico
             // 
+            this.textBox_Correo_electronico.AcceptsTab = true;
             this.textBox_Correo_electronico.Location = new System.Drawing.Point(167, 129);
             this.textBox_Correo_electronico.Name = "textBox_Correo_electronico";
             this.textBox_Correo_electronico.Size = new System.Drawing.Size(216, 20);
-            this.textBox_Correo_electronico.TabIndex = 40;
+            this.textBox_Correo_electronico.TabIndex = 9;
             // 
             // dp_Fecha_de_nacimiento
             // 
             this.dp_Fecha_de_nacimiento.Location = new System.Drawing.Point(167, 185);
             this.dp_Fecha_de_nacimiento.Name = "dp_Fecha_de_nacimiento";
             this.dp_Fecha_de_nacimiento.Size = new System.Drawing.Size(216, 20);
-            this.dp_Fecha_de_nacimiento.TabIndex = 39;
+            this.dp_Fecha_de_nacimiento.TabIndex = 11;
             // 
             // comboBox_Sexo
             // 
@@ -233,7 +240,7 @@
             this.comboBox_Sexo.Location = new System.Drawing.Point(167, 155);
             this.comboBox_Sexo.Name = "comboBox_Sexo";
             this.comboBox_Sexo.Size = new System.Drawing.Size(216, 21);
-            this.comboBox_Sexo.TabIndex = 37;
+            this.comboBox_Sexo.TabIndex = 10;
             // 
             // lblMail
             // 
@@ -319,38 +326,43 @@
             // 
             // textBox_Calle
             // 
+            this.textBox_Calle.AcceptsTab = true;
             this.textBox_Calle.Location = new System.Drawing.Point(67, 26);
             this.textBox_Calle.Name = "textBox_Calle";
             this.textBox_Calle.Size = new System.Drawing.Size(318, 20);
-            this.textBox_Calle.TabIndex = 24;
+            this.textBox_Calle.TabIndex = 12;
             // 
             // textBox_Piso
             // 
+            this.textBox_Piso.AcceptsTab = true;
             this.textBox_Piso.Location = new System.Drawing.Point(67, 52);
             this.textBox_Piso.Name = "textBox_Piso";
             this.textBox_Piso.Size = new System.Drawing.Size(37, 20);
-            this.textBox_Piso.TabIndex = 25;
+            this.textBox_Piso.TabIndex = 13;
             // 
             // textBox_Departamento
             // 
+            this.textBox_Departamento.AcceptsTab = true;
             this.textBox_Departamento.Location = new System.Drawing.Point(190, 52);
             this.textBox_Departamento.Name = "textBox_Departamento";
             this.textBox_Departamento.Size = new System.Drawing.Size(38, 20);
-            this.textBox_Departamento.TabIndex = 28;
+            this.textBox_Departamento.TabIndex = 14;
             // 
             // textBox_Codigo_postal
             // 
+            this.textBox_Codigo_postal.AcceptsTab = true;
             this.textBox_Codigo_postal.Location = new System.Drawing.Point(311, 52);
             this.textBox_Codigo_postal.Name = "textBox_Codigo_postal";
             this.textBox_Codigo_postal.Size = new System.Drawing.Size(74, 20);
-            this.textBox_Codigo_postal.TabIndex = 30;
+            this.textBox_Codigo_postal.TabIndex = 15;
             // 
             // textBox_Localidad
             // 
+            this.textBox_Localidad.AcceptsTab = true;
             this.textBox_Localidad.Location = new System.Drawing.Point(89, 78);
             this.textBox_Localidad.Name = "textBox_Localidad";
             this.textBox_Localidad.Size = new System.Drawing.Size(296, 20);
-            this.textBox_Localidad.TabIndex = 32;
+            this.textBox_Localidad.TabIndex = 16;
             // 
             // labelLocalidad
             // 
@@ -402,7 +414,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(53, 534);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(164, 23);
-            this.btnCancelar.TabIndex = 33;
+            this.btnCancelar.TabIndex = 18;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
@@ -412,7 +424,7 @@
             this.btnRegistracion.Location = new System.Drawing.Point(236, 534);
             this.btnRegistracion.Name = "btnRegistracion";
             this.btnRegistracion.Size = new System.Drawing.Size(182, 23);
-            this.btnRegistracion.TabIndex = 31;
+            this.btnRegistracion.TabIndex = 17;
             this.btnRegistracion.Text = "Confirmar";
             this.btnRegistracion.UseVisualStyleBackColor = true;
             // 

@@ -1,5 +1,6 @@
 
 
+
 IF OBJECT_ID('DATA_GROUP.sp_nuevaCompra') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.sp_nuevaCompra
 	GO
@@ -7,10 +8,10 @@ CREATE PROCEDURE DATA_GROUP.sp_nuevaCompra
 @id_publicacion numeric(18, 0),
 @id_usuario numeric(18, 0),
 @cantidad numeric(18, 0),
-@id_compra_nueva numeric(18, 0) OUTPUT
+@id_compra_nueva numeric(18, 0) OUTPUT,
+@puede_comprar bit OUTPUT
 AS
-BEGIN	
-
+BEGIN		
 	BEGIN TRY
 		BEGIN TRAN
 		
@@ -30,18 +31,30 @@ BEGIN
 				WHERE id_publicacion = @id_publicacion
 			END
 			
+			DECLARE @comision numeric(18,2)
+			
+			SELECT @comision=p.precio*v.porcentaje*@cantidad
+			FROM DATA_GROUP.Publicacion p
+			JOIN DATA_GROUP.VisibilidadPublicacion v ON v.id_visibilidad=p.id_visibilidad
+			
 			INSERT INTO DATA_GROUP.Compra(  id_publicacion, 
 											id_usuario_comprador, 
 											fecha, 
 											cantidad,
+											comision,
 											facturada)
 			VALUES (@id_publicacion, 
 					@id_usuario, 
 					GETDATE(), 
 					@cantidad,
+					@comision,
 					0)
 					
 			SET @id_compra_nueva = SCOPE_IDENTITY();
+			
+			EXEC DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador @id_usuario, @puede_comprar OUTPUT
+			
+			EXEC DATA_GROUP.ValidarComprasRendidasDelVendedor @id_publicacion
 
 		COMMIT TRAN
 	END TRY
@@ -60,9 +73,133 @@ BEGIN
 				   );
 		
 	END CATCH
+
 END
 GO
 
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+IF OBJECT_ID('DATA_GROUP.ValidarComprasRendidasDelVendedor') is not null
+	DROP PROCEDURE DATA_GROUP.ValidarComprasRendidasDelVendedor
+	GO
+CREATE PROCEDURE DATA_GROUP.ValidarComprasRendidasDelVendedor
+@id_publicacion numeric(18, 0)
+AS
+BEGIN
+
+	DECLARE @cantidad_sin_rendir int;
+	DECLARE @id_vendedor numeric(18,0);
+	
+	SELECT @id_vendedor=p.id_usuario_publicador
+	FROM DATA_GROUP.Publicacion p
+	WHERE p.id_publicacion=@id_publicacion
+	
+	EXEC DATA_GROUP.cantidadDeComprasSinRendir @id_vendedor, @cantidad_sin_rendir OUTPUT
+	
+	if @cantidad_sin_rendir>10
+		EXEC DATA_GROUP.inHabilitarUsuario @id_vendedor
+	
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.cantidadDeComprasSinRendir') is not null
+	DROP PROCEDURE DATA_GROUP.cantidadDeComprasSinRendir
+	GO
+CREATE PROCEDURE DATA_GROUP.cantidadDeComprasSinRendir
+@id_vendedor numeric(18, 0),
+@cantidad_sin_rendir int OUTPUT
+AS
+BEGIN
+
+	SELECT @cantidad_sin_rendir = COUNT(*)
+	FROM DATA_GROUP.Compra c
+	JOIN DATA_GROUP.Publicacion p ON p.id_usuario_publicador=@id_vendedor AND c.id_publicacion=p.id_publicacion
+	WHERE c.facturada=0
+
+END
+GO
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+IF OBJECT_ID('DATA_GROUP.puedeComprar') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.puedeComprar
+	GO
+CREATE PROCEDURE DATA_GROUP.puedeComprar
+@id_usuario numeric(18,0),
+@puedeComprar bit OUTPUT
+AS
+BEGIN
+	
+	SELECT @puedeComprar = habilitada_comprar
+	FROM DATA_GROUP.Usuarios
+	WHERE id_usuario = @id_usuario
+	
+END
+GO
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+IF OBJECT_ID('DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador') is not null
+	DROP PROCEDURE DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador
+	GO
+CREATE PROCEDURE DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador
+@id_usuario numeric(18, 0),
+@puede_comprar bit OUTPUT
+AS
+BEGIN
+
+	DECLARE @cantidadComprasSinCalificar int
+	EXEC DATA_GROUP.cantidadDeComprasSinCalificar @id_usuario, @cantidadComprasSinCalificar OUTPUT
+	
+	if @cantidadComprasSinCalificar>5
+	BEGIN
+		UPDATE DATA_GROUP.Usuario
+		SET habilitada_comprar=0
+		WHERE id_usuario=@id_usuario
+		
+		SET @puede_comprar=0
+	END
+	ELSE
+		SET @puede_comprar=1
+	
+END
+GO
+
+
+
+
+IF OBJECT_ID('DATA_GROUP.cantidadDeComprasSinCalificar') is not null
+	DROP PROCEDURE DATA_GROUP.cantidadDeComprasSinCalificar
+	GO
+CREATE PROCEDURE DATA_GROUP.cantidadDeComprasSinCalificar
+@id_usuario numeric(18, 0),
+@cantidad_sin_calificar int OUTPUT
+AS
+BEGIN
+
+	SELECT @cantidad_sin_calificar=COUNT(*) 
+	from DATA_GROUP.Compra c
+	WHERE c.id_calificacion is null AND c.id_usuario_comprador=@id_usuario
+	
+END
+GO
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 IF OBJECT_ID('DATA_GROUP.sp_nuevaOferta') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.sp_nuevaOferta

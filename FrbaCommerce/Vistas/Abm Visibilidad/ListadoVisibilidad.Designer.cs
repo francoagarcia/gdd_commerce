@@ -80,21 +80,21 @@
             this.label_Nombre_de_visibilidad.AutoSize = true;
             this.label_Nombre_de_visibilidad.Location = new System.Drawing.Point(6, 27);
             this.label_Nombre_de_visibilidad.Name = "label_Nombre_de_visibilidad";
-            this.label_Nombre_de_visibilidad.Size = new System.Drawing.Size(107, 13);
+            this.label_Nombre_de_visibilidad.Size = new System.Drawing.Size(63, 13);
             this.label_Nombre_de_visibilidad.TabIndex = 2;
-            this.label_Nombre_de_visibilidad.Text = "Nombre de visibilidad";
+            this.label_Nombre_de_visibilidad.Text = "Descripcion";
             // 
             // tb_Nombre_de_visibilidad
             // 
-            this.tb_Nombre_de_visibilidad.Location = new System.Drawing.Point(119, 24);
+            this.tb_Nombre_de_visibilidad.Location = new System.Drawing.Point(75, 24);
             this.tb_Nombre_de_visibilidad.Name = "tb_Nombre_de_visibilidad";
-            this.tb_Nombre_de_visibilidad.Size = new System.Drawing.Size(526, 20);
+            this.tb_Nombre_de_visibilidad.Size = new System.Drawing.Size(495, 20);
             this.tb_Nombre_de_visibilidad.TabIndex = 0;
             // 
             // label_Precio
             // 
             this.label_Precio.AutoSize = true;
-            this.label_Precio.Location = new System.Drawing.Point(109, 54);
+            this.label_Precio.Location = new System.Drawing.Point(6, 53);
             this.label_Precio.Name = "label_Precio";
             this.label_Precio.Size = new System.Drawing.Size(37, 13);
             this.label_Precio.TabIndex = 4;
@@ -103,7 +103,7 @@
             // label_Porcentaje
             // 
             this.label_Porcentaje.AutoSize = true;
-            this.label_Porcentaje.Location = new System.Drawing.Point(109, 77);
+            this.label_Porcentaje.Location = new System.Drawing.Point(191, 53);
             this.label_Porcentaje.Name = "label_Porcentaje";
             this.label_Porcentaje.Size = new System.Drawing.Size(58, 13);
             this.label_Porcentaje.TabIndex = 5;
@@ -111,7 +111,7 @@
             // 
             // tb_Precio
             // 
-            this.tb_Precio.Location = new System.Drawing.Point(178, 51);
+            this.tb_Precio.Location = new System.Drawing.Point(75, 50);
             this.tb_Precio.Name = "tb_Precio";
             this.tb_Precio.Size = new System.Drawing.Size(100, 20);
             this.tb_Precio.TabIndex = 1;
@@ -119,7 +119,7 @@
             // 
             // tb_Porcentaje
             // 
-            this.tb_Porcentaje.Location = new System.Drawing.Point(178, 74);
+            this.tb_Porcentaje.Location = new System.Drawing.Point(255, 50);
             this.tb_Porcentaje.Name = "tb_Porcentaje";
             this.tb_Porcentaje.Size = new System.Drawing.Size(100, 20);
             this.tb_Porcentaje.TabIndex = 2;

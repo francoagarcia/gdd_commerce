@@ -25,10 +25,12 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
         private Usuario usuarioPublicador;
         private TipoPublicacion tipoPublicacion;
         private PublicacionDB publicacionDB;
+        private DateTime fecha_vencimiento;
 
         public GenerarPublicacion(TipoPublicacion _tipoPublicacion, Usuario _usuarioPublicador)
             : base()
         {
+            this.fecha_vencimiento = new DateTime();
             this.publicacionDB = new PublicacionDB();
             this.tipoPublicacion = _tipoPublicacion;
             this.usuarioPublicador = _usuarioPublicador;
@@ -42,14 +44,14 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
             this.AgregarValidacion(new ValidadorCombobox(this.cb_Visibilidad));
             this.AgregarValidacion(new ValidadorCombobox(this.cb_Estado));
             this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_inicio, DateManager.Ahora()));
-            this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_Vencimiento, DateManager.Ahora()));
             this.CargarCombos();
             this.CargarListaRubros();
+            this.tb_Fecha_de_vencimiento.Text = "";
         }
 
         private void CargarCombos() {
 
-            this.estados = (new EstadoPublicacionDB()).ObtenerTodos();
+            this.estados = (new EstadoPublicacionDB()).ObtenerTodos().Where(e => e.id_estado!=4).ToList();
             cb_Estado.DataSource = this.estados;
             cb_Estado.DisplayMember = "descripcion";
             cb_Estado.ValueMember = "id_estado";
@@ -137,7 +139,7 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
             publi.usuario_publicador = this.usuarioPublicador;
             publi.descripcion = this.tb_Descripcion.Text;
             publi.fecha_inicio = this.dp_Fecha_inicio.Value;
-            publi.fecha_vencimiento = this.dp_Fecha_Vencimiento.Value;
+            publi.fecha_vencimiento = this.fecha_vencimiento;
             publi.habilitada = true;
             publi.estado = ((EstadoPublicacion)this.cb_Estado.SelectedItem);
             publi.precio = this.nud_Precio.Value;
@@ -205,6 +207,23 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
             }
         }
 
+        private void cb_Visibilidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.ActualizarFechaDeVencimiento();
+        }
+
+        private void dp_Fecha_inicio_ValueChanged(object sender, EventArgs e)
+        {
+            this.ActualizarFechaDeVencimiento();
+        }
+
+        private void ActualizarFechaDeVencimiento() 
+        {
+            Visibilidad visibilidadElegida = (Visibilidad)this.cb_Visibilidad.SelectedItem;
+            DateTime fecha_inicio = dp_Fecha_inicio.Value;
+            this.fecha_vencimiento = fecha_inicio.AddDays(Convert.ToDouble(visibilidadElegida.dias_vencimiento_publi));
+            this.tb_Fecha_de_vencimiento.Text = this.fecha_vencimiento.ToString();
+        }
 
 
 

@@ -1,6 +1,6 @@
 ﻿namespace FrbaCommerce.Vistas.ABM_Rol
 {
-    partial class ModificarRol
+    partial class AltaDeRol
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             this.btn_Cancelar = new System.Windows.Forms.Button();
-            this.btn_Modificar = new System.Windows.Forms.Button();
-            this.tb_Nombre_nuevo = new System.Windows.Forms.TextBox();
+            this.btn_Crear = new System.Windows.Forms.Button();
+            this.tb_Nombre_del_rol = new System.Windows.Forms.TextBox();
             this.lbl_Nombre_nuevo = new System.Windows.Forms.Label();
             this.gb_Asignacion_de_funcionalidades = new System.Windows.Forms.GroupBox();
             this.list_funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.btn_Limpiar = new System.Windows.Forms.Button();
+            this.ch_Habilitado = new System.Windows.Forms.CheckBox();
             this.gb_Asignacion_de_funcionalidades.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,31 +49,31 @@
             this.btn_Cancelar.UseVisualStyleBackColor = true;
             this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);
             // 
-            // btn_Modificar
+            // btn_Crear
             // 
-            this.btn_Modificar.Location = new System.Drawing.Point(304, 312);
-            this.btn_Modificar.Name = "btn_Modificar";
-            this.btn_Modificar.Size = new System.Drawing.Size(111, 23);
-            this.btn_Modificar.TabIndex = 28;
-            this.btn_Modificar.Text = "Modificar";
-            this.btn_Modificar.UseVisualStyleBackColor = true;
-            this.btn_Modificar.Click += new System.EventHandler(this.btn_Modificar_Click);
+            this.btn_Crear.Location = new System.Drawing.Point(304, 312);
+            this.btn_Crear.Name = "btn_Crear";
+            this.btn_Crear.Size = new System.Drawing.Size(111, 23);
+            this.btn_Crear.TabIndex = 28;
+            this.btn_Crear.Text = "Crear";
+            this.btn_Crear.UseVisualStyleBackColor = true;
+            this.btn_Crear.Click += new System.EventHandler(this.btn_Crear_Click);
             // 
-            // tb_Nombre_nuevo
+            // tb_Nombre_del_rol
             // 
-            this.tb_Nombre_nuevo.Location = new System.Drawing.Point(98, 12);
-            this.tb_Nombre_nuevo.Name = "tb_Nombre_nuevo";
-            this.tb_Nombre_nuevo.Size = new System.Drawing.Size(317, 20);
-            this.tb_Nombre_nuevo.TabIndex = 25;
+            this.tb_Nombre_del_rol.Location = new System.Drawing.Point(98, 12);
+            this.tb_Nombre_del_rol.Name = "tb_Nombre_del_rol";
+            this.tb_Nombre_del_rol.Size = new System.Drawing.Size(224, 20);
+            this.tb_Nombre_del_rol.TabIndex = 25;
             // 
             // lbl_Nombre_nuevo
             // 
             this.lbl_Nombre_nuevo.AutoSize = true;
             this.lbl_Nombre_nuevo.Location = new System.Drawing.Point(15, 15);
             this.lbl_Nombre_nuevo.Name = "lbl_Nombre_nuevo";
-            this.lbl_Nombre_nuevo.Size = new System.Drawing.Size(77, 13);
+            this.lbl_Nombre_nuevo.Size = new System.Drawing.Size(75, 13);
             this.lbl_Nombre_nuevo.TabIndex = 24;
-            this.lbl_Nombre_nuevo.Text = "Nombre nuevo";
+            this.lbl_Nombre_nuevo.Text = "Nombre del rol";
             // 
             // gb_Asignacion_de_funcionalidades
             // 
@@ -109,20 +110,32 @@
             this.btn_Limpiar.UseVisualStyleBackColor = true;
             this.btn_Limpiar.Click += new System.EventHandler(this.btn_Limpiar_Click);
             // 
-            // ModificarRol
+            // ch_Habilitado
+            // 
+            this.ch_Habilitado.AutoSize = true;
+            this.ch_Habilitado.Location = new System.Drawing.Point(342, 14);
+            this.ch_Habilitado.Name = "ch_Habilitado";
+            this.ch_Habilitado.Size = new System.Drawing.Size(73, 17);
+            this.ch_Habilitado.TabIndex = 32;
+            this.ch_Habilitado.Text = "Habilitado";
+            this.ch_Habilitado.UseVisualStyleBackColor = true;
+            // 
+            // AltaDeRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(433, 347);
+            this.Controls.Add(this.ch_Habilitado);
             this.Controls.Add(this.btn_Limpiar);
             this.Controls.Add(this.gb_Asignacion_de_funcionalidades);
             this.Controls.Add(this.btn_Cancelar);
-            this.Controls.Add(this.btn_Modificar);
-            this.Controls.Add(this.tb_Nombre_nuevo);
+            this.Controls.Add(this.btn_Crear);
+            this.Controls.Add(this.tb_Nombre_del_rol);
             this.Controls.Add(this.lbl_Nombre_nuevo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "ModificarRol";
-            this.Text = "Modificar un Rol";
+            this.Name = "AltaDeRol";
+            this.Text = "Crear un rol";
+            this.Load += new System.EventHandler(this.AltaDeRol_Load);
             this.gb_Asignacion_de_funcionalidades.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -132,11 +145,12 @@
         #endregion
 
         private System.Windows.Forms.Button btn_Cancelar;
-        private System.Windows.Forms.Button btn_Modificar;
-        private System.Windows.Forms.TextBox tb_Nombre_nuevo;
+        private System.Windows.Forms.Button btn_Crear;
+        private System.Windows.Forms.TextBox tb_Nombre_del_rol;
         private System.Windows.Forms.Label lbl_Nombre_nuevo;
         private System.Windows.Forms.GroupBox gb_Asignacion_de_funcionalidades;
         private System.Windows.Forms.CheckedListBox list_funcionalidades;
         private System.Windows.Forms.Button btn_Limpiar;
+        private System.Windows.Forms.CheckBox ch_Habilitado;
     }
 }

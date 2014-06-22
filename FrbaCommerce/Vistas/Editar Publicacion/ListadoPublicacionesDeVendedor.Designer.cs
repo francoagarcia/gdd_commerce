@@ -49,7 +49,8 @@
             // 
             // gbAcciones
             // 
-            this.gbAcciones.Location = new System.Drawing.Point(11, 428);
+            this.gbAcciones.Location = new System.Drawing.Point(11, 463);
+            this.gbAcciones.Size = new System.Drawing.Size(861, 47);
             // 
             // btn_Habilitacion
             // 
@@ -59,7 +60,7 @@
             // gbBusqueda
             // 
             this.gbBusqueda.Location = new System.Drawing.Point(11, 183);
-            this.gbBusqueda.Size = new System.Drawing.Size(652, 239);
+            this.gbBusqueda.Size = new System.Drawing.Size(861, 274);
             // 
             // gbFiltros
             // 
@@ -78,7 +79,7 @@
             this.gbFiltros.Controls.Add(this.dp_Fecha_de_inicio);
             this.gbFiltros.Controls.Add(this.tb_Descripcion);
             this.gbFiltros.Controls.Add(this.label1);
-            this.gbFiltros.Size = new System.Drawing.Size(651, 165);
+            this.gbFiltros.Size = new System.Drawing.Size(860, 165);
             this.gbFiltros.Controls.SetChildIndex(this.label1, 0);
             this.gbFiltros.Controls.SetChildIndex(this.tb_Descripcion, 0);
             this.gbFiltros.Controls.SetChildIndex(this.dp_Fecha_de_inicio, 0);
@@ -103,7 +104,11 @@
             // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(570, 136);
+            this.btnFiltrar.Location = new System.Drawing.Point(779, 136);
+            // 
+            // btn_Seleccionar
+            // 
+            this.btn_Seleccionar.Location = new System.Drawing.Point(780, 18);
             // 
             // tb_Descripcion
             // 
@@ -129,7 +134,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(307, 25);
+            this.label4.Location = new System.Drawing.Point(340, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 8;
@@ -138,7 +143,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(307, 49);
+            this.label5.Location = new System.Drawing.Point(340, 49);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(43, 13);
             this.label5.TabIndex = 9;
@@ -147,7 +152,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(307, 100);
+            this.label6.Location = new System.Drawing.Point(340, 100);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 13);
             this.label6.TabIndex = 10;
@@ -155,9 +160,10 @@
             // 
             // tb_Rubro
             // 
-            this.tb_Rubro.Enabled = false;
-            this.tb_Rubro.Location = new System.Drawing.Point(369, 98);
+            this.tb_Rubro.ForeColor = System.Drawing.SystemColors.Info;
+            this.tb_Rubro.Location = new System.Drawing.Point(402, 98);
             this.tb_Rubro.Name = "tb_Rubro";
+            this.tb_Rubro.ReadOnly = true;
             this.tb_Rubro.Size = new System.Drawing.Size(180, 20);
             this.tb_Rubro.TabIndex = 11;
             // 
@@ -167,7 +173,7 @@
             this.cb_Visibilidad.FormattingEnabled = true;
             this.cb_Visibilidad.Items.AddRange(new object[] {
             "(Seleccione)"});
-            this.cb_Visibilidad.Location = new System.Drawing.Point(369, 20);
+            this.cb_Visibilidad.Location = new System.Drawing.Point(402, 20);
             this.cb_Visibilidad.Name = "cb_Visibilidad";
             this.cb_Visibilidad.Size = new System.Drawing.Size(180, 21);
             this.cb_Visibilidad.TabIndex = 12;
@@ -178,14 +184,14 @@
             this.cb_Estado.FormattingEnabled = true;
             this.cb_Estado.Items.AddRange(new object[] {
             "(Seleccione)"});
-            this.cb_Estado.Location = new System.Drawing.Point(369, 46);
+            this.cb_Estado.Location = new System.Drawing.Point(402, 46);
             this.cb_Estado.Name = "cb_Estado";
             this.cb_Estado.Size = new System.Drawing.Size(180, 21);
             this.cb_Estado.TabIndex = 13;
             // 
             // btn_Seleccionar_rubro
             // 
-            this.btn_Seleccionar_rubro.Location = new System.Drawing.Point(555, 95);
+            this.btn_Seleccionar_rubro.Location = new System.Drawing.Point(588, 95);
             this.btn_Seleccionar_rubro.Name = "btn_Seleccionar_rubro";
             this.btn_Seleccionar_rubro.Size = new System.Drawing.Size(90, 23);
             this.btn_Seleccionar_rubro.TabIndex = 14;
@@ -199,7 +205,7 @@
             this.cb_Tipo_de_publicacion.FormattingEnabled = true;
             this.cb_Tipo_de_publicacion.Items.AddRange(new object[] {
             "(Seleccione)"});
-            this.cb_Tipo_de_publicacion.Location = new System.Drawing.Point(369, 71);
+            this.cb_Tipo_de_publicacion.Location = new System.Drawing.Point(402, 71);
             this.cb_Tipo_de_publicacion.Name = "cb_Tipo_de_publicacion";
             this.cb_Tipo_de_publicacion.Size = new System.Drawing.Size(180, 21);
             this.cb_Tipo_de_publicacion.TabIndex = 16;
@@ -207,7 +213,7 @@
             // lbl_Tipo_de_publicacion
             // 
             this.lbl_Tipo_de_publicacion.AutoSize = true;
-            this.lbl_Tipo_de_publicacion.Location = new System.Drawing.Point(307, 74);
+            this.lbl_Tipo_de_publicacion.Location = new System.Drawing.Point(340, 74);
             this.lbl_Tipo_de_publicacion.Name = "lbl_Tipo_de_publicacion";
             this.lbl_Tipo_de_publicacion.Size = new System.Drawing.Size(31, 13);
             this.lbl_Tipo_de_publicacion.TabIndex = 15;
@@ -246,7 +252,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 487);
+            this.ClientSize = new System.Drawing.Size(884, 522);
             this.Name = "ListadoPublicacionesDeVendedor";
             this.Text = "FRBA Commerce - Listado de publicaciones";
             this.gbAcciones.ResumeLayout(false);

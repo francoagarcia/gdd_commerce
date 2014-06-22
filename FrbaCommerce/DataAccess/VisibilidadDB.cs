@@ -42,6 +42,10 @@ namespace FrbaCommerce.DataAccess
             pPorc.Scale = 2;
             parametros.Add(pPorc);
 
+            SqlParameter dias_vencimiento_publi = new SqlParameter("dias_vencimiento_publi", SqlDbType.Decimal, 18, "dias_vencimiento_publi");
+            dias_vencimiento_publi.Value = visibilidad.dias_vencimiento_publi;
+            parametros.Add(dias_vencimiento_publi);
+
             SqlParameter idNuevoOUTPUT = new SqlParameter("@id_visibilidad_agregado", SqlDbType.Decimal, 18);
             idNuevoOUTPUT.Direction = ParameterDirection.Output;
             parametros.Add(idNuevoOUTPUT);     
@@ -103,6 +107,10 @@ namespace FrbaCommerce.DataAccess
             pPorc.Precision = 18;
             pPorc.Scale = 2;
             parametros.Add(pPorc);
+
+            SqlParameter dias_vencimiento_publi = new SqlParameter("dias_vencimiento_publi", SqlDbType.Decimal, 18, "dias_vencimiento_publi");
+            dias_vencimiento_publi.Value = visibilidadModificada.dias_vencimiento_publi;
+            parametros.Add(dias_vencimiento_publi);
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.modificarVisibilidad", parametros);        
         }

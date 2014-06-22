@@ -59,7 +59,7 @@ namespace FrbaCommerce.Vistas.Abm_Empresa
             this.tb_Calle.Text = this.empresaModificar.dom_calle;
             this.tb_Ciudad.Text = this.empresaModificar.ciudad;
             this.tb_Codigo_postal.Text = this.empresaModificar.cod_postal;
-            this.tb_Contraseña.Text = "123456"; //TODO revisar esto que es una poronga, lo mismo en ModificacionCliente
+            this.tb_Contraseña.Text = "123456"; 
             this.tb_Correo_electronico.Text = empresaModificar.mail;
             this.tb_CUIT.Text = empresaModificar.cuit;
             this.tb_Departamento.Text = empresaModificar.depto;

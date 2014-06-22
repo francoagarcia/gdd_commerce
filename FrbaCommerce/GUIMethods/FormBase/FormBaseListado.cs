@@ -58,6 +58,7 @@ namespace FrbaCommerce.GUIMethods.FormBase
             if (result == DialogResult.Yes)
             {
                 this.AccionLimpiar();
+                this.Filtrar();
             }
         }
 

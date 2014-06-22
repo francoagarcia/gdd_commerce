@@ -11,6 +11,7 @@ namespace FrbaCommerce.Entidades
         public string descripcion { get; set; }
         public decimal precio { get; set; }
         public decimal porcentaje { get; set; }
+        public decimal dias_vencimiento_publi { get; set; }
         public bool habilitada { get; set; }
     }
     

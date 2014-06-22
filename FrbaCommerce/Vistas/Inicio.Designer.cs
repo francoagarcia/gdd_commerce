@@ -101,44 +101,44 @@
             this.itm_Const_Sesion_IniciarSesion,
             this.itm_Const_Sesion_CerrarSesion});
             this.itm_Const_Sesion.Name = "itm_Const_Sesion";
-            this.itm_Const_Sesion.Size = new System.Drawing.Size(152, 22);
+            this.itm_Const_Sesion.Size = new System.Drawing.Size(134, 22);
             this.itm_Const_Sesion.Text = "Sesión";
             // 
             // itm_Const_Sesion_IniciarSesion
             // 
             this.itm_Const_Sesion_IniciarSesion.Name = "itm_Const_Sesion_IniciarSesion";
-            this.itm_Const_Sesion_IniciarSesion.Size = new System.Drawing.Size(152, 22);
+            this.itm_Const_Sesion_IniciarSesion.Size = new System.Drawing.Size(142, 22);
             this.itm_Const_Sesion_IniciarSesion.Text = "Iniciar sesión";
             this.itm_Const_Sesion_IniciarSesion.Click += new System.EventHandler(this.itm_Const_Sesion_IniciarSesion_Click);
             // 
             // itm_Const_Sesion_CerrarSesion
             // 
             this.itm_Const_Sesion_CerrarSesion.Name = "itm_Const_Sesion_CerrarSesion";
-            this.itm_Const_Sesion_CerrarSesion.Size = new System.Drawing.Size(152, 22);
+            this.itm_Const_Sesion_CerrarSesion.Size = new System.Drawing.Size(142, 22);
             this.itm_Const_Sesion_CerrarSesion.Text = "Cerrar sesión";
             this.itm_Const_Sesion_CerrarSesion.Click += new System.EventHandler(this.itm_Const_Sesion_CerrarSesion_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(131, 6);
             // 
             // itm_Var_Listado_Estadistico
             // 
             this.itm_Var_Listado_Estadistico.Name = "itm_Var_Listado_Estadistico";
-            this.itm_Var_Listado_Estadistico.Size = new System.Drawing.Size(152, 22);
+            this.itm_Var_Listado_Estadistico.Size = new System.Drawing.Size(134, 22);
             this.itm_Var_Listado_Estadistico.Text = "Estadísticas";
             this.itm_Var_Listado_Estadistico.Click += new System.EventHandler(this.itm_Var_Listado_Estadistico_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(131, 6);
             // 
             // itm_Const_Salir
             // 
             this.itm_Const_Salir.Name = "itm_Const_Salir";
-            this.itm_Const_Salir.Size = new System.Drawing.Size(152, 22);
+            this.itm_Const_Salir.Size = new System.Drawing.Size(134, 22);
             this.itm_Const_Salir.Text = "Salir";
             this.itm_Const_Salir.Click += new System.EventHandler(this.itm_Const_Salir_Click);
             // 
@@ -161,6 +161,7 @@
             this.itm_Var_Facturar_Publicaciones.Name = "itm_Var_Facturar_Publicaciones";
             this.itm_Var_Facturar_Publicaciones.Size = new System.Drawing.Size(220, 22);
             this.itm_Var_Facturar_Publicaciones.Text = "Facturar publicaciones";
+            this.itm_Var_Facturar_Publicaciones.Click += new System.EventHandler(this.itm_Var_Facturar_Publicaciones_Click);
             // 
             // toolStripSeparator6
             // 
@@ -172,6 +173,7 @@
             this.itm_Var_ABM_de_Rol.Name = "itm_Var_ABM_de_Rol";
             this.itm_Var_ABM_de_Rol.Size = new System.Drawing.Size(220, 22);
             this.itm_Var_ABM_de_Rol.Text = "Roles";
+            this.itm_Var_ABM_de_Rol.Click += new System.EventHandler(this.itm_Var_ABM_de_Rol_Click);
             // 
             // itm_Var_Usuarios
             // 
@@ -187,12 +189,14 @@
             this.itm_Var_ABM_de_Empresa.Name = "itm_Var_ABM_de_Empresa";
             this.itm_Var_ABM_de_Empresa.Size = new System.Drawing.Size(124, 22);
             this.itm_Var_ABM_de_Empresa.Text = "Empresas";
+            this.itm_Var_ABM_de_Empresa.Click += new System.EventHandler(this.itm_Var_ABM_de_Empresa_Click);
             // 
             // itm_Var_ABM_de_Cliente
             // 
             this.itm_Var_ABM_de_Cliente.Name = "itm_Var_ABM_de_Cliente";
             this.itm_Var_ABM_de_Cliente.Size = new System.Drawing.Size(124, 22);
             this.itm_Var_ABM_de_Cliente.Text = "Clientes";
+            this.itm_Var_ABM_de_Cliente.Click += new System.EventHandler(this.itm_Var_ABM_de_Cliente_Click);
             // 
             // toolStripSeparator7
             // 
@@ -204,12 +208,14 @@
             this.itm_Var_ABM_de_Rubro.Name = "itm_Var_ABM_de_Rubro";
             this.itm_Var_ABM_de_Rubro.Size = new System.Drawing.Size(220, 22);
             this.itm_Var_ABM_de_Rubro.Text = "Rubros de publicaciones";
+            this.itm_Var_ABM_de_Rubro.Click += new System.EventHandler(this.itm_Var_ABM_de_Rubro_Click);
             // 
             // itm_Var_ABM_de_Visibilidad_de_Publicacion
             // 
             this.itm_Var_ABM_de_Visibilidad_de_Publicacion.Name = "itm_Var_ABM_de_Visibilidad_de_Publicacion";
             this.itm_Var_ABM_de_Visibilidad_de_Publicacion.Size = new System.Drawing.Size(220, 22);
             this.itm_Var_ABM_de_Visibilidad_de_Publicacion.Text = "Visibilidad de publicaciones";
+            this.itm_Var_ABM_de_Visibilidad_de_Publicacion.Click += new System.EventHandler(this.itm_Var_ABM_de_Visibilidad_de_Publicacion_Click);
             // 
             // itm_Var_Publicaciones
             // 
@@ -229,12 +235,14 @@
             this.itm_Var_Nueva_Publicacion.Name = "itm_Var_Nueva_Publicacion";
             this.itm_Var_Nueva_Publicacion.Size = new System.Drawing.Size(201, 22);
             this.itm_Var_Nueva_Publicacion.Text = "Nueva publicación";
+            this.itm_Var_Nueva_Publicacion.Click += new System.EventHandler(this.itm_Var_Nueva_Publicacion_Click);
             // 
             // itm_Var_Editar_Publicacion
             // 
             this.itm_Var_Editar_Publicacion.Name = "itm_Var_Editar_Publicacion";
             this.itm_Var_Editar_Publicacion.Size = new System.Drawing.Size(201, 22);
             this.itm_Var_Editar_Publicacion.Text = "Editar publicación";
+            this.itm_Var_Editar_Publicacion.Click += new System.EventHandler(this.itm_Var_Editar_Publicacion_Click);
             // 
             // toolStripSeparator9
             // 
@@ -246,6 +254,7 @@
             this.itm_Var_Historial_de_Operaciones.Name = "itm_Var_Historial_de_Operaciones";
             this.itm_Var_Historial_de_Operaciones.Size = new System.Drawing.Size(201, 22);
             this.itm_Var_Historial_de_Operaciones.Text = "Historial de operaciones";
+            this.itm_Var_Historial_de_Operaciones.Click += new System.EventHandler(this.itm_Var_Historial_de_Operaciones_Click);
             // 
             // toolStripSeparator8
             // 
@@ -257,6 +266,7 @@
             this.itm_Var_Gestion_de_Preguntas.Name = "itm_Var_Gestion_de_Preguntas";
             this.itm_Var_Gestion_de_Preguntas.Size = new System.Drawing.Size(201, 22);
             this.itm_Var_Gestion_de_Preguntas.Text = "Gestion de preguntas";
+            this.itm_Var_Gestion_de_Preguntas.Click += new System.EventHandler(this.itm_Var_Gestion_de_Preguntas_Click);
             // 
             // itm_Var_Clientes
             // 
@@ -350,7 +360,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuPrincipal;
             this.Name = "Inicio";
-            this.Text = "Commerce FRBA";
+            this.Text = "FRBA Commerce";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.mnuPrincipal.ResumeLayout(false);
@@ -363,6 +373,7 @@
             this.PerformLayout();
 
         }
+
 
         #endregion
 

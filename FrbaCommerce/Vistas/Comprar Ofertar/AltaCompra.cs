@@ -67,8 +67,8 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             try
             {
                 this.compra = this.armarCompra();
-                decimal idNuevo = this.compDB.nuevaCompra(this.compra);
-                this.compra.id_compra = idNuevo;
+                bool puedeComprar = this.compDB.nuevaCompra(this.compra);
+                this.usuarioActual.habilitada_comprar = puedeComprar;
                 this.DialogResult = DialogResult.OK;
             }
             catch (SqlException e)
@@ -109,63 +109,5 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             }
         }
         #endregion
-
-
-
-
-
-
-        //public AltaCompra(Usuario usuario, DataRowView data)
-        //{
-        //    this.usuarioActual = usuario;
-
-        //    DataRow row = data.Row;
-
-        //    InitializeComponent();
-
-
-        //}
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-
-        //    if (textBox1.Text != "")
-        //    {
-
-        //        int cantidad = Convert.ToInt32(textBox1.Text);
-        //        // cargo el objeto stock del dataset a int stk
-        //        var st = row["Stock"];
-        //        string id_tipo = st.ToString();
-        //        int stk = Convert.ToInt32(id_tipo);
-
-        //        //solo cargo la compra si tengo stock disponible
-        //        if (stk > cantidad)
-        //        {
-        //            // cargo el objeto id publicacion del dataset a int id_pub
-        //            var pu = row["id_publicacion"];
-        //            string id_p = pu.ToString();
-        //            int id_pub = Convert.ToInt32(id_p);
-
-        //            // actualizo el stock en la publicacion
-        //            ComprarOfertarDB comp = new ComprarOfertarDB();
-        //            comp.update_Publicacion(id_pub, (stk - cantidad));
-
-        //            // agrego la nuevo compra al sistema
-        //            comp.agregar_Compra(id_pub, usuarioActual.id_usuario, cantidad);
-
-        //            // luego de confirmada la compra se muestra la info del vendedor
-        //            UsuarioDB usu = new UsuarioDB();
-        //            DataSet ds = usu.dame_TusDatos(usuarioActual.id_usuario);
-
-        //            dataGridView1.AutoGenerateColumns = true;
-        //            dataGridView1.DataSource = ds.Tables[0];
-        //        }
-        //        else
-        //            MessageDialog.MensajeError("No se ha podido realizar la compra. Usted ha excedido el stock disponible.");
-        //    }
-
-        //}
-
-        
     }
 }

@@ -33,7 +33,7 @@
             this.btn_Limpiar = new System.Windows.Forms.Button();
             this.btn_Generar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dp_Fecha_Vencimiento = new System.Windows.Forms.DateTimePicker();
+            this.tb_Fecha_de_vencimiento = new System.Windows.Forms.TextBox();
             this.dp_Fecha_inicio = new System.Windows.Forms.DateTimePicker();
             this.nud_Stock = new System.Windows.Forms.NumericUpDown();
             this.nud_Precio = new System.Windows.Forms.NumericUpDown();
@@ -101,7 +101,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dp_Fecha_Vencimiento);
+            this.groupBox1.Controls.Add(this.tb_Fecha_de_vencimiento);
             this.groupBox1.Controls.Add(this.dp_Fecha_inicio);
             this.groupBox1.Controls.Add(this.nud_Stock);
             this.groupBox1.Controls.Add(this.nud_Precio);
@@ -126,12 +126,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingrese los datos solicitados";
             // 
-            // dp_Fecha_Vencimiento
+            // tb_Fecha_de_vencimiento
             // 
-            this.dp_Fecha_Vencimiento.Location = new System.Drawing.Point(92, 294);
-            this.dp_Fecha_Vencimiento.Name = "dp_Fecha_Vencimiento";
-            this.dp_Fecha_Vencimiento.Size = new System.Drawing.Size(198, 21);
-            this.dp_Fecha_Vencimiento.TabIndex = 38;
+            this.tb_Fecha_de_vencimiento.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.tb_Fecha_de_vencimiento.Location = new System.Drawing.Point(93, 291);
+            this.tb_Fecha_de_vencimiento.Name = "tb_Fecha_de_vencimiento";
+            this.tb_Fecha_de_vencimiento.ReadOnly = true;
+            this.tb_Fecha_de_vencimiento.Size = new System.Drawing.Size(197, 21);
+            this.tb_Fecha_de_vencimiento.TabIndex = 38;
             // 
             // dp_Fecha_inicio
             // 
@@ -139,6 +141,7 @@
             this.dp_Fecha_inicio.Name = "dp_Fecha_inicio";
             this.dp_Fecha_inicio.Size = new System.Drawing.Size(198, 21);
             this.dp_Fecha_inicio.TabIndex = 37;
+            this.dp_Fecha_inicio.ValueChanged += new System.EventHandler(this.dp_Fecha_inicio_ValueChanged);
             // 
             // nud_Stock
             // 
@@ -210,6 +213,7 @@
             this.cb_Visibilidad.Name = "cb_Visibilidad";
             this.cb_Visibilidad.Size = new System.Drawing.Size(197, 23);
             this.cb_Visibilidad.TabIndex = 24;
+            this.cb_Visibilidad.SelectedIndexChanged += new System.EventHandler(this.cb_Visibilidad_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -225,9 +229,9 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(310, 162);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 15);
+            this.label7.Size = new System.Drawing.Size(121, 15);
             this.label7.TabIndex = 34;
-            this.label7.Text = "Selección de Rubros :";
+            this.label7.Text = "Selección de Rubro :";
             // 
             // list_Rubros
             // 
@@ -308,7 +312,11 @@
             this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.btn_Limpiar);
             this.Controls.Add(this.btn_Generar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GenerarPublicacion";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRBA Commerce - Generar publicación";
             this.Load += new System.EventHandler(this.GenerarPublicacion_Load);
             this.groupBox1.ResumeLayout(false);
@@ -326,7 +334,6 @@
         private System.Windows.Forms.Button btn_Limpiar;
         private System.Windows.Forms.Button btn_Generar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DateTimePicker dp_Fecha_Vencimiento;
         private System.Windows.Forms.DateTimePicker dp_Fecha_inicio;
         private System.Windows.Forms.NumericUpDown nud_Stock;
         private System.Windows.Forms.NumericUpDown nud_Precio;
@@ -343,5 +350,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tb_Descripcion;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tb_Fecha_de_vencimiento;
     }
 }

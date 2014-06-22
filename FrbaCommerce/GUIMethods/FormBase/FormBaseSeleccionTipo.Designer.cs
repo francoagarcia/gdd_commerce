@@ -28,51 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cb_Tipo = new System.Windows.Forms.ComboBox();
-            this.btn_Siguiente = new System.Windows.Forms.Button();
-            this.btn_Cancelar = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
             this.groupBox_Tipo = new System.Windows.Forms.GroupBox();
             this.label_Tipo = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cb_Tipo = new System.Windows.Forms.ComboBox();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
+            this.btn_Siguiente = new System.Windows.Forms.Button();
             this.groupBox_Tipo.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // cb_Tipo
-            // 
-            this.cb_Tipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_Tipo.FormattingEnabled = true;
-            this.cb_Tipo.Location = new System.Drawing.Point(127, 36);
-            this.cb_Tipo.Name = "cb_Tipo";
-            this.cb_Tipo.Size = new System.Drawing.Size(178, 21);
-            this.cb_Tipo.TabIndex = 2;
-            // 
-            // btn_Siguiente
-            // 
-            this.btn_Siguiente.Location = new System.Drawing.Point(180, 118);
-            this.btn_Siguiente.Name = "btn_Siguiente";
-            this.btn_Siguiente.Size = new System.Drawing.Size(125, 23);
-            this.btn_Siguiente.TabIndex = 6;
-            this.btn_Siguiente.Text = "Siguiente";
-            this.btn_Siguiente.UseVisualStyleBackColor = true;
-            this.btn_Siguiente.Click += new System.EventHandler(this.btn_Siguiente_Click);
-            // 
-            // btn_Cancelar
-            // 
-            this.btn_Cancelar.Location = new System.Drawing.Point(33, 118);
-            this.btn_Cancelar.Name = "btn_Cancelar";
-            this.btn_Cancelar.Size = new System.Drawing.Size(125, 23);
-            this.btn_Cancelar.TabIndex = 15;
-            this.btn_Cancelar.Text = "Cancelar";
-            this.btn_Cancelar.UseVisualStyleBackColor = true;
-            this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(36, 296);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(0, 13);
-            this.label10.TabIndex = 22;
             // 
             // groupBox_Tipo
             // 
@@ -95,6 +58,43 @@
             this.label_Tipo.TabIndex = 23;
             this.label_Tipo.Text = "Tipo:";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(36, 296);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(0, 13);
+            this.label10.TabIndex = 22;
+            // 
+            // cb_Tipo
+            // 
+            this.cb_Tipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_Tipo.FormattingEnabled = true;
+            this.cb_Tipo.Location = new System.Drawing.Point(127, 36);
+            this.cb_Tipo.Name = "cb_Tipo";
+            this.cb_Tipo.Size = new System.Drawing.Size(178, 21);
+            this.cb_Tipo.TabIndex = 2;
+            // 
+            // btn_Cancelar
+            // 
+            this.btn_Cancelar.Location = new System.Drawing.Point(33, 118);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(125, 23);
+            this.btn_Cancelar.TabIndex = 15;
+            this.btn_Cancelar.Text = "Cancelar";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);
+            // 
+            // btn_Siguiente
+            // 
+            this.btn_Siguiente.Location = new System.Drawing.Point(180, 118);
+            this.btn_Siguiente.Name = "btn_Siguiente";
+            this.btn_Siguiente.Size = new System.Drawing.Size(125, 23);
+            this.btn_Siguiente.TabIndex = 6;
+            this.btn_Siguiente.Text = "Siguiente";
+            this.btn_Siguiente.UseVisualStyleBackColor = true;
+            this.btn_Siguiente.Click += new System.EventHandler(this.btn_Siguiente_Click);
+            // 
             // FormBaseSeleccionTipo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -103,6 +103,9 @@
             this.Controls.Add(this.groupBox_Tipo);
             this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.btn_Siguiente);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormBaseSeleccionTipo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SeleccionDeTipo";

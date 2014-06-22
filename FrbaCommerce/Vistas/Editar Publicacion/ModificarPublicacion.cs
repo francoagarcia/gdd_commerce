@@ -23,9 +23,11 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
         private PublicacionDB publiDB;
         private Usuario usuarioPublicador;
         private IList<Rubro> rubros;
+        private DateTime fecha_vencimiento;
         
         public ModificarPublicacion(Publicacion publicacion, Usuario usuario)
         {
+            this.fecha_vencimiento = publicacion.fecha_vencimiento;
             this.publiModificar = publicacion;
             this.usuarioPublicador = usuario;
             this.publiDB = new PublicacionDB();
@@ -102,7 +104,10 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
                 this.cb_Estado.DataSource = lista.Todos;
                 this.cb_Estado.DisplayMember = "Nombre";
                 this.cb_Estado.ValueMember = "Id";
-                MessageDialog.MensajeInformativo(this, "No se puede modificar una subasta");
+                if (esPublicacionBorrador()) 
+                    this.HabilitarTodo();
+                else
+                MessageDialog.MensajeInformativo(this, "Solo se puede modificar una subasta en estado borrador");
             }
             this.CargarPublicacion();
         }
@@ -113,7 +118,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             this.nud_Precio.Value = this.publiModificar.precio;
             this.nud_Stock.Value = this.publiModificar.stock;
             this.dp_Fecha_inicio.Value = this.publiModificar.fecha_inicio;
-            this.dp_Fecha_Vencimiento.Value = this.publiModificar.fecha_vencimiento;
+            this.tb_Fecha_de_vencimiento.Text = this.publiModificar.fecha_vencimiento.ToString();
             this.cb_Estado.SelectedIndex = Convert.ToInt32(publiModificar.estado.id_estado)-1;
             this.chk_Permite_preguntas.Checked = this.publiModificar.permite_preguntas;
             this.CargarListCheckBox();
@@ -171,7 +176,6 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             this.AgregarValidacion(new ValidadorCombobox(this.cb_Visibilidad));
             this.AgregarValidacion(new ValidadorCombobox(this.cb_Estado));
             this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_inicio, DateManager.Ahora()));
-            this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_Vencimiento, DateManager.Ahora()));
         }
         #endregion
 
@@ -246,7 +250,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             publi.usuario_publicador = this.usuarioPublicador;
             publi.descripcion = this.tb_Descripcion.Text;
             publi.fecha_inicio = this.dp_Fecha_inicio.Value;
-            publi.fecha_vencimiento = this.dp_Fecha_Vencimiento.Value;
+            publi.fecha_vencimiento = this.fecha_vencimiento;
             publi.habilitada = true;
             EstadoPublicacion estado = new EstadoPublicacion();
             estado.id_estado =((TipoEstados)this.cb_Estado.SelectedItem).Id;
@@ -316,6 +320,26 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             }
         }
 
+        private void dp_Fecha_inicio_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarFechaDeVencimiento();
+        }
+
+        private void cb_Visibilidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ActualizarFechaDeVencimiento();
+        }
+
+        private void ActualizarFechaDeVencimiento()
+        {
+            Visibilidad visibilidadElegida = (Visibilidad)this.cb_Visibilidad.SelectedItem;
+            if (visibilidadElegida != null)
+            {
+                DateTime fecha_inicio = dp_Fecha_inicio.Value;
+                this.fecha_vencimiento = fecha_inicio.AddDays(Convert.ToDouble(visibilidadElegida.dias_vencimiento_publi));
+                this.tb_Fecha_de_vencimiento.Text = this.fecha_vencimiento.ToString();
+            }
+        }
 
     }
 }

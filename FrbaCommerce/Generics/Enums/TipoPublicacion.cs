@@ -23,6 +23,15 @@ namespace FrbaCommerce.Generics.Enums
         }
     }
 
+    public class TipoCualquiera : TipoPublicacion
+    {
+        public TipoCualquiera()
+        {
+            this.Id = 99;
+            this.Nombre = "";
+        }
+    }
+
     public class ListaTipoPublicacion : ListaTipoGenerico {
 
         public ListaTipoPublicacion() 
@@ -32,8 +41,9 @@ namespace FrbaCommerce.Generics.Enums
 
         protected override void GenerarSubTipos()
         {
-            Todos.Add(new TipoSubasta());
+            Todos.Add(new TipoCualquiera());
             Todos.Add(new TipoCompraInmediata());
+            Todos.Add(new TipoSubasta());
         }
     
     }

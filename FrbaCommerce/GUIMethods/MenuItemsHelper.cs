@@ -11,14 +11,30 @@ namespace FrbaCommerce.GUIMethods
 {
     public class MenuItemsHelper
     {
-        public void manejarItems(ToolStripItemCollection menu_toolItems, IList<string> listaNombresCruda)
+        public void manejarItemsAll(ToolStripItemCollection menu_toolItems, IList<string> listaNombresCruda)
         {
             this.esconderLosQueNoEstenEnLaLista(menu_toolItems, listaNombresCruda);
-            this.mostrarAquellosQueTieneTodosSusHijosHabilitados(menu_toolItems);
+            IList<string> listaNombresCocinada = adaptarListaDeFuncionalidades(listaNombresCruda);
+            this.mostrarAquellosQueTieneTodosSusHijosHabilitados2(menu_toolItems, listaNombresCocinada);
+            //this.mostrarAquellosQueTieneTodosSusHijosHabilitados(menu_toolItems); //Algun
+            int indexSubniveles = 0;
+            int cantidadMaximaDeSubniveles = this.cantidadMaximaDeSubNiveles(menu_toolItems);
+            while (indexSubniveles <= cantidadMaximaDeSubniveles)
+            {
+                this.mostrarAquellosQueTieneTodosSusHijosHabilitados2(menu_toolItems, listaNombresCocinada);
+                //this.mostrarAquellosQueTieneTodosSusHijosHabilitados(menu_toolItems);
+                indexSubniveles++;
+            }
+        }
+
+        public void manejarItemsAny(ToolStripItemCollection menu_toolItems, IList<string> listaNombresCruda)
+        {
+            this.esconderLosQueNoEstenEnLaLista(menu_toolItems, listaNombresCruda);
+            this.mostrarAquellosQueTieneAlgunoDeSusHijosHabilitados(menu_toolItems); //Algun
             int cant = 0;
             while (cant <= this.cantidadMaximaDeSubNiveles(menu_toolItems))
             {
-                this.mostrarAquellosQueTieneTodosSusHijosHabilitados(menu_toolItems);
+                this.mostrarAquellosQueTieneAlgunoDeSusHijosHabilitados(menu_toolItems);
                 cant++;
             }
         }
@@ -81,7 +97,27 @@ namespace FrbaCommerce.GUIMethods
             return (string[])listNombres.ToArray();
         }
 
-        public  void mostrarAquellosQueTieneTodosSusHijosHabilitados(ToolStripItemCollection menu_toolItems)
+       
+
+        public void mostrarAquellosQueTieneAlgunoDeSusHijosHabilitados(ToolStripItemCollection menu_toolItems)
+        {
+            List<ToolStripMenuItem> allItems = this.getAllItems(menu_toolItems);
+            foreach (ToolStripMenuItem item in allItems)
+            {
+                if (algunoDeSusHijosEstanHabilitados(item))
+                    item.Enabled = item.Visible = true;
+                else
+                    item.Enabled = item.Visible = false;
+            }
+        }
+
+        private bool algunoDeSusHijosEstanHabilitados(ToolStripMenuItem unItem)
+        {
+            List<ToolStripMenuItem> itemsHijos = this.getItemsChildren(unItem);
+            return itemsHijos.Count.Equals(0) || itemsHijos.Any(i => i.Enabled);
+        }
+
+        public void mostrarAquellosQueTieneTodosSusHijosHabilitados(ToolStripItemCollection menu_toolItems)
         {
             List<ToolStripMenuItem> allItems = this.getAllItems(menu_toolItems);
             foreach (ToolStripMenuItem item in allItems)
@@ -93,10 +129,38 @@ namespace FrbaCommerce.GUIMethods
             }
         }
 
+        public void mostrarAquellosQueTieneTodosSusHijosHabilitados2(ToolStripItemCollection menu_toolItems, IList<string> listaNombresCocinada)
+        {
+            List<ToolStripMenuItem> allItems = this.getAllItems(menu_toolItems);
+            foreach (ToolStripMenuItem item in allItems)
+            {
+                if (todosSusHijosEstanHabilitados2(item, listaNombresCocinada))
+                    item.Enabled = item.Visible = true;
+                else
+                    item.Enabled = item.Visible = false;
+            }
+        }
+
+         private  bool todosSusHijosEstanHabilitados2(ToolStripMenuItem unItem, IList<string> listaNombresCocinada)
+        {
+            List<ToolStripMenuItem> itemsHijos = this.getItemsChildren(unItem);
+            if(itemsHijos.Count>0)
+                return itemsHijos.All(i => i.Enabled);
+            else 
+                if(this.hayQueHabilitarFuncionalidad(unItem, listaNombresCocinada))
+                    return true;
+                else
+                    return false;
+
+        }
+
         private  bool todosSusHijosEstanHabilitados(ToolStripMenuItem unItem)
         {
             List<ToolStripMenuItem> itemsHijos = this.getItemsChildren(unItem);
-            return itemsHijos.All(i => i.Enabled);
+            //if(itemsHijos.Count>0)
+                return itemsHijos.All(i => i.Enabled);
+            //else this.hayQueHabilitarFuncionalidad
+
         }
 
         public  List<ToolStripMenuItem> getItemsChildren(ToolStripMenuItem unItem)

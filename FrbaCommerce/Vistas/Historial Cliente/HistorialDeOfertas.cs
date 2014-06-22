@@ -17,6 +17,7 @@ namespace FrbaCommerce.Vistas.Historial_Cliente
             :base(usu)
         {
             //InitializeComponent();
+            this.Text = "Historial de ofertas";
         }
 
         protected override void LlenarGrilla()

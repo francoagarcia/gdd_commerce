@@ -21,45 +21,82 @@ AS
 BEGIN
 	
 	BEGIN TRY
-		BEGIN TRAN
+	
+		DECLARE @cantidad_publicaciones_gratuitas_activas numeric(18,0);
 		
-			DECLARE @max_id numeric(18,0)
-			SELECT @max_id = MAX(id_publicacion)+1
-			FROM DATA_GROUP.Publicacion;
-			
-			INSERT INTO DATA_GROUP.Publicacion( id_publicacion,
-												descripcion, 
-												stock, 
-												fecha_inicio, 
-												fecha_vencimiento, 
-												precio, 
-												permite_preguntas, 
-												id_tipo_publicacion, 
-												id_visibilidad, 
-												id_estado, 
-												id_usuario_publicador, 
-												id_rubro, 
-												habilitada,
-												facturada)
-			VALUES( @max_id,
-					@descripcion, 
-					@stock, 
-					@fecha_inicio, 
-					@fecha_vencimiento, 
-					@precio, 
-					@permite_preguntas, 
-					@id_tipo_publicacion, 
-					@id_visibilidad, 
-					@id_estado, 
-					@id_usuario_publicador, 
-					@id_rubro, 
-					@habilitada,
-					0)
-					
-			SET @id_publicacion_nueva = @max_id
-			RETURN @id_publicacion_nueva
+		SELECT @cantidad_publicaciones_gratuitas_activas=COUNT(*)
+		FROM DATA_GROUP.Publicacion p
+		WHERE p.id_usuario_publicador=@id_usuario_publicador
+			AND p.id_estado=1
+			AND p.id_visibilidad=10006
+
+		if @cantidad_publicaciones_gratuitas_activas>=3 AND @id_visibilidad=10006 AND @id_estado=1
+		BEGIN
+	
+			DECLARE @ErrorSeverityGratuita INT;
+			DECLARE @ErrorStateGratuita INT;
+
+			SELECT @ErrorSeverityGratuita = ERROR_SEVERITY(), @ErrorStateGratuita = ERROR_STATE();
+
+			RAISERROR ('No puede tener mas de 3 publicaciones gratuitas activas(publicada) al mismo tiempo.', -- Message text.
+				   @ErrorSeverityGratuita, -- Severity.
+				   @ErrorStateGratuita -- State.
+				   );
+		END
+		ELSE
+		BEGIN
+			BEGIN TRAN
+
+				DECLARE @max_id numeric(18,0)
+				SELECT @max_id = MAX(id_publicacion)+1
+				FROM DATA_GROUP.Publicacion;
+				
+				INSERT INTO DATA_GROUP.Publicacion( id_publicacion,
+													descripcion, 
+													stock, 
+													fecha_inicio, 
+													fecha_vencimiento, 
+													precio, 
+													permite_preguntas, 
+													id_tipo_publicacion, 
+													id_visibilidad, 
+													id_estado, 
+													id_usuario_publicador, 
+													id_rubro, 
+													habilitada,
+													facturada)
+				VALUES( @max_id,
+						@descripcion, 
+						@stock, 
+						@fecha_inicio, 
+						@fecha_vencimiento, 
+						@precio, 
+						@permite_preguntas, 
+						@id_tipo_publicacion, 
+						@id_visibilidad, 
+						@id_estado, 
+						@id_usuario_publicador, 
+						@id_rubro, 
+						@habilitada,
+						0)
 						
-		COMMIT TRAN
+				SET @id_publicacion_nueva = @max_id
+				
+				--Publicacion no gratuita
+				IF( @id_visibilidad!=10006)
+				BEGIN
+					IF NOT EXISTS ( SELECT * FROM DATA_GROUP.CantVisibilidadesFacturadasPorUsuario c
+									WHERE c.id_usuario_fact = @id_usuario_publicador
+									AND c.id_visibilidad_fact = @id_visibilidad)
+					BEGIN
+						INSERT INTO DATA_GROUP.CantVisibilidadesFacturadasPorUsuario(id_usuario_fact, id_visibilidad_fact, cantidad_fact)
+						VALUES(@id_usuario_publicador, @id_visibilidad, 0); --Le sumo 1 cuando facturo
+					END
+				END
+				
+			COMMIT TRAN
+			RETURN @id_publicacion_nueva
+		END
 	END TRY
 	BEGIN CATCH
 		ROLLBACK TRAN
@@ -76,7 +113,6 @@ BEGIN
 			   );
 	END CATCH
 END
-
 
 
 

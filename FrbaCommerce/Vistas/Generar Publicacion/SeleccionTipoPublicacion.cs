@@ -23,7 +23,7 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
             : base(new ListaTipoPublicacion())
         {
             this.usuarioPublicador = unUsuario;
-            //InitializeComponent();
+            InitializeComponent();
         }
 
         protected override void CargarNombres()
@@ -36,8 +36,13 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
         protected override void AccionMostrarSiguiente(TipoGenerico tipoElegido)
         {
             TipoPublicacion tipo = (TipoPublicacion)tipoElegido;
-            this.FormSiguiente = new GenerarPublicacion(tipo, this.usuarioPublicador);
-            this.mostrarVentanaSiguiente();
+            if (!string.IsNullOrEmpty(tipo.Nombre))
+            {
+                this.FormSiguiente = new GenerarPublicacion(tipo, this.usuarioPublicador);
+                this.mostrarVentanaSiguiente();
+            }
+            else
+                MessageDialog.MensajeInformativo(this, "Seleccione un tipo de publicacion a crear para continuar");
         }
     }
 }

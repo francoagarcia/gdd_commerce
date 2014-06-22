@@ -1,4 +1,31 @@
 
+
+
+
+
+
+-----------------------------------------------------------------------------------------
+-----------------------------------Items para bonificar----------------------------------
+-----------------------------------------------------------------------------------------
+
+
+IF OBJECT_ID('DATA_GROUP.getBonificados') is not null
+	DROP PROCEDURE DATA_GROUP.getBonificados
+	GO
+CREATE PROCEDURE DATA_GROUP.getBonificados
+@id_usuario numeric(18,0)
+AS
+BEGIN
+	
+	SELECT  c.id_visibilidad_fact, v.descripcion, c.id_usuario_fact, c.cantidad_fact
+	FROM DATA_GROUP.CantVisibilidadesFacturadasPorUsuario c
+	JOIN DATA_GROUP.VisibilidadPublicacion v ON v.id_visibilidad=c.id_visibilidad_fact
+	WHERE c.id_usuario_fact=@id_usuario
+	Order by c.id_visibilidad_fact ASC
+	
+END
+GO
+
 -----------------------------------------------------------------------------------------
 -------------------------------Pendientes para facturar----------------------------------
 -----------------------------------------------------------------------------------------
@@ -14,7 +41,7 @@ BEGIN
 	facturar bit,
 	id_publicacion numeric(18,0),
 	id_compra numeric(18,0),
-	tipo_item_a_facturar nvarchar(1),
+	tipo_item_a_facturar nvarchar(10),
 	resumen nvarchar(255),
 	cantidad_a_rendir numeric(18,0),
 	importe_a_rendir numeric(18,2),
@@ -34,7 +61,7 @@ BEGIN
 	Select	P.id_publicacion, 
 			id_compra = 0,
 			[Facturar] = CONVERT(Bit, 0), 
-			[Tipo] = 'P',
+			[Tipo] = 'PUBL',
 			[Resumen] = 'Costo por publicacion(' + LTRIM(RTRIM(STR(P.id_publicacion))) + ') - Visibilidad: ' + V.descripcion,
 			[Cantidad] = 1, 
 			[Importe] = V.precio,
@@ -50,7 +77,7 @@ BEGIN
 	Select	P.id_publicacion, 
 			C.id_compra, 
 			[Facturar] = CONVERT(Bit, 0),
-			[Tipo] = 'C',
+			[Tipo] = 'COMP',
 			[Resumen] = 'Comision por compra en publicacion(' + LTRIM(RTRIM(STR(P.id_publicacion))) +
 					') - Usuario: ' + U.username, 
 			[Cantidad] = C.cantidad,
@@ -73,7 +100,7 @@ BEGIN
 			id_visibilidad,
 			fecha_inicio 
 	FROM temp_pendientes 
-	ORDER BY fecha_inicio DESC;
+	ORDER BY fecha_inicio ASC;
 
 	DROP TABLE temp_pendientes;
 END
@@ -95,8 +122,8 @@ CREATE PROCEDURE DATA_GROUP.crearFactura
 AS
 BEGIN
 
--- BEGIN TRY
-	-- BEGIN TRAN
+BEGIN TRY
+	BEGIN TRAN
 
 	SELECT @nro_factura = MAX(nro_factura) + 1 
 	FROM DATA_GROUP.Factura
@@ -109,23 +136,25 @@ BEGIN
 									forma_pago_datos)
 	Values(@nro_factura, @id_vendedor, GETDATE(), @total, @id_forma_pago, @forma_pago_datos);
 	
-	-- COMMIT TRAN
--- END TRY
--- BEGIN CATCH
-	-- ROLLBACK TRAN
-	
-	-- DECLARE @ErrorMessage NVARCHAR(4000);
-	-- DECLARE @ErrorSeverity INT;
-	-- DECLARE @ErrorState INT;
 
-	-- SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
 
-	-- RAISERROR (@ErrorMessage, -- Message text.
-		   -- @ErrorSeverity, -- Severity.
-		   -- @ErrorState -- State.
-		   -- );
+	COMMIT TRAN
+END TRY
+BEGIN CATCH
+	ROLLBACK TRAN
 
--- END CATCH
+	DECLARE @ErrorMessage NVARCHAR(4000);
+	DECLARE @ErrorSeverity INT;
+	DECLARE @ErrorState INT;
+
+	SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+	RAISERROR (@ErrorMessage, -- Message text.
+		@ErrorSeverity, -- Severity.
+		@ErrorState -- State.
+		);
+
+END CATCH
 END
 GO
 
@@ -146,8 +175,8 @@ CREATE PROCEDURE DATA_GROUP.crearItemFactura
 AS
 BEGIN
 
--- BEGIN TRY
-	-- BEGIN TRAN
+BEGIN TRY
+	BEGIN TRAN
 		DECLARE @pub_visibilidad_Id INT
 		DECLARE @pub_usu_Id INT
 		DECLARE @esCompra bit
@@ -172,30 +201,38 @@ BEGIN
 			SET facturada = 1
 			WHERE id_compra = @id_compra
 		END
+		
+		DECLARE @id_visibilidad_fact numeric(18,0)
+		DECLARE @id_usuario_fact numeric(18,0)
+		
+		SELECT @id_visibilidad_fact=id_visibilidad, @id_usuario_fact=id_usuario_publicador
+		FROM DATA_GROUP.Publicacion 
+		WHERE id_publicacion=@id_publicacion
+		
+		UPDATE DATA_GROUP.CantVisibilidadesFacturadasPorUsuario
+		SET cantidad_fact=cantidad_fact+1
+		WHERE id_visibilidad_fact=@id_visibilidad_fact AND id_usuario_fact=@id_usuario_fact
 	
-	-- COMMIT TRAN
--- END TRY
--- BEGIN CATCH
-	-- ROLLBACK TRAN
+	 COMMIT TRAN
+ END TRY
+ BEGIN CATCH
+	 ROLLBACK TRAN
 	
-	-- DECLARE @ErrorMessage NVARCHAR(4000);
-	-- DECLARE @ErrorSeverity INT;
-	-- DECLARE @ErrorState INT;
+	 DECLARE @ErrorMessage NVARCHAR(4000);
+	 DECLARE @ErrorSeverity INT;
+	 DECLARE @ErrorState INT;
 
-	-- SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+	 SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
 
-	-- RAISERROR (@ErrorMessage, -- Message text.
-		   -- @ErrorSeverity, -- Severity.
-		   -- @ErrorState -- State.
-		   -- );
+	 RAISERROR (@ErrorMessage, -- Message text.
+		    @ErrorSeverity, -- Severity.
+		    @ErrorState -- State.
+		    );
 
--- END CATCH
+ END CATCH
 
 END
 GO
-
-
-
 
 
 

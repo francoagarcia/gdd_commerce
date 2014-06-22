@@ -37,7 +37,10 @@
             this.tb_Descripcion = new System.Windows.Forms.TextBox();
             this.button_Cancelar = new System.Windows.Forms.Button();
             this.button_Guardar = new System.Windows.Forms.Button();
+            this.tb_Dias_habilitados = new System.Windows.Forms.TextBox();
+            this.nud_Dias_habilitados = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Dias_habilitados)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -69,6 +72,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.nud_Dias_habilitados);
+            this.groupBox1.Controls.Add(this.tb_Dias_habilitados);
             this.groupBox1.Controls.Add(this.tb_Porcentaje);
             this.groupBox1.Controls.Add(this.tb_Precio);
             this.groupBox1.Controls.Add(this.tb_Descripcion);
@@ -77,7 +82,7 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(298, 143);
+            this.groupBox1.Size = new System.Drawing.Size(298, 173);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingrese datos";
@@ -105,7 +110,7 @@
             // 
             // button_Cancelar
             // 
-            this.button_Cancelar.Location = new System.Drawing.Point(47, 161);
+            this.button_Cancelar.Location = new System.Drawing.Point(47, 191);
             this.button_Cancelar.Name = "button_Cancelar";
             this.button_Cancelar.Size = new System.Drawing.Size(99, 23);
             this.button_Cancelar.TabIndex = 5;
@@ -115,7 +120,7 @@
             // 
             // button_Guardar
             // 
-            this.button_Guardar.Location = new System.Drawing.Point(173, 161);
+            this.button_Guardar.Location = new System.Drawing.Point(173, 191);
             this.button_Guardar.Name = "button_Guardar";
             this.button_Guardar.Size = new System.Drawing.Size(101, 23);
             this.button_Guardar.TabIndex = 6;
@@ -123,11 +128,44 @@
             this.button_Guardar.UseVisualStyleBackColor = true;
             this.button_Guardar.Click += new System.EventHandler(this.button_Guardar_Click);
             // 
+            // tb_Dias_habilitados
+            // 
+            this.tb_Dias_habilitados.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_Dias_habilitados.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Dias_habilitados.Location = new System.Drawing.Point(34, 124);
+            this.tb_Dias_habilitados.Multiline = true;
+            this.tb_Dias_habilitados.Name = "tb_Dias_habilitados";
+            this.tb_Dias_habilitados.Size = new System.Drawing.Size(63, 34);
+            this.tb_Dias_habilitados.TabIndex = 8;
+            this.tb_Dias_habilitados.Text = "Dias habilitados:";
+            // 
+            // nud_Dias_habilitados
+            // 
+            this.nud_Dias_habilitados.Location = new System.Drawing.Point(105, 129);
+            this.nud_Dias_habilitados.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.nud_Dias_habilitados.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nud_Dias_habilitados.Name = "nud_Dias_habilitados";
+            this.nud_Dias_habilitados.Size = new System.Drawing.Size(157, 20);
+            this.nud_Dias_habilitados.TabIndex = 9;
+            this.nud_Dias_habilitados.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // AltaVisibilidad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 200);
+            this.ClientSize = new System.Drawing.Size(322, 222);
             this.Controls.Add(this.button_Guardar);
             this.Controls.Add(this.button_Cancelar);
             this.Controls.Add(this.groupBox1);
@@ -135,10 +173,11 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AltaVisibilidad";
-            this.Text = "Alta de clienteModif de publicacion";
+            this.Text = "Alta de visibilidad";
             this.Load += new System.EventHandler(this.AltaVisibilidad_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Dias_habilitados)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -154,5 +193,7 @@
         private System.Windows.Forms.TextBox tb_Precio;
         private System.Windows.Forms.Button button_Cancelar;
         private System.Windows.Forms.Button button_Guardar;
+        private System.Windows.Forms.NumericUpDown nud_Dias_habilitados;
+        private System.Windows.Forms.TextBox tb_Dias_habilitados;
     }
 }

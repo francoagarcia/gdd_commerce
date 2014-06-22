@@ -52,9 +52,7 @@
             // 
             // btn_Ver_historial_calificaciones
             // 
-            this.btn_Ver_historial_calificaciones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Ver_historial_calificaciones.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Ver_historial_calificaciones.Location = new System.Drawing.Point(29, 172);
             this.btn_Ver_historial_calificaciones.Name = "btn_Ver_historial_calificaciones";
             this.btn_Ver_historial_calificaciones.Size = new System.Drawing.Size(201, 42);
@@ -65,9 +63,7 @@
             // 
             // btn_Ver_historial_de_ofertas
             // 
-            this.btn_Ver_historial_de_ofertas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Ver_historial_de_ofertas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Ver_historial_de_ofertas.Location = new System.Drawing.Point(29, 105);
             this.btn_Ver_historial_de_ofertas.Name = "btn_Ver_historial_de_ofertas";
             this.btn_Ver_historial_de_ofertas.Size = new System.Drawing.Size(201, 42);
@@ -78,9 +74,7 @@
             // 
             // btn_Ver_historial_de_compras
             // 
-            this.btn_Ver_historial_de_compras.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Ver_historial_de_compras.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Ver_historial_de_compras.Location = new System.Drawing.Point(29, 41);
             this.btn_Ver_historial_de_compras.Name = "btn_Ver_historial_de_compras";
             this.btn_Ver_historial_de_compras.Size = new System.Drawing.Size(201, 42);
@@ -95,8 +89,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(281, 269);
             this.Controls.Add(this.gb_Elegir_historial);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Historial";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FRBA Commerce - Historial";
             this.gb_Elegir_historial.ResumeLayout(false);
             this.ResumeLayout(false);

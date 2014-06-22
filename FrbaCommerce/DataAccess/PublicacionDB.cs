@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlTypes;
+using FrbaCommerce.Generics;
 
 
 namespace FrbaCommerce.DataAccess
@@ -32,8 +33,15 @@ namespace FrbaCommerce.DataAccess
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.nuevaPublicacion", parametros);
 
             var idNuevoOUTPUT = parametros.Where(p => p.ParameterName == "@id_publicacion_nueva").FirstOrDefault();
-            publi.id_publicacion = Convert.ToDecimal(idNuevoOUTPUT.Value);
-            return publi.id_publicacion;
+            if (idNuevoOUTPUT.Value != System.DBNull.Value)
+            {
+                publi.id_publicacion = Convert.ToDecimal(idNuevoOUTPUT.Value);
+                return publi.id_publicacion;
+            }
+            else
+            {
+                throw new TresPublicacionesGratuitasException();
+            }
         }
 
         #region [Generadores de parametros]

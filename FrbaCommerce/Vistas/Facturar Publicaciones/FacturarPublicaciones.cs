@@ -13,6 +13,7 @@ using FrbaCommerce.GUIMethods;
 using FrbaCommerce.GUIMethods.FormBase;
 using FrbaCommerce.GUIMethods.Validaciones;
 using System.Data.SqlClient;
+using FrbaCommerce.Generics;
 
 namespace FrbaCommerce.Vistas.Facturar_Publicaciones
 {
@@ -21,7 +22,12 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
         private ListaFormasDePago formasDePago;
         private Usuario usuarioSeleccionado;
         private IList<ItemPendiente> items;
+        private IList<VisibilidadesFacturadas> bonificaciones;
         private FacturacionDB factuDB;
+
+        private const string COMPRA = "COMP";
+        private const string PUBLICACION = "PUBL";
+        private const string BONIFICACION = "BONIF";
 
         public FacturarPublicaciones()
             : base("¿Confirma la creacion de la factura?")
@@ -74,11 +80,14 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
 
         private void btn_Aceptar_Click(object sender, EventArgs e)
         {
+            this.CargarGrilla();
+        }
+
+        private void habilitarControllersDeFacturacion() 
+        {
             this.gb_Busqueda.Enabled = true;
             this.btn_Generar.Enabled = true;
             this.btn_Limpiar.Enabled = true;
-            this.CargarGrilla();
-            this.CalcularCostos();
         }
 
         private void CalcularCostos() 
@@ -104,7 +113,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             this.tb_Total_a_facturar.Text = totalFacturar.ToString();
             this.tb_Cantidad_de_items.Text = cantidadItems.ToString();
 
-            // txtSaldo.Text = "$ " + (decAcum - decTotal + decBonif).ToString();
+            // tb_Saldo.Text = "$ " + (decAcum - decTotal + decBonif).ToString();
         }
 
         private void CalcularTotalAdeudado() 
@@ -113,11 +122,18 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
         }
 
         private void CargarGrilla() {
-            if (itemsPendientesDB()) {
-                this.dgv_Busqueda.DataSource = this.items;
-                this.PrepararGrilla();
-                if (this.items.Count.Equals(0)) {
+            if (itemsDB()) {
+                if (this.items.Count.Equals(0))
+                {
                     this.btn_Generar.Enabled = this.btn_Limpiar.Enabled = false;
+                    MessageDialog.MensajeInformativo(this, "El usuario elegido no tiene nada pendiente que facturar");
+                }
+                else 
+                {
+                    this.dgv_Busqueda.DataSource = this.items;
+                    this.PrepararGrilla();
+                    this.habilitarControllersDeFacturacion();
+                    this.CalcularCostos();
                 }
             }
         }
@@ -139,10 +155,21 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             this.dgv_Busqueda.Columns["Facturar"].ReadOnly = false;
         }
 
-        private bool itemsPendientesDB() {
+        private void obtenerItemsBonificadosDB()
+        {
+            this.bonificaciones = this.factuDB.getBonificados(this.usuarioSeleccionado);
+        }
+
+        private void obtenerItemsPendientesDeFacturarDB()
+        {
+            this.items = this.factuDB.getPendientesDeFacturar(this.usuarioSeleccionado);
+        }
+
+        private bool itemsDB() {
             try
             {
-                this.items = this.factuDB.getPendientesDeFacturar(this.usuarioSeleccionado);
+                this.obtenerItemsBonificadosDB();
+                this.obtenerItemsPendientesDeFacturarDB();                
             }
             catch (Exception e)
             {
@@ -208,8 +235,160 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             {
                 this.dgv_Busqueda.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = !(bool)this.dgv_Busqueda.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
+                if (/*itemMarcadoParaFacturar(dgv_Busqueda.Rows[e.RowIndex]) && */itemEsUnaCompra(dgv_Busqueda.Rows[e.RowIndex]) )
+                {
+                    if (!ValidarComprasAnteriores(this.dgv_Busqueda.Rows[e.RowIndex]))
+                    {
+                        this.dgv_Busqueda.Rows[e.RowIndex].Cells["Facturar"].Value = false;
+                        MessageDialog.MensajeInformativo(this, "Debe pagar las compras mas antiguas primero");
+                        this.dgv_Busqueda.RefreshEdit();
+                    }
+                }
+
+                this.Cada10PublicacionesSeDebeBonificarLaDecima(dgv_Busqueda.Rows[e.RowIndex]);
+
                 this.CalcularCostos();
             }
+        }
+
+        private void Cada10PublicacionesSeDebeBonificarLaDecima(DataGridViewRow row) 
+        {
+            if (itemEsUnaPublicacion(row))
+            {
+                CalcularBonificacion();
+            }
+        }
+
+        private bool itemMarcadoParaFacturar(DataGridViewRow row) 
+        { 
+            return Convert.ToBoolean(row.Cells["Facturar"].Value);
+        }
+
+        private bool itemEsUnaPublicacion(DataGridViewRow row) 
+        {
+            return row.Cells["tipo_item_a_facturar"].Value.ToString().Equals(PUBLICACION);
+        }
+
+        private bool itemEsUnaCompra(DataGridViewRow row)
+        {
+            return row.Cells["tipo_item_a_facturar"].Value.ToString().Equals(COMPRA);
+        }
+
+        private bool itemEsUnaBonificacion(DataGridViewRow row)
+        {
+            return row.Cells["tipo_item_a_facturar"].Value.ToString().Equals(BONIFICACION);
+        }
+
+        private decimal getIdVisibilidad(DataGridViewRow row) 
+        {
+            return Convert.ToDecimal(row.Cells["id_visibilidad"].Value);
+        }
+
+        private decimal getIdPublicacion(DataGridViewRow row) 
+        {
+            return Convert.ToDecimal(row.Cells["id_publicacion"].Value);
+        }
+
+        private decimal getImporteARendir(DataGridViewRow row) 
+        {
+            return Convert.ToDecimal(row.Cells["importe_a_rendir"].Value);
+        }
+
+        private DateTime getFechaInicio(DataGridViewRow row) 
+        {
+            return Convert.ToDateTime(row.Cells["fecha_inicio"].Value);
+        }
+
+        private bool esLaDecimaPublicacionConEsaVisibilidad(VisibilidadesFacturadas visibilidadFactu) 
+        {
+            return visibilidadFactu != null && ((visibilidadFactu.cantidad_fact + 1) % 10).Equals(0);
+        }
+
+        private ItemPendiente armarItemBonificado(DataGridViewRow row)
+        {
+            ItemPendiente itemBonificado = new ItemPendiente();
+            itemBonificado.cantidad_a_rendir = 1;
+            itemBonificado.Facturar = true;
+            itemBonificado.fecha_inicio = DateManager.Ahora();
+            itemBonificado.id_compra = 0;
+            itemBonificado.id_publicacion = getIdPublicacion(row);
+            itemBonificado.id_visibilidad = getIdVisibilidad(row);
+            itemBonificado.importe_a_rendir = getImporteARendir(row);
+            itemBonificado.resumen = "Bonificacion por 10 publicaciones. Publicacion bonificada: " + getIdPublicacion(row).ToString();
+            itemBonificado.tipo_item_a_facturar = BONIFICACION;
+            return itemBonificado;        
+        }
+
+        private IList<ItemPendiente> armarBonificaciones() 
+        {
+            VisibilidadesFacturadas visibilidadFactu = new VisibilidadesFacturadas();
+            IList<ItemPendiente> itemsBonificados = new List<ItemPendiente>();
+            foreach (DataGridViewRow row in dgv_Busqueda.Rows)
+            {
+                if (itemMarcadoParaFacturar(row) && itemEsUnaPublicacion(row))
+                {
+                    visibilidadFactu = this.bonificaciones.Where(b => b.id_visibilidad_fact.Equals(this.getIdVisibilidad(row))).FirstOrDefault();
+                    if (esLaDecimaPublicacionConEsaVisibilidad(visibilidadFactu))
+                    {
+                        itemsBonificados.Add(armarItemBonificado(row));
+                    }
+                }
+            }
+            return itemsBonificados;
+        }
+
+        private void CalcularBonificacion()
+        {
+            IList<ItemPendiente> itemsBonificados = this.armarBonificaciones();
+
+            foreach (ItemPendiente itm in itemsBonificados) 
+            {
+                this.items.Add(itm);
+            }
+            this.dgv_Busqueda.Refresh();
+
+            foreach (DataGridViewRow row in this.dgv_Busqueda.Rows) 
+            {
+                if (itemEsUnaBonificacion(row)) 
+                {
+                    row.DefaultCellStyle.BackColor = Color.PaleTurquoise;
+                }
+            
+            }
+            int cant = itemsBonificados.Count;
+            decimal descuentoPorBonificacio = itemsBonificados.Sum(i => i.importe_a_rendir);
+
+            tb_Cantidad_de_bonificaciones.Text = cant.ToString();
+            tb_Bonificacion_monto.Text = descuentoPorBonificacio.ToString();
+        }
+
+        private bool ValidarComprasAnteriores(DataGridViewRow rowEvento) 
+        {
+            DateTime fechaDeLaCompraMarcada = getFechaInicio(rowEvento);
+
+            if (itemMarcadoParaFacturar(rowEvento))
+            {
+                foreach (DataGridViewRow row in dgv_Busqueda.Rows)
+                {
+                    if (!itemMarcadoParaFacturar(row) && itemEsUnaCompra(row) && getFechaInicio(row) < fechaDeLaCompraMarcada)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dgv_Busqueda.Rows)
+                {
+                    if (itemMarcadoParaFacturar(row) && itemEsUnaCompra(row) && getFechaInicio(row) > fechaDeLaCompraMarcada) 
+                    {
+                        row.Cells["Facturar"].Value = false;
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private void btn_Generar_Click(object sender, EventArgs e)
@@ -263,7 +442,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             IList<ItemFactura> items = new List<ItemFactura>();
             foreach (DataGridViewRow row in dgv_Busqueda.Rows)
             {
-                if (Convert.ToBoolean(row.Cells["Facturar"].Value))
+                if (itemMarcadoParaFacturar(row))
                 {
                     items.Add(armarUnItem(row));
                 }

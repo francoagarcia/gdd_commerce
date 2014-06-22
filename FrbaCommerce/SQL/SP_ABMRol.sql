@@ -1,27 +1,4 @@
 
-IF OBJECT_ID('DATA_GROUP.SP_deshabilitarRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_deshabilitarRol
-	GO
-CREATE PROCEDURE DATA_GROUP.SP_deshabilitarRol
-(@nombreRol nvarchar(255))
-AS
-BEGIN
-	UPDATE DATA_GROUP.Rol SET habilitada=0 WHERE nombre=@nombreRol
-END
-GO
-
-
-IF OBJECT_ID('DATA_GROUP.SP_habilitarRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_habilitarRol
-	GO
-CREATE PROCEDURE DATA_GROUP.SP_habilitarRol
-(@nombreRol nvarchar(255))
-AS
-BEGIN
-	UPDATE DATA_GROUP.Rol SET habilitada=1 WHERE nombre=@nombreRol
-END
-GO
-
 
 -----------------------------------------------------
 
@@ -40,31 +17,7 @@ GO
 
 -----------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.SP_modificarRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_modificarRol
-	GO
-CREATE PROCEDURE DATA_GROUP.SP_modificarRol
-(@nombreViejo nvarchar(255), @nombreNuevo nvarchar(255)) 
-AS
-BEGIN	
-	UPDATE DATA_GROUP.ROL 
-	SET nombre = @nombreNuevo
-	WHERE nombre = @nombreViejo
-END
-GO
 
-
-IF OBJECT_ID('DATA_GROUP.SP_crearRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_crearRol
-	GO
-CREATE PROCEDURE DATA_GROUP.SP_crearRol
-(@nombreRolNuevo nvarchar(255))
-AS
-BEGIN
-	IF(NOT EXISTS(SELECT nombre FROM DATA_GROUP.Rol WHERE nombre=@nombreRolNuevo))
-		INSERT INTO DATA_GROUP.Rol (nombre) VALUES (@nombreRolNuevo)
-END
-GO
 
 
 IF OBJECT_ID('DATA_GROUP.getIdRolPorNombre') IS NOT NULL
@@ -96,32 +49,6 @@ BEGIN
 END
 GO
 
-
-IF OBJECT_ID('DATA_GROUP.SP_agregarFuncionalidadXRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_agregarFuncionalidadXRol
-	GO
-CREATE PROCEDURE DATA_GROUP.SP_agregarFuncionalidadXRol
-(@func_to_rol nvarchar(255), @rol_to_func nvarchar(255))
-AS
-BEGIN
-	DECLARE @funcionalidad_id numeric(18, 0)
-	DECLARE @rol_id numeric(18, 0)
-
-	SELECT @rol_id=id_rol 
-	FROM DATA_GROUP.Rol 
-	WHERE nombre=@rol_to_func;
-	
-	SELECT @funcionalidad_id=id_funcionalidad 
-	FROM DATA_GROUP.Funcionalidad 
-	WHERE nombre=@func_to_rol;
-	
-	INSERT INTO DATA_GROUP.FuncionalidadXRol(id_funcionalidad, id_rol)
-	VALUES (@funcionalidad_id, @rol_id);
-		
-END
-GO
-
-
 IF OBJECT_ID('DATA_GROUP.getRolesDeUsuario') is not null
 	DROP PROCEDURE DATA_GROUP.getRolesDeUsuario
 	GO
@@ -141,4 +68,187 @@ BEGIN
 END
 GO
 
+
+-------------------------------------------------------------------------------------
+
+IF OBJECT_ID('DATA_GROUP.sp_rol_filter') is not null
+	DROP PROCEDURE DATA_GROUP.sp_rol_filter
+	GO
+CREATE PROCEDURE DATA_GROUP.sp_rol_filter(
+	@nombre nvarchar(255) = NULL
+)
+AS
+BEGIN
+
+SELECT id_rol, nombre, habilitada 
+FROM DATA_GROUP.Rol
+WHERE ((@nombre is null) OR (nombre like '%' + @nombre + '%'))
+
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.modificarRol') is not null
+	DROP PROCEDURE DATA_GROUP.modificarRol
+	GO
+CREATE PROCEDURE DATA_GROUP.modificarRol
+@id_rol numeric(18,0),
+@nombre nvarchar(255)
+AS
+BEGIN
+	UPDATE DATA_GROUP.Rol
+	SET nombre = @nombre
+	WHERE id_rol=@id_rol
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.modificarFuncionalidadDeUnRol') is not null
+	DROP PROCEDURE DATA_GROUP.modificarFuncionalidadDeUnRol
+	GO
+CREATE PROCEDURE DATA_GROUP.modificarFuncionalidadDeUnRol
+@id_rol numeric(18,0),
+@id_funcionalidad numeric(18,0),
+@habilitada bit
+AS
+BEGIN
 	
+	Declare @id_funcionalidad_buscado numeric(18,0)
+	
+	SELECT @id_funcionalidad_buscado=id_funcionalidad
+	FROM DATA_GROUP.FuncionalidadXRol
+	WHERE id_funcionalidad=@id_funcionalidad AND id_rol=@id_rol
+	
+	if @id_funcionalidad_buscado is not null
+		update DATA_GROUP.FuncionalidadXRol
+		Set habilitada=@habilitada
+		where id_funcionalidad=@id_funcionalidad and id_rol=@id_rol
+	else
+	begin
+	if @habilitada=1
+		insert into DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad, habilitada)
+		values(@id_rol, @id_funcionalidad, @habilitada)
+	end
+END
+GO
+
+
+
+IF OBJECT_ID('DATA_GROUP.SP_deshabilitarRol') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_deshabilitarRol
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_deshabilitarRol
+(@id_rol numeric(18,0))
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			UPDATE DATA_GROUP.Rol 
+			SET habilitada=0 
+			WHERE id_rol=@id_rol
+			
+			UPDATE DATA_GROUP.UsuarioXRol
+			SET habilitada = 0
+			where id_rol=@id_rol
+			
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN
+		
+		DECLARE @ErrorMessage NVARCHAR(4000);
+		DECLARE @ErrorSeverity INT;
+		DECLARE @ErrorState INT;
+
+		SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+		RAISERROR (@ErrorMessage, -- Message text.
+			   @ErrorSeverity, -- Severity.
+			   @ErrorState -- State.
+			   );
+		
+	END CATCH
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.SP_habilitarRol') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_habilitarRol
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_habilitarRol
+@id_rol numeric(18,0)
+AS
+BEGIN
+
+BEGIN TRY
+		BEGIN TRAN
+			UPDATE DATA_GROUP.Rol 
+			SET habilitada=1 
+			WHERE id_rol=@id_rol
+			
+			UPDATE DATA_GROUP.UsuarioXRol
+			SET habilitada = 1
+			where id_rol=@id_rol
+			
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN
+		
+		DECLARE @ErrorMessage NVARCHAR(4000);
+		DECLARE @ErrorSeverity INT;
+		DECLARE @ErrorState INT;
+
+		SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+		RAISERROR (@ErrorMessage, -- Message text.
+			   @ErrorSeverity, -- Severity.
+			   @ErrorState -- State.
+			   );
+		
+	END CATCH
+
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.SP_agregarFuncionalidadXRol') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_agregarFuncionalidadXRol
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_agregarFuncionalidadXRol
+@id_rol numeric(18,0),
+@id_funcionalidad numeric(18,0),
+@habilitada bit=1
+AS
+BEGIN
+	INSERT INTO DATA_GROUP.FuncionalidadXRol(id_funcionalidad, id_rol, habilitada)
+	VALUES (@id_funcionalidad, @id_rol, 1);	
+END
+GO
+
+
+
+IF OBJECT_ID('DATA_GROUP.SP_crearRol') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.SP_crearRol
+	GO
+CREATE PROCEDURE DATA_GROUP.SP_crearRol
+@nombreRolNuevo nvarchar(255),
+@habilitada bit,
+@id_rol_nuevo numeric(18, 0) OUTPUT
+AS
+BEGIN
+	IF(NOT EXISTS(SELECT nombre FROM DATA_GROUP.Rol WHERE nombre=@nombreRolNuevo))
+	BEGIN
+		INSERT INTO DATA_GROUP.Rol (nombre, habilitada) VALUES (@nombreRolNuevo, @habilitada);
+		
+		SET @id_rol_nuevo = SCOPE_IDENTITY();
+	END
+	ELSE
+	BEGIN
+		RAISERROR ('El nombre de rol seleccionado ya existe. Debe ser unico', -- Message text.
+			   -1, -- Severity.
+			   -1 -- State.
+			   );
+	END
+END
+GO

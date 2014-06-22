@@ -68,6 +68,7 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             visi.descripcion = tb_Descripcion.Text;
             visi.porcentaje = Convert.ToDecimal(tb_Porcentaje.Text);
             visi.precio = Convert.ToDecimal(tb_Precio.Text);
+            visi.dias_vencimiento_publi = Convert.ToDecimal(nud_Dias_habilitados.Value);
             visi.id_visibilidad = 0;
             visi.habilitada = true;
             return visi;

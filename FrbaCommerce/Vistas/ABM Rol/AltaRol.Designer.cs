@@ -28,118 +28,99 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.bAgregar1 = new System.Windows.Forms.Button();
-            this.bQuitar1 = new System.Windows.Forms.Button();
-            this.ModificacionFunc1 = new System.Windows.Forms.GroupBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.labelNomRol1 = new System.Windows.Forms.Label();
-            this.textBoxNomRol1 = new System.Windows.Forms.TextBox();
-            this.buttonOK1 = new System.Windows.Forms.Button();
-            this.buttonCancelar1 = new System.Windows.Forms.Button();
-            this.ModificacionFunc1.SuspendLayout();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
+            this.btn_Modificar = new System.Windows.Forms.Button();
+            this.tb_Nombre_nuevo = new System.Windows.Forms.TextBox();
+            this.lbl_Nombre_de_rol = new System.Windows.Forms.Label();
+            this.gb_Asignacion_de_funcionalidades = new System.Windows.Forms.GroupBox();
+            this.list_funcionalidades = new System.Windows.Forms.CheckedListBox();
+            this.btn_Limpiar = new System.Windows.Forms.Button();
+            this.gb_Asignacion_de_funcionalidades.SuspendLayout();
             this.SuspendLayout();
             // 
-            // bAgregar1
+            // btn_Cancelar
             // 
-            this.bAgregar1.Location = new System.Drawing.Point(193, 88);
-            this.bAgregar1.Name = "bAgregar1";
-            this.bAgregar1.Size = new System.Drawing.Size(75, 23);
-            this.bAgregar1.TabIndex = 2;
-            this.bAgregar1.Text = "Agregar";
-            this.bAgregar1.UseVisualStyleBackColor = true;
-            this.bAgregar1.Click += new System.EventHandler(this.bAgregar_Click);
+            this.btn_Cancelar.Location = new System.Drawing.Point(18, 312);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(111, 23);
+            this.btn_Cancelar.TabIndex = 29;
+            this.btn_Cancelar.Text = "Cancelar";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
             // 
-            // bQuitar1
+            // btn_Modificar
             // 
-            this.bQuitar1.Location = new System.Drawing.Point(193, 154);
-            this.bQuitar1.Name = "bQuitar1";
-            this.bQuitar1.Size = new System.Drawing.Size(75, 23);
-            this.bQuitar1.TabIndex = 3;
-            this.bQuitar1.Text = "Limpiar";
-            this.bQuitar1.UseVisualStyleBackColor = true;
-            this.bQuitar1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Modificar.Location = new System.Drawing.Point(304, 312);
+            this.btn_Modificar.Name = "btn_Modificar";
+            this.btn_Modificar.Size = new System.Drawing.Size(111, 23);
+            this.btn_Modificar.TabIndex = 28;
+            this.btn_Modificar.Text = "Modificar";
+            this.btn_Modificar.UseVisualStyleBackColor = true;
             // 
-            // ModificacionFunc1
+            // tb_Nombre_nuevo
             // 
-            this.ModificacionFunc1.Controls.Add(this.listBox2);
-            this.ModificacionFunc1.Controls.Add(this.listBox1);
-            this.ModificacionFunc1.Controls.Add(this.bQuitar1);
-            this.ModificacionFunc1.Controls.Add(this.bAgregar1);
-            this.ModificacionFunc1.Location = new System.Drawing.Point(12, 63);
-            this.ModificacionFunc1.Name = "ModificacionFunc1";
-            this.ModificacionFunc1.Size = new System.Drawing.Size(460, 286);
-            this.ModificacionFunc1.TabIndex = 4;
-            this.ModificacionFunc1.TabStop = false;
-            this.ModificacionFunc1.Text = "Asignacion de Funcionalidades";
+            this.tb_Nombre_nuevo.Location = new System.Drawing.Point(98, 12);
+            this.tb_Nombre_nuevo.Name = "tb_Nombre_nuevo";
+            this.tb_Nombre_nuevo.Size = new System.Drawing.Size(317, 20);
+            this.tb_Nombre_nuevo.TabIndex = 25;
             // 
-            // listBox2
+            // lbl_Nombre_de_rol
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(274, 41);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(169, 225);
-            this.listBox2.TabIndex = 5;
+            this.lbl_Nombre_de_rol.AutoSize = true;
+            this.lbl_Nombre_de_rol.Location = new System.Drawing.Point(15, 15);
+            this.lbl_Nombre_de_rol.Name = "lbl_Nombre_de_rol";
+            this.lbl_Nombre_de_rol.Size = new System.Drawing.Size(77, 13);
+            this.lbl_Nombre_de_rol.TabIndex = 24;
+            this.lbl_Nombre_de_rol.Text = "Nombre nuevo";
             // 
-            // listBox1
+            // gb_Asignacion_de_funcionalidades
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(15, 41);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(169, 225);
-            this.listBox1.TabIndex = 4;
+            this.gb_Asignacion_de_funcionalidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gb_Asignacion_de_funcionalidades.Controls.Add(this.list_funcionalidades);
+            this.gb_Asignacion_de_funcionalidades.Location = new System.Drawing.Point(12, 38);
+            this.gb_Asignacion_de_funcionalidades.Name = "gb_Asignacion_de_funcionalidades";
+            this.gb_Asignacion_de_funcionalidades.Size = new System.Drawing.Size(409, 269);
+            this.gb_Asignacion_de_funcionalidades.TabIndex = 30;
+            this.gb_Asignacion_de_funcionalidades.TabStop = false;
+            this.gb_Asignacion_de_funcionalidades.Text = "Asignacion de funcionalidades";
             // 
-            // labelNomRol1
+            // list_funcionalidades
             // 
-            this.labelNomRol1.AutoSize = true;
-            this.labelNomRol1.Location = new System.Drawing.Point(25, 24);
-            this.labelNomRol1.Name = "labelNomRol1";
-            this.labelNomRol1.Size = new System.Drawing.Size(83, 13);
-            this.labelNomRol1.TabIndex = 8;
-            this.labelNomRol1.Text = "Nombre del Rol:";
+            this.list_funcionalidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.list_funcionalidades.CheckOnClick = true;
+            this.list_funcionalidades.FormattingEnabled = true;
+            this.list_funcionalidades.Location = new System.Drawing.Point(6, 19);
+            this.list_funcionalidades.Name = "list_funcionalidades";
+            this.list_funcionalidades.Size = new System.Drawing.Size(397, 244);
+            this.list_funcionalidades.TabIndex = 0;
             // 
-            // textBoxNomRol1
+            // btn_Limpiar
             // 
-            this.textBoxNomRol1.Location = new System.Drawing.Point(114, 21);
-            this.textBoxNomRol1.Name = "textBoxNomRol1";
-            this.textBoxNomRol1.Size = new System.Drawing.Size(341, 20);
-            this.textBoxNomRol1.TabIndex = 9;
-            // 
-            // buttonOK1
-            // 
-            this.buttonOK1.Location = new System.Drawing.Point(286, 355);
-            this.buttonOK1.Name = "buttonOK1";
-            this.buttonOK1.Size = new System.Drawing.Size(169, 23);
-            this.buttonOK1.TabIndex = 12;
-            this.buttonOK1.Text = "Crear";
-            this.buttonOK1.UseVisualStyleBackColor = true;
-            this.buttonOK1.Click += new System.EventHandler(this.buttonOK1_Click);
-            // 
-            // buttonCancelar1
-            // 
-            this.buttonCancelar1.Location = new System.Drawing.Point(27, 352);
-            this.buttonCancelar1.Name = "buttonCancelar1";
-            this.buttonCancelar1.Size = new System.Drawing.Size(169, 23);
-            this.buttonCancelar1.TabIndex = 13;
-            this.buttonCancelar1.Text = "Cancelar";
-            this.buttonCancelar1.UseVisualStyleBackColor = true;
-            this.buttonCancelar1.Click += new System.EventHandler(this.buttonCancelar1_Click);
+            this.btn_Limpiar.Location = new System.Drawing.Point(164, 312);
+            this.btn_Limpiar.Name = "btn_Limpiar";
+            this.btn_Limpiar.Size = new System.Drawing.Size(111, 23);
+            this.btn_Limpiar.TabIndex = 31;
+            this.btn_Limpiar.Text = "Limpiar";
+            this.btn_Limpiar.UseVisualStyleBackColor = true;
             // 
             // AltaRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 387);
-            this.Controls.Add(this.buttonCancelar1);
-            this.Controls.Add(this.buttonOK1);
-            this.Controls.Add(this.textBoxNomRol1);
-            this.Controls.Add(this.labelNomRol1);
-            this.Controls.Add(this.ModificacionFunc1);
+            this.ClientSize = new System.Drawing.Size(433, 347);
+            this.Controls.Add(this.btn_Limpiar);
+            this.Controls.Add(this.gb_Asignacion_de_funcionalidades);
+            this.Controls.Add(this.btn_Cancelar);
+            this.Controls.Add(this.btn_Modificar);
+            this.Controls.Add(this.tb_Nombre_nuevo);
+            this.Controls.Add(this.lbl_Nombre_de_rol);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "AltaRol";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Crear Roles";
-            this.ModificacionFunc1.ResumeLayout(false);
+            this.Text = "Crear un rol";
+            this.gb_Asignacion_de_funcionalidades.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,17 +128,13 @@
 
         #endregion
 
-        //private System.Windows.Forms.ListBox listFunc;
-        //private System.Windows.Forms.ListBox listFuncActivas;
-        private System.Windows.Forms.Button bAgregar1;
-        private System.Windows.Forms.Button bQuitar1;
-        private System.Windows.Forms.GroupBox ModificacionFunc1;
-        private System.Windows.Forms.Label labelNomRol1;
-        private System.Windows.Forms.TextBox textBoxNomRol1;
-        private System.Windows.Forms.Button buttonOK1;
-        private System.Windows.Forms.Button buttonCancelar1;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btn_Cancelar;
+        private System.Windows.Forms.Button btn_Modificar;
+        private System.Windows.Forms.TextBox tb_Nombre_nuevo;
+        private System.Windows.Forms.Label lbl_Nombre_de_rol;
+        private System.Windows.Forms.GroupBox gb_Asignacion_de_funcionalidades;
+        private System.Windows.Forms.CheckedListBox list_funcionalidades;
+        private System.Windows.Forms.Button btn_Limpiar;
 
     }
 }

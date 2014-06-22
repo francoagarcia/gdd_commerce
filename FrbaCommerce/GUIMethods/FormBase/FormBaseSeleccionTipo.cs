@@ -82,7 +82,8 @@ namespace FrbaCommerce.GUIMethods.FormBase
         protected void mostrarVentanaSiguiente()
         {
             this.Hide();
-            this.FormSiguiente.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Visible = false;
+            this.FormSiguiente.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             DialogResult resultado = this.FormSiguiente.ShowDialog(this);
             if (resultado == DialogResult.OK || resultado == DialogResult.Cancel || resultado == DialogResult.Abort || resultado == DialogResult.No)
             {
@@ -90,6 +91,7 @@ namespace FrbaCommerce.GUIMethods.FormBase
             }
             else if (resultado == DialogResult.Retry) {
                 this.Show();
+                this.Visible = true;
             }
         }
 

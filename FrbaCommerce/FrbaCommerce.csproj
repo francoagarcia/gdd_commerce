@@ -77,6 +77,7 @@
     <Compile Include="Entidades\Builder\BuilderCliente.cs" />
     <Compile Include="Entidades\Builder\BuilderEmpresa.cs" />
     <Compile Include="Entidades\Builder\BuilderEstadoPublicacion.cs" />
+    <Compile Include="Entidades\Builder\BuilderFuncionalidadXRol.cs" />
     <Compile Include="Entidades\Builder\BuilderItemPendiente.cs" />
     <Compile Include="Entidades\Builder\BuilderPreguntas.cs" />
     <Compile Include="Entidades\Builder\BuilderPublicacion.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Entidades\Builder\BuilderRubro.cs" />
     <Compile Include="Entidades\Builder\BuilderUsuarioFactura.cs" />
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
+    <Compile Include="Entidades\Builder\BuilderVisibilidadesFacturadas.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Compra.cs" />
     <Compile Include="Entidades\Empresa.cs" />
@@ -94,10 +96,12 @@
     <Compile Include="Entidades\Filtros\FiltroCliente.cs" />
     <Compile Include="Entidades\Filtros\FiltroEmpresa.cs" />
     <Compile Include="Entidades\Filtros\FiltroPublicacion.cs" />
+    <Compile Include="Entidades\Filtros\FiltroRol.cs" />
     <Compile Include="Entidades\Filtros\FiltroRubros.cs" />
     <Compile Include="Entidades\Filtros\FiltroUsuario.cs" />
     <Compile Include="Entidades\Filtros\FiltroVisibilidades.cs" />
     <Compile Include="Entidades\Funcionalidad.cs" />
+    <Compile Include="Entidades\FuncionalidaXRol.cs" />
     <Compile Include="Entidades\ItemFactura.cs" />
     <Compile Include="Entidades\ItemPendiente.cs" />
     <Compile Include="Entidades\Oferta.cs" />
@@ -106,6 +110,7 @@
     <Compile Include="Entidades\Rol.cs" />
     <Compile Include="Entidades\Rubro.cs" />
     <Compile Include="Entidades\Visibilidad.cs" />
+    <Compile Include="Entidades\VisibilidadesFacturadas.cs" />
     <Compile Include="Generics\AppConfigReader.cs" />
     <Compile Include="Generics\ContextoAplicacion.cs" />
     <Compile Include="Generics\DateManager.cs" />
@@ -123,6 +128,7 @@
     <Compile Include="Generics\Logger\LoggerFile.cs" />
     <Compile Include="Generics\Resultados\Resultado.cs" />
     <Compile Include="Generics\Resultados\ResultadoIncorrectoException.cs" />
+    <Compile Include="Generics\TresPublicacionesGratuitasException.cs" />
     <Compile Include="GUIMethods\FormBase\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,7 @@
     <Compile Include="GUIMethods\Validaciones\ValidadorLista.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorMail.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorNumerico.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorNumericUpDown.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorString.cs" />
     <Compile Include="Vistas\Abm Cliente\AltaCliente.cs">
       <SubType>Form</SubType>
@@ -196,11 +203,23 @@
     <Compile Include="Vistas\Abm Empresa\ModificarEmpresa.Designer.cs">
       <DependentUpon>ModificarEmpresa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\ABM Rol\AltaDeRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ABM Rol\AltaDeRol.Designer.cs">
+      <DependentUpon>AltaDeRol.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\ABM Rol\AltaRol.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\ABM Rol\AltaRol.Designer.cs">
       <DependentUpon>AltaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ABM Rol\ListadoRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ABM Rol\ListadoRoles.Designer.cs">
+      <DependentUpon>ListadoRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\ABM Rol\ModificarRol.cs">
       <SubType>Form</SubType>
@@ -310,6 +329,12 @@
     <Compile Include="Vistas\Comprar Ofertar\AltaPregunta.Designer.cs">
       <DependentUpon>AltaPregunta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Gestion de Preguntas\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Gestion de Preguntas\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -402,8 +427,14 @@
     <EmbeddedResource Include="Vistas\Abm Empresa\ModificarEmpresa.resx">
       <DependentUpon>ModificarEmpresa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ABM Rol\AltaDeRol.resx">
+      <DependentUpon>AltaDeRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ABM Rol\AltaRol.resx">
       <DependentUpon>AltaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ABM Rol\ListadoRoles.resx">
+      <DependentUpon>ListadoRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ABM Rol\ModificarRol.resx">
       <DependentUpon>ModificarRol.cs</DependentUpon>

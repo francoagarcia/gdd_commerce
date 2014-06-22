@@ -9,126 +9,130 @@ using System.Windows.Forms;
 using FrbaCommerce.DataAccess;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.Entidades;
+using FrbaCommerce.GUIMethods.FormBase;
+using FrbaCommerce.GUIMethods.Validaciones;
+using System.Data.SqlClient;
 
 namespace FrbaCommerce.Vistas.ABM_Rol
 {
-    public partial class ModificarRol : Form
+    public partial class ModificarRol : FormBaseModificacion
     {
+        private Rol rolModif;
+        private IList<FuncionalidaXRol> funcionalidades;
+        private FuncionalidadDB funcDB;
+        private RolDB rolDB;
 
-        public ModificarRol()
+        public ModificarRol(Rol _rolModif)
         {
             InitializeComponent();
-
-            RolDB ro = new RolDB();
-            DataSet da = (DataSet)ro.Mostrar_Roles();
-
-            comboBoxRoles.DataSource = da.Tables[0];
-            comboBoxRoles.DisplayMember = "nombre";
-
-            FuncionalidadDB fu = new FuncionalidadDB();
-            DataSet ds = (DataSet)fu.pedir_func();
-
-            listBox1.DisplayMember = "nombre";
-            listBox1.DataSource = ds.Tables[0];
+            this.rolModif = _rolModif;
+            this.rolDB = new RolDB();
+            this.funcDB = new FuncionalidadDB();
+            this.funcionalidades = new List<FuncionalidaXRol>();
         }
 
-        public void ADD()
+        #region Accion iniciar
+        protected override void AccionIniciar()
         {
-            int c = listBox1.Items.Count - 1;
-            FuncionalidadDB fu = new FuncionalidadDB();
-            DataSet ds = (DataSet)fu.pedir_func();
+            this.AgregarValidacion(new ValidadorString(this.tb_Nombre_nuevo, 1, 255));
+            this.CargarRol();
+        }
 
-            for (int i = c; i >= 0; i--)
+        private void CargarRol() 
+        {
+            this.tb_Nombre_nuevo.Text = this.rolModif.nombre;
+            this.CargarFuncionalidades();
+        }
+
+        private void CargarFuncionalidades() 
+        {
+            this.funcionalidades = this.funcDB.getFuncDeUnRolHabilYNoHabilitadas(this.rolModif);
+            foreach (FuncionalidaXRol fun_rol in this.funcionalidades)
             {
-                if (listBox1.GetSelected(i))
-                {
-                    if (listBox2.Items.Count < 1)
-                    {
-                        listBox2.Items.Add(ds.Tables[0].Rows[i][1]);
-                    }
-                    else
-                    {
-                        int f = listBox2.Items.Count - 1;
-                        int aux = 0;
-                        for (int u = f; u >= 0; u--)
-                        {
-
-                            if (listBox2.GetItemText(listBox2.Items[u]) == (listBox1.GetItemText(listBox1.Items[i])))
-                            {
-                                aux++;
-                            }
-                        }
-
-                        if (aux == 0) listBox2.Items.Add(ds.Tables[0].Rows[i][1]);
-
-
-                    }
-
-                }
-
+                this.list_funcionalidades.Items.Add(fun_rol.funcionalidad.Nombre, fun_rol.habilitada);
             }
+        }
+        #endregion
 
+        #region Cancelar
+        private void btn_Cancelar_Click(object sender, EventArgs e)
+        {
+            base.Cancelar();
+        }
+        #endregion
+
+        #region Aceptar
+        private void btn_Modificar_Click(object sender, EventArgs e)
+        {
+            base.Aceptar();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        protected override void AccionAceptar()
         {
-            ADD();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            listBox2.Items.Clear();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (listBox2.Items.Count > 0)
+            this.rolModif.nombre = this.tb_Nombre_nuevo.Text;
+            IList<FuncionalidaXRol> funcs = this.armarFuncionalidades();
+            
+            if(this.modificarRolDB( funcs )) 
             {
-
-                if (checkBoxHabilitado.Enabled)
-                {
-
-                    if (textBox1.Text != "")
-                    {
-
-                        //actualizo nombre de rol
-                        RolDB rol = new RolDB();
-                        rol.Modificar_Rol(comboBoxRoles.Text, textBox1.Text);
-
-                        FuncionalidadDB fun = new FuncionalidadDB();
-
-                        //actualizo funcionalidades
-                        for (int i = 0; i < listBox2.Items.Count; i++)
-                            fun.funcionalidadXRol(textBox1.Text, listBox2.GetItemText(listBox2.Items[i]));
-
-                        //habilito el rol
-                        rol.habilitar(textBox1.Text);
-
-                    }
-
-                }
-                else
-                {
-                    if (textBox1.Text != "")
-                    {
-
-                        //actualizo nombre de rol
-                        RolDB rol = new RolDB();
-                        rol.Modificar_Rol(comboBoxRoles.Text, textBox1.Text);
-
-                        FuncionalidadDB fun = new FuncionalidadDB();
-
-                        //actualizo funcionalidades
-                        for (int i = 0; i < listBox2.Items.Count; i++)
-                            fun.funcionalidadXRol(textBox1.Text, listBox2.GetItemText(listBox2.Items[i]));
-
-                        //habilito el rol
-                        rol.habilitar(textBox1.Text);
-                    }
-                }
+                this.funcionalidades = funcs;
+                MessageDialog.MensajeInformativo(this, "Se modifico el registro correctamente");
+                this.Close();
             }
-
+            
         }
+
+        private bool modificarRolDB(IList<FuncionalidaXRol> funcs) {
+
+            try
+            {
+                this.rolDB.modificarRolConFuncionalidades(this.rolModif, funcs);
+            }
+            catch (SqlException e)
+            {
+                MessageDialog.MensajeError(e.Message);
+                return false;
+            }
+            catch (Exception e) 
+            {
+                MessageDialog.MensajeError(e.Message);
+                return false;
+            }
+            return true;
+        }
+
+        private IList<FuncionalidaXRol> armarFuncionalidades() 
+        {
+            IList<FuncionalidaXRol> funcs = new List<FuncionalidaXRol>();
+            foreach (string item in this.list_funcionalidades.Items) 
+            {
+                FuncionalidaXRol fun = new FuncionalidaXRol();
+                fun.rol = this.rolModif;
+                fun.funcionalidad = this.funcionalidades.Where(fr => fr.funcionalidad.Nombre.Equals(item)).FirstOrDefault().funcionalidad;
+                fun.habilitada = this.list_funcionalidades.CheckedItems.Contains(item);
+                funcs.Add(fun);
+            }
+            return funcs;
+        }
+        #endregion
+
+        #region Limpiar
+        private void btn_Limpiar_Click(object sender, EventArgs e)
+        {
+            base.Limpiar();
+        }
+
+        protected override void AccionLimpiar()
+        {
+            this.tb_Nombre_nuevo.Text = "";
+            for (int i = 0; i < this.list_funcionalidades.Items.Count; i++)
+            {
+                list_funcionalidades.SetItemChecked(i, false);
+            }
+        }
+
+        #endregion
+
+
 
     }
 

@@ -12,10 +12,6 @@ BEGIN
 END
 
 
-
-
-
-
 IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
 	GO

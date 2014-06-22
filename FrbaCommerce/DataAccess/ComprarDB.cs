@@ -12,13 +12,17 @@ namespace FrbaCommerce.DataAccess
     public class ComprarDB
     {
 
-        public decimal nuevaCompra(Compra comp) {
+        public bool nuevaCompra(Compra comp) {
             IList<SqlParameter> parametros = this.GenerarParametrosCrear(comp);
             DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.sp_nuevaCompra", parametros);
 
             var idNuevoOUTPUT = parametros.Where(p => p.ParameterName == "@id_compra_nueva").FirstOrDefault();
             comp.id_compra = Convert.ToDecimal(idNuevoOUTPUT.Value);
-            return comp.id_compra;
+
+            var puede_comprarOUTPUT = parametros.Where(p => p.ParameterName == "@puede_comprar").FirstOrDefault();
+            bool puedeComprar = Convert.ToBoolean(puede_comprarOUTPUT.Value);
+
+            return puedeComprar;
         }
 
         private IList<SqlParameter> GenerarParametrosCrear(Compra comp) {
@@ -40,6 +44,10 @@ namespace FrbaCommerce.DataAccess
             var id_compra_nueva = new SqlParameter("@id_compra_nueva", SqlDbType.Decimal, 18, "id_compra");
             id_compra_nueva.Direction = ParameterDirection.Output;
             parametros.Add(id_compra_nueva);
+
+            var puede_comprar = new SqlParameter("@puede_comprar", SqlDbType.Bit);
+            puede_comprar.Direction = ParameterDirection.Output;
+            parametros.Add(puede_comprar);
 
             return parametros;
         }

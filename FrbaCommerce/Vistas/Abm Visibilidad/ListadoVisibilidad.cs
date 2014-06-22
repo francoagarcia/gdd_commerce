@@ -106,8 +106,18 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
 
             this.dgvBusqueda.DataSource = resultado.Retorno;
 
-            this.dgvBusqueda.Columns["id_visibilidad"].Visible = false;
+            this.PrepararGrilla();
+            //this.dgvBusqueda.Columns["id_visibilidad"].Visible = false;
             //this.dgvBusqueda.Columns["habilitada"].Visible = false;
+        }
+
+        private void PrepararGrilla() 
+        {
+            this.dgvBusqueda.Columns["id_visibilidad"].HeaderText = "Nro de visibilidad";
+            this.dgvBusqueda.Columns["habilitada"].HeaderText = "Habilitada";
+            this.dgvBusqueda.Columns["precio"].HeaderText = "Precio";
+            this.dgvBusqueda.Columns["porcentaje"].HeaderText = "Porcentj";
+            this.dgvBusqueda.Columns["dias_vencimiento_publi"].HeaderText = "Habilitada";
         }
 
         private IResultado<IList<Visibilidad>> getVisibilidadesFiltradas(FiltroVisibilidades filtro)

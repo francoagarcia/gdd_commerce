@@ -25,6 +25,7 @@ namespace FrbaCommerce.Vistas.Historial_Cliente
             this.dgv_Historial.AutoGenerateColumns = true;
             this.dgv_Historial.DataSource = dz.Tables[0];
             this.dgv_Historial.Columns["estrellas_calificacion"].HeaderText = "Cantidad de estrellas";
+            this.Text = "Historial de calificaciones";
         }
     }
 }

@@ -148,11 +148,13 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
                 endRec = pageSize * currentPage;
             }
             startRec = recNo;
-
-            for (i = startRec; i < endRec; i++)
+            if (pubs.Count > 0)
             {
-                pub_source_temp.Add(pubs.ElementAt(i));
-                recNo += 1;
+                for (i = startRec; i < endRec; i++)
+                {
+                    pub_source_temp.Add(pubs.ElementAt(i));
+                    recNo += 1;
+                }
             }
             this.DisplayPageInfo();
             return pub_source_temp;
@@ -247,11 +249,19 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             }
             else
             {
-                Publicacion publicacion = this.rearmarPublicacion(publicacionMostrada);
-                PublicacionView frmPub = new PublicacionView(publicacion, this.usuarioActual);
-                frmPub.ShowDialog(this);
+                if (this.usuarioActual.habilitada_comprar)
+                {
+                    Publicacion publicacion = this.rearmarPublicacion(publicacionMostrada);
+                    PublicacionView frmPub = new PublicacionView(publicacion, this.usuarioActual);
+                    frmPub.ShowDialog(this);
+                }
+                else 
+                {
+                    MessageDialog.MensajeInformativo(this, "No puede realizar ninguna operación de compra u oferta hasta que califique todas sus operaciones");
+                }
             }
         }
+
 
         #endregion
 

@@ -294,6 +294,7 @@ BEGIN
 			c.sexo,
 			u.telefono,
 			u.habilitada,
+			u.habilitada_comprar,
 			u.username
 	FROM DATA_GROUP.Cliente c
 	INNER JOIN DATA_GROUP.Usuario u

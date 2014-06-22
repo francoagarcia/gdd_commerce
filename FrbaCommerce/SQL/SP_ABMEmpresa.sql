@@ -229,6 +229,7 @@ BEGIN
 			e.fecha_creacion,
 			u.telefono,
 			u.habilitada,
+			u.habilitada_comprar,
 			u.username
 	FROM DATA_GROUP.Empresa e
 	INNER JOIN DATA_GROUP.Usuario u

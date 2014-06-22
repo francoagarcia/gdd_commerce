@@ -15,7 +15,6 @@ namespace FrbaCommerce.DataAccess
 
         public static IList<Funcionalidad> getFuncionalidadesDeUnRol(decimal idRol)
         {
-
             IList<SqlParameter> parametros = new List<SqlParameter>();
             SqlParameter pIdRol = new SqlParameter("@id_rol", System.Data.SqlDbType.Decimal, 18, "id_rol");
             pIdRol.Value = idRol;
@@ -34,29 +33,44 @@ namespace FrbaCommerce.DataAccess
             return funcionalidadesDeUnRol;
         }
 
+        public IList<FuncionalidaXRol> getFuncDeUnRolHabilYNoHabilitadas(Rol unRol)
+        {
+
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter pIdRol = new SqlParameter("@id_rol", System.Data.SqlDbType.Decimal, 18, "id_rol");
+            pIdRol.Value = unRol.idRol;
+            parametros.Add(pIdRol);
+
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getFuncDeUnRolHabilYNoHabilitadas", parametros);
+
+            List<FuncionalidaXRol> funcionalidades = new List<FuncionalidaXRol>();
+            BuilderFuncionalidadXRol builder = new BuilderFuncionalidadXRol();
+
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                funcionalidades.Add(builder.Build(row));
+            }
+
+            funcionalidades.All(f => { f.rol = unRol; return true; });
+
+            return funcionalidades;
+        }
+
         public DataSet pedir_func()
         {
-            DataSet ds = (DataSet)HomeDB.ExecuteStoredProcedured("DATA_GROUP.getTodasLasFuncionalidades");
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getTodasLasFuncionalidades");
             return ds;
         }
 
-        public bool funcionalidadXRol(string rol, string fun)
-        {
+        public IList<Funcionalidad> getTodasFuncionalidades() {
+            IList<Funcionalidad> list = new List<Funcionalidad>();
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getTodasLasFuncionalidades");
 
-            List<SqlParameter> parametros = new List<SqlParameter>();
-
-            var pRol_to = new SqlParameter("@rol_to_func", SqlDbType.NVarChar, 255, "rol_to_func");
-            pRol_to.Value = rol;
-            parametros.Add(pRol_to);
-
-            var pFun_to = new SqlParameter("@func_to_rol", SqlDbType.NVarChar, 255, "func_to_rol");
-            pFun_to.Value = fun;
-            parametros.Add(pFun_to);
-
-            //Ejecuto el stored procedure
-            HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_agregarFuncionalidadXRol", parametros);
-
-            return true;
+            BuilderFuncionalidad builder = new BuilderFuncionalidad();
+            foreach (DataRow row in ds.Tables[0].Rows) {
+                list.Add(builder.Build(row));
+            }
+            return list;        
         }
     }
 

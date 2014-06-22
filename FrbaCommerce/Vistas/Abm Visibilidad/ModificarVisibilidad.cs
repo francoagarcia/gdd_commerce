@@ -41,6 +41,7 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             this.tb_Descripcion.Text = this.visibilidadEntidad.descripcion;
             this.tb_Porcentaje.Text = this.visibilidadEntidad.porcentaje.ToString();
             this.tb_Precio.Text = this.visibilidadEntidad.precio.ToString();
+            this.nud_Dias_habilitados.Value = this.visibilidadEntidad.dias_vencimiento_publi;
         }
         #endregion
 
@@ -77,6 +78,7 @@ namespace FrbaCommerce.Vistas.Abm_Visibilidad
             this.visibilidadEntidad.descripcion = this.tb_Descripcion.Text;
             this.visibilidadEntidad.porcentaje = Convert.ToDecimal(this.tb_Porcentaje.Text);
             this.visibilidadEntidad.precio = Convert.ToDecimal(this.tb_Precio.Text);
+            this.visibilidadEntidad.dias_vencimiento_publi = Convert.ToDecimal(this.nud_Dias_habilitados.Value);
         }
         #endregion
 

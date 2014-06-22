@@ -45,7 +45,7 @@ CREATE TABLE DATA_GROUP.Compra (
 	fecha datetime NOT NULL,
 	cantidad NUMERIC(18, 0) NOT NULL,
 	facturada bit DEFAULT 1, --1 es facturada, 0 no facturada
-	comision numeric(18,1) NOT NULL DEFAULT 0,
+	comision numeric(18,2) NOT NULL DEFAULT 0,
 );
 
 IF OBJECT_ID('DATA_GROUP.Oferta', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Oferta;
@@ -127,6 +127,13 @@ CREATE TABLE DATA_GROUP.Funcionalidad (
 	habilitada bit DEFAULT 1 NOT NULL,
 );
 
+IF OBJECT_ID('DATA_GROUP.CantVisibilidadesFacturadasPorUsuario', 'U') IS NOT NULL DROP TABLE DATA_GROUP.CantVisibilidadesFacturadasPorUsuario;
+CREATE TABLE DATA_GROUP.CantVisibilidadesFacturadasPorUsuario (
+	id_visibilidad_fact NUMERIC(18,0),
+	id_usuario_fact NUMERIC(18,0),
+	cantidad_fact NUMERIC(18,0),
+);
+
 IF OBJECT_ID('DATA_GROUP.Administrador', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Administrador;
 CREATE TABLE DATA_GROUP.Administrador ( 
 	id_administrador NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
@@ -178,7 +185,8 @@ CREATE TABLE DATA_GROUP.Usuario (
 	telefono numeric(18,0),
 	intentos_login int DEFAULT 0 NOT NULL, 
 	tipo_usuario nvarchar(3), 
-	habilitada bit DEFAULT 1
+	habilitada bit DEFAULT 1,
+	habilitada_comprar bit DEFAULT 1
 );
 
 IF OBJECT_ID('DATA_GROUP.TipoDocumento', 'U') IS NOT NULL DROP TABLE DATA_GROUP.TipoDocumento;
@@ -205,6 +213,7 @@ CREATE TABLE DATA_GROUP.VisibilidadPublicacion(
 	descripcion nvarchar(255) NOT NULL UNIQUE,
 	precio NUMERIC(18, 2) NOT NULL,
 	porcentaje NUMERIC(18, 2) NOT NULL,
+	dias_vencimiento_publi NUMERIC(18, 0) NOT NULL,
 	habilitada bit DEFAULT 1
 );
 
@@ -219,6 +228,7 @@ CREATE TABLE DATA_GROUP.FormaDePago(
 	id_forma_pago NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
 	descripcion nvarchar(255) NOT NULL,
 );
+
 
 -------------------------------------------------------------------------------------
 ----------------------------------CREANDO LAS PKS------------------------------------
@@ -322,13 +332,19 @@ FOREIGN KEY (id_vendedor) REFERENCES DATA_GROUP.Usuario (id_usuario);
 ALTER TABLE DATA_GROUP.Factura ADD CONSTRAINT fk_Factura_to_FormaDePago
 FOREIGN KEY (id_forma_pago) REFERENCES DATA_GROUP.FormaDePago (id_forma_pago);
 
+--Item de Facturas
 ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Publicacion 
 FOREIGN KEY (id_publicacion) REFERENCES DATA_GROUP.Publicacion ( id_publicacion );
 
 ALTER TABLE DATA_GROUP.ItemFactura ADD CONSTRAINT fk_ItemFactura_to_Factura 
 FOREIGN KEY (nro_factura) REFERENCES DATA_GROUP.Factura ( nro_factura );
 
+--Cantidad de visibilidades pagas de un usuario
+ALTER TABLE DATA_GROUP.CantVisibilidadesFacturadasPorUsuario ADD CONSTRAINT fk_CantVisibilidadesFacturadasPorUsuario_to_VisibilidadPublicacion
+FOREIGN KEY (id_visibilidad_fact) REFERENCES DATA_GROUP.VisibilidadPublicacion ( id_visibilidad );
 
+ALTER TABLE DATA_GROUP.CantVisibilidadesFacturadasPorUsuario ADD CONSTRAINT fk_CantVisibilidadesFacturadasPorUsuario_to_Usuario 
+FOREIGN KEY (id_usuario_fact) REFERENCES DATA_GROUP.Usuario ( id_usuario );
 
 -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------
@@ -358,8 +374,8 @@ VALUES ('Publicada'),('Borrador'),('Pausada'),('Finalizada');
 --------------------------------------------------------
 ------------------VisibilidadPublicacion----------------
 --------------------------------------------------------
-INSERT INTO DATA_GROUP.VisibilidadPublicacion(id_visibilidad, descripcion, precio, porcentaje)
-SELECT DISTINCT Publicacion_Visibilidad_Cod, Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Precio, Publicacion_Visibilidad_Porcentaje
+INSERT INTO DATA_GROUP.VisibilidadPublicacion(id_visibilidad, descripcion, precio, porcentaje, dias_vencimiento_publi)
+SELECT DISTINCT Publicacion_Visibilidad_Cod, Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Precio, Publicacion_Visibilidad_Porcentaje, 10
 FROM gd_esquema.Maestra;
 
 --------------------------------------------------------
@@ -513,8 +529,9 @@ JOIN DATA_GROUP.Usuario u
 ON u.username=CAST(m.Cli_Dni as nvarchar(255))
 WHERE m.Compra_Fecha is not null AND
 		m.Cli_Dni is not null AND
-		m.Publicacion_Cod is not null;
-		
+		m.Publicacion_Cod is not null AND
+		M.Calificacion_Codigo is not null
+
 --------------------------------------------------------
 -------------------------Ofertas------------------------
 --------------------------------------------------------		

@@ -19,17 +19,17 @@ namespace FrbaCommerce.Vistas.Login
     public partial class Login : Form
     {
 
-        #region [Atributos(private)]
-        private bool rol_seleccionado;
-        #endregion
 
-        #region [Propiedades(public)]
+        #region [Atributos]
+        private bool rol_seleccionado;
+        private RolDB rolDB;
         public Usuario UsuarioIniciado { get; private set; }
         public Rol RolUsuarioIniciado { get; private set; }
         #endregion
 
         public Login()
         {
+            this.rolDB = new RolDB();
             this.rol_seleccionado = true;
             InitializeComponent();
         }
@@ -39,7 +39,7 @@ namespace FrbaCommerce.Vistas.Login
             {
                 if (this.realizar_login())
                 {
-                    IList<Rol> roles_usuario = RolDB.ObtenerRoles(this.textBoxUsername.Text);
+                    IList<Rol> roles_usuario = this.rolDB.ObtenerRoles(this.textBoxUsername.Text);
 
                     if (roles_usuario.Count > 1 && rol_seleccionado)
                     {
@@ -50,7 +50,7 @@ namespace FrbaCommerce.Vistas.Login
                         this.comboBoxRol.DataSource = roles_usuario;
                         this.comboBoxRol.SelectedIndex = 0;
 
-                        MessageDialog.MensajeInformativo(this, "Seleccione un rol");
+                        MessageDialog.MensajeInformativo(this, "Debe seleccionar un rol para continuar");
                         rol_seleccionado = false;
                     }
                     else if (roles_usuario.Count > 1 && !rol_seleccionado)
@@ -58,10 +58,18 @@ namespace FrbaCommerce.Vistas.Login
                         this.RolUsuarioIniciado = (Rol)this.comboBoxRol.SelectedItem;
                         this.obtenerUsuarioLogueadoCorrectamente();
                     }
-                    else
+                    else 
                     {
-                        this.RolUsuarioIniciado = roles_usuario.First();
-                        this.obtenerUsuarioLogueadoCorrectamente();
+                        if (roles_usuario.Count.Equals(0))
+                        {
+                            MessageDialog.MensajeInformativo(this,"No puede ingresar al sistema debido a que se encuentra inhabilitado o todos sus roles lo están.");
+                            this.Close();
+                        }
+                        else
+                        {
+                            this.RolUsuarioIniciado = roles_usuario.First();
+                            this.obtenerUsuarioLogueadoCorrectamente();
+                        }
                     }
                     
                 }

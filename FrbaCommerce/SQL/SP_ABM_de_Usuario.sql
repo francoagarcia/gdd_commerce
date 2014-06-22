@@ -144,9 +144,31 @@ CREATE PROCEDURE DATA_GROUP.sp_Usuario_filter(
 )
 AS
 BEGIN
-	SELECT username, id_usuario, telefono, habilitada
+	SELECT username, id_usuario, telefono, habilitada, habilitada_comprar
 	FROM DATA_GROUP.Usuario
 	WHERE ((@username is null) OR (username like '%' + @username + '%'))
 		AND ((@telefono is null) OR (@telefono = telefono))
+END
+GO
+
+
+
+
+----------------------PROMEDIO USUARIO--------------------------
+IF OBJECT_ID('DATA_GROUP.promedioCalificaciones') IS NOT NULL
+	DROP PROCEDURE DATA_GROUP.promedioCalificaciones
+	GO
+CREATE PROCEDURE DATA_GROUP.promedioCalificaciones
+@id_usuario numeric(18,0)
+AS
+BEGIN
+
+	SELECT AVG(cal.estrellas_calificacion) promedioCalificaciones
+	from DATA_GROUP.Compra c
+	join DATA_GROUP.Publicacion p 
+		on p.id_publicacion=c.id_publicacion and p.id_usuario_publicador=@id_usuario
+	join DATA_GROUP.CalificacionPublicacion cal 
+		on c.id_calificacion=cal.id_calificacion;
+
 END
 GO

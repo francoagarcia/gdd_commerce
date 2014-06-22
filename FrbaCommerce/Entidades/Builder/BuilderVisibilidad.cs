@@ -16,6 +16,7 @@ namespace FrbaCommerce.Entidades.Builder
             visibilidad.precio = Convert.ToDecimal(row["precio"]);
             visibilidad.porcentaje = Convert.ToDecimal(row["porcentaje"]);
             visibilidad.habilitada = Convert.ToBoolean(row["habilitada"]);
+            visibilidad.dias_vencimiento_publi = Convert.ToDecimal(row["dias_vencimiento_publi"]);
             return visibilidad;
         }
     }
