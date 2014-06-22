@@ -67,13 +67,31 @@ CREATE PROCEDURE DATA_GROUP.SP_agregrarRespuesta
 @respuesta nvarchar(255), 
 @id numeric(18, 0)
 AS
-BEGIN	
+BEGIN
+	
+	BEGIN TRY
+		BEGIN TRAN
 	UPDATE DATA_GROUP.Pregunta 
 	SET respuesta = @respuesta
 	WHERE id_pregunta = @id
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN
+
+		DECLARE @ErrorMessage NVARCHAR(4000);
+	    DECLARE @ErrorSeverity INT;
+		DECLARE @ErrorState INT;
+
+		SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+		RAISERROR (@ErrorMessage, -- Message text.
+               @ErrorSeverity, -- Severity.
+               @ErrorState -- State.
+               );
+	END CATCH	
 END
 GO
-
 
 
 IF OBJECT_ID('DATA_GROUP.getCalificaciones') is not null

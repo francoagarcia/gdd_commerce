@@ -7,6 +7,13 @@ using System.Data.SqlClient;
 using FrbaCommerce.ConnectorDB;
 using FrbaCommerce.Entidades;
 using FrbaCommerce.Entidades.Builder;
+using FrbaCommerce.GUIMethods.FormBase;
+using FrbaCommerce.GUIMethods;
+using FrbaCommerce.GUIMethods.Validaciones;
+using FrbaCommerce.Generics.Resultados;
+using FrbaCommerce.Generics;
+using FrbaCommerce.Generics.Enums;
+
 
 namespace FrbaCommerce.DataAccess
 {
@@ -68,13 +75,13 @@ namespace FrbaCommerce.DataAccess
             return parametros;
         }
 
-        public DataSet dame_Preguntas(string usuario)
+        public DataSet dame_Preguntas(Usuario usu)
         {
 
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             var pUsuario = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
-            pUsuario.Value = usuario;
+            pUsuario.Value = usu.username;
             parametros.Add(pUsuario);
 
             DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getPreguntas", parametros);
@@ -83,13 +90,13 @@ namespace FrbaCommerce.DataAccess
 
         }
 
-        public DataSet dame_Respuestas(string usuario)
+        public DataSet dame_Respuestas(Usuario usu)
         {
 
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             var pUsuario = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
-            pUsuario.Value = usuario;
+            pUsuario.Value = usu.username;
             parametros.Add(pUsuario);
 
             DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getRespuestas", parametros);
@@ -98,25 +105,40 @@ namespace FrbaCommerce.DataAccess
 
         }
 
-        public void guarda_Respuesta(decimal id, string resp)
+        public bool guarda_Respuesta(Preguntas pre)
         {
-
+            try
+            {
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             var pId = new SqlParameter("@id_pregunta", SqlDbType.Decimal, 18, "id_pregunta");
-            pId.Value = id;
+            pId.Value = pre.id_pregunta;
             parametros.Add(pId);
 
             var pRespuesta = new SqlParameter("@respuesta ", SqlDbType.NVarChar, 400, "respuesta");
-            pRespuesta.Value = resp;
+            pRespuesta.Value = pre.respuesta;
             parametros.Add(pRespuesta);
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.getRespuestas", parametros);
+            }
+            catch (SqlException exSQL)
+            {
+                MessageDialog.MensajeError(exSQL.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageDialog.MensajeError(ex.Message);
+                return false;
+            }
+            return true;
+        
         }
 
-        public void guarda_Pregunta(string pre, decimal id_pub, decimal id_usu)
+        public bool guarda_Pregunta(string pre, decimal id_pub, decimal id_usu)
         {
-
+            try
+            {
             List<SqlParameter> parametros = new List<SqlParameter>();
 
             var pid_Pub = new SqlParameter("@id_pub", SqlDbType.Decimal, 18, "id_pub");
@@ -132,6 +154,19 @@ namespace FrbaCommerce.DataAccess
             parametros.Add(pPregunta);
 
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_agregrarPregunta", parametros);
+        
+            }
+            catch (SqlException exSQL)
+            {
+                MessageDialog.MensajeError(exSQL.Message);
+                return false;
+            }
+            catch (Exception ex)
+            {
+                MessageDialog.MensajeError(ex.Message);
+                return false;
+            }
+            return true;
         }
 
     }

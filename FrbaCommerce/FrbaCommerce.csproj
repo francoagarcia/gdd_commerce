@@ -313,6 +313,12 @@
     <Compile Include="Vistas\Comprar Ofertar\AltaPregunta.Designer.cs">
       <DependentUpon>AltaPregunta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Gestion de Preguntas\AltaRespuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Gestion de Preguntas\AltaRespuesta.Designer.cs">
+      <DependentUpon>AltaRespuesta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,11 +355,11 @@
     <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\Pregunta.cs">
+    <Compile Include="Vistas\Gestion de Preguntas\GestionPregunta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\Pregunta.Designer.cs">
-      <DependentUpon>Pregunta.cs</DependentUpon>
+    <Compile Include="Vistas\Gestion de Preguntas\GestionPregunta.Designer.cs">
+      <DependentUpon>GestionPregunta.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Historial Cliente\Historial.cs">
       <SubType>Form</SubType>
@@ -460,8 +466,11 @@
     <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaPregunta.resx">
       <DependentUpon>AltaPregunta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Gestion de Preguntas\Pregunta.resx">
-      <DependentUpon>Pregunta.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Gestion de Preguntas\AltaRespuesta.resx">
+      <DependentUpon>AltaRespuesta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Gestion de Preguntas\GestionPregunta.resx">
+      <DependentUpon>GestionPregunta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Historial Cliente\Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
