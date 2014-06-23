@@ -68,6 +68,8 @@
             this.labelInfoAsterizco = new System.Windows.Forms.Label();
             this.label_Ingrese_datos = new System.Windows.Forms.Label();
             this.btn_Limpiar = new System.Windows.Forms.Button();
+            this.tb_Altura = new System.Windows.Forms.TextBox();
+            this.lbl_Altura = new System.Windows.Forms.Label();
             this.groupBox_Datos_de_usuario.SuspendLayout();
             this.groupBoxDatosCliente.SuspendLayout();
             this.groupBoxDomicilioCliente.SuspendLayout();
@@ -301,6 +303,8 @@
             // 
             // groupBoxDomicilioCliente
             // 
+            this.groupBoxDomicilioCliente.Controls.Add(this.tb_Altura);
+            this.groupBoxDomicilioCliente.Controls.Add(this.lbl_Altura);
             this.groupBoxDomicilioCliente.Controls.Add(this.tb_Calle);
             this.groupBoxDomicilioCliente.Controls.Add(this.tb_Piso);
             this.groupBoxDomicilioCliente.Controls.Add(this.tb_Departamento);
@@ -322,7 +326,7 @@
             // 
             this.tb_Calle.Location = new System.Drawing.Point(67, 26);
             this.tb_Calle.Name = "tb_Calle";
-            this.tb_Calle.Size = new System.Drawing.Size(318, 20);
+            this.tb_Calle.Size = new System.Drawing.Size(194, 20);
             this.tb_Calle.TabIndex = 24;
             // 
             // tb_Piso
@@ -447,6 +451,22 @@
             this.btn_Limpiar.UseVisualStyleBackColor = true;
             this.btn_Limpiar.Click += new System.EventHandler(this.btn_Limpiar_Click);
             // 
+            // tb_Altura
+            // 
+            this.tb_Altura.Location = new System.Drawing.Point(311, 26);
+            this.tb_Altura.Name = "tb_Altura";
+            this.tb_Altura.Size = new System.Drawing.Size(74, 20);
+            this.tb_Altura.TabIndex = 34;
+            // 
+            // lbl_Altura
+            // 
+            this.lbl_Altura.AutoSize = true;
+            this.lbl_Altura.Location = new System.Drawing.Point(268, 29);
+            this.lbl_Altura.Name = "lbl_Altura";
+            this.lbl_Altura.Size = new System.Drawing.Size(34, 13);
+            this.lbl_Altura.TabIndex = 33;
+            this.lbl_Altura.Text = "Altura";
+            // 
             // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -517,6 +537,8 @@
         private System.Windows.Forms.Label labelInfoAsterizco;
         private System.Windows.Forms.Label label_Ingrese_datos;
         private System.Windows.Forms.Button btn_Limpiar;
+        private System.Windows.Forms.TextBox tb_Altura;
+        private System.Windows.Forms.Label lbl_Altura;
 
     }
 }

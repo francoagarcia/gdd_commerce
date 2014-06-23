@@ -211,7 +211,8 @@ BEGIN
 			p.id_tipo_publicacion,
 			tipPub.descripcion descTipoPubli,
 			p.id_visibilidad,
-			visi.descripcion descVisi
+			visi.descripcion descVisi,
+			p.id_usuario_publicador
 	FROM DATA_GROUP.Publicacion p
 	INNER JOIN DATA_GROUP.EstadoPublicacion est
 	ON est.id_estado=p.id_estado

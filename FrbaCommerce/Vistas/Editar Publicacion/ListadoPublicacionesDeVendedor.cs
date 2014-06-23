@@ -238,6 +238,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
                 pubShow.precio = pub.precio;
                 pubShow.stock = pub.stock;
                 pubShow.tipo_publicacion = pub.tipo_publicacion;
+                pubShow.id_usuario_publicador = pub.usuario_publicador.id_usuario;
                 lista.Add(pubShow);
             }
             return lista;
@@ -257,6 +258,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             public string desc_estado { get; set; }
             public string desc_rubro { get; set; }
             public bool habilitada { get; set; }
+            public decimal id_usuario_publicador { get; set; }
         }
         #endregion
 

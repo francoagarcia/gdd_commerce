@@ -1,6 +1,86 @@
 
 
 
+
+
+IF OBJECT_ID('DATA_GROUP.nuevaRespuesta') is not null
+	DROP PROCEDURE DATA_GROUP.nuevaRespuesta
+	GO
+CREATE PROCEDURE DATA_GROUP.nuevaRespuesta
+@id_pregunta numeric(18,0),
+@respuesta nvarchar(400)
+AS
+BEGIN
+	
+	UPDATE DATA_GROUP.Pregunta
+	SET respuesta=@respuesta, fecha_respuesta=GETDATE()
+	WHERE id_pregunta=@id_pregunta
+END
+GO
+
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+
+IF OBJECT_ID('DATA_GROUP.getPreguntasSinResponder') is not null
+	DROP PROCEDURE DATA_GROUP.getPreguntasSinResponder
+	GO
+CREATE PROCEDURE DATA_GROUP.getPreguntasSinResponder
+@id_vendedor numeric(18,0)
+AS
+BEGIN
+
+	SELECT  preg.id_pregunta, 
+			preg.id_publicacion, 
+			preg.id_usuario,
+			u.username,
+			preg.pregunta, 
+			preg.fecha_pregunta, 
+			preg.respuesta,
+			preg.fecha_respuesta 
+	FROM DATA_GROUP.Pregunta preg
+	JOIN DATA_GROUP.Publicacion pub on pub.id_publicacion=preg.id_publicacion
+	JOIN DATA_GROUP.Usuario u on u.id_usuario=preg.id_usuario
+	WHERE pub.id_usuario_publicador=@id_vendedor AND respuesta is null
+
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.getPreguntasYaRespondidas') is not null
+	DROP PROCEDURE DATA_GROUP.getPreguntasYaRespondidas
+	GO
+CREATE PROCEDURE DATA_GROUP.getPreguntasYaRespondidas
+@id_vendedor numeric(18,0)
+AS
+BEGIN
+
+	SELECT  preg.id_pregunta, 
+			preg.id_publicacion, 
+			preg.id_usuario,
+			u.username, 
+			preg.pregunta, 
+			preg.fecha_pregunta, 
+			preg.respuesta,
+			preg.fecha_respuesta 
+	FROM DATA_GROUP.Pregunta preg
+	JOIN DATA_GROUP.Publicacion pub on pub.id_publicacion=preg.id_publicacion
+	JOIN DATA_GROUP.Usuario u on u.id_usuario=preg.id_usuario
+	WHERE pub.id_usuario_publicador=@id_vendedor AND respuesta is not null
+
+END
+GO
+
+
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+
+
+
 IF OBJECT_ID('DATA_GROUP.getRespuestasDeUnaPublicacion') is not null
 	DROP PROCEDURE DATA_GROUP.getRespuestasDeUnaPublicacion
 	GO

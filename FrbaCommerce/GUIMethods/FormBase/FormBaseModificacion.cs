@@ -72,7 +72,11 @@ namespace FrbaCommerce.GUIMethods.FormBase
         #region [Limpiar]
         protected void Limpiar()
         {
-            this.AccionLimpiar();
+            DialogResult dr = MessageDialog.MensajeInformativo(this, "¿Esta seguro que desea limpiar los campos?", MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+            {
+                this.AccionLimpiar();
+            }
         }
 
         protected virtual void AccionLimpiar()

@@ -6,11 +6,42 @@ using System.Data;
 using System.Data.SqlClient;
 using FrbaCommerce.ConnectorDB;
 using FrbaCommerce.Entidades;
+using FrbaCommerce.Entidades.Builder;
 
 namespace FrbaCommerce.DataAccess
 {
     public class ComprarDB
     {
+
+        public void habilitarParaComprar(Usuario usuario)
+        {
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            var id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            id_usuario.Value = usuario.id_usuario;
+            parametros.Add(id_usuario);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.habilitarParaComprar", parametros);
+        }
+
+
+        public IList<Compra> getComprasSinCalificar(Usuario usuarioComprador) 
+        {
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+
+            var id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario_comprador");
+            id_usuario.Value = usuarioComprador.id_usuario;
+            parametros.Add(id_usuario);
+
+            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getComprasSinCalificar", parametros);
+
+            BuilderCompra builder = new BuilderCompra();
+            IList<Compra> compras = new List<Compra>();
+            foreach (DataRow row in ds.Tables[0].Rows) {
+                compras.Add(builder.Build(row));
+            }
+            return compras;
+        }
+
 
         public bool nuevaCompra(Compra comp) {
             IList<SqlParameter> parametros = this.GenerarParametrosCrear(comp);

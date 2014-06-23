@@ -1,6 +1,85 @@
 
 
 
+IF OBJECT_ID('DATA_GROUP.habilitarParaComprar') is not null
+	DROP PROCEDURE DATA_GROUP.habilitarParaComprar
+	GO
+CREATE PROCEDURE DATA_GROUP.habilitarParaComprar
+@id_usuario numeric(18,0)
+AS
+BEGIN
+	
+	UPDATE DATA_GROUP.Usuario
+	SET habilitada_comprar=1
+	WHERE id_usuario=@id_usuario;
+END
+GO
+
+
+
+
+IF OBJECT_ID('DATA_GROUP.nuevaCalificacion') is not null
+	DROP PROCEDURE DATA_GROUP.nuevaCalificacion
+	GO
+CREATE PROCEDURE DATA_GROUP.nuevaCalificacion
+@id_compra numeric(18,0),
+@estrellas_calificacion numeric(18, 0),
+@detalle_calificacion nvarchar(255),
+@id_calificacion numeric(18,0) OUTPUT
+AS
+BEGIN
+
+BEGIN TRY
+	BEGIN TRAN
+	
+		SELECT @id_calificacion = MAX(id_calificacion)+1
+		FROM DATA_GROUP.CalificacionPublicacion
+
+		INSERT INTO DATA_GROUP.CalificacionPublicacion(id_calificacion, estrellas_calificacion, detalle_calificacion)
+		VALUES (@id_calificacion, @estrellas_calificacion, @detalle_calificacion)
+		
+		UPDATE DATA_GROUP.Compra
+		SET id_calificacion=@id_calificacion
+		WHERE id_compra=@id_compra
+
+	COMMIT TRAN
+END TRY
+BEGIN CATCH
+	ROLLBACK TRAN
+	
+	DECLARE @ErrorMessage NVARCHAR(4000);
+	DECLARE @ErrorSeverity INT;
+	DECLARE @ErrorState INT;
+
+	SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+	RAISERROR (@ErrorMessage, -- Message text.
+		   @ErrorSeverity, -- Severity.
+		   @ErrorState -- State.
+		   );
+END CATCH
+END
+GO
+
+
+IF OBJECT_ID('DATA_GROUP.getComprasSinCalificar') is not null
+	DROP PROCEDURE DATA_GROUP.getComprasSinCalificar
+	GO
+CREATE PROCEDURE DATA_GROUP.getComprasSinCalificar
+@id_usuario numeric(18, 0)
+AS
+BEGIN
+	SELECT c.id_compra, c.id_publicacion, c.id_usuario_comprador, c.id_calificacion, c.fecha, c.cantidad
+	FROM DATA_GROUP.Compra c
+	WHERE id_calificacion is null AND id_usuario_comprador=@id_usuario
+END
+
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+
 IF OBJECT_ID('DATA_GROUP.sp_nuevaCompra') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.sp_nuevaCompra
 	GO
@@ -148,10 +227,6 @@ GO
 -------------------------------------------------------------------------------
 
 
-
-
-
-
 IF OBJECT_ID('DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador') is not null
 	DROP PROCEDURE DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador
 	GO
@@ -177,8 +252,6 @@ BEGIN
 	
 END
 GO
-
-
 
 
 IF OBJECT_ID('DATA_GROUP.cantidadDeComprasSinCalificar') is not null

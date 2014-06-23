@@ -67,7 +67,7 @@
             // 
             // btn_Salir
             // 
-            this.btn_Salir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Salir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btn_Salir.Location = new System.Drawing.Point(6, 18);
             this.btn_Salir.Name = "btn_Salir";
             this.btn_Salir.Size = new System.Drawing.Size(131, 23);
@@ -107,7 +107,7 @@
             // 
             // lbl_Paginas
             // 
-            this.lbl_Paginas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbl_Paginas.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lbl_Paginas.AutoSize = true;
             this.lbl_Paginas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_Paginas.Location = new System.Drawing.Point(318, 234);

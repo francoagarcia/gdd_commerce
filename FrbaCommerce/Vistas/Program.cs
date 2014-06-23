@@ -42,13 +42,13 @@ namespace FrbaCommerce
                 usu.id_usuario = 1;
                 usu.habilitada = true;
                 usu.habilitada_comprar = true;
-                //Application.Run(new FrbaCommerce.Vistas.Abm_Visibilidad.ListadoVisibilidad());
+                //Application.Run(new FrbaCommerce.Vistas.Gestion_de_Preguntas.GestionPreguntas(usu));
 
                 //Application.Run(new FrbaCommerce.Vistas.Editar_Publicacion.ListadoPublicacionesDeVendedor(usu));
                 //Application.Run(new FrbaCommerce.Vistas.Comprar_Ofertar.ListadoPublicacionesCompra(usu));
                 //Application.Run(new FrbaCommerce.Vistas.Generar_Publicacion.SeleccionTipoPublicacion(usu));
-                //Application.Run(new FrbaCommerce.Inicio());
                 Application.Run(new FrbaCommerce.Inicio());
+                //Application.Run(new FrbaCommerce.Vistas.Comprar_Ofertar.DatosDelVendedor());
 
             }
             catch (Exception ex)

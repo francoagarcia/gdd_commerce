@@ -144,7 +144,5 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             base.Cancelar();
         }
 
-
-
     }
 }

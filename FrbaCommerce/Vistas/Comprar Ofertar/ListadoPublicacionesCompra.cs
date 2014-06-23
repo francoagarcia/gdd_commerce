@@ -170,7 +170,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             this.dgv_Busqueda.Columns["id_rubro"].Visible = false;
             this.dgv_Busqueda.Columns["id_visibilidad"].Visible = false;
             this.dgv_Busqueda.Columns["id_estado"].Visible = false;
-            this.dgv_Busqueda.Columns["usuario"].Visible = false;
+            this.dgv_Busqueda.Columns["id_usuario_publicador"].Visible = false;
 
             this.dgv_Busqueda.Columns["desc_visibilidad"].HeaderText = "Visibilidad";
             this.dgv_Busqueda.Columns["desc_rubro"].HeaderText = "Rubro";
@@ -319,7 +319,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             pub.fecha_inicio = pubshow.fecha_inicio;
             pub.fecha_vencimiento = pubshow.fecha_vencimiento;
             pub.usuario_publicador = new Usuario();
-            pub.usuario_publicador = pubshow.usuario;
+            pub.usuario_publicador.id_usuario = pubshow.id_usuario_publicador;
             pub.visibilidad = new Visibilidad();
             pub.visibilidad.id_visibilidad = pubshow.id_visibilidad;
             pub.visibilidad.descripcion = pubshow.desc_visibilidad;
@@ -343,7 +343,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
                 pubShow.id_rubro = pub.rubro.id_rubro;
                 pubShow.desc_rubro = pub.rubro.descripcion;
                 pubShow.desc_visibilidad = pub.visibilidad.descripcion;
-                pubShow.usuario = pub.usuario_publicador;
+                pubShow.id_usuario_publicador = pub.usuario_publicador.id_usuario;
                 pubShow.descripcion = pub.descripcion;
                 pubShow.fecha_inicio = pub.fecha_inicio;
                 pubShow.fecha_vencimiento = pub.fecha_vencimiento;
@@ -361,7 +361,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
         private class PublicacionAMostrar
         {
             public decimal id_publicacion { get; set; }
-            public Usuario usuario { get; set; }
+            public decimal id_usuario_publicador { get; set; }
             public string descripcion { get; set; }
             public decimal stock { get; set; }
             public DateTime fecha_inicio { get; set; }

@@ -144,7 +144,7 @@ CREATE TABLE DATA_GROUP.Administrador (
 IF OBJECT_ID('DATA_GROUP.Cliente', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Cliente;
 CREATE TABLE DATA_GROUP.Cliente (
 	id_tipo_documento NUMERIC(18, 0) NOT NULL,
-	nro_documento NUMERIC(18,0) NOT NULL,
+	nro_documento nvarchar(50) NOT NULL,
 	id_usuario NUMERIC(18,0),
 	nombre nvarchar(255), 
 	apellido nvarchar (255),
@@ -157,7 +157,6 @@ CREATE TABLE DATA_GROUP.Cliente (
 	mail nvarchar(255),
 	fecha_nacimiento datetime,
 	sexo int DEFAULT 2, --0: masculino -> 1: femenino -> 2:indefinido
-	--habilitada bit DEFAULT 1,
 );
 
 IF OBJECT_ID('DATA_GROUP.Empresa', 'U') IS NOT NULL DROP TABLE DATA_GROUP.Empresa;
@@ -460,7 +459,7 @@ WHERE U.tipo_usuario='ADM' AND U.username ='admin' AND U.contrasenia='e6b87050bf
 --------------------------------------------------------
 
 INSERT INTO DATA_GROUP.Cliente(nro_documento, id_tipo_documento, id_usuario, apellido, nombre, fecha_nacimiento, mail, dom_calle, nro_calle, piso, depto, cod_postal)
-SELECT DISTINCT maes.Publ_Cli_Dni, 1, usu.id_usuario, maes.Publ_Cli_Apeliido, maes.Publ_Cli_Nombre, maes.Publ_Cli_Fecha_Nac, maes.Publ_Cli_Mail, Publ_Cli_Dom_Calle, Publ_Cli_Nro_Calle, Publ_Cli_Piso, Publ_Cli_Depto, Publ_Cli_Cod_Postal
+SELECT DISTINCT LTRIM(RTRIM(STR(maes.Publ_Cli_Dni))), 1, usu.id_usuario, maes.Publ_Cli_Apeliido, maes.Publ_Cli_Nombre, maes.Publ_Cli_Fecha_Nac, maes.Publ_Cli_Mail, Publ_Cli_Dom_Calle, Publ_Cli_Nro_Calle, Publ_Cli_Piso, Publ_Cli_Depto, Publ_Cli_Cod_Postal
 FROM gd_esquema.Maestra maes
 JOIN DATA_GROUP.Usuario usu
 ON usu.tipo_usuario='CLI' AND usu.username=CAST(maes.Publ_Cli_Dni AS NVARCHAR(255));

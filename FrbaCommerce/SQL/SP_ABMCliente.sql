@@ -1,3 +1,7 @@
+
+
+
+
 ----------------------------------------------------
 IF OBJECT_ID('DATA_GROUP.nuevoCliente') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.nuevoCliente
@@ -5,13 +9,14 @@ IF OBJECT_ID('DATA_GROUP.nuevoCliente') IS NOT NULL
 CREATE PROCEDURE DATA_GROUP.nuevoCliente(
 @id_usuario_agregado numeric(18, 0) OUTPUT,
 @id_tipo_doc numeric(18, 0),  
-@nro_documento numeric(18, 0), 
+@nro_documento nvarchar(50), 
 @nombre_de_usuario nvarchar(255), 
 @contrasenia_usuario nvarchar(255),
 @telefono_usuario numeric(18, 0),
 @nombre nvarchar(255), 
 @apellido nvarchar(255), 
 @dom_calle nvarchar(255), 
+@nro_calle numeric(18,0),
 @piso numeric(18, 0), 
 @depto nvarchar(50), 
 @localidad nvarchar(255), 
@@ -22,31 +27,20 @@ CREATE PROCEDURE DATA_GROUP.nuevoCliente(
 )
 AS
 BEGIN
-	BEGIN TRY
 
-		DECLARE @telefonoRepetido numeric(18, 0);
+	BEGIN TRY
 		
+		DECLARE @telefonoRepetido numeric(18, 0) = null
+	
 		SET @telefonoRepetido = (SELECT TOP 1 telefono FROM DATA_GROUP.Usuario WHERE telefono is not null and telefono=@telefono_usuario)
 		
-		if @telefonoRepetido is not null
-		BEGIN
-			
-			DECLARE @ErrorSeverityTelefono INT;
-			DECLARE @ErrorStateTelefono INT;
-
-			SELECT @ErrorSeverityTelefono = ERROR_SEVERITY(), @ErrorStateTelefono = ERROR_STATE();
-
-			RAISERROR ('Telefono ingresado ya se encuentra registrado en el sistema. Por favor ingrese otro', -- Message text.
-				   @ErrorSeverityTelefono, -- Severity.
-				   @ErrorStateTelefono -- State.
-				   );
-		END
-		ELSE
-		BEGIN
+		if @telefonoRepetido is null
+		BEGIN		
 			BEGIN TRAN	
 			DECLARE @id_usuario_new numeric(18,0);
 			
 			EXEC DATA_GROUP.nuevoUsuario  @nombre_de_usuario, @contrasenia_usuario, @telefono_usuario, 'CLI', @id_usuario_new OUTPUT
+			SET @id_usuario_agregado = @id_usuario_new
 			
 			DECLARE @id_rol_for_new_user numeric(18) = (SELECT TOP 1 id_rol FROM DATA_GROUP.Rol WHERE nombre = 'Cliente')
 			
@@ -79,12 +73,9 @@ BEGIN
 					@mail, 
 					@fecha_nacimiento, 
 					@sexo)
-					
-			SET @id_usuario_agregado = SCOPE_IDENTITY();
 
 			COMMIT TRAN
 		END
-		
 	END TRY
 	BEGIN CATCH
 		ROLLBACK TRAN
@@ -102,36 +93,7 @@ BEGIN
 	END CATCH
 
 END
-
-
-
-----------------------Existe CLIENTE--------------------------
-
-
-IF OBJECT_ID('DATA_GROUP.existeDocumentoRepetidoDeCliente') is not null
-	DROP PROCEDURE DATA_GROUP.existeDocumentoRepetidoDeCliente;
-	GO
-CREATE PROCEDURE DATA_GROUP.existeDocumentoRepetidoDeCliente
-@id_tipo_documento numeric(18,0),
-@nro_documento numeric(18, 0),
-@existeRepetido bit OUTPUT
-AS
-BEGIN
-
-	DECLARE @id_usuario numeric(18,0) = null
-	
-	SELECT @id_usuario=id_usuario
-	FROM DATA_GROUP.Cliente
-	WHERE id_tipo_documento=@id_tipo_documento AND nro_documento=@nro_documento;
-	
-	if @id_usuario is not null
-		SET @existeRepetido = 1 --TRUE
-	else
-		SET @existeRepetido = 0 --False: no existe
-
-END
 GO
-
 
 ----------------------MODIFICAR CLIENTE--------------------------
 
@@ -141,14 +103,15 @@ IF OBJECT_ID('DATA_GROUP.modificarCliente') IS NOT NULL
 CREATE PROCEDURE DATA_GROUP.modificarCliente
 (	
 	@id_usuario_a_modificar numeric(18, 0),
-	@id_tipo_documento numeric(18,0),
-	@nro_documento numeric(18, 0), 
+	@id_tipo_documento nvarchar(50),
+	@nro_documento nvarchar(50), 
 	@nombre_de_usuario nvarchar(255),
 	@contrasenia_usuario nvarchar(255),
 	@telefono_usuario numeric(18, 0),
 	@nombre nvarchar(255), 
 	@apellido nvarchar(255), 
-	@dom_calle nvarchar(255), 
+	@dom_calle nvarchar(255),
+	@nro_calle numeric(18,0),	
 	@piso numeric(18, 0), 
 	@depto nvarchar(50), 
 	@localidad nvarchar(255), 
@@ -166,6 +129,8 @@ BEGIN
 		
 		UPDATE DATA_GROUP.Cliente
 		SET 
+			nro_documento = @nro_documento,
+			id_tipo_documento = @id_tipo_documento,
 			nombre=@nombre, 
 			apellido=@apellido, 
 			dom_calle=@dom_calle, 
@@ -176,7 +141,7 @@ BEGIN
 			mail=@mail,
 			fecha_nacimiento=@fecha_nacimiento, 
 			sexo=@sexo
-		WHERE id_tipo_documento=@id_tipo_documento AND nro_documento=@nro_documento
+		WHERE id_usuario = @id_usuario_a_modificar
 
 		COMMIT TRAN
 	END TRY
@@ -196,70 +161,19 @@ BEGIN
                );
 	END CATCH
 END
-
-
-
-----------------------HABILITACION DE CLIENTE--------------------------
-IF OBJECT_ID('DATA_GROUP.deshabilitarCliente') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.deshabilitarCliente
-	GO
-CREATE PROCEDURE DATA_GROUP.deshabilitarCliente
-@tipo_documento nvarchar(255),
-@nro_documento numeric(18, 0)
-AS
-BEGIN
-
-	DECLARE @id_tipo_doc numeric(18, 0)
-	SELECT @id_tipo_doc=id_tipo_documento
-	FROM DATA_GROUP.TipoDocumento
-	WHERE descripcion=@tipo_documento
-	
-	DECLARE @id_usu_deshabilitado numeric(18, 0)
-	SET @id_usu_deshabilitado = (SELECT id_usuario FROM DATA_GROUP.Cliente WHERE id_tipo_documento=@id_tipo_doc AND nro_documento=@nro_documento)
-	
-	UPDATE DATA_GROUP.Usuario
-	SET habilitada=0
-	WHERE id_usuario=@id_usu_deshabilitado
-	
-END
 GO
 
 
-IF OBJECT_ID('DATA_GROUP.habilitarCliente') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.habilitarCliente
-	GO
-
-CREATE PROCEDURE DATA_GROUP.habilitarCliente
-@tipo_documento nvarchar(255),
-@nro_documento numeric(18, 0)
-AS
-BEGIN
-
-	DECLARE @id_tipo_doc numeric(18, 0)
-	SELECT @id_tipo_doc=id_tipo_documento
-	FROM DATA_GROUP.TipoDocumento
-	WHERE descripcion=@tipo_documento
-	
-	DECLARE @id_usu_deshabilitado numeric(18, 0)
-	SET @id_usu_deshabilitado = (SELECT id_usuario FROM DATA_GROUP.Cliente WHERE id_tipo_documento=@id_tipo_doc AND nro_documento=@nro_documento)
-	
-	UPDATE DATA_GROUP.Usuario
-	SET habilitada=1
-	WHERE id_usuario=@id_usu_deshabilitado
-	
-END
-GO
 
 
 ----------------------------------FILTRO DE CLIENTE--------------------------------
-
 
 IF OBJECT_ID('DATA_GROUP.sp_cliente_filter') is not null
 	DROP PROCEDURE DATA_GROUP.sp_cliente_filter
 	GO
 CREATE PROCEDURE DATA_GROUP.sp_cliente_filter(
 	@id_tipo_doc numeric(18, 0) = NULL,  
-	@nro_documento numeric(18, 0) = NULL, 
+	@nro_documento nvarchar(50) = NULL, 
 	@telefono_usuario numeric(18, 0) = NULL,
 	@nombre nvarchar(255) = NULL, 
 	@apellido nvarchar(255) = NULL, 
@@ -285,6 +199,7 @@ BEGIN
 			c.nombre,
 			c.apellido,
 			c.dom_calle,
+			c.nro_calle,
 			c.piso,
 			c.depto,
 			c.localidad,
@@ -316,37 +231,5 @@ BEGIN
 	  
 END
 GO
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

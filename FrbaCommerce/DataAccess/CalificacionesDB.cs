@@ -5,64 +5,54 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using FrbaCommerce.ConnectorDB;
+using FrbaCommerce.Entidades;
 
 namespace FrbaCommerce.DataAccess
 {
-    class CalificacionesDB
+    public class CalificacionesDB
     {
-        public DataSet dame_Calificaciones(string usuario)
+
+        public decimal nuevaCalificacion(Compra compra) 
         {
+            IList<SqlParameter> parametros = this.GenerarParametrosCrear(compra);
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.nuevaCalificacion", parametros);
 
-            List<SqlParameter> parametros = new List<SqlParameter>();
+            var idNuevoOUTPUT = parametros.Where(p => p.ParameterName == "@id_calificacion").FirstOrDefault();
 
-            var pUsuario = new SqlParameter("@username", SqlDbType.NVarChar, 255, "username");
-            pUsuario.Value = usuario;
-            parametros.Add(pUsuario);
-
-            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getCalificaciones", parametros);
-
-            return ds;
-
+            if (idNuevoOUTPUT.Value != System.DBNull.Value)
+            {
+                compra.calificacion.id_calificacion = Convert.ToDecimal(idNuevoOUTPUT.Value);
+                return compra.calificacion.id_calificacion;
+            }
+            else 
+            {
+                return 0;
+            }
         }
 
-        public decimal agrega_Calificaciones(string detalle, decimal estrellas)
+        private IList<SqlParameter> GenerarParametrosCrear(Compra compra) 
         {
+            IList<SqlParameter> parametros = new List<SqlParameter>();
 
-            List<SqlParameter> parametros = new List<SqlParameter>();
+            var id_compra = new SqlParameter("@id_compra", SqlDbType.Decimal, 18, "id_compra");
+            id_compra.Value = compra.id_compra;
+            parametros.Add(id_compra);
 
-            var pDetalle = new SqlParameter("@detalle", SqlDbType.NVarChar, 255, "detalle");
-            pDetalle.Value = detalle;
-            parametros.Add(pDetalle);
+            var estrellas_calificacion = new SqlParameter("@estrellas_calificacion", SqlDbType.Decimal, 18, "estrellas_calificacion");
+            estrellas_calificacion.Value = compra.calificacion.estrellas_calificacion;
+            parametros.Add(estrellas_calificacion);
 
-            var pEstrella = new SqlParameter("@estrellas", SqlDbType.Decimal, 18, "estrellas");
-            pEstrella.Value = estrellas;
-            parametros.Add(pEstrella);
+            var detalle_calificacion = new SqlParameter("@detalle_calificacion", SqlDbType.NVarChar, 255, "detalle_calificacion");
+            detalle_calificacion.Value = compra.calificacion.detalle_calificacion;
+            parametros.Add(detalle_calificacion);
 
-            decimal id_calificacion = -1;
-            var pId = new SqlParameter("@id_calificacion", SqlDbType.Decimal, 18, "id_calificacion");
-            pId.Value = id_calificacion;
-            parametros.Add(pId);
+            var id_calificacion = new SqlParameter("@id_calificacion", SqlDbType.Decimal, 18, "id_calificacion");
+            id_calificacion.Direction = ParameterDirection.Output;
+            parametros.Add(id_calificacion);
 
-            DataSet ds = HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_agregrarCalificacion", parametros);
+            return parametros;
 
-            return (decimal)pId.Value;
 
-        }
-
-        public void actualizar_Compras(decimal calificacion, decimal compra)
-        {
-
-            List<SqlParameter> parametros = new List<SqlParameter>();
-
-            var pCalifica = new SqlParameter("@id_calificacion", SqlDbType.Decimal, 18, "id_calificacion");
-            pCalifica.Value = calificacion;
-            parametros.Add(pCalifica);
-
-            var pCompra = new SqlParameter("@id_compra", SqlDbType.Decimal, 18, "id_compra");
-            pCompra.Value = compra;
-            parametros.Add(pCompra);
-
-            HomeDB.ExecuteStoredProcedured("DATA_GROUP.SP_actualizarCompra", parametros);
         }
     }
 }

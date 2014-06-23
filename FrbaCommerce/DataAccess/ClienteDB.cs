@@ -9,6 +9,7 @@ using FrbaCommerce.Entidades;
 using FrbaCommerce.Entidades.Builder;
 using FrbaCommerce.Generics.Enums;
 using FrbaCommerce.Entidades.Filtros;
+using FrbaCommerce.Generics.Excepciones;
 
 namespace FrbaCommerce.DataAccess
 {
@@ -43,8 +44,16 @@ namespace FrbaCommerce.DataAccess
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.nuevoCliente", parametros);
             
             var idNuevoOUTPUT = parametros.Where(p => p.ParameterName == "@id_usuario_agregado").FirstOrDefault();
-            clienteNuevo.id_usuario = Convert.ToDecimal(idNuevoOUTPUT.Value);
-            return Convert.ToDecimal(idNuevoOUTPUT);
+            
+            if (idNuevoOUTPUT.Value != System.DBNull.Value)
+            {
+                clienteNuevo.id_usuario = Convert.ToDecimal(idNuevoOUTPUT.Value);
+                return clienteNuevo.id_usuario;
+            }
+            else
+            {
+                throw new TelefonoRepetidoException();
+            }
         }
 
         private IList<SqlParameter> GenerarParametrosModificar(Cliente clienteModificado) {
@@ -59,7 +68,7 @@ namespace FrbaCommerce.DataAccess
             id_tipo_documento.Value = clienteModificado.tipo_documento.Id;
             parametros.Add(id_tipo_documento);
 
-            SqlParameter nro_documento = new SqlParameter("@nro_documento", System.Data.SqlDbType.Decimal, 18, "nro_documento");
+            SqlParameter nro_documento = new SqlParameter("@nro_documento", System.Data.SqlDbType.NVarChar, 50, "nro_documento");
             nro_documento.Value = clienteModificado.nro_documento;
             parametros.Add(nro_documento);
 
@@ -86,6 +95,10 @@ namespace FrbaCommerce.DataAccess
             SqlParameter dom_calle = new SqlParameter("@dom_calle", System.Data.SqlDbType.NVarChar, 255, "dom_calle");
             dom_calle.Value = clienteModificado.dom_calle;
             parametros.Add(dom_calle);
+
+            SqlParameter nro_calle = new SqlParameter("@nro_calle", System.Data.SqlDbType.Decimal, 18, "nro_calle");
+            nro_calle.Value = clienteModificado.altura;
+            parametros.Add(nro_calle);
 
             SqlParameter piso = new SqlParameter("@piso", System.Data.SqlDbType.Decimal, 18, "piso");
             piso.Value = clienteModificado.piso;
@@ -130,8 +143,8 @@ namespace FrbaCommerce.DataAccess
                 id_tipo_documento.Value = filtro.IdTipoDocumento.Id;
             parametros.Add(id_tipo_documento);
 
-            SqlParameter nro_documento = new SqlParameter("@nro_documento", System.Data.SqlDbType.Decimal, 18, "nro_documento");
-            if(filtro.NroDocumento.HasValue)
+            SqlParameter nro_documento = new SqlParameter("@nro_documento", System.Data.SqlDbType.NVarChar, 50, "nro_documento");
+            if(!string.IsNullOrEmpty(filtro.NroDocumento))
                 nro_documento.Value = filtro.NroDocumento;
             parametros.Add(nro_documento);
 
@@ -207,7 +220,7 @@ namespace FrbaCommerce.DataAccess
             id_tipo_documento.Value = clienteNuevo.tipo_documento.Id;
             parametros.Add(id_tipo_documento);
 
-            SqlParameter nro_documento = new SqlParameter("@nro_documento", System.Data.SqlDbType.Decimal, 18, "nro_documento");
+            SqlParameter nro_documento = new SqlParameter("@nro_documento", System.Data.SqlDbType.NVarChar, 50, "nro_documento");
             nro_documento.Value = clienteNuevo.nro_documento;
             parametros.Add(nro_documento);
 
@@ -234,6 +247,10 @@ namespace FrbaCommerce.DataAccess
             SqlParameter dom_calle = new SqlParameter("@dom_calle", System.Data.SqlDbType.NVarChar, 255, "dom_calle");
             dom_calle.Value = clienteNuevo.dom_calle;
             parametros.Add(dom_calle);
+
+            SqlParameter nro_calle = new SqlParameter("@nro_calle", System.Data.SqlDbType.Decimal, 18, "nro_calle");
+            nro_calle.Value = clienteNuevo.altura;
+            parametros.Add(nro_calle);
 
             SqlParameter piso = new SqlParameter("@piso", System.Data.SqlDbType.Decimal, 18, "piso");
             piso.Value = clienteNuevo.piso;

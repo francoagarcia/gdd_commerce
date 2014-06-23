@@ -10,7 +10,7 @@ namespace FrbaCommerce.Entidades.Filtros
     {
         public TipoDocumento IdTipoDocumento { get; set; }
         public decimal? IdUsuario { get; set; }
-        public decimal? NroDocumento { get; set; }
+        public string NroDocumento { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public decimal? Telefono { get; set; }

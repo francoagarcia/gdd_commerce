@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FrbaCommerce.Generics
+namespace FrbaCommerce.Generics.Excepciones
 {
     public class TresPublicacionesGratuitasException : Exception
     {

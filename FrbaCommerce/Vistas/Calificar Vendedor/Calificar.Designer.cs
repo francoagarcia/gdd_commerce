@@ -28,118 +28,115 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.cb_calificacion = new System.Windows.Forms.ComboBox();
+            this.tb_comentario = new System.Windows.Forms.TextBox();
+            this.lbl_Comentario = new System.Windows.Forms.Label();
+            this.lbl_Calificacion = new System.Windows.Forms.Label();
+            this.btn_Comprar = new System.Windows.Forms.Button();
+            this.btn_Cancelar = new System.Windows.Forms.Button();
+            this.pnl_Calificacion = new System.Windows.Forms.Panel();
+            this.pnl_Calificacion.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // cb_calificacion
             // 
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 197);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(438, 104);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Puntaje";
+            this.cb_calificacion.FormattingEnabled = true;
+            this.cb_calificacion.Location = new System.Drawing.Point(74, 14);
+            this.cb_calificacion.Name = "cb_calificacion";
+            this.cb_calificacion.Size = new System.Drawing.Size(140, 21);
+            this.cb_calificacion.TabIndex = 3;
             // 
-            // button1
+            // tb_comentario
             // 
-            this.button1.Location = new System.Drawing.Point(342, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(78, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Enviar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tb_comentario.Location = new System.Drawing.Point(74, 46);
+            this.tb_comentario.Multiline = true;
+            this.tb_comentario.Name = "tb_comentario";
+            this.tb_comentario.Size = new System.Drawing.Size(351, 66);
+            this.tb_comentario.TabIndex = 5;
             // 
-            // label1
+            // lbl_Comentario
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Ingresar calificación:";
+            this.lbl_Comentario.AutoSize = true;
+            this.lbl_Comentario.Location = new System.Drawing.Point(5, 71);
+            this.lbl_Comentario.Name = "lbl_Comentario";
+            this.lbl_Comentario.Size = new System.Drawing.Size(63, 13);
+            this.lbl_Comentario.TabIndex = 4;
+            this.lbl_Comentario.Text = "Comentario:";
             // 
-            // textBox1
+            // lbl_Calificacion
             // 
-            this.textBox1.Location = new System.Drawing.Point(128, 27);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(199, 20);
-            this.textBox1.TabIndex = 1;
+            this.lbl_Calificacion.AutoSize = true;
+            this.lbl_Calificacion.Location = new System.Drawing.Point(4, 17);
+            this.lbl_Calificacion.Name = "lbl_Calificacion";
+            this.lbl_Calificacion.Size = new System.Drawing.Size(64, 13);
+            this.lbl_Calificacion.TabIndex = 2;
+            this.lbl_Calificacion.Text = "Calificación:";
             // 
-            // label2
+            // btn_Comprar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 62);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Comentario:";
+            this.btn_Comprar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Comprar.Location = new System.Drawing.Point(360, 144);
+            this.btn_Comprar.Name = "btn_Comprar";
+            this.btn_Comprar.Size = new System.Drawing.Size(78, 23);
+            this.btn_Comprar.TabIndex = 6;
+            this.btn_Comprar.Text = "Comprar";
+            this.btn_Comprar.UseVisualStyleBackColor = true;
+            this.btn_Comprar.Click += new System.EventHandler(this.btn_Comprar_Click);
             // 
-            // textBox2
+            // btn_Cancelar
             // 
-            this.textBox2.Location = new System.Drawing.Point(87, 59);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(333, 20);
-            this.textBox2.TabIndex = 4;
+            this.btn_Cancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btn_Cancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_Cancelar.Location = new System.Drawing.Point(20, 144);
+            this.btn_Cancelar.Name = "btn_Cancelar";
+            this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
+            this.btn_Cancelar.TabIndex = 7;
+            this.btn_Cancelar.Text = "Cancelar";
+            this.btn_Cancelar.UseVisualStyleBackColor = true;
+            this.btn_Cancelar.Click += new System.EventHandler(this.btn_Cancelar_Click);
             // 
-            // dataGridView1
+            // pnl_Calificacion
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 33);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(438, 146);
-            this.dataGridView1.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Seleccione una compra:";
+            this.pnl_Calificacion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Calificacion.Controls.Add(this.lbl_Calificacion);
+            this.pnl_Calificacion.Controls.Add(this.tb_comentario);
+            this.pnl_Calificacion.Controls.Add(this.cb_calificacion);
+            this.pnl_Calificacion.Controls.Add(this.lbl_Comentario);
+            this.pnl_Calificacion.Location = new System.Drawing.Point(12, 12);
+            this.pnl_Calificacion.Name = "pnl_Calificacion";
+            this.pnl_Calificacion.Size = new System.Drawing.Size(438, 126);
+            this.pnl_Calificacion.TabIndex = 1;
             // 
             // Calificar
             // 
+            this.AcceptButton = this.btn_Comprar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 313);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.groupBox1);
+            this.CancelButton = this.btn_Cancelar;
+            this.ClientSize = new System.Drawing.Size(462, 177);
+            this.Controls.Add(this.pnl_Calificacion);
+            this.Controls.Add(this.btn_Cancelar);
+            this.Controls.Add(this.btn_Comprar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Calificar";
-            this.Text = "Calificar";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Text = "Calificar compra";
+            this.Load += new System.EventHandler(this.Calificar_Load);
+            this.pnl_Calificacion.ResumeLayout(false);
+            this.pnl_Calificacion.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_Calificacion;
+        private System.Windows.Forms.Button btn_Comprar;
+        private System.Windows.Forms.Label lbl_Comentario;
+        private System.Windows.Forms.TextBox tb_comentario;
+        private System.Windows.Forms.ComboBox cb_calificacion;
+        private System.Windows.Forms.Button btn_Cancelar;
+        private System.Windows.Forms.Panel pnl_Calificacion;
     }
 }

@@ -200,7 +200,6 @@ namespace FrbaCommerce.Vistas.Listado_Estadistico
             esta.trimestre = Convert.ToInt32(((KeyValuePair<string, int>)cb_Trimestre.SelectedItem).Value);
             esta.mes = -1;
 
-            //textBox1.Text = Convert.ToString(cb_Vista.SelectedIndex);
             DataSet ds = null;
             switch (cb_Vista.SelectedIndex)
             {

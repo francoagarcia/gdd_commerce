@@ -44,7 +44,6 @@
             this.tb_Descripcion = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gb_Acciones = new System.Windows.Forms.GroupBox();
-            this.btn_Ver_informacion_de_vendedor = new System.Windows.Forms.Button();
             this.btn_Preguntar = new System.Windows.Forms.Button();
             this.btn_Comprar = new System.Windows.Forms.Button();
             this.btn_Cancelar = new System.Windows.Forms.Button();
@@ -210,7 +209,6 @@
             // 
             this.gb_Acciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.gb_Acciones.Controls.Add(this.btn_Ver_informacion_de_vendedor);
             this.gb_Acciones.Controls.Add(this.btn_Preguntar);
             this.gb_Acciones.Controls.Add(this.btn_Comprar);
             this.gb_Acciones.Controls.Add(this.btn_Cancelar);
@@ -221,21 +219,11 @@
             this.gb_Acciones.TabStop = false;
             this.gb_Acciones.Text = "Acciones";
             // 
-            // btn_Ver_informacion_de_vendedor
-            // 
-            this.btn_Ver_informacion_de_vendedor.Location = new System.Drawing.Point(193, 19);
-            this.btn_Ver_informacion_de_vendedor.Name = "btn_Ver_informacion_de_vendedor";
-            this.btn_Ver_informacion_de_vendedor.Size = new System.Drawing.Size(122, 39);
-            this.btn_Ver_informacion_de_vendedor.TabIndex = 3;
-            this.btn_Ver_informacion_de_vendedor.Text = "Ver informacion de vendedor";
-            this.btn_Ver_informacion_de_vendedor.UseVisualStyleBackColor = true;
-            this.btn_Ver_informacion_de_vendedor.Click += new System.EventHandler(this.btn_Ver_informacion_de_vendedor_Click);
-            // 
             // btn_Preguntar
             // 
-            this.btn_Preguntar.Location = new System.Drawing.Point(357, 19);
+            this.btn_Preguntar.Location = new System.Drawing.Point(236, 23);
             this.btn_Preguntar.Name = "btn_Preguntar";
-            this.btn_Preguntar.Size = new System.Drawing.Size(122, 39);
+            this.btn_Preguntar.Size = new System.Drawing.Size(180, 39);
             this.btn_Preguntar.TabIndex = 2;
             this.btn_Preguntar.Text = "Preguntar";
             this.btn_Preguntar.UseVisualStyleBackColor = true;
@@ -243,9 +231,9 @@
             // 
             // btn_Comprar
             // 
-            this.btn_Comprar.Location = new System.Drawing.Point(513, 19);
+            this.btn_Comprar.Location = new System.Drawing.Point(440, 23);
             this.btn_Comprar.Name = "btn_Comprar";
-            this.btn_Comprar.Size = new System.Drawing.Size(122, 39);
+            this.btn_Comprar.Size = new System.Drawing.Size(180, 39);
             this.btn_Comprar.TabIndex = 1;
             this.btn_Comprar.Text = "Comprar";
             this.btn_Comprar.UseVisualStyleBackColor = true;
@@ -253,9 +241,9 @@
             // 
             // btn_Cancelar
             // 
-            this.btn_Cancelar.Location = new System.Drawing.Point(33, 19);
+            this.btn_Cancelar.Location = new System.Drawing.Point(33, 23);
             this.btn_Cancelar.Name = "btn_Cancelar";
-            this.btn_Cancelar.Size = new System.Drawing.Size(122, 39);
+            this.btn_Cancelar.Size = new System.Drawing.Size(180, 39);
             this.btn_Cancelar.TabIndex = 0;
             this.btn_Cancelar.Text = "Cancelar";
             this.btn_Cancelar.UseVisualStyleBackColor = true;
@@ -335,7 +323,6 @@
         private System.Windows.Forms.TextBox tb_Precio;
         private System.Windows.Forms.Label lbl_Rubro;
         private System.Windows.Forms.GroupBox gb_Acciones;
-        private System.Windows.Forms.Button btn_Ver_informacion_de_vendedor;
         private System.Windows.Forms.Button btn_Preguntar;
         private System.Windows.Forms.Button btn_Comprar;
         private System.Windows.Forms.Button btn_Cancelar;

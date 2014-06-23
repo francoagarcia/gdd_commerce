@@ -11,6 +11,7 @@ namespace FrbaCommerce.Entidades
         public string razon_social { get; set; }
         public string nombre_de_contacto { get; set; }
         public string dom_calle { get; set; }
+        public decimal altura { get; set; }
         public decimal piso { get; set; }
         public string depto { get; set; }
         public string localidad { get; set; }

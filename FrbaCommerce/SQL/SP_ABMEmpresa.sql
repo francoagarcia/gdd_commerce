@@ -13,7 +13,8 @@ CREATE PROCEDURE DATA_GROUP.nuevaEmpresa(
 @cuit nvarchar(50), 
 @razon_social nvarchar(50), 
 @mail nvarchar(50), 
-@dom_calle nvarchar(255), 
+@dom_calle nvarchar(255),
+@nro_calle numeric(18,0), 
 @piso numeric(18, 0),
 @depto nvarchar(50),
 @localidad nvarchar(255),
@@ -26,30 +27,17 @@ AS
 BEGIN
 	BEGIN TRY
 	
-		DECLARE @telefonoRepetido numeric(18, 0);
-		
+		DECLARE @telefonoRepetido numeric(18, 0) = null
+	
 		SET @telefonoRepetido = (SELECT TOP 1 telefono FROM DATA_GROUP.Usuario WHERE telefono is not null and telefono=@telefono_usuario)
 		
-		if @telefonoRepetido is not null
-		BEGIN
-			
-			DECLARE @ErrorSeverityTelefono INT;
-			DECLARE @ErrorStateTelefono INT;
-
-			SELECT @ErrorSeverityTelefono = ERROR_SEVERITY(), @ErrorStateTelefono = ERROR_STATE();
-
-			RAISERROR ('Telefono ingresado ya se encuentra registrado en el sistema. Por favor ingrese otro', -- Message text.
-				   @ErrorSeverityTelefono, -- Severity.
-				   @ErrorStateTelefono -- State.
-				   );
-		END
-		ELSE
-		BEGIN
-			BEGIN TRAN
-			
+		if @telefonoRepetido is null
+		BEGIN		
+			BEGIN TRAN	
 			DECLARE @id_usuario_new numeric(18,0);
 			
 			EXEC DATA_GROUP.nuevoUsuario @nombre_de_usuario, @contrasenia_usuario, @telefono_usuario, 'EMP', @id_usuario_new OUTPUT
+			SET @id_usuario_agregado = @id_usuario_new
 			
 			DECLARE @id_rol_for_new_user numeric(18) = (SELECT TOP 1 id_rol FROM DATA_GROUP.Rol WHERE nombre = 'Empresa')
 			
@@ -60,7 +48,8 @@ BEGIN
 										   razon_social, 
 										   id_usuario, 
 										   mail, 
-										   dom_calle, 
+										   dom_calle,
+										   nro_calle,
 										   piso, 
 										   depto, 
 										   localidad, 
@@ -72,7 +61,8 @@ BEGIN
 				@razon_social, 
 				@id_usuario_new, 
 				@mail, 
-				@dom_calle, 
+				@dom_calle,
+				@nro_calle,
 				@piso, 
 				@depto, 
 				@localidad, 
@@ -80,12 +70,10 @@ BEGIN
 				@ciudad, 
 				@nombre_de_contacto, 
 				@fecha_creacion)
-					
-			SET @id_usuario_agregado = SCOPE_IDENTITY();
 
 			COMMIT TRAN
 		END
-		
+	
 	END TRY
 	BEGIN CATCH
 		ROLLBACK TRAN
@@ -101,8 +89,8 @@ BEGIN
 			   @ErrorState -- State.
 			   );
 	END CATCH
-
 END
+GO
 
 ---------------------------------Modificar Empresa-------------------------------
 
@@ -118,6 +106,7 @@ CREATE PROCEDURE DATA_GROUP.modificarEmpresa
 @telefono_usuario numeric(18, 0),
 @mail nvarchar(50), 
 @dom_calle nvarchar(255), 
+@nro_calle numeric(18,0),
 @piso numeric(18, 0),
 @depto nvarchar(50),
 @localidad nvarchar(255),
@@ -138,7 +127,8 @@ BEGIN
 			cuit = @cuit,
 			fecha_creacion=@fecha_creacion,
 			mail=@mail, 
-			dom_calle=@dom_calle, 
+			dom_calle=@dom_calle,
+			nro_calle=@nro_calle,
 			piso=@piso, 
 			depto=@depto, 
 			localidad=@localidad,  
@@ -165,37 +155,7 @@ BEGIN
                );
 	END CATCH
 END
-
----------------------------------Habilitacion de Empresa-------------------------------
-
-
-IF OBJECT_ID('DATA_GROUP.inHabilitarEmpresa') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.inHabilitarEmpresa
-	GO
-CREATE PROCEDURE DATA_GROUP.inHabilitarEmpresa
-@id_usuario numeric(18,0)
-AS
-BEGIN
-	UPDATE DATA_GROUP.Usuario
-	SET habilitada=0
-	WHERE id_usuario=@id_usuario AND tipo_usuario='EMP'
-END
 GO
-
-
-IF OBJECT_ID('DATA_GROUP.habilitarEmpresa') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.habilitarEmpresa
-	GO
-CREATE PROCEDURE DATA_GROUP.habilitarEmpresa
-@id_usuario numeric(18, 0)
-AS
-BEGIN
-	UPDATE DATA_GROUP.Usuario
-	SET habilitada=1
-	WHERE id_usuario=@id_usuario AND tipo_usuario='EMP'
-END
-GO
-
 
 ---------------------------------Filtro de Empresa-------------------------------
 
@@ -219,7 +179,8 @@ BEGIN
 			e.razon_social, 
 			e.id_usuario, 
 			e.mail, 
-			e.dom_calle, 
+			e.dom_calle,
+			e.nro_calle,
 			e.piso, 
 			e.depto, 
 			e.localidad, 

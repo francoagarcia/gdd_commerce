@@ -42,7 +42,7 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             this.AgregarValidacion(new ValidadorString(this.tb_Contraseña, 1, 255));
             //this.AgregarValidacion(new ValidadorNumerico(tb_Telefono));
             this.AgregarValidacion(new ValidadorCombobox(cb_Tipo_de_documento));
-            this.AgregarValidacion(new ValidadorNumerico(tb_Numero_de_documento));
+            this.AgregarValidacion(new ValidadorString(tb_Numero_de_documento, 1, 50));
             this.AgregarValidacion(new ValidadorString(tb_Nombre, 0, 255));
             this.AgregarValidacion(new ValidadorString(tb_Apellido, 0, 255));
             this.AgregarValidacion(new ValidadorString(tb_Correo_electronico, 1, 255));
@@ -62,8 +62,9 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         private void CargarClienteAModificar() {
             tb_Apellido.Text = this.clienteEntidad.apellido;
             tb_Calle.Text = clienteEntidad.dom_calle;
+            tb_Altura.Text = clienteEntidad.altura.ToString();
             tb_Codigo_postal.Text = clienteEntidad.cod_postal;
-            tb_Contraseña.Text = "123456"; //Le pongo cualquiera TODO revisar
+            tb_Contraseña.Text = "123456";
             tb_Correo_electronico.Text = clienteEntidad.mail;
             tb_Departamento.Text = clienteEntidad.depto;
             tb_Localidad.Text = clienteEntidad.localidad;
@@ -135,8 +136,9 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             this.clienteEntidad.cod_postal = tb_Codigo_postal.Text;
             this.clienteEntidad.depto = tb_Departamento.Text;
             this.clienteEntidad.dom_calle = tb_Calle.Text;
+            this.clienteEntidad.altura = Convert.ToDecimal(tb_Altura.Text);
             this.clienteEntidad.fecha_nacimiento = dp_Fecha_de_nacimiento.Value;
-            this.clienteEntidad.nro_documento = Convert.ToDecimal(tb_Numero_de_documento.Text);
+            this.clienteEntidad.nro_documento =tb_Numero_de_documento.Text;
             this.clienteEntidad.piso = Convert.ToDecimal(tb_Piso.Text);
             this.clienteEntidad.telefono = Convert.ToDecimal(tb_Telefono.Text);
             this.clienteEntidad.tipo_documento = (TipoDocumento)cb_Tipo_de_documento.SelectedItem;
@@ -153,6 +155,11 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
 
         private void btn_Limpiar_Click(object sender, EventArgs e)
         {
+            base.Limpiar();
+        }
+
+        protected override void AccionLimpiar()
+        {
             this.tb_Apellido.Text = "";
             this.tb_Calle.Text = "";
             this.tb_Codigo_postal.Text = "";
@@ -165,6 +172,7 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             this.tb_Numero_de_documento.Text = "";
             this.tb_Piso.Text = "";
             this.tb_Telefono.Text = "";
+            this.tb_Altura.Text = "";
             this.dp_Fecha_de_nacimiento.Value = DateManager.Ahora();
             this.cb_Sexo.SelectedIndex = 0;
             this.cb_Tipo_de_documento.SelectedIndex = 0;

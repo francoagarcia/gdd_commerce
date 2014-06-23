@@ -9,6 +9,7 @@ using FrbaCommerce.Entidades;
 using FrbaCommerce.Entidades.Builder;
 using FrbaCommerce.Generics.Enums;
 using FrbaCommerce.Entidades.Filtros;
+using FrbaCommerce.Generics.Excepciones;
 
 namespace FrbaCommerce.DataAccess
 {
@@ -43,8 +44,15 @@ namespace FrbaCommerce.DataAccess
             HomeDB.ExecuteStoredProcedured("DATA_GROUP.nuevaEmpresa", parametros);
 
             var idNuevoOUTPUT = parametros.Where(p => p.ParameterName == "@id_usuario_agregado").FirstOrDefault();
-            empresa.id_usuario = Convert.ToDecimal(idNuevoOUTPUT.Value);
-            return Convert.ToDecimal(idNuevoOUTPUT);
+             if (idNuevoOUTPUT.Value != System.DBNull.Value)
+            {
+                empresa.id_usuario = Convert.ToDecimal(idNuevoOUTPUT.Value);
+                return empresa.id_usuario;
+            }
+            else
+            {
+                throw new TelefonoRepetidoException();
+            }
         }
 
         #region Generadores de parametros
@@ -83,6 +91,10 @@ namespace FrbaCommerce.DataAccess
             SqlParameter dom_calle = new SqlParameter("@dom_calle", System.Data.SqlDbType.NVarChar, 255, "dom_calle");
             dom_calle.Value = empresa.dom_calle;
             parametros.Add(dom_calle);
+
+            SqlParameter nro_calle = new SqlParameter("@nro_calle", System.Data.SqlDbType.Decimal, 18, "nro_calle");
+            nro_calle.Value = empresa.altura;
+            parametros.Add(nro_calle);
 
             SqlParameter piso = new SqlParameter("@piso", System.Data.SqlDbType.Decimal, 18, "piso");
             piso.Value = empresa.piso;
@@ -178,6 +190,10 @@ namespace FrbaCommerce.DataAccess
             SqlParameter dom_calle = new SqlParameter("@dom_calle", System.Data.SqlDbType.NVarChar, 255, "dom_calle");
             dom_calle.Value = empresa.dom_calle;
             parametros.Add(dom_calle);
+
+            SqlParameter nro_calle = new SqlParameter("@nro_calle", System.Data.SqlDbType.Decimal, 18, "nro_calle");
+            nro_calle.Value = empresa.altura;
+            parametros.Add(nro_calle);
 
             SqlParameter piso = new SqlParameter("@piso", System.Data.SqlDbType.Decimal, 18, "piso");
             piso.Value = empresa.piso;

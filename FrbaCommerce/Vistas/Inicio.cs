@@ -21,6 +21,9 @@ using FrbaCommerce.Vistas.Generar_Publicacion;
 using FrbaCommerce.Vistas.Editar_Publicacion;
 using FrbaCommerce.Vistas.Facturar_Publicaciones;
 using FrbaCommerce.Vistas.Historial_Cliente;
+using FrbaCommerce.Vistas.Gestion_de_Preguntas;
+using FrbaCommerce.Vistas.Comprar_Ofertar;
+using FrbaCommerce.Vistas.Calificar_Vendedor;
 
 namespace FrbaCommerce
 {
@@ -111,13 +114,37 @@ namespace FrbaCommerce
             }
             if (usuario != null)
             {
-                Program.ContextoActual.RegistrarUsuario(usuario);
-                this.lblUsuario.Text = usuario.username;
+                this.ValidarUsuario(usuario);
             }
             if (rol != null)
             {
                 Program.ContextoActual.RegistrarRol(rol);         
             }
+        }
+
+        private void ValidarUsuario(Usuario usuario) 
+        {
+            if (esUnUsuarioRegistradoPorElAdministrador(usuario))
+            {
+                PrimerIngreso frm = new PrimerIngreso(usuario);
+                frm.ShowDialog(this);
+                if (frm.DialogResult == DialogResult.Cancel)
+                    this.Close();
+                Program.ContextoActual.RegistrarUsuario(usuario);
+                this.lblUsuario.Text = usuario.username;
+            }
+            else 
+            {
+                Program.ContextoActual.RegistrarUsuario(usuario);
+                this.lblUsuario.Text = usuario.username;
+            }
+        }
+
+        private bool esUnUsuarioRegistradoPorElAdministrador(Usuario usuario) 
+        {
+            string pass_cli_nuevo = Encryptation.get_hash("pass_cli_nuevo");
+            string pass_emp_nueva = Encryptation.get_hash("pass_emp_nueva");
+            return usuario.contrasenia.Equals(pass_cli_nuevo) || usuario.contrasenia.Equals(pass_emp_nueva);
         }
 
         private void Inicio_Load_CargarMenues()
@@ -171,15 +198,14 @@ namespace FrbaCommerce
         }
         #endregion
 
-        #region [Menu Archivo]
-        #region [itm_Const_Salir]
+        #region Salir
         private void itm_Const_Salir_Click(object sender, EventArgs e)
         {
             this.Close();
         }
         #endregion
 
-        #region [itm_Const_Sesion_IniciarSesion]
+        #region Iniciar sesion
         private void itm_Const_Sesion_IniciarSesion_Click(object sender, EventArgs e)
         {
             this.ReestrablecerTodo();
@@ -223,7 +249,7 @@ namespace FrbaCommerce
         }
         #endregion
 
-        #region [itm_Const_Sesion_CerrarSesion]
+        #region Cerrar sesion
         private void itm_Const_Sesion_CerrarSesion_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageDialog.MensajeInterrogativo(this, "¿Está seguro que desea cerrar su sesión?", MessageBoxButtons.YesNo);
@@ -243,7 +269,7 @@ namespace FrbaCommerce
         }
         #endregion
 
-        #region [estadísticasToolStripMenuItem]
+        #region Estadisticas
         private void itm_Var_Listado_Estadistico_Click(object sender, EventArgs e)
         {
             try
@@ -261,9 +287,8 @@ namespace FrbaCommerce
         }
 
         #endregion
-        #endregion
 
-        #region Menu Administracion
+        #region ABM de rol
         private void itm_Var_ABM_de_Rol_Click(object sender, EventArgs e)
         {
             try
@@ -279,7 +304,9 @@ namespace FrbaCommerce
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
+        #endregion
 
+        #region ABM de clientes
         private void itm_Var_ABM_de_Cliente_Click(object sender, EventArgs e)
         {
             try
@@ -295,7 +322,9 @@ namespace FrbaCommerce
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
+        #endregion
 
+        #region ABM de empresa
         private void itm_Var_ABM_de_Empresa_Click(object sender, EventArgs e)
         {
             try
@@ -311,7 +340,9 @@ namespace FrbaCommerce
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
+        #endregion
 
+        #region ABM de rubros
         private void itm_Var_ABM_de_Rubro_Click(object sender, EventArgs e)
         {
             try
@@ -327,7 +358,9 @@ namespace FrbaCommerce
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
+        #endregion
 
+        #region ABM de visibilidad de publicaciones
         private void itm_Var_ABM_de_Visibilidad_de_Publicacion_Click(object sender, EventArgs e)
         {
             try
@@ -345,6 +378,8 @@ namespace FrbaCommerce
         }
         #endregion
 
+        #region Nueva publicacoin
+
         private void itm_Var_Nueva_Publicacion_Click(object sender, EventArgs e)
         {
             try
@@ -361,6 +396,9 @@ namespace FrbaCommerce
             }
         }
 
+        #endregion 
+
+        #region Editar publicacion
         private void itm_Var_Editar_Publicacion_Click(object sender, EventArgs e)
         {
             try
@@ -376,7 +414,9 @@ namespace FrbaCommerce
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
+        #endregion
 
+        #region Facturar publicaciones
         private void itm_Var_Facturar_Publicaciones_Click(object sender, EventArgs e)
         {
             try
@@ -392,7 +432,9 @@ namespace FrbaCommerce
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
+        #endregion
 
+        #region Historial de operaciones
         private void itm_Var_Historial_de_Operaciones_Click(object sender, EventArgs e)
         {
             try
@@ -409,20 +451,62 @@ namespace FrbaCommerce
             }
 
         }
+        #endregion
 
+        #region Gestion de preguntas
         private void itm_Var_Gestion_de_Preguntas_Click(object sender, EventArgs e)
         {
+            try
+            {
+                GestionPreguntas frm = new GestionPreguntas(Program.ContextoActual.UsuarioActual);
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageDialog.MensajeError(this, ex.Message);
+            }
+        }
+        #endregion
 
+        #region Comprar/Ofertar
+        private void itm_Var_Comprar_Ofertar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListadoPublicacionesCompra frm = new ListadoPublicacionesCompra(Program.ContextoActual.UsuarioActual);
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageDialog.MensajeError(this, ex.Message);
+            }
+        }
+        #endregion
+
+        #region Calificar al vendedor
+        private void itm_Var_Calificar_al_Vendedor_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SeleccionarCompra frm = new SeleccionarCompra(Program.ContextoActual.UsuarioActual);
+                frm.StartPosition = FormStartPosition.CenterParent;
+                frm.WindowState = FormWindowState.Maximized;
+                frm.MdiParent = this;
+                frm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageDialog.MensajeError(this, ex.Message);
+            }
         }
 
-        
-
-        
-
-
-
-
-
+        #endregion
 
     }
 }

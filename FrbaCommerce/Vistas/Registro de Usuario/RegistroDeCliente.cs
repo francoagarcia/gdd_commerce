@@ -88,7 +88,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             cliente.telefono = Convert.ToDecimal(this.textBox_Telefono.Text);
             cliente.nombre = this.textBox_Nombre.Text;
             cliente.apellido = this.textBox_Apellido.Text;
-            cliente.nro_documento = Convert.ToDecimal(this.textBox_Numero_de_documento.Text);
+            cliente.nro_documento = Convert.ToString(this.textBox_Numero_de_documento.Text);
             cliente.tipo_documento = (TipoDocumento)this.comboBox_Tipo_de_documento.SelectedItem;
             cliente.sexo = (Sexo)this.comboBox_Sexo.SelectedItem;
             cliente.mail = this.textBox_Correo_electronico.Text;
@@ -112,7 +112,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             this.AgregarValidacion(new ValidadorString(this.textBox_Contraseña, 1, 255));
             this.AgregarValidacion(new ValidadorNumerico(this.textBox_Telefono));
             this.AgregarValidacion(new ValidadorCombobox(this.comboBox_Tipo_de_documento));
-            this.AgregarValidacion(new ValidadorNumerico(this.textBox_Numero_de_documento));
+            this.AgregarValidacion(new ValidadorString(this.textBox_Numero_de_documento, 1, 50));
             this.AgregarValidacion(new ValidadorString(this.textBox_Nombre, 1, 255));
             this.AgregarValidacion(new ValidadorString(this.textBox_Apellido, 1, 255));
             this.AgregarValidacion(new ValidadorString(this.textBox_Correo_electronico, 1, 255));

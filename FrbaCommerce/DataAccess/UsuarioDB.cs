@@ -18,6 +18,22 @@ namespace FrbaCommerce.DataAccess
         {
         }
 
+        
+
+        public void actualizarContraseniaPrimerIngreso(Usuario usuario) 
+        {
+            IList<SqlParameter> parametros = new List<SqlParameter>();
+            var id_usuario = new SqlParameter("@id_usuario", SqlDbType.Decimal, 18, "id_usuario");
+            id_usuario.Value = usuario.id_usuario;
+            parametros.Add(id_usuario);
+
+            var contrasenia = new SqlParameter("@contrasenia", SqlDbType.NVarChar, 255, "contrasenia");
+            contrasenia.Value = usuario.contrasenia;
+            parametros.Add(contrasenia);
+
+            HomeDB.ExecuteStoredProcedured("DATA_GROUP.actualizarContraseniaPrimerIngreso", parametros);
+        }
+
         public bool puedeComprar(Usuario usuario) {
 
             IList<SqlParameter> parametros = new List<SqlParameter>();
@@ -109,15 +125,14 @@ namespace FrbaCommerce.DataAccess
             parametros.Add(pNombre);
 
             var dataSet = HomeDB.ExecuteStoredProcedured("DATA_GROUP.getUsuarioByUsername", parametros);
-
-            //BuilderUsuario builder = new BuilderUsuario();
-            //return builder.Build(dataSet.Tables[0].Rows[0]);
             Usuario usuario = new Usuario();
             usuario.username = Convert.ToString(dataSet.Tables[0].Rows[0]["username"]);
             usuario.contrasenia = Convert.ToString(dataSet.Tables[0].Rows[0]["contrasenia"]);
             usuario.habilitada = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["habilitada"]);
             usuario.cantidadIntentos = Convert.ToInt32(dataSet.Tables[0].Rows[0]["intentos_login"]);
             usuario.id_usuario = Convert.ToDecimal(dataSet.Tables[0].Rows[0]["id_usuario"]);
+            usuario.habilitada_comprar = Convert.ToBoolean(dataSet.Tables[0].Rows[0]["habilitada_comprar"]);
+            usuario.telefono = dataSet.Tables[0].Rows[0]["telefono"]!=System.DBNull.Value ? Convert.ToDecimal(dataSet.Tables[0].Rows[0]["telefono"]) : 0;
             return usuario;
 
         }

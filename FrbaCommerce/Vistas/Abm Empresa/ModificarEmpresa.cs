@@ -29,7 +29,7 @@ namespace FrbaCommerce.Vistas.Abm_Empresa
             this.empresaModificar = empresaModi;
             this.empresaDB = new EmpresaDB();
             InitializeComponent();
-            this.Text = "FRBA Commerce - Modificacion de empresa";
+            this.Text = "Modificacion de usuario empresa";
             this.cb_Tipo_de_usuario.SelectedIndex = 1;
             this.cb_Tipo_de_usuario.Enabled = false;
         }
@@ -48,6 +48,7 @@ namespace FrbaCommerce.Vistas.Abm_Empresa
             this.AgregarValidacion(new ValidadorString(this.tb_Ciudad, 1, 255));
             this.AgregarValidacion(new ValidadorNumerico(this.tb_Telefono));
             this.AgregarValidacion(new ValidadorNumerico(this.tb_Piso));
+            this.AgregarValidacion(new ValidadorNumerico(this.tb_Altura));
             this.AgregarValidacion(new ValidadorMail(this.tb_Correo_electronico));
             this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_de_creacion, DateManager.Ahora()));
 
@@ -57,6 +58,7 @@ namespace FrbaCommerce.Vistas.Abm_Empresa
         private void CargarEmpresaModificar() 
         {
             this.tb_Calle.Text = this.empresaModificar.dom_calle;
+            this.tb_Altura.Text = this.empresaModificar.altura.ToString();
             this.tb_Ciudad.Text = this.empresaModificar.ciudad;
             this.tb_Codigo_postal.Text = this.empresaModificar.cod_postal;
             this.tb_Contraseña.Text = "123456"; 
@@ -77,6 +79,7 @@ namespace FrbaCommerce.Vistas.Abm_Empresa
         protected override void AccionLimpiar()
         {
             this.tb_Calle.Text = "";
+            this.tb_Altura.Text = "";
             this.tb_Ciudad.Text = "";
             this.tb_Codigo_postal.Text = "";
             this.tb_Contraseña.Text = "";
@@ -132,11 +135,13 @@ namespace FrbaCommerce.Vistas.Abm_Empresa
             this.empresaModificar.cod_postal = tb_Codigo_postal.Text;
             this.empresaModificar.depto = tb_Departamento.Text;
             this.empresaModificar.dom_calle = tb_Calle.Text;
+            this.empresaModificar.altura = Convert.ToDecimal(tb_Altura.Text);
             this.empresaModificar.fecha_creacion = dp_Fecha_de_creacion.Value;
             this.empresaModificar.piso = Convert.ToDecimal(tb_Piso.Text);
             this.empresaModificar.telefono = Convert.ToDecimal(tb_Telefono.Text);
             this.empresaModificar.razon_social = tb_Razon_Social.Text;
             this.empresaModificar.cuit = tb_CUIT.Text;
+            this.empresaModificar.nombre_de_contacto = this.tb_Nombre_de_contacto.Text;
         }
         #endregion
 

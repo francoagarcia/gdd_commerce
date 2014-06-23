@@ -9,10 +9,11 @@ namespace FrbaCommerce.Entidades
     public class Cliente : Usuario
     {
         public TipoDocumento tipo_documento{get; set;}
-        public decimal nro_documento {get; set;}
+        public string nro_documento {get; set;}
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string dom_calle { get; set; }
+        public decimal altura { get; set; }
         public decimal piso { get; set; }
         public string depto { get; set; }
         public string localidad { get; set; }

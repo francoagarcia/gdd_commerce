@@ -54,7 +54,7 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         #region [AccionAlta]
         protected override void AccionAlta()
         {
-            AltaCliente FormAlta = new AltaCliente();
+            AltaClientes FormAlta = new AltaClientes();
             FormAlta.ShowDialog();
             //Cuando hace el Evento Load ahi vuelve a cargar el nuevo registro
         }
@@ -110,9 +110,7 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
         private FiltroCliente prepararFiltroCliente() {
 
             FiltroCliente filtro = new FiltroCliente();
-
-            if (!string.IsNullOrEmpty(tb_Numero_de_Documento.Text))
-                filtro.NroDocumento = Convert.ToDecimal(tb_Numero_de_Documento.Text);
+            filtro.NroDocumento = tb_Numero_de_Documento.Text;
 
             if (!string.IsNullOrEmpty(tb_Telefono.Text))
                 filtro.Telefono = Convert.ToDecimal(tb_Telefono.Text);

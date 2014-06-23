@@ -24,6 +24,9 @@ namespace FrbaCommerce.Entidades.Builder
             publi.rubro = this.BuildRubro(row);
             publi.tipo_publicacion = this.BuildTipoPublicacion(row);
             publi.visibilidad = this.BuildVisibilidad(row);
+            publi.usuario_publicador = new Usuario();
+            publi.usuario_publicador.id_usuario = Convert.ToDecimal(row["id_usuario_publicador"]);
+
 
             return publi;
         }

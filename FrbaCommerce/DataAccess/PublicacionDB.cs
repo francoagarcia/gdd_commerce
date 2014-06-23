@@ -10,8 +10,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Data.Sql;
 using System.Data.SqlTypes;
-using FrbaCommerce.Generics;
-
+using FrbaCommerce.Generics.Excepciones;
 
 namespace FrbaCommerce.DataAccess
 {

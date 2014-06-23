@@ -283,6 +283,7 @@
             this.itm_Var_Comprar_Ofertar.Name = "itm_Var_Comprar_Ofertar";
             this.itm_Var_Comprar_Ofertar.Size = new System.Drawing.Size(182, 22);
             this.itm_Var_Comprar_Ofertar.Text = "Comprar/Ofertar";
+            this.itm_Var_Comprar_Ofertar.Click += new System.EventHandler(this.itm_Var_Comprar_Ofertar_Click);
             // 
             // toolStripSeparator1
             // 
@@ -294,6 +295,7 @@
             this.itm_Var_Calificar_al_Vendedor.Name = "itm_Var_Calificar_al_Vendedor";
             this.itm_Var_Calificar_al_Vendedor.Size = new System.Drawing.Size(182, 22);
             this.itm_Var_Calificar_al_Vendedor.Text = "Calificar al vendedor";
+            this.itm_Var_Calificar_al_Vendedor.Click += new System.EventHandler(this.itm_Var_Calificar_al_Vendedor_Click);
             // 
             // stsBarraEstado
             // 

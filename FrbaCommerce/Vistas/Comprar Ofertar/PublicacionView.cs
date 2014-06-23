@@ -137,13 +137,6 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
         }
         #endregion
 
-        #region [btn_Ver_informacion_de_vendedor]
-        private void btn_Ver_informacion_de_vendedor_Click(object sender, EventArgs e)
-        {
-            MessageDialog.MensajeError("not yet implemented");
-        }
-        #endregion
-
         #region [Preguntar]
         private void btn_Preguntar_Click(object sender, EventArgs e)
         {

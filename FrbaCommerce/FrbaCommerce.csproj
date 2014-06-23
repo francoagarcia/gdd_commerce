@@ -75,6 +75,7 @@
     <Compile Include="DataAccess\RubroDB.cs" />
     <Compile Include="DataAccess\VisibilidadDB.cs" />
     <Compile Include="Entidades\Builder\BuilderCliente.cs" />
+    <Compile Include="Entidades\Builder\BuilderCompra.cs" />
     <Compile Include="Entidades\Builder\BuilderEmpresa.cs" />
     <Compile Include="Entidades\Builder\BuilderEstadoPublicacion.cs" />
     <Compile Include="Entidades\Builder\BuilderFuncionalidadXRol.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Entidades\Builder\BuilderUsuarioFactura.cs" />
     <Compile Include="Entidades\Builder\BuilderVisibilidad.cs" />
     <Compile Include="Entidades\Builder\BuilderVisibilidadesFacturadas.cs" />
+    <Compile Include="Entidades\Calificacion.cs" />
     <Compile Include="Entidades\Cliente.cs" />
     <Compile Include="Entidades\Compra.cs" />
     <Compile Include="Entidades\Empresa.cs" />
@@ -122,13 +124,14 @@
     <Compile Include="Generics\Enums\TipoEstados.cs" />
     <Compile Include="Generics\Enums\TipoGenerico.cs" />
     <Compile Include="Generics\Enums\TipoPublicacion.cs" />
+    <Compile Include="Generics\Excepciones\TresPublicacionesGratuitasException.cs" />
+    <Compile Include="Generics\Excepciones\TelefonoRepetidoException.cs" />
     <Compile Include="Generics\IContexto.cs" />
     <Compile Include="Generics\Resultados\IResultado.cs" />
     <Compile Include="Generics\Logger\ILogger.cs" />
     <Compile Include="Generics\Logger\LoggerFile.cs" />
     <Compile Include="Generics\Resultados\Resultado.cs" />
     <Compile Include="Generics\Resultados\ResultadoIncorrectoException.cs" />
-    <Compile Include="Generics\TresPublicacionesGratuitasException.cs" />
     <Compile Include="GUIMethods\FormBase\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,11 +170,17 @@
     <Compile Include="GUIMethods\Validaciones\ValidadorNumerico.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorNumericUpDown.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorString.cs" />
-    <Compile Include="Vistas\Abm Cliente\AltaCliente.cs">
+    <Compile Include="Vistas\Abm Cliente\AltaClientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Cliente\AltaCliente.Designer.cs">
-      <DependentUpon>AltaCliente.cs</DependentUpon>
+    <Compile Include="Vistas\Abm Cliente\AltaClientes.Designer.cs">
+      <DependentUpon>AltaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Abm Cliente\DatosUsuarioNuevo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Abm Cliente\DatosUsuarioNuevo.Designer.cs">
+      <DependentUpon>DatosUsuarioNuevo.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm Cliente\ListadoCliente.cs">
       <SubType>Form</SubType>
@@ -185,11 +194,11 @@
     <Compile Include="Vistas\Abm Cliente\ModificacionCliente.Designer.cs">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Abm Empresa\AltaEmpresa.cs">
+    <Compile Include="Vistas\Abm Empresa\AltaEmpresas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Abm Empresa\AltaEmpresa.Designer.cs">
-      <DependentUpon>AltaEmpresa.cs</DependentUpon>
+    <Compile Include="Vistas\Abm Empresa\AltaEmpresas.Designer.cs">
+      <DependentUpon>AltaEmpresas.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Abm Empresa\ListadoEmpresa.cs">
       <SubType>Form</SubType>
@@ -257,17 +266,29 @@
     <Compile Include="Vistas\Calificar Vendedor\Calificar.Designer.cs">
       <DependentUpon>Calificar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Calificar Vendedor\SeleccionarCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Calificar Vendedor\SeleccionarCompra.Designer.cs">
+      <DependentUpon>SeleccionarCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Comprar Ofertar\AltaCompra.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Comprar Ofertar\AltaCompra.Designer.cs">
       <DependentUpon>AltaCompra.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Comprar Ofertar\LisadoPublicacionesCompra.cs">
+    <Compile Include="Vistas\Comprar Ofertar\DatosDelVendedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Comprar Ofertar\LisadoPublicacionesCompra.Designer.cs">
-      <DependentUpon>LisadoPublicacionesCompra.cs</DependentUpon>
+    <Compile Include="Vistas\Comprar Ofertar\DatosDelVendedor.Designer.cs">
+      <DependentUpon>DatosDelVendedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\ListadoPublicacionesCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Comprar Ofertar\ListadoPublicacionesCompra.Designer.cs">
+      <DependentUpon>ListadoPublicacionesCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Comprar Ofertar\AltaOferta.cs">
       <SubType>Form</SubType>
@@ -329,11 +350,17 @@
     <Compile Include="Vistas\Comprar Ofertar\AltaPregunta.Designer.cs">
       <DependentUpon>AltaPregunta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\Form1.cs">
+    <Compile Include="Vistas\Gestion de Preguntas\GestionPreguntas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Vistas\Gestion de Preguntas\GestionPreguntas.Designer.cs">
+      <DependentUpon>GestionPreguntas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Gestion de Preguntas\PreguntaRespuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Gestion de Preguntas\PreguntaRespuesta.Designer.cs">
+      <DependentUpon>PreguntaRespuesta.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Historial Cliente\HistorialDeCalificaciones.cs">
       <SubType>Form</SubType>
@@ -371,12 +398,6 @@
     <Compile Include="Vistas\Generar Publicacion\GenerarPublicacion.Designer.cs">
       <DependentUpon>GenerarPublicacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\Pregunta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Gestion de Preguntas\Pregunta.Designer.cs">
-      <DependentUpon>Pregunta.cs</DependentUpon>
-    </Compile>
     <Compile Include="Vistas\Historial Cliente\Historial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -398,6 +419,12 @@
     <Compile Include="Entidades\Builder\IBuilder.cs" />
     <Compile Include="Entidades\Builder\BuilderUsuario.cs" />
     <Compile Include="Entidades\Usuario.cs" />
+    <Compile Include="Vistas\Login\PrimerIngreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Login\PrimerIngreso.Designer.cs">
+      <DependentUpon>PrimerIngreso.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUIMethods\FormBase\FormBase.resx">
@@ -415,11 +442,20 @@
     <EmbeddedResource Include="GUIMethods\FormBase\FormBaseSeleccionTipo.resx">
       <DependentUpon>FormBaseSeleccionTipo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Cliente\AltaClientes.resx">
+      <DependentUpon>AltaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Cliente\DatosUsuarioNuevo.resx">
+      <DependentUpon>DatosUsuarioNuevo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Cliente\ListadoCliente.resx">
       <DependentUpon>ListadoCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Cliente\ModificacionCliente.resx">
       <DependentUpon>ModificacionCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Abm Empresa\AltaEmpresas.resx">
+      <DependentUpon>AltaEmpresas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Abm Empresa\ListadoEmpresa.resx">
       <DependentUpon>ListadoEmpresa.cs</DependentUpon>
@@ -454,11 +490,17 @@
     <EmbeddedResource Include="Vistas\Calificar Vendedor\Calificar.resx">
       <DependentUpon>Calificar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Calificar Vendedor\SeleccionarCompra.resx">
+      <DependentUpon>SeleccionarCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaCompra.resx">
       <DependentUpon>AltaCompra.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Comprar Ofertar\LisadoPublicacionesCompra.resx">
-      <DependentUpon>LisadoPublicacionesCompra.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\DatosDelVendedor.resx">
+      <DependentUpon>DatosDelVendedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Comprar Ofertar\ListadoPublicacionesCompra.resx">
+      <DependentUpon>ListadoPublicacionesCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaOferta.resx">
       <DependentUpon>AltaOferta.cs</DependentUpon>
@@ -487,8 +529,11 @@
     <EmbeddedResource Include="Vistas\Comprar Ofertar\AltaPregunta.resx">
       <DependentUpon>AltaPregunta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\Gestion de Preguntas\Pregunta.resx">
-      <DependentUpon>Pregunta.cs</DependentUpon>
+    <EmbeddedResource Include="Vistas\Gestion de Preguntas\GestionPreguntas.resx">
+      <DependentUpon>GestionPreguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Gestion de Preguntas\PreguntaRespuesta.resx">
+      <DependentUpon>PreguntaRespuesta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Historial Cliente\Historial.resx">
       <DependentUpon>Historial.cs</DependentUpon>
@@ -509,6 +554,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Login\PrimerIngreso.resx">
+      <DependentUpon>PrimerIngreso.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Registro de Usuario\RegistroDeCliente.resx">
       <DependentUpon>RegistroDeCliente.cs</DependentUpon>

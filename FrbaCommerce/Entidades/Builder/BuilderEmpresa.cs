@@ -20,6 +20,7 @@ namespace FrbaCommerce.Entidades.Builder
             emp.id_usuario = Convert.ToDecimal(row["id_usuario"]);
             emp.nombre_de_contacto = Convert.ToString(row["nombre_de_contacto"]);
             emp.dom_calle = Convert.ToString(row["dom_calle"]);
+            emp.altura = row["nro_calle"] != System.DBNull.Value ? Convert.ToDecimal(row["nro_calle"]) : decimal.Zero;
             emp.depto = Convert.ToString(row["depto"]);
             emp.piso = Convert.ToDecimal(row["piso"]);
             emp.localidad = Convert.ToString(row["localidad"]);

@@ -44,6 +44,8 @@
             // 
             // pnl_Seleccion
             // 
+            this.pnl_Seleccion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_Seleccion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_Seleccion.Controls.Add(this.btn_Ver_respuestas);
             this.pnl_Seleccion.Controls.Add(this.btn_Ver_preguntas_pendientes);
@@ -54,6 +56,7 @@
             // 
             // btn_Ver_respuestas
             // 
+            this.btn_Ver_respuestas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Ver_respuestas.Location = new System.Drawing.Point(289, 13);
             this.btn_Ver_respuestas.Name = "btn_Ver_respuestas";
             this.btn_Ver_respuestas.Size = new System.Drawing.Size(193, 29);
@@ -64,6 +67,7 @@
             // 
             // btn_Ver_preguntas_pendientes
             // 
+            this.btn_Ver_preguntas_pendientes.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Ver_preguntas_pendientes.Location = new System.Drawing.Point(68, 13);
             this.btn_Ver_preguntas_pendientes.Name = "btn_Ver_preguntas_pendientes";
             this.btn_Ver_preguntas_pendientes.Size = new System.Drawing.Size(204, 29);
@@ -74,6 +78,9 @@
             // 
             // pnl_Busqueda
             // 
+            this.pnl_Busqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_Busqueda.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_Busqueda.Controls.Add(this.dgv_Busqueda);
             this.pnl_Busqueda.Location = new System.Drawing.Point(12, 74);
@@ -104,6 +111,8 @@
             // 
             // pnl_Acciones
             // 
+            this.pnl_Acciones.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.pnl_Acciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_Acciones.Controls.Add(this.btn_Seleccionar);
             this.pnl_Acciones.Controls.Add(this.btn_Salir);
@@ -114,15 +123,19 @@
             // 
             // btn_Seleccionar
             // 
+            this.btn_Seleccionar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_Seleccionar.Enabled = false;
             this.btn_Seleccionar.Location = new System.Drawing.Point(380, 12);
             this.btn_Seleccionar.Name = "btn_Seleccionar";
             this.btn_Seleccionar.Size = new System.Drawing.Size(158, 29);
             this.btn_Seleccionar.TabIndex = 3;
             this.btn_Seleccionar.Text = "Seleccionar";
             this.btn_Seleccionar.UseVisualStyleBackColor = true;
+            this.btn_Seleccionar.Click += new System.EventHandler(this.btn_Seleccionar_Click);
             // 
             // btn_Salir
             // 
+            this.btn_Salir.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Salir.Location = new System.Drawing.Point(17, 12);
             this.btn_Salir.Name = "btn_Salir";
             this.btn_Salir.Size = new System.Drawing.Size(158, 29);

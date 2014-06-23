@@ -58,7 +58,9 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             bool resultado = this.ComprarDB();
             if (resultado) 
             {
-                MessageDialog.MensajeInformativo(this, "La compra se ralizó con exito");
+                DatosDelVendedor frm = new DatosDelVendedor(this.publiCompra);
+                frm.ShowDialog(this);
+                this.Close();
             }
         }
 
@@ -92,6 +94,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             compra.usuario_comprador = this.usuarioActual;
             compra.fecha = DateTime.UtcNow;
             compra.cantidad = this.nud_Ingresar_cantidad.Value;
+            compra.calificacion = new Calificacion();
             return compra;
         }
         #endregion
