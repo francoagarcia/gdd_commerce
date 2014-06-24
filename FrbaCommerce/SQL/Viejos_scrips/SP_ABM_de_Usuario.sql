@@ -74,7 +74,6 @@ BEGIN
  END
 GO
 
-
 ----------------------MODIFICAR USUARIO--------------------------
 
 IF OBJECT_ID('DATA_GROUP.modificarUsuario') IS NOT NULL

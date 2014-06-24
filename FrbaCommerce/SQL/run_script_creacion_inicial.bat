@@ -1,1 +1,1 @@
-sqlcmd -S localhost\SQLSERVER2008 -U gd -P gd2014 -i script_creacion_inicial.sql -o resultado_output.txt
+sqlcmd -S localhost\SQLSERVER2008 -U gd -P gd2014 -i drop_all.sql,script_creacion_inicial.sql,stored_procedures.sql -o resultado_output.txt
