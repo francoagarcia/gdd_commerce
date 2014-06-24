@@ -216,7 +216,7 @@ AS
 BEGIN
 	
 	SELECT @puedeComprar = habilitada_comprar
-	FROM DATA_GROUP.Usuarios
+	FROM DATA_GROUP.Usuario
 	WHERE id_usuario = @id_usuario
 	
 END
