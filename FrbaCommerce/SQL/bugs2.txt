@@ -1,0 +1,51 @@
+﻿03-12354889-26
+-al salir de la sesion, si la ventana no se cierra, la misma se mantiene de fondo.
+-al boton registrar del logueo no funca.
+-REGISTRO ABM
+	-funciona bien el detector mail.
+	-si vivis en casa residencial, te obliga a poner depa piso.
+-PUBLICAR
+	-al crear una subasta, visi bronce, publicada, no seleccione el rubro, tira este error:
+	"object reference not set to an instance of an object"
+	(cuando activo el checkbox todo funciona correctamente)
+
+
+-COMPRAR
+	-Permite comprar tu mismo producto (en este caso mi usuario del tipo cliente)
+	-Nuevamente me permite comprar el mismo producto. (Una vez terminada la compra, en
+este caso de stock 1, el sistema deberia actualizar el datagridview, cosa que no hace)
+**En este caso hay que destacar que cuando queres preguntar te advierte de la situacion y 
+	una vez despues de la compra, buscas la publicacion, la misma no aparece **
+	(al parecer, al seguir comprando, el stock sigue disminuyendo. luego de dos compras 
+	el stock es -1)
+	-al ofertar, darle click a seleccionar, luego ofertar, deberia permitirme ingresar el 
+	monto, pero me tira el siguiente error:
+	"Value of '5000,00' is not valid for 'Value'. 'Value' should be between 'Minimum' and 'Maximum'."
+	(5000 es el valor inicial de la subasta)
+
+-EDITAR PUBLICACION
+	-Al tratar de modificar la publicacion anterior tira error: revise el archivo log.
+	(justamente parece que los validadores funcionaron, dicen que -1 no pertence o no
+	esta entre el maximo y el minimo)
+-CALIFICAR 
+	**Hay que destacar que en este caso una vez calificado, la gridview se actualiza**
+
+-HISTORIAL
+	-En el de compras, solo se muestra el id. Deberia mostrar mas info no?
+	-Cuando clickeo el de ofertas me salta error. (es mio, me pasa lo mismo que con
+	getTop5VendedorconProductosNoVendidos, se elimina solo)
+
+-FACTURAR
+	-Realiza 10 compras de 1 producto determinado de 1 stock cada uno. Y al momento 
+	de facturar, tildar cada una, al llegar al numero 10 me sumo el valor de la misma,
+	en el sumador acumulado.
+	(que a mi entender no deberia ocurrir)
+
+////////////PROBADO////////////////
+ABM visibilidad Ok
+ABM Cliente
+ABM Empresa (Funciona el tema del doble telefono) Lo que no pude es hacer que un usuario
+	tenga 2 roles :S
+Manejo general de CLiente/empresa: Probado casi todas las funcionalidades pregunta, calificacion, 
+	compra, responder, todo	funciona excepto lo mencionado arriba.
+Lo que me falta es toquetear mas el tema de las funcionalidades del ADMIN.
