@@ -399,6 +399,7 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnRegistracion);
             this.Controls.Add(this.labelInfoAsterizco);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AltaClientes";

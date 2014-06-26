@@ -1157,6 +1157,10 @@ BEGIN
 	BEGIN TRY
 		BEGIN TRAN
 		
+			UPDATE DATA_GROUP.Publicacion 
+			SET precio = @monto
+			WHERE id_publicacion = @id_publicacion
+		
 			INSERT INTO DATA_GROUP.Oferta(id_publicacion, id_usuario_ofertador, monto, fecha)
 			VALUES(@id_publicacion, @id_usuario_ofertador, @monto, GETDATE())
 			

@@ -375,7 +375,7 @@ VALUES ('Publicada'),('Borrador'),('Pausada'),('Finalizada');
 ------------------VisibilidadPublicacion----------------
 --------------------------------------------------------
 INSERT INTO DATA_GROUP.VisibilidadPublicacion(id_visibilidad, descripcion, precio, porcentaje, dias_vencimiento_publi)
-SELECT DISTINCT Publicacion_Visibilidad_Cod, Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Precio, Publicacion_Visibilidad_Porcentaje, 10
+SELECT DISTINCT Publicacion_Visibilidad_Cod, Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Precio, Publicacion_Visibilidad_Porcentaje, 7
 FROM gd_esquema.Maestra;
 
 --------------------------------------------------------

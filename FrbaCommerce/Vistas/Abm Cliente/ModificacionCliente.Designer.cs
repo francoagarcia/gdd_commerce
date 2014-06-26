@@ -53,6 +53,8 @@
             this.lblNroDoc = new System.Windows.Forms.Label();
             this.lblTipoDoc = new System.Windows.Forms.Label();
             this.groupBoxDomicilioCliente = new System.Windows.Forms.GroupBox();
+            this.tb_Altura = new System.Windows.Forms.TextBox();
+            this.lbl_Altura = new System.Windows.Forms.Label();
             this.tb_Calle = new System.Windows.Forms.TextBox();
             this.tb_Piso = new System.Windows.Forms.TextBox();
             this.tb_Departamento = new System.Windows.Forms.TextBox();
@@ -68,8 +70,6 @@
             this.labelInfoAsterizco = new System.Windows.Forms.Label();
             this.label_Ingrese_datos = new System.Windows.Forms.Label();
             this.btn_Limpiar = new System.Windows.Forms.Button();
-            this.tb_Altura = new System.Windows.Forms.TextBox();
-            this.lbl_Altura = new System.Windows.Forms.Label();
             this.groupBox_Datos_de_usuario.SuspendLayout();
             this.groupBoxDatosCliente.SuspendLayout();
             this.groupBoxDomicilioCliente.SuspendLayout();
@@ -322,6 +322,22 @@
             this.groupBoxDomicilioCliente.TabStop = false;
             this.groupBoxDomicilioCliente.Text = "Domicilio";
             // 
+            // tb_Altura
+            // 
+            this.tb_Altura.Location = new System.Drawing.Point(311, 26);
+            this.tb_Altura.Name = "tb_Altura";
+            this.tb_Altura.Size = new System.Drawing.Size(74, 20);
+            this.tb_Altura.TabIndex = 34;
+            // 
+            // lbl_Altura
+            // 
+            this.lbl_Altura.AutoSize = true;
+            this.lbl_Altura.Location = new System.Drawing.Point(268, 29);
+            this.lbl_Altura.Name = "lbl_Altura";
+            this.lbl_Altura.Size = new System.Drawing.Size(34, 13);
+            this.lbl_Altura.TabIndex = 33;
+            this.lbl_Altura.Text = "Altura";
+            // 
             // tb_Calle
             // 
             this.tb_Calle.Location = new System.Drawing.Point(67, 26);
@@ -451,22 +467,6 @@
             this.btn_Limpiar.UseVisualStyleBackColor = true;
             this.btn_Limpiar.Click += new System.EventHandler(this.btn_Limpiar_Click);
             // 
-            // tb_Altura
-            // 
-            this.tb_Altura.Location = new System.Drawing.Point(311, 26);
-            this.tb_Altura.Name = "tb_Altura";
-            this.tb_Altura.Size = new System.Drawing.Size(74, 20);
-            this.tb_Altura.TabIndex = 34;
-            // 
-            // lbl_Altura
-            // 
-            this.lbl_Altura.AutoSize = true;
-            this.lbl_Altura.Location = new System.Drawing.Point(268, 29);
-            this.lbl_Altura.Name = "lbl_Altura";
-            this.lbl_Altura.Size = new System.Drawing.Size(34, 13);
-            this.lbl_Altura.TabIndex = 33;
-            this.lbl_Altura.Text = "Altura";
-            // 
             // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -480,6 +480,7 @@
             this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.btn_Confirmar);
             this.Controls.Add(this.labelInfoAsterizco);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ModificacionCliente";

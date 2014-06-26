@@ -107,7 +107,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
                 DialogResult result = frm.ShowDialog(this);
                 if (result == DialogResult.OK)
                 {
-                    
+                    this.publi.precio = frm.oferta.monto;
                 }
                 this.AccionIniciar();
             }

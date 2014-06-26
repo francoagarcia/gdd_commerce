@@ -29,11 +29,11 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
         private Usuario usuarioActual;
         private EstadoPublicacion estadoActivo;
         //Para la paginacion 
-        int PageCount;
-        int maxRec;
-        int pageSize;
-        int currentPage;
-        int recNo;
+        private int PageCount;
+        private int maxRec;
+        private int pageSize;
+        private int currentPage;
+        private int recNo;
         public object EntidadSeleccionada { get { return Seleccionar(); } }
         #endregion
 
@@ -47,12 +47,15 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             this.estadoActivo.descripcion = "Publicada";
             this.publiDB = new PublicacionDB();
             this.usuarioActual = usuActu;
-            // Initial seeings
-            currentPage = 1;
-            recNo = 0;
             this.pageSize = 5;
-            this.settingsPage(0);
+            // Initial seeings
+            ConfiguracionesLoad();
+        }
 
+        private void ConfiguracionesLoad() {
+            this.currentPage = 1;
+            this.recNo = 0;
+            this.settingsPage(0);
             this.maxRec = 0;
             this.PageCount = maxRec / pageSize;
 
@@ -242,7 +245,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
                     Publicacion publicacion = this.rearmarPublicacion(publicacionMostrada);
                     PublicacionView frmPub = new PublicacionView(publicacion, this.usuarioActual);
                     frmPub.ShowDialog(this);
-                    this.recNo = 0;
+                    this.ConfiguracionesLoad();
                     this.Filtrar();
                 }
                 else 
