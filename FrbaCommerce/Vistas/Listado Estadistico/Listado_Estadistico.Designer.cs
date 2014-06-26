@@ -200,7 +200,9 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_Resultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Resultado.Location = new System.Drawing.Point(9, 19);
+            this.dgv_Resultado.MultiSelect = false;
             this.dgv_Resultado.Name = "dgv_Resultado";
+            this.dgv_Resultado.ReadOnly = true;
             this.dgv_Resultado.Size = new System.Drawing.Size(653, 241);
             this.dgv_Resultado.TabIndex = 0;
             // 

@@ -957,7 +957,6 @@ BEGIN
 	SELECT TOP 5 
 			p.id_usuario_publicador Vendedor, 
 			@anio as 'Año',
-			@mes as 'Mes',
 			AVG(cal.estrellas_calificacion) as 'Calificacio promedio'
 	FROM DATA_GROUP.CalificacionPublicacion cal
 	JOIN DATA_GROUP.Compra comp
@@ -983,15 +982,23 @@ CREATE PROCEDURE DATA_GROUP.getTop5ClientesConMasPublicacionesSinCalificar
 @visibilidad_desc nvarchar(255) = NULL
 AS
 BEGIN
-	SELECT TOP 5 com.id_usuario_comprador, COUNT(*) CantidadPublicaciones
+	SELECT TOP 5 
+			usu.username as 'Username', 
+			COUNT(*) as 'Cantidad',
+			@anio as 'Año',
+			CASE WHEN @trimestre=1 THEN 'Primer trimestre'
+				 WHEN @trimestre=2 THEN 'Segundo trimestre'
+				 WHEN @trimestre=3 THEN 'Tercer trimestre'
+				 WHEN @trimestre=4 THEN 'Cuarto trimestre'
+			END as 'Trimestre'
 	FROM DATA_GROUP.Compra com
-	JOIN DATA_GROUP.Cliente cli
-	ON com.id_usuario_comprador=cli.id_usuario 
+	JOIN DATA_GROUP.Usuario usu
+	ON com.id_usuario_comprador=usu.id_usuario 
 		AND com.id_calificacion is null
 		AND YEAR(com.fecha)=@anio 
 		AND MONTH(com.fecha)>(@trimestre-1)*3 AND MONTH(com.fecha)<=@trimestre*3 
-	GROUP BY com.id_usuario_comprador
-	ORDER BY CantidadPublicaciones 
+	GROUP BY usu.username
+	ORDER BY COUNT(*) DESC
 END
 GO
 
