@@ -211,6 +211,7 @@
             this.ClientSize = new System.Drawing.Size(692, 396);
             this.Controls.Add(this.gb_Resultado);
             this.Controls.Add(this.gb_Opciones_estadisticas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Listado_Estadistico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRBA Commerce - Listados estadísticos";

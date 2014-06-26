@@ -887,6 +887,33 @@ GO
 
 -------------------------------------------------------------------------------------
 
+/*
+	SELECT  b.usu_UserName Usuario,
+		c.pubvis_Descripcion Visibilidad, 
+		MONTH(a.pub_Fecha_Ini) Mes, 
+		SUM(a.pub_Stock) Productos_No_Vendidos
+	FROM J2LA.Publicaciones a, J2LA.Usuarios b, J2LA.Publicaciones_Visibilidades c
+	WHERE a.pub_usu_Id = b.usu_Id
+	AND a.pub_visibilidad_Id = c.pubvis_id
+	AND YEAR(a.pub_Fecha_Ini) = @anio
+	AND (a.pub_visibilidad_Id = @visibilidad OR @visibilidad=0)
+	AND (MONTH(a.pub_Fecha_Ini) = @mes OR @mes=0)
+	AND MONTH(a.pub_Fecha_Ini)>(@trimestre-1)*3 AND MONTH(a.pub_Fecha_Ini)<= @trimestre*3
+	AND b.usu_UserName IN (
+		SELECT TOP 5 b.usu_UserName Usuario
+		FROM J2LA.Publicaciones a, J2LA.Usuarios b, J2LA.Publicaciones_Visibilidades c
+		WHERE a.pub_usu_Id = b.usu_Id
+		AND a.pub_visibilidad_Id = c.pubvis_id
+		AND YEAR(a.pub_Fecha_Ini) = @anio
+		AND MONTH(a.pub_Fecha_Ini)>(@trimestre-1)*3 AND MONTH(a.pub_Fecha_Ini)<= @trimestre*3
+		GROUP BY b.usu_UserName
+		ORDER BY SUM(a.pub_Stock)DESC)
+	GROUP BY b.usu_UserName,c.pubvis_Descripcion,MONTH(a.pub_Fecha_Ini)
+	ORDER BY MONTH(a.pub_Fecha_Ini),c.pubvis_Descripcion,SUM(a.pub_Stock) DESC
+
+*/
+
+
 IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos') IS NOT NULL
 	DROP PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
 	GO
@@ -898,18 +925,23 @@ CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
 AS
 BEGIN
 
-	DECLARE @visibilidad_id numeric(18, 0)
-	SET @visibilidad_id = (SELECT id_visibilidad FROM DATA_GROUP.VisibilidadPublicacion WHERE descripcion=@visibilidad_desc)
+	select TOP 5 
+			u.username 'Username', 
+			SUM(p.stock) 'Cantidad_no_vendida',
+			@anio as 'Anio',
+			@mes as 'Mes',
+			@visibilidad_desc as 'Visibilidad'
+	from DATA_GROUP.Publicacion p
+	join DATA_GROUP.Usuario u
+	on u.id_usuario=p.id_usuario_publicador
+	join DATA_GROUP.VisibilidadPublicacion v
+	ON p.id_visibilidad=v.id_visibilidad AND v.descripcion=@visibilidad_desc
+	where 	YEAR(p.fecha_inicio)=@anio
+			AND MONTH(p.fecha_inicio)=@mes
+			AND MONTH(p.fecha_inicio)>(@trimestre-1)*3 AND MONTH(p.fecha_inicio)<=@trimestre*3	
+	group by u.username
+	order by sum(p.stock) desc
 
-	SELECT top 5 p.id_usuario_publicador, SUM(p.stock) CantidadNoVendidaTotal
-	FROM DATA_GROUP.Publicacion p
-	WHERE YEAR(p.fecha_inicio)=@anio
-		AND p.id_visibilidad=@visibilidad_id
-		AND MONTH(p.fecha_inicio)=@mes
-		AND MONTH(p.fecha_inicio)>(@trimestre-1)*3 AND MONTH(p.fecha_inicio)<=@trimestre*3	
-	GROUP BY p.id_usuario_publicador, p.fecha_inicio, p.id_visibilidad
-	ORDER BY CantidadNoVendidaTotal DESC, p.fecha_inicio ASC, p.id_visibilidad ASC
-	
 END
 GO
 
@@ -925,6 +957,7 @@ CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMayorFacturacion
 @visibilidad_desc nvarchar(255) = NULL
 AS
 BEGIN
+
 	SELECT top 5 f.id_vendedor, SUM(f.total) Facturacion
 	FROM DATA_GROUP.Factura f
 	JOIN DATA_GROUP.Usuario u
@@ -948,7 +981,11 @@ CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMayorCalificaciones
 @visibilidad_desc nvarchar(255) = NULL
 AS
 BEGIN
-	SELECT TOP 5 p.id_usuario_publicador Vendedor, AVG(cal.estrellas_calificacion) Calificaciones
+	SELECT TOP 5 
+			p.id_usuario_publicador Vendedor, 
+			@anio as 'Año',
+			@mes as 'Mes',
+			AVG(cal.estrellas_calificacion) as 'Calificacio promedio'
 	FROM DATA_GROUP.CalificacionPublicacion cal
 	JOIN DATA_GROUP.Compra comp
 	ON comp.id_calificacion=cal.id_calificacion
@@ -957,7 +994,7 @@ BEGIN
 	WHERE YEAR(comp.fecha)=@anio 
 		AND MONTH(comp.fecha)>(@trimestre-1)*3 AND MONTH(comp.fecha)<=@trimestre*3 
 	GROUP BY p.id_usuario_publicador
-	ORDER BY Calificaciones DESC
+	ORDER BY AVG(cal.estrellas_calificacion) DESC
 END
 GO
 
@@ -1228,9 +1265,78 @@ CREATE PROCEDURE DATA_GROUP.inHabilitarUsuario
 @id_usuario numeric(18, 0)
 AS
 BEGIN
-	UPDATE DATA_GROUP.Usuario
-	SET habilitada=0
-	WHERE id_usuario=@id_usuario
+	BEGIN TRY
+		BEGIN TRAN
+			UPDATE DATA_GROUP.Usuario
+			SET habilitada=0
+			WHERE id_usuario=@id_usuario
+			
+			DECLARE @id_pausada numeric(18,0)
+			SET @id_pausada = 3
+
+			UPDATE DATA_GROUP.Publicacion
+			SET id_estado=@id_pausada
+			WHERE id_usuario_publicador=@id_usuario
+			
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN
+
+		DECLARE @ErrorMessage NVARCHAR(4000);
+			DECLARE @ErrorSeverity INT;
+			DECLARE @ErrorState INT;
+
+			SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+			RAISERROR (@ErrorMessage, -- Message text.
+				   @ErrorSeverity, -- Severity.
+				   @ErrorState -- State.
+				   );
+	END CATCH
+END
+GO
+
+-------------------------------------------------------------------------------------
+
+IF OBJECT_ID('DATA_GROUP.habilitarUsuario') IS NOT NULL 
+	DROP PROCEDURE DATA_GROUP.habilitarUsuario
+	GO
+CREATE PROCEDURE DATA_GROUP.habilitarUsuario
+@id_usuario numeric(18, 0)
+AS
+BEGIN
+	BEGIN TRY
+		BEGIN TRAN
+			UPDATE DATA_GROUP.Usuario
+			SET habilitada=1
+			WHERE id_usuario=@id_usuario
+			
+			DECLARE @id_publicada numeric(18,0)
+			SET @id_publicada = 1
+
+			UPDATE DATA_GROUP.Publicacion
+			SET id_estado=@id_publicada
+			WHERE id_usuario_publicador=@id_usuario
+			
+		COMMIT TRAN
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRAN
+
+		DECLARE @ErrorMessage NVARCHAR(4000);
+			DECLARE @ErrorSeverity INT;
+			DECLARE @ErrorState INT;
+
+			SELECT @ErrorMessage = ERROR_MESSAGE(), @ErrorSeverity = ERROR_SEVERITY(), @ErrorState = ERROR_STATE();
+
+			RAISERROR (@ErrorMessage, -- Message text.
+				   @ErrorSeverity, -- Severity.
+				   @ErrorState -- State.
+				   );
+	END CATCH
+	
+	
 END
 GO
 
@@ -1471,22 +1577,6 @@ BEGIN
 	RETURN @resultado
 END
 GO
-
--------------------------------------------------------------------------------------
-
-IF OBJECT_ID('DATA_GROUP.habilitarUsuario') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.habilitarUsuario
-	GO
-CREATE PROCEDURE DATA_GROUP.habilitarUsuario
-@id_usuario numeric(18, 0)
-AS
-BEGIN
-	UPDATE DATA_GROUP.Usuario
-	SET habilitada=1
-	WHERE id_usuario=@id_usuario
-END
-GO
-
 
 -------------------------------------------------------------------------------------
 
@@ -2186,7 +2276,7 @@ BEGIN
 									AND c.id_visibilidad_fact = @id_visibilidad)
 					BEGIN
 						INSERT INTO DATA_GROUP.CantVisibilidadesFacturadasPorUsuario(id_usuario_fact, id_visibilidad_fact, cantidad_fact)
-						VALUES(@id_usuario_publicador, @id_visibilidad, 0); --Le sumo 1 cuando facturo
+						VALUES(@id_usuario_publicador, @id_visibilidad, 1); --Es por cada factura generada
 					END
 				END
 				

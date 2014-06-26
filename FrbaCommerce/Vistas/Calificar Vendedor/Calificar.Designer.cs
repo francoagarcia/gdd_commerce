@@ -40,6 +40,7 @@
             // 
             // cb_calificacion
             // 
+            this.cb_calificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_calificacion.FormattingEnabled = true;
             this.cb_calificacion.Location = new System.Drawing.Point(74, 14);
             this.cb_calificacion.Name = "cb_calificacion";
@@ -79,7 +80,7 @@
             this.btn_Comprar.Name = "btn_Comprar";
             this.btn_Comprar.Size = new System.Drawing.Size(78, 23);
             this.btn_Comprar.TabIndex = 6;
-            this.btn_Comprar.Text = "Comprar";
+            this.btn_Comprar.Text = "Calificar";
             this.btn_Comprar.UseVisualStyleBackColor = true;
             this.btn_Comprar.Click += new System.EventHandler(this.btn_Comprar_Click);
             // 

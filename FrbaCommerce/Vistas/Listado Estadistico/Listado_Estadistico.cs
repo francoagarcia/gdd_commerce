@@ -205,7 +205,7 @@ namespace FrbaCommerce.Vistas.Listado_Estadistico
             {
                 case 1:
                     esta.mes = Convert.ToInt32(((KeyValuePair<string, int>)cb_Mes.SelectedItem).Value);
-                    esta.visibilidad = Convert.ToString(this.cb_Visibilidad.SelectedItem);
+                    esta.visibilidad = Convert.ToString(((KeyValuePair<string, int>)cb_Visibilidad.SelectedItem).Key);
                     ds = this.estadisDB.getTop5VendedoresConMasProductosNoVendidos(esta);
                     break;
                 case 2:

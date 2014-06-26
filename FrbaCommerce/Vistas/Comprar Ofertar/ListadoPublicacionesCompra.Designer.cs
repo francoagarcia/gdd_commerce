@@ -273,8 +273,6 @@
             this.Controls.Add(this.gbBusqueda);
             this.Controls.Add(this.gbFiltros);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "ListadoPublicacionesCompra";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRBA Commerce - Publicaciones";

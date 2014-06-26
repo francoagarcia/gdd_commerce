@@ -59,12 +59,12 @@
             // 
             this.gbFiltros.Controls.Add(this.chBox_Habilitados);
             this.gbFiltros.Controls.Add(this.tb_Mail);
-            this.gbFiltros.Controls.Add(this.tb_Telefono);
             this.gbFiltros.Controls.Add(this.labelTelefono);
             this.gbFiltros.Controls.Add(this.tb_Apellido);
             this.gbFiltros.Controls.Add(this.lbl_Mail);
             this.gbFiltros.Controls.Add(this.label4);
             this.gbFiltros.Controls.Add(this.label3);
+            this.gbFiltros.Controls.Add(this.tb_Telefono);
             this.gbFiltros.Controls.Add(this.tb_Nombre);
             this.gbFiltros.Controls.Add(this.label1);
             this.gbFiltros.Controls.Add(this.label5);
@@ -82,7 +82,6 @@
             this.gbFiltros.Controls.SetChildIndex(this.lbl_Mail, 0);
             this.gbFiltros.Controls.SetChildIndex(this.tb_Apellido, 0);
             this.gbFiltros.Controls.SetChildIndex(this.labelTelefono, 0);
-            
             this.gbFiltros.Controls.SetChildIndex(this.tb_Mail, 0);
             this.gbFiltros.Controls.SetChildIndex(this.btnFiltrar, 0);
             this.gbFiltros.Controls.SetChildIndex(this.btnLimpiar, 0);
@@ -219,6 +218,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 490);
+            this.MaximizeBox = true;
+            this.MinimizeBox = true;
             this.Name = "ListadoCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRBA Commerce - Listado de clientes";

@@ -160,6 +160,7 @@
     <Compile Include="GUIMethods\NameVariableParser.cs" />
     <Compile Include="GUIMethods\Validaciones\IValidador.cs" />
     <Compile Include="GUIMethods\MenuItemsHelper.cs" />
+    <Compile Include="GUIMethods\Validaciones\ValidadorCheckedListBox.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorCombobox.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorDateTimeFrom.cs" />
     <Compile Include="GUIMethods\Validaciones\ValidadorDateTimeUntil.cs" />
@@ -217,12 +218,6 @@
     </Compile>
     <Compile Include="Vistas\ABM Rol\AltaDeRol.Designer.cs">
       <DependentUpon>AltaDeRol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\ABM Rol\AltaRol.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\ABM Rol\AltaRol.Designer.cs">
-      <DependentUpon>AltaRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\ABM Rol\ListadoRoles.cs">
       <SubType>Form</SubType>
@@ -465,9 +460,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ABM Rol\AltaDeRol.resx">
       <DependentUpon>AltaDeRol.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Vistas\ABM Rol\AltaRol.resx">
-      <DependentUpon>AltaRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ABM Rol\ListadoRoles.resx">
       <DependentUpon>ListadoRoles.cs</DependentUpon>

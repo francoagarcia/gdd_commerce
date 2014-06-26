@@ -73,5 +73,10 @@ namespace FrbaCommerce.GUIMethods
         {
             MessageBox.Show(string.Format("Debe seleccionar un elemento del control '{0}'", controlName), "Error al validar");
         }
+
+        internal static void MensajeValidacionCheckedListBox(string controlName)
+        {
+            MessageBox.Show(string.Format("Debe seleccionar un elemento del control '{0}'", controlName), "Error al validar");
+        }
     }
 }

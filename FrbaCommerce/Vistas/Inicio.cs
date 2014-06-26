@@ -30,6 +30,19 @@ namespace FrbaCommerce
     public partial class Inicio : Form
     {
         private MenuItemsHelper menuItems { get; set; }
+        private Listado_Estadistico frm_estadisticas;
+        private ListadoRoles frm_roles;
+        private ListadoCliente frm_clientes;
+        private ListadoEmpresa frm_empresas;
+        private ListadoRubros frm_rubros;
+        private ListadoVisibilidad frm_visibilidades;
+        private SeleccionTipoPublicacion frm_seleccionTipoPublicacion;
+        private ListadoPublicacionesDeVendedor frm_publicacionesVendedor;
+        private FacturarPublicaciones frm_facturar;
+        private Historial frm_historial;
+        private GestionPreguntas frm_gestionPreguntas;
+        private ListadoPublicacionesCompra frm_comprar;
+        private SeleccionarCompra frm_Calificar;
 
         public Inicio()
         {
@@ -201,7 +214,13 @@ namespace FrbaCommerce
         #region Salir
         private void itm_Const_Salir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageDialog.MensajeInterrogativo(this, "¿Está seguro que desea salir?", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                this.cerrarFormsChildren();
+                this.Close();
+            }
+            
         }
         #endregion
 
@@ -255,8 +274,19 @@ namespace FrbaCommerce
             DialogResult result = MessageDialog.MensajeInterrogativo(this, "¿Está seguro que desea cerrar su sesión?", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
+                cerrarFormsChildren();
                 this.itm_Const_Sesion_CerrarSesion_Aceptado();
             }
+        }
+
+        private void cerrarFormsChildren()
+        {
+            if (this.MdiChildren.Length > 0)
+            {
+                foreach (Form childForm in this.MdiChildren)
+                    childForm.Close();
+            }
+
         }
 
         private void itm_Const_Sesion_CerrarSesion_Aceptado()
@@ -274,18 +304,18 @@ namespace FrbaCommerce
         {
             try
             {
-                Listado_Estadistico frm = new Listado_Estadistico();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_estadisticas = null;
+                frm_estadisticas = new Listado_Estadistico();
+                frm_estadisticas.StartPosition = FormStartPosition.CenterParent;
+                frm_estadisticas.WindowState = FormWindowState.Maximized;
+                frm_estadisticas.MdiParent = this;
+                frm_estadisticas.Show();
             }
             catch (Exception ex)
             {
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
-
         #endregion
 
         #region ABM de rol
@@ -293,11 +323,12 @@ namespace FrbaCommerce
         {
             try
             {
-                ListadoRoles frm = new ListadoRoles();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_roles = null;
+                frm_roles = new ListadoRoles();
+                frm_roles.StartPosition = FormStartPosition.CenterParent;
+                frm_roles.WindowState = FormWindowState.Maximized;
+                frm_roles.MdiParent = this;
+                frm_roles.Show();
             }
             catch (Exception ex)
             {
@@ -311,11 +342,12 @@ namespace FrbaCommerce
         {
             try
             {
-                ListadoCliente frm = new ListadoCliente();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_clientes = null;
+                frm_clientes = new ListadoCliente();
+                frm_clientes.StartPosition = FormStartPosition.CenterParent;
+                frm_clientes.WindowState = FormWindowState.Maximized;
+                frm_clientes.MdiParent = this;
+                frm_clientes.Show();
             }
             catch (Exception ex)
             {
@@ -329,11 +361,12 @@ namespace FrbaCommerce
         {
             try
             {
-                ListadoEmpresa frm = new ListadoEmpresa();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_empresas = null;
+                frm_empresas = new ListadoEmpresa();
+                frm_empresas.StartPosition = FormStartPosition.CenterParent;
+                frm_empresas.WindowState = FormWindowState.Maximized;
+                frm_empresas.MdiParent = this;
+                frm_empresas.Show();
             }
             catch (Exception ex)
             {
@@ -347,11 +380,12 @@ namespace FrbaCommerce
         {
             try
             {
-                ListadoRubros frm = new ListadoRubros();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_rubros = null;
+                frm_rubros = new ListadoRubros();
+                frm_rubros.StartPosition = FormStartPosition.CenterParent;
+                frm_rubros.WindowState = FormWindowState.Maximized;
+                frm_rubros.MdiParent = this;
+                frm_rubros.Show();
             }
             catch (Exception ex)
             {
@@ -365,11 +399,12 @@ namespace FrbaCommerce
         {
             try
             {
-                ListadoVisibilidad frm = new ListadoVisibilidad();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_visibilidades = null;
+                frm_visibilidades = new ListadoVisibilidad();
+                frm_visibilidades.StartPosition = FormStartPosition.CenterParent;
+                frm_visibilidades.WindowState = FormWindowState.Maximized;
+                frm_visibilidades.MdiParent = this;
+                frm_visibilidades.Show();
             }
             catch (Exception ex)
             {
@@ -379,23 +414,22 @@ namespace FrbaCommerce
         #endregion
 
         #region Nueva publicacoin
-
         private void itm_Var_Nueva_Publicacion_Click(object sender, EventArgs e)
         {
             try
             {
-                SeleccionTipoPublicacion frm = new SeleccionTipoPublicacion(Program.ContextoActual.UsuarioActual);
-                frm.StartPosition = FormStartPosition.CenterScreen;
-                //frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_seleccionTipoPublicacion = null;
+                frm_seleccionTipoPublicacion = new SeleccionTipoPublicacion(Program.ContextoActual.UsuarioActual);
+                frm_seleccionTipoPublicacion.StartPosition = FormStartPosition.CenterScreen;
+                //frm_seleccionTipoPublicacion.WindowState = FormWindowState.Maximized;
+                frm_seleccionTipoPublicacion.MdiParent = this;
+                frm_seleccionTipoPublicacion.Show();
             }
             catch (Exception ex)
             {
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
-
         #endregion 
 
         #region Editar publicacion
@@ -403,11 +437,12 @@ namespace FrbaCommerce
         {
             try
             {
-                ListadoPublicacionesDeVendedor frm = new ListadoPublicacionesDeVendedor(Program.ContextoActual.UsuarioActual);
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_publicacionesVendedor = null;
+                frm_publicacionesVendedor = new ListadoPublicacionesDeVendedor(Program.ContextoActual.UsuarioActual);
+                frm_publicacionesVendedor.StartPosition = FormStartPosition.CenterParent;
+                frm_publicacionesVendedor.WindowState = FormWindowState.Maximized;
+                frm_publicacionesVendedor.MdiParent = this;
+                frm_publicacionesVendedor.Show();
             }
             catch (Exception ex)
             {
@@ -421,11 +456,12 @@ namespace FrbaCommerce
         {
             try
             {
-                FacturarPublicaciones frm = new FacturarPublicaciones();
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_facturar = null;
+                frm_facturar = new FacturarPublicaciones();
+                frm_facturar.StartPosition = FormStartPosition.CenterParent;
+                frm_facturar.WindowState = FormWindowState.Maximized;
+                frm_facturar.MdiParent = this;
+                frm_facturar.Show();
             }
             catch (Exception ex)
             {
@@ -439,11 +475,11 @@ namespace FrbaCommerce
         {
             try
             {
-                Historial frm = new Historial(Program.ContextoActual.UsuarioActual);
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_historial = new Historial(Program.ContextoActual.UsuarioActual);
+                frm_historial.StartPosition = FormStartPosition.CenterParent;
+                frm_historial.WindowState = FormWindowState.Maximized;
+                frm_historial.MdiParent = this;
+                frm_historial.Show();
             }
             catch (Exception ex)
             {
@@ -458,11 +494,12 @@ namespace FrbaCommerce
         {
             try
             {
-                GestionPreguntas frm = new GestionPreguntas(Program.ContextoActual.UsuarioActual);
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_gestionPreguntas = null;
+                frm_gestionPreguntas = new GestionPreguntas(Program.ContextoActual.UsuarioActual);
+                frm_gestionPreguntas.StartPosition = FormStartPosition.CenterParent;
+                frm_gestionPreguntas.WindowState = FormWindowState.Maximized;
+                frm_gestionPreguntas.MdiParent = this;
+                frm_gestionPreguntas.Show();
             }
             catch (Exception ex)
             {
@@ -476,11 +513,12 @@ namespace FrbaCommerce
         {
             try
             {
-                ListadoPublicacionesCompra frm = new ListadoPublicacionesCompra(Program.ContextoActual.UsuarioActual);
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_comprar = null;
+                frm_comprar = new ListadoPublicacionesCompra(Program.ContextoActual.UsuarioActual);
+                frm_comprar.StartPosition = FormStartPosition.CenterParent;
+                frm_comprar.WindowState = FormWindowState.Maximized;
+                frm_comprar.MdiParent = this;
+                frm_comprar.Show();
             }
             catch (Exception ex)
             {
@@ -494,18 +532,18 @@ namespace FrbaCommerce
         {
             try
             {
-                SeleccionarCompra frm = new SeleccionarCompra(Program.ContextoActual.UsuarioActual);
-                frm.StartPosition = FormStartPosition.CenterParent;
-                frm.WindowState = FormWindowState.Maximized;
-                frm.MdiParent = this;
-                frm.Show();
+                frm_Calificar = null;
+                frm_Calificar = new SeleccionarCompra(Program.ContextoActual.UsuarioActual);
+                frm_Calificar.StartPosition = FormStartPosition.CenterParent;
+                frm_Calificar.WindowState = FormWindowState.Maximized;
+                frm_Calificar.MdiParent = this;
+                frm_Calificar.Show();
             }
             catch (Exception ex)
             {
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
-
         #endregion
 
     }

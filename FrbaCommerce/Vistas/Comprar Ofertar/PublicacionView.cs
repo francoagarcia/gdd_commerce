@@ -58,7 +58,11 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             {
                 this.btn_Comprar.Text = "Ofertar";
                 this.lbl_Stock.Text = "Monto minimo";
-
+            }
+            if (this.publi.usuario_publicador.id_usuario == this.usuarioActual.id_usuario) 
+            {
+                this.btn_Comprar.Enabled = false;
+                this.btn_Preguntar.Enabled = false;
             }
         }
 
@@ -85,7 +89,6 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
         #region [btn_Comprar]
         private void btn_Comprar_Click(object sender, EventArgs e)
         {
-
             if (this.esUnaCompraInmediata())
             {
                 this.AccionComprar();

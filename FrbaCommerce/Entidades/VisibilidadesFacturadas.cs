@@ -11,5 +11,6 @@ namespace FrbaCommerce.Entidades
         public string descripcion { get; set; }
         public decimal id_usuario { get; set; }
         public decimal cantidad_fact { get; set; }
+        public decimal cantidad_marcada { get; set; }
     }
 }

@@ -88,6 +88,7 @@ namespace FrbaCommerce.Vistas.Abm_Cliente
             this.dgvBusqueda.Columns["username"].Visible = false;
             this.dgvBusqueda.Columns["contrasenia"].Visible = false;
             this.dgvBusqueda.Columns["cantidadIntentos"].Visible = false;
+            this.dgvBusqueda.Columns["habilitada_comprar"].Visible = false;
 
         }
 

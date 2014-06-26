@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.gb_Seleccionar_compra = new System.Windows.Forms.GroupBox();
+            this.dgv_Busqueda = new System.Windows.Forms.DataGridView();
             this.btn_Cancelar = new System.Windows.Forms.Button();
             this.btn_Seleccionar = new System.Windows.Forms.Button();
             this.gb_Acciones = new System.Windows.Forms.GroupBox();
-            this.dgv_Busqueda = new System.Windows.Forms.DataGridView();
             this.gb_Seleccionar_compra.SuspendLayout();
-            this.gb_Acciones.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Busqueda)).BeginInit();
+            this.gb_Acciones.SuspendLayout();
             this.SuspendLayout();
             // 
             // gb_Seleccionar_compra
@@ -50,6 +50,27 @@
             this.gb_Seleccionar_compra.TabIndex = 0;
             this.gb_Seleccionar_compra.TabStop = false;
             this.gb_Seleccionar_compra.Text = "Elija una compra realizada para calificarla:";
+            // 
+            // dgv_Busqueda
+            // 
+            this.dgv_Busqueda.AllowDrop = true;
+            this.dgv_Busqueda.AllowUserToAddRows = false;
+            this.dgv_Busqueda.AllowUserToDeleteRows = false;
+            this.dgv_Busqueda.AllowUserToOrderColumns = true;
+            this.dgv_Busqueda.AllowUserToResizeRows = false;
+            this.dgv_Busqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_Busqueda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgv_Busqueda.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv_Busqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Busqueda.Location = new System.Drawing.Point(6, 19);
+            this.dgv_Busqueda.MultiSelect = false;
+            this.dgv_Busqueda.Name = "dgv_Busqueda";
+            this.dgv_Busqueda.ReadOnly = true;
+            this.dgv_Busqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_Busqueda.Size = new System.Drawing.Size(640, 229);
+            this.dgv_Busqueda.TabIndex = 2;
             // 
             // btn_Cancelar
             // 
@@ -86,27 +107,6 @@
             this.gb_Acciones.TabIndex = 3;
             this.gb_Acciones.TabStop = false;
             // 
-            // dgv_Busqueda
-            // 
-            this.dgv_Busqueda.AllowDrop = true;
-            this.dgv_Busqueda.AllowUserToAddRows = false;
-            this.dgv_Busqueda.AllowUserToDeleteRows = false;
-            this.dgv_Busqueda.AllowUserToOrderColumns = true;
-            this.dgv_Busqueda.AllowUserToResizeRows = false;
-            this.dgv_Busqueda.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv_Busqueda.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgv_Busqueda.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgv_Busqueda.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Busqueda.Location = new System.Drawing.Point(6, 19);
-            this.dgv_Busqueda.MultiSelect = false;
-            this.dgv_Busqueda.Name = "dgv_Busqueda";
-            this.dgv_Busqueda.ReadOnly = true;
-            this.dgv_Busqueda.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_Busqueda.Size = new System.Drawing.Size(640, 229);
-            this.dgv_Busqueda.TabIndex = 2;
-            // 
             // SeleccionarCompra
             // 
             this.AcceptButton = this.btn_Seleccionar;
@@ -121,8 +121,8 @@
             this.Text = "Calificar compras";
             this.Load += new System.EventHandler(this.SeleccionarCompra_Load);
             this.gb_Seleccionar_compra.ResumeLayout(false);
-            this.gb_Acciones.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Busqueda)).EndInit();
+            this.gb_Acciones.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

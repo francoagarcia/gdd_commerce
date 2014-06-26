@@ -43,10 +43,27 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
             this.AgregarValidacion(new ValidadorString(this.tb_Descripcion, 1, 255));
             this.AgregarValidacion(new ValidadorCombobox(this.cb_Visibilidad));
             this.AgregarValidacion(new ValidadorCombobox(this.cb_Estado));
+            this.AgregarValidacion(new ValidadorCheckedListBox(this.list_Rubros));
             this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_inicio, DateManager.Ahora()));
             this.CargarCombos();
             this.CargarListaRubros();
+            this.CargarNudStock();
             this.tb_Fecha_de_vencimiento.Text = "";
+            this.CargarFechaDeVencimiento();
+        }
+
+        private void CargarFechaDeVencimiento() 
+        {
+            ActualizarFechaDeVencimiento();
+        }
+
+        private void CargarNudStock() 
+        {
+            if (this.tipoPublicacion.Id.Equals(2)) 
+            {
+                this.nud_Stock.Value = 1;
+                this.nud_Stock.ReadOnly = true;
+            }
         }
 
         private void CargarCombos() {

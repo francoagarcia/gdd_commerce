@@ -71,6 +71,11 @@
             // nud_Ingresar_cantidad
             // 
             this.nud_Ingresar_cantidad.Location = new System.Drawing.Point(112, 25);
+            this.nud_Ingresar_cantidad.Maximum = new decimal(new int[] {
+            1874919423,
+            2328306,
+            0,
+            0});
             this.nud_Ingresar_cantidad.Name = "nud_Ingresar_cantidad";
             this.nud_Ingresar_cantidad.Size = new System.Drawing.Size(153, 20);
             this.nud_Ingresar_cantidad.TabIndex = 2;

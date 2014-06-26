@@ -165,6 +165,7 @@
             this.dgv_Busqueda.Size = new System.Drawing.Size(645, 302);
             this.dgv_Busqueda.TabIndex = 1;
             this.dgv_Busqueda.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Busqueda_CellContentClick);
+            this.dgv_Busqueda.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Busqueda_CellContentDoubleClick);
             // 
             // tb_Cantidad_de_bonificaciones
             // 
@@ -370,8 +371,6 @@
             this.Controls.Add(this.gb_Busqueda);
             this.Controls.Add(this.gb_Seleccionar_Usuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FacturarPublicaciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FRBA Commerce - Facturacion";

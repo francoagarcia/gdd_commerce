@@ -92,6 +92,11 @@
             // nud_Ingresar_monto_a_ofertar
             // 
             this.nud_Ingresar_monto_a_ofertar.Location = new System.Drawing.Point(112, 25);
+            this.nud_Ingresar_monto_a_ofertar.Maximum = new decimal(new int[] {
+            1874919423,
+            2328306,
+            0,
+            0});
             this.nud_Ingresar_monto_a_ofertar.Name = "nud_Ingresar_monto_a_ofertar";
             this.nud_Ingresar_monto_a_ofertar.Size = new System.Drawing.Size(153, 20);
             this.nud_Ingresar_monto_a_ofertar.TabIndex = 1;

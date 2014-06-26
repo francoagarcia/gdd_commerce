@@ -31,24 +31,17 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
         }
 
         #region [AccionAceptar]
-        private void btnRegistracion_Click(object sender, EventArgs e)
+        private void btnRegistracion_Click_1(object sender, EventArgs e)
         {
             base.Aceptar();
         }
 
-        protected override void AccionAceptar() //Esta tambien sería abstracta
+        protected override void AccionAceptar()
         {
             Usuario nuevaPosibleEmpresa = this.armarNueva();
             this.AltaUsuario(nuevaPosibleEmpresa);
 
         }
-
-        /*
-         * Tendríamos el metodo armarNueva() como abstract
-         * El metodo AccionAceptar como virtual
-         * El metodo CrearUsuario como virtual
-         * El metodo CrearUsuarioDB como abstract
-         */
 
         private void AltaUsuario(Usuario empresaAlta)
         {
@@ -107,6 +100,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             empresa.localidad = this.tb_Localidad.Text;
             empresa.cod_postal = this.tb_Codigo_postal.Text;
             empresa.ciudad = this.tb_Ciudad.Text;
+            empresa.altura = Convert.ToDecimal(this.tb_Altura.Text);
 
             return empresa;
         }
@@ -127,22 +121,22 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             this.AgregarValidacion(new ValidadorString(this.tb_Ciudad, 1, 255));
             this.AgregarValidacion(new ValidadorNumerico(this.tb_Telefono));
             this.AgregarValidacion(new ValidadorNumerico(this.tb_Piso));
+            this.AgregarValidacion(new ValidadorNumerico(this.tb_Altura));
             this.AgregarValidacion(new ValidadorMail(this.tb_Correo_electronico));
             this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_de_creacion, DateManager.Ahora()));
         }
         #endregion
 
         #region [Accion Cancelar]
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             base.Cancelar();
         }
         #endregion
 
-        private void btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            base.Cancelar();
-        }
+        
+
+
 
     }
 }

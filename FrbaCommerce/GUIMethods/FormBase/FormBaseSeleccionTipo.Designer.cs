@@ -39,6 +39,7 @@
             // 
             // groupBox_Tipo
             // 
+            this.groupBox_Tipo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox_Tipo.Controls.Add(this.label_Tipo);
             this.groupBox_Tipo.Controls.Add(this.label10);
             this.groupBox_Tipo.Controls.Add(this.cb_Tipo);
@@ -77,6 +78,7 @@
             // 
             // btn_Cancelar
             // 
+            this.btn_Cancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Cancelar.Location = new System.Drawing.Point(33, 118);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(125, 23);
@@ -87,6 +89,7 @@
             // 
             // btn_Siguiente
             // 
+            this.btn_Siguiente.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btn_Siguiente.Location = new System.Drawing.Point(180, 118);
             this.btn_Siguiente.Name = "btn_Siguiente";
             this.btn_Siguiente.Size = new System.Drawing.Size(125, 23);

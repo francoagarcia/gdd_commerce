@@ -30,15 +30,8 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             this.comboBox_Tipo_de_usuario.Enabled = false;
         }
 
-        #region [AccionCancelar]
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            base.Cancelar();
-        }
-        #endregion 
-
         #region [AccionAceptar]
-        private void btnRegistracion_Click(object sender, EventArgs e)
+        private void btnRegistracion_Click_1(object sender, EventArgs e)
         {
             base.Aceptar();
         }
@@ -94,6 +87,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             cliente.mail = this.textBox_Correo_electronico.Text;
             cliente.fecha_nacimiento = this.dp_Fecha_de_nacimiento.Value;
             cliente.dom_calle = this.textBox_Calle.Text;
+            cliente.altura = Convert.ToDecimal(this.tb_Altura.Text);
             cliente.piso = Convert.ToDecimal(this.textBox_Piso.Text);
             cliente.depto = this.textBox_Departamento.Text;
             cliente.localidad = this.textBox_Localidad.Text;
@@ -121,6 +115,7 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
             this.AgregarValidacion(new ValidadorDateTimeUntil(this.dp_Fecha_de_nacimiento, DateManager.Ahora()));
             this.AgregarValidacion(new ValidadorString(this.textBox_Calle, 1, 255));
             this.AgregarValidacion(new ValidadorNumerico(this.textBox_Piso));
+            this.AgregarValidacion(new ValidadorNumerico(this.tb_Altura));
             this.AgregarValidacion(new ValidadorString(this.textBox_Departamento, 1, 50));
             this.AgregarValidacion(new ValidadorString(this.textBox_Codigo_postal, 1, 50));
             this.AgregarValidacion(new ValidadorString(this.textBox_Localidad, 1, 255));
@@ -142,9 +137,12 @@ namespace FrbaCommerce.Vistas.Registro_de_Usuario
         }
         #endregion
 
+        #region [AccionCancelar]
         private void btnCancelar_Click_1(object sender, EventArgs e)
         {
             base.Cancelar();
         }
+        #endregion
+
     }
 }

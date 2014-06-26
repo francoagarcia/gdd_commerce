@@ -19,7 +19,6 @@ namespace FrbaCommerce.Vistas.Login
     public partial class Login : Form
     {
 
-
         #region [Atributos]
         private bool rol_seleccionado;
         private RolDB rolDB;
@@ -173,6 +172,12 @@ namespace FrbaCommerce.Vistas.Login
             {
                 this.Close();
             }
+        }
+
+        private void btnRegistrarse_Click(object sender, EventArgs e)
+        {
+            Registro_de_Usuario.RegistroDeUsuario frm = new Registro_de_Usuario.RegistroDeUsuario();
+            frm.ShowDialog();
         }
 
        

@@ -32,16 +32,12 @@ namespace FrbaCommerce.Vistas.Calificar_Vendedor
 
         private void Calificar_Load(object sender, EventArgs e)
         {
-            this.AgregarValidacion(new ValidadorCombobox(cb_calificacion));
-            this.AgregarValidacion(new ValidadorString(tb_comentario, 1, 255));
-
             this.CargarCombo();
         }
 
         private void CargarCombo()
         {
             List<KeyValuePair<string, int>> cb_califi = new List<KeyValuePair<string, int>>();
-            cb_califi.Add(new KeyValuePair<string, int>("   ", 0));
             cb_califi.Add(new KeyValuePair<string, int>("Uno", 1));
             cb_califi.Add(new KeyValuePair<string, int>("Dos", 2));
             cb_califi.Add(new KeyValuePair<string, int>("Tres", 3));

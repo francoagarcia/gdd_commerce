@@ -52,6 +52,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             //this.dgvBusqueda.Columns["id_usuario"].Visible = false;
             this.dgvBusqueda.Columns["cantidadIntentos"].Visible = false;
             this.dgvBusqueda.Columns["contrasenia"].Visible = false;
+            this.dgvBusqueda.Columns["habilitada_comprar"].Visible = false;
         }
 
         private IResultado<IList<Usuario>> getUsuariosFiltrados(FiltroUsuario filtro)
