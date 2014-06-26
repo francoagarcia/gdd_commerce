@@ -64,6 +64,7 @@
             this.tstNombre = new System.Windows.Forms.ToolStripStatusLabel();
             this.tstBarraDebug = new System.Windows.Forms.StatusStrip();
             this.lblConnectionString = new System.Windows.Forms.ToolStripStatusLabel();
+            this.itm_Const_Cambiar_contrasenia = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPrincipal.SuspendLayout();
             this.stsBarraEstado.SuspendLayout();
             this.tstBarraDebug.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             this.itm_Const_Archivo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.itm_Const_Sesion,
+            this.itm_Const_Cambiar_contrasenia,
             this.toolStripSeparator4,
             this.itm_Var_Listado_Estadistico,
             this.toolStripSeparator5,
@@ -100,44 +102,44 @@
             this.itm_Const_Sesion_IniciarSesion,
             this.itm_Const_Sesion_CerrarSesion});
             this.itm_Const_Sesion.Name = "itm_Const_Sesion";
-            this.itm_Const_Sesion.Size = new System.Drawing.Size(134, 22);
+            this.itm_Const_Sesion.Size = new System.Drawing.Size(180, 22);
             this.itm_Const_Sesion.Text = "Sesión";
             // 
             // itm_Const_Sesion_IniciarSesion
             // 
             this.itm_Const_Sesion_IniciarSesion.Name = "itm_Const_Sesion_IniciarSesion";
-            this.itm_Const_Sesion_IniciarSesion.Size = new System.Drawing.Size(142, 22);
+            this.itm_Const_Sesion_IniciarSesion.Size = new System.Drawing.Size(152, 22);
             this.itm_Const_Sesion_IniciarSesion.Text = "Iniciar sesión";
             this.itm_Const_Sesion_IniciarSesion.Click += new System.EventHandler(this.itm_Const_Sesion_IniciarSesion_Click);
             // 
             // itm_Const_Sesion_CerrarSesion
             // 
             this.itm_Const_Sesion_CerrarSesion.Name = "itm_Const_Sesion_CerrarSesion";
-            this.itm_Const_Sesion_CerrarSesion.Size = new System.Drawing.Size(142, 22);
+            this.itm_Const_Sesion_CerrarSesion.Size = new System.Drawing.Size(152, 22);
             this.itm_Const_Sesion_CerrarSesion.Text = "Cerrar sesión";
             this.itm_Const_Sesion_CerrarSesion.Click += new System.EventHandler(this.itm_Const_Sesion_CerrarSesion_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(131, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // itm_Var_Listado_Estadistico
             // 
             this.itm_Var_Listado_Estadistico.Name = "itm_Var_Listado_Estadistico";
-            this.itm_Var_Listado_Estadistico.Size = new System.Drawing.Size(134, 22);
+            this.itm_Var_Listado_Estadistico.Size = new System.Drawing.Size(180, 22);
             this.itm_Var_Listado_Estadistico.Text = "Estadísticas";
             this.itm_Var_Listado_Estadistico.Click += new System.EventHandler(this.itm_Var_Listado_Estadistico_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(131, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // itm_Const_Salir
             // 
             this.itm_Const_Salir.Name = "itm_Const_Salir";
-            this.itm_Const_Salir.Size = new System.Drawing.Size(134, 22);
+            this.itm_Const_Salir.Size = new System.Drawing.Size(180, 22);
             this.itm_Const_Salir.Text = "Salir";
             this.itm_Const_Salir.Click += new System.EventHandler(this.itm_Const_Salir_Click);
             // 
@@ -342,6 +344,13 @@
             this.lblConnectionString.Size = new System.Drawing.Size(71, 17);
             this.lblConnectionString.Text = "Conectado: ";
             // 
+            // itm_Const_Cambiar_contrasenia
+            // 
+            this.itm_Const_Cambiar_contrasenia.Name = "itm_Const_Cambiar_contrasenia";
+            this.itm_Const_Cambiar_contrasenia.Size = new System.Drawing.Size(180, 22);
+            this.itm_Const_Cambiar_contrasenia.Text = "Cambiar contraseña";
+            this.itm_Const_Cambiar_contrasenia.Click += new System.EventHandler(this.itm_Const_Cambiar_contrasenia_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -407,6 +416,7 @@
         private System.Windows.Forms.ToolStripMenuItem itm_Var_Comprar_Ofertar;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem itm_Var_Calificar_al_Vendedor;
+        private System.Windows.Forms.ToolStripMenuItem itm_Const_Cambiar_contrasenia;
 
     }
 }

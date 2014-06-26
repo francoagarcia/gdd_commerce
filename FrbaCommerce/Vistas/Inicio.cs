@@ -43,6 +43,7 @@ namespace FrbaCommerce
         private GestionPreguntas frm_gestionPreguntas;
         private ListadoPublicacionesCompra frm_comprar;
         private SeleccionarCompra frm_Calificar;
+        private CambiarContraseña frm_CambiarPass;
 
         public Inicio()
         {
@@ -71,6 +72,9 @@ namespace FrbaCommerce
 
                 this.itm_Var_Listado_Estadistico.Enabled = true;
                 this.itm_Var_Listado_Estadistico.Visible = true;
+
+                this.itm_Const_Cambiar_contrasenia.Enabled = true;
+                this.itm_Const_Cambiar_contrasenia.Visible = true;
             }
             else
             {
@@ -82,6 +86,9 @@ namespace FrbaCommerce
 
                 this.itm_Var_Listado_Estadistico.Enabled = false;
                 this.itm_Var_Listado_Estadistico.Visible = false;
+
+                this.itm_Const_Cambiar_contrasenia.Enabled = false;
+                this.itm_Const_Cambiar_contrasenia.Visible = false;
             }
         }
         
@@ -477,7 +484,7 @@ namespace FrbaCommerce
             {
                 frm_historial = new Historial(Program.ContextoActual.UsuarioActual);
                 frm_historial.StartPosition = FormStartPosition.CenterParent;
-                frm_historial.WindowState = FormWindowState.Maximized;
+                //frm_historial.WindowState = FormWindowState.Maximized;
                 frm_historial.MdiParent = this;
                 frm_historial.Show();
             }
@@ -545,6 +552,23 @@ namespace FrbaCommerce
             }
         }
         #endregion
+
+        private void itm_Const_Cambiar_contrasenia_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frm_CambiarPass = null;
+                frm_CambiarPass = new CambiarContraseña(Program.ContextoActual.UsuarioActual);
+                frm_CambiarPass.StartPosition = FormStartPosition.CenterParent;
+                //frm_Calificar.WindowState = FormWindowState.Maximized;
+                //frm_CambiarPass.MdiParent = this;
+                frm_CambiarPass.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageDialog.MensajeError(this, ex.Message);
+            }
+        }
 
     }
 }

@@ -90,6 +90,7 @@
             this.ClientSize = new System.Drawing.Size(281, 269);
             this.Controls.Add(this.gb_Elegir_historial);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Historial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FRBA Commerce - Historial";

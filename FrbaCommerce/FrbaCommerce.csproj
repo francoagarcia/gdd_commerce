@@ -405,6 +405,12 @@
     <Compile Include="Vistas\Listado Estadistico\Listado_Estadistico.Designer.cs">
       <DependentUpon>Listado_Estadistico.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Login\CambiarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Login\CambiarContraseña.Designer.cs">
+      <DependentUpon>CambiarContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -538,6 +544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Listado Estadistico\Listado_Estadistico.resx">
       <DependentUpon>Listado_Estadistico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Login\CambiarContraseña.resx">
+      <DependentUpon>CambiarContraseña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
