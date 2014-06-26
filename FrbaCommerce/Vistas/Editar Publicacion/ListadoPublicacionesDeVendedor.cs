@@ -118,7 +118,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             IResultado<IList<Publicacion>> resultado = this.getPublicacionesFiltradas(filtro);
 
             if (!resultado.Correcto)
-                throw new ResultadoIncorrectoException<IList<Publicacion>>(resultado);
+                MessageDialog.MensajeError(resultado.Mensajes.First());
 
             //IList<PublicacionAMostrar> lista = this.armarPublicacionAMostrar(resultado);
 
@@ -134,7 +134,7 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             this.dgvBusqueda.Columns["rubro"].Visible = false;
             this.dgvBusqueda.Columns["habilitada"].Visible = false;
             this.dgvBusqueda.Columns["id_publicacion"].Visible = false;
-            
+            this.dgvBusqueda.Columns["usuario_publicador"].Visible = false;
 
             this.dgvBusqueda.Columns["descripcion"].HeaderText = "Descripcion";
             this.dgvBusqueda.Columns["stock"].HeaderText = "Stock";

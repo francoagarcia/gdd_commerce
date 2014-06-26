@@ -1,10 +1,10 @@
 
 ---------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_rubro_select_all') is not null
-	DROP PROCEDURE DATA_GROUP.sp_rubro_select_all
+IF OBJECT_ID('[DATA_GROUP].[sp_rubro_select_all]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_rubro_select_all]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_rubro_select_all
+CREATE PROCEDURE [DATA_GROUP].[sp_rubro_select_all]
 AS
 BEGIN
 	SELECT id_rubro, descripcion
@@ -14,10 +14,10 @@ GO
 
 ---------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_rubro_filter') is not null
-	DROP PROCEDURE DATA_GROUP.sp_rubro_filter
+IF OBJECT_ID('[DATA_GROUP].[sp_rubro_filter]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_rubro_filter]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_rubro_filter(
+CREATE PROCEDURE [DATA_GROUP].[sp_rubro_filter](
 	@descripcion nvarchar(255) = NULL
 )
 AS
@@ -114,10 +114,10 @@ GO
 
 ---------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_Visibilidad_filter') is not null
-	DROP PROCEDURE DATA_GROUP.sp_Visibilidad_filter
+IF OBJECT_ID('[DATA_GROUP].[sp_Visibilidad_filter]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_Visibilidad_filter]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_Visibilidad_filter(
+CREATE PROCEDURE [DATA_GROUP].[sp_Visibilidad_filter](
 	@descripcion nvarchar(255) = NULL,
 	@precio numeric(18, 2)  = NULL,
 	@porcentaje numeric(18, 2) = NULL
@@ -136,10 +136,10 @@ GO
 
 ----------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_Visibilidad_select_all') is not null
-	DROP PROCEDURE DATA_GROUP.sp_Visibilidad_select_all
+IF OBJECT_ID('[DATA_GROUP].[sp_Visibilidad_select_all]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_Visibilidad_select_all]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_Visibilidad_select_all
+CREATE PROCEDURE [DATA_GROUP].[sp_Visibilidad_select_all]
 AS
 BEGIN
 	SELECT id_visibilidad, descripcion, precio, porcentaje, habilitada, dias_vencimiento_publi
@@ -368,10 +368,10 @@ GO
 
 --------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_cliente_filter') is not null
-	DROP PROCEDURE DATA_GROUP.sp_cliente_filter
+IF OBJECT_ID('[DATA_GROUP].[sp_cliente_filter]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_cliente_filter]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_cliente_filter(
+CREATE PROCEDURE [DATA_GROUP].[sp_cliente_filter](
 	@id_tipo_doc numeric(18, 0) = NULL,  
 	@nro_documento nvarchar(50) = NULL, 
 	@telefono_usuario numeric(18, 0) = NULL,
@@ -591,10 +591,10 @@ GO
 
 ---------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_empresa_filter') is not null
-	DROP PROCEDURE DATA_GROUP.sp_empresa_filter
+IF OBJECT_ID('[DATA_GROUP].[sp_empresa_filter]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_empresa_filter]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_empresa_filter
+CREATE PROCEDURE [DATA_GROUP].[sp_empresa_filter]
 (
 	@CUIT nvarchar(50) = NULL, 
 	@razon_social nvarchar(255) = NULL, 
@@ -689,10 +689,10 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_rol_filter') is not null
-	DROP PROCEDURE DATA_GROUP.sp_rol_filter
+IF OBJECT_ID('[DATA_GROUP].[sp_rol_filter]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_rol_filter]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_rol_filter(
+CREATE PROCEDURE [DATA_GROUP].[sp_rol_filter](
 	@nombre nvarchar(255) = NULL
 )
 AS
@@ -1580,10 +1580,10 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_Usuario_filter') is not null
-	DROP PROCEDURE DATA_GROUP.sp_Usuario_filter
+IF OBJECT_ID('[DATA_GROUP].[sp_Usuario_filter]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_Usuario_filter]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_Usuario_filter(
+CREATE PROCEDURE [DATA_GROUP].[sp_Usuario_filter](
 	@username nvarchar(255) = NULL,
 	@telefono numeric(18, 0) = NULL
 )
@@ -1688,10 +1688,10 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_EstadoPublicacion_select_all') is not null
-	DROP PROCEDURE DATA_GROUP.sp_EstadoPublicacion_select_all
+IF OBJECT_ID('[DATA_GROUP].[sp_EstadoPublicacion_select_all]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_EstadoPublicacion_select_all]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_EstadoPublicacion_select_all
+CREATE PROCEDURE [DATA_GROUP].[sp_EstadoPublicacion_select_all]
 AS
 BEGIN
 	SELECT id_estado, descripcion
@@ -1985,10 +1985,10 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.realizar_identificacion') is not null
-	DROP PROCEDURE DATA_GROUP.realizar_identificacion;
+IF OBJECT_ID('[DATA_GROUP].[realizar_identificacion]') is not null
+	DROP PROCEDURE [DATA_GROUP].[realizar_identificacion]
 	GO
-CREATE PROCEDURE DATA_GROUP.realizar_identificacion(
+CREATE PROCEDURE [DATA_GROUP].[realizar_identificacion](
 	@username nvarchar(255),
 	@passwordHash nvarchar(255),
 	@resultado int OUTPUT
@@ -2302,10 +2302,10 @@ END
 
 ------------------------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.modificarPublicacion') is not null
-	DROP PROCEDURE DATA_GROUP.modificarPublicacion
+IF OBJECT_ID('[DATA_GROUP].[modificarPublicacion]') is not null
+	DROP PROCEDURE [DATA_GROUP].[modificarPublicacion]
 	GO
-CREATE PROCEDURE DATA_GROUP.modificarPublicacion
+CREATE PROCEDURE [DATA_GROUP].[modificarPublicacion]
 @id_publicacion_modificar numeric(18, 0),
 @descripcion nvarchar(255), 
 @stock numeric(18,0), 
@@ -2357,10 +2357,10 @@ END
 
 ------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_publicacion_filter') is not null
-	DROP PROCEDURE DATA_GROUP.sp_publicacion_filter
+IF OBJECT_ID('[DATA_GROUP].[sp_publicacion_filter]') is not null
+	DROP PROCEDURE [DATA_GROUP].[sp_publicacion_filter]
 	GO
-CREATE PROCEDURE DATA_GROUP.sp_publicacion_filter(
+CREATE PROCEDURE [DATA_GROUP].[sp_publicacion_filter](
 	@descripcion nvarchar(255) = NULL,
 	@fecha_inicio datetime = NULL,
 	@fecha_vencimiento datetime = NULL,

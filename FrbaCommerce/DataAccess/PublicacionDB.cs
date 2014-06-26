@@ -17,7 +17,7 @@ namespace FrbaCommerce.DataAccess
     public class PublicacionDB : EntidadBaseDB<Publicacion, FiltroPublicacion>
     {
         public PublicacionDB() 
-            : base(new BuilderPublicacion(), "Publicacion") 
+            : base(new BuilderPublicacion(), "publicacion") 
         { 
         }
 
