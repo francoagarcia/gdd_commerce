@@ -64,7 +64,6 @@
             this.tstNombre = new System.Windows.Forms.ToolStripStatusLabel();
             this.tstBarraDebug = new System.Windows.Forms.StatusStrip();
             this.lblConnectionString = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblLogPath = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuPrincipal.SuspendLayout();
             this.stsBarraEstado.SuspendLayout();
             this.tstBarraDebug.SuspendLayout();
@@ -330,8 +329,7 @@
             // tstBarraDebug
             // 
             this.tstBarraDebug.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblConnectionString,
-            this.lblLogPath});
+            this.lblConnectionString});
             this.tstBarraDebug.Location = new System.Drawing.Point(0, 445);
             this.tstBarraDebug.Name = "tstBarraDebug";
             this.tstBarraDebug.Size = new System.Drawing.Size(1281, 22);
@@ -343,12 +341,6 @@
             this.lblConnectionString.Name = "lblConnectionString";
             this.lblConnectionString.Size = new System.Drawing.Size(71, 17);
             this.lblConnectionString.Text = "Conectado: ";
-            // 
-            // lblLogPath
-            // 
-            this.lblLogPath.Name = "lblLogPath";
-            this.lblLogPath.Size = new System.Drawing.Size(41, 17);
-            this.lblLogPath.Text = " - Log:";
             // 
             // Inicio
             // 
@@ -385,7 +377,6 @@
         private System.Windows.Forms.ToolStripStatusLabel lblUsuario;
         private System.Windows.Forms.StatusStrip tstBarraDebug;
         private System.Windows.Forms.ToolStripStatusLabel lblConnectionString;
-        private System.Windows.Forms.ToolStripStatusLabel lblLogPath;
         private System.Windows.Forms.ToolStripStatusLabel tstNombre;
         private System.Windows.Forms.ToolStripMenuItem itm_Const_Archivo;
         private System.Windows.Forms.ToolStripMenuItem itm_Const_Sesion;

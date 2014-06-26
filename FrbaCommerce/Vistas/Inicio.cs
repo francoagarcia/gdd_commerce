@@ -172,7 +172,7 @@ namespace FrbaCommerce
         private void Inicio_Load_CargarBarrasDeEstado()
         {
             this.lblUsuario.Text = "Usuario: " + Program.ContextoActual.UsuarioActual.username;
-            this.lblLogPath.Text = "Almacenando log en: " + Program.ContextoActual.LogPath;
+            //this.lblLogPath.Text = "Almacenando log en: " + Program.ContextoActual.LogPath;
             this.lblFechaSistema.Text = "Fecha: " + DateManager.Format(Program.ContextoActual.FechaActual);
             this.lblConnectionString.Text = "Conectado: " + AppConfigReader.Get("connection_string");
         }

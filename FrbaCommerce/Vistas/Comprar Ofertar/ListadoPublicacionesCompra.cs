@@ -105,7 +105,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
         #region [btnFiltrar]
         private void btn_Filtrar_Click(object sender, EventArgs e)
         {
-            //this.recNo = 0;
+            this.recNo = 0;
             this.Filtrar();
         }
         
@@ -113,7 +113,6 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
         {
             if (base.Validar())
             {
-                this.recNo = 0;
                 this.AccionFiltrar();
             }
         }
@@ -243,6 +242,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
                     Publicacion publicacion = this.rearmarPublicacion(publicacionMostrada);
                     PublicacionView frmPub = new PublicacionView(publicacion, this.usuarioActual);
                     frmPub.ShowDialog(this);
+                    this.recNo = 0;
                     this.Filtrar();
                 }
                 else 
