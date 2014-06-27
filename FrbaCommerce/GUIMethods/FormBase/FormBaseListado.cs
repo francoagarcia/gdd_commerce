@@ -31,7 +31,7 @@ namespace FrbaCommerce.GUIMethods.FormBase
         /// </summary>
         /// 
         public bool ModoSeleccion { get; set; }
-        public object EntidadSeleccionada { get { return Seleccionar(); }}
+        public object EntidadSeleccionada { get { return Seleccionar(); } }
 
         #region [FormularioBaseListado_Load]
         private void FormularioBaseListado_Load(object sender, EventArgs e)

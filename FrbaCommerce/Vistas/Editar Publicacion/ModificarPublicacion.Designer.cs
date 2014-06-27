@@ -49,6 +49,7 @@
             this.lbl_Stock = new System.Windows.Forms.Label();
             this.tb_Descripcion = new System.Windows.Forms.TextBox();
             this.lbl_Descripcion = new System.Windows.Forms.Label();
+            this.lbl_Info_edicion = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Stock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Precio)).BeginInit();
@@ -57,7 +58,7 @@
             // btn_Cancelar
             // 
             this.btn_Cancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Cancelar.Location = new System.Drawing.Point(428, 436);
+            this.btn_Cancelar.Location = new System.Drawing.Point(428, 448);
             this.btn_Cancelar.Name = "btn_Cancelar";
             this.btn_Cancelar.Size = new System.Drawing.Size(75, 23);
             this.btn_Cancelar.TabIndex = 25;
@@ -68,7 +69,7 @@
             // btn_Limpiar
             // 
             this.btn_Limpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Limpiar.Location = new System.Drawing.Point(509, 436);
+            this.btn_Limpiar.Location = new System.Drawing.Point(509, 448);
             this.btn_Limpiar.Name = "btn_Limpiar";
             this.btn_Limpiar.Size = new System.Drawing.Size(75, 23);
             this.btn_Limpiar.TabIndex = 24;
@@ -79,7 +80,7 @@
             // btn_Generar
             // 
             this.btn_Generar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Generar.Location = new System.Drawing.Point(590, 436);
+            this.btn_Generar.Location = new System.Drawing.Point(590, 448);
             this.btn_Generar.Name = "btn_Generar";
             this.btn_Generar.Size = new System.Drawing.Size(75, 23);
             this.btn_Generar.TabIndex = 23;
@@ -108,9 +109,9 @@
             this.groupBox1.Controls.Add(this.lbl_Descripcion);
             this.groupBox1.Enabled = false;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 44);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(670, 418);
+            this.groupBox1.Size = new System.Drawing.Size(670, 392);
             this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingrese los datos solicitados";
@@ -292,11 +293,23 @@
             this.lbl_Descripcion.TabIndex = 23;
             this.lbl_Descripcion.Text = "Descripción :";
             // 
+            // lbl_Info_edicion
+            // 
+            this.lbl_Info_edicion.AutoSize = true;
+            this.lbl_Info_edicion.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Info_edicion.ForeColor = System.Drawing.Color.Maroon;
+            this.lbl_Info_edicion.Location = new System.Drawing.Point(18, 16);
+            this.lbl_Info_edicion.Name = "lbl_Info_edicion";
+            this.lbl_Info_edicion.Size = new System.Drawing.Size(28, 14);
+            this.lbl_Info_edicion.TabIndex = 28;
+            this.lbl_Info_edicion.Text = "info";
+            // 
             // ModificarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 468);
+            this.ClientSize = new System.Drawing.Size(694, 482);
+            this.Controls.Add(this.lbl_Info_edicion);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_Cancelar);
             this.Controls.Add(this.btn_Limpiar);
@@ -310,6 +323,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_Stock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Precio)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -336,6 +350,7 @@
         private System.Windows.Forms.TextBox tb_Descripcion;
         private System.Windows.Forms.Label lbl_Descripcion;
         private System.Windows.Forms.TextBox tb_Fecha_de_vencimiento;
+        private System.Windows.Forms.Label lbl_Info_edicion;
 
 
     }

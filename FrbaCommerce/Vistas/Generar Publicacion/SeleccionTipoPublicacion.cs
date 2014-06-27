@@ -24,6 +24,7 @@ namespace FrbaCommerce.Vistas.Generar_Publicacion
         {
             this.usuarioPublicador = unUsuario;
             InitializeComponent();
+            this.Text = "Seleccion de tipo de publicacion";
         }
 
         protected override void CargarNombres()

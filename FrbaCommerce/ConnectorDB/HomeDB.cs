@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-
+using FrbaCommerce.Generics;
 
 namespace FrbaCommerce.ConnectorDB
 {
@@ -21,10 +21,15 @@ namespace FrbaCommerce.ConnectorDB
         {
 
             DataSet ds = new DataSet();
+            //DataTable dt = new DataTable();
+            //ds.Tables.Add(dt);
 
             SqlConnection sqlConnection = DBConnection.getConnection;
-            if(sqlConnection.State!= ConnectionState.Open)
+            if (sqlConnection.State != ConnectionState.Open)
                 sqlConnection.Open();
+
+            //SqlConnection sqlConnection = GenerarConexion();
+            //sqlConnection.Open();
             using (SqlCommand sqlCommand = new SqlCommand(comando))
             {
                 sqlCommand.CommandType = CommandType.StoredProcedure;
@@ -34,11 +39,18 @@ namespace FrbaCommerce.ConnectorDB
                 AgregarParametros(parametros, sqlCommand);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(sqlCommand);
+                //SqlDataReader reader = sqlCommand.ExecuteReader();
+                //dt.Load(sqlCommand.ExecuteReader(CommandBehavior.CloseConnection));
                 adapter.Fill(ds);
-                
             }
             sqlConnection.Close();
             return ds;
+        }
+
+        private static SqlConnection GenerarConexion()
+        {
+            SqlConnection sqlConnection = new SqlConnection(AppConfigReader.Get("connection_string"));
+            return sqlConnection;
         }
 
         public static DataSet ExecuteStoredProceduredPaginado(int scrollVal, string comando, IList<SqlParameter> parametros)

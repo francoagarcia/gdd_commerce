@@ -86,7 +86,8 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
                     this.cb_Estado.DisplayMember = "Nombre";
                     this.cb_Estado.ValueMember = "Id";
                     this.lbl_Estado.Enabled = true;
-                    MessageDialog.MensajeInformativo(this, "En una publicacion de compra inmediata aún activa solo se puede modificar la descripcion, el stock y estado");
+                    this.lbl_Info_edicion.Text = "En una publicacion de compra inmediata aún activa solo se puede modificar la descripcion, el stock y estado";
+                    //MessageDialog.MensajeInformativo(this, "En una publicacion de compra inmediata aún activa solo se puede modificar la descripcion, el stock y estado");
                 }
                 else if (esPublicacionBorrador())
                 {
@@ -94,20 +95,35 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
                     this.cb_Estado.DisplayMember = "Nombre";
                     this.cb_Estado.ValueMember = "Id";
                     this.HabilitarTodo();
+                    this.lbl_Info_edicion.Text = "En una publicacion de compra inmediata en estado de borrador se pueden modificar todos los campos";
                 }
-                else if (esPublicacionFinalizada() || esPublicacionPausada())
+                else if (esPublicacionFinalizada())
                 {
                     this.cb_Estado.DataSource = lista.Todos;
+                    this.lbl_Info_edicion.Text = "No se puede modificar nada de una publicacion que ya ha finalizado";
                 }
+                else if (esPublicacionPausada())
+                {
+                    this.cb_Estado.DataSource = lista.EstadosPublicacionPausada;
+                    this.lbl_Info_edicion.Text = "En una publicacion de compra en estado pausado solo se puede volver a ponerla en Activo";
+                    this.cb_Estado.Enabled = true;
+                    this.groupBox1.Enabled = true;
+                    this.btn_Generar.Enabled = true;
+                }
+
             }
             else {
                 this.cb_Estado.DataSource = lista.Todos;
                 this.cb_Estado.DisplayMember = "Nombre";
                 this.cb_Estado.ValueMember = "Id";
-                if (esPublicacionBorrador()) 
+                if (esPublicacionBorrador())
+                {
                     this.HabilitarTodo();
+                    this.lbl_Info_edicion.Text = "En una publicacion de subasta en estado de borrador se pueden modificar todos los campos";
+                }
                 else
-                MessageDialog.MensajeInformativo(this, "Solo se puede modificar una subasta en estado borrador");
+                    this.lbl_Info_edicion.Text = "Solo se puede modificar una subasta en estado borrador";
+                    //MessageDialog.MensajeInformativo(this, "Solo se puede modificar una subasta en estado borrador");
             }
             this.CargarPublicacion();
         }
@@ -119,7 +135,10 @@ namespace FrbaCommerce.Vistas.Editar_Publicacion
             this.nud_Stock.Value = this.publiModificar.stock;
             this.dp_Fecha_inicio.Value = this.publiModificar.fecha_inicio;
             this.tb_Fecha_de_vencimiento.Text = this.publiModificar.fecha_vencimiento.ToString();
-            this.cb_Estado.SelectedIndex = Convert.ToInt32(publiModificar.estado.id_estado)-1;
+            if(this.publiModificar.estado!=null && !this.publiModificar.estado.id_estado.Equals(3))
+                this.cb_Estado.SelectedIndex = Convert.ToInt32(publiModificar.estado.id_estado)-1;
+            else
+                this.cb_Estado.SelectedIndex = 1;
             this.chk_Permite_preguntas.Checked = this.publiModificar.permite_preguntas;
             this.CargarListCheckBox();
             this.CargarVisibilidades();            

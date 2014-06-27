@@ -87,9 +87,13 @@ namespace FrbaCommerce.Generics.Enums
         {
             get
             {
-                IList<TipoEstados> pausada = new List<TipoEstados>();
-                pausada.Add((TipoEstados)base.Obtener("Pausada"));
-                return pausada;
+                IList<TipoEstados> estadosPublicacionPausada = new List<TipoEstados>();
+                estadosPublicacionPausada.Add(new TipoPublicada());
+                estadosPublicacionPausada.Add(new TipoPausada());
+                //IList<TipoEstados> pausada = new List<TipoEstados>();
+                //pausada.Add((TipoEstados)base.Obtener("Pausada"));
+                //pausada.Add((TipoEstados)base.Obtener(""));
+                return estadosPublicacionPausada;
             }
         }
 

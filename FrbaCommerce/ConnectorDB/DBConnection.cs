@@ -18,6 +18,8 @@ namespace FrbaCommerce.ConnectorDB
         {
         }
 
+        
+
         public static SqlConnection getConnection
         {
             get

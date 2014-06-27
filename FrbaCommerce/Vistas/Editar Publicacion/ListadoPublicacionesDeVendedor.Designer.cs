@@ -43,6 +43,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.chb_Fecha_inicio = new System.Windows.Forms.CheckBox();
             this.chb_Fecha_de_vencimiento = new System.Windows.Forms.CheckBox();
+            this.btn_Limpiar_rubro = new System.Windows.Forms.Button();
             this.gbAcciones.SuspendLayout();
             this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +65,7 @@
             // 
             // gbFiltros
             // 
+            this.gbFiltros.Controls.Add(this.btn_Limpiar_rubro);
             this.gbFiltros.Controls.Add(this.chb_Fecha_de_vencimiento);
             this.gbFiltros.Controls.Add(this.chb_Fecha_inicio);
             this.gbFiltros.Controls.Add(this.cb_Tipo_de_publicacion);
@@ -97,6 +99,7 @@
             this.gbFiltros.Controls.SetChildIndex(this.btnLimpiar, 0);
             this.gbFiltros.Controls.SetChildIndex(this.chb_Fecha_inicio, 0);
             this.gbFiltros.Controls.SetChildIndex(this.chb_Fecha_de_vencimiento, 0);
+            this.gbFiltros.Controls.SetChildIndex(this.btn_Limpiar_rubro, 0);
             // 
             // btnLimpiar
             // 
@@ -248,6 +251,17 @@
             this.chb_Fecha_de_vencimiento.Text = "Fecha de vto.";
             this.chb_Fecha_de_vencimiento.UseVisualStyleBackColor = true;
             // 
+            // btn_Limpiar_rubro
+            // 
+            this.btn_Limpiar_rubro.Location = new System.Drawing.Point(588, 95);
+            this.btn_Limpiar_rubro.Name = "btn_Limpiar_rubro";
+            this.btn_Limpiar_rubro.Size = new System.Drawing.Size(90, 23);
+            this.btn_Limpiar_rubro.TabIndex = 19;
+            this.btn_Limpiar_rubro.Text = "Limpiar rubro";
+            this.btn_Limpiar_rubro.UseVisualStyleBackColor = true;
+            this.btn_Limpiar_rubro.Visible = false;
+            this.btn_Limpiar_rubro.Click += new System.EventHandler(this.btn_Limpiar_rubro_Click);
+            // 
             // ListadoPublicacionesDeVendedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -281,5 +295,6 @@
         private System.Windows.Forms.CheckBox chb_Fecha_de_vencimiento;
         private System.Windows.Forms.CheckBox chb_Fecha_inicio;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_Limpiar_rubro;
     }
 }

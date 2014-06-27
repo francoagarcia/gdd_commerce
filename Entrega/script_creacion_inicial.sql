@@ -1,9 +1,551 @@
 
----------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+---------------------------------CREANDO EL ESQUEMA----------------------------------
+-------------------------------------------------------------------------------------
+USE [GD1C2014]
+GO
 
-IF OBJECT_ID('[DATA_GROUP].[sp_rubro_select_all]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_rubro_select_all]
-	GO
+CREATE SCHEMA [DATA_GROUP] AUTHORIZATION [gd]
+GO
+
+-------------------------------------------------------------------------------------
+---------------------------------CREANDO LAS TABLAS----------------------------------
+-------------------------------------------------------------------------------------
+
+CREATE TABLE DATA_GROUP.Funcionalidad (
+	id_funcionalidad NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
+	nombre nvarchar(255) NOT NULL,
+	habilitada bit DEFAULT 1 NOT NULL,
+	CONSTRAINT pk_id_funcionalidad PRIMARY KEY ( id_funcionalidad )
+)
+GO
+
+CREATE TABLE DATA_GROUP.Rol(
+	id_rol NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
+	nombre nvarchar(255) NOT NULL,
+	habilitada bit DEFAULT 1 NOT NULL,
+	CONSTRAINT pk_id_rol PRIMARY KEY ( id_rol )
+)
+GO
+
+CREATE TABLE DATA_GROUP.FuncionalidadXRol (
+	id_rol NUMERIC(18,0) NOT NULL,
+	id_funcionalidad NUMERIC(18,0) NOT NULL,
+	habilitada bit DEFAULT 1 NOT NULL,
+	CONSTRAINT pk_funcionalidad_rol PRIMARY KEY ( id_rol, id_funcionalidad ),
+	CONSTRAINT fk_FuncionalidadXRol_to_Funcionalidad FOREIGN KEY (id_funcionalidad) 
+	REFERENCES DATA_GROUP.Funcionalidad (id_funcionalidad),
+	CONSTRAINT fk_FuncionalidadXRol_to_Rol
+	FOREIGN KEY (id_rol) REFERENCES DATA_GROUP.Rol (id_rol)
+)
+GO
+
+CREATE TABLE DATA_GROUP.Usuario (
+	id_usuario NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
+	username nvarchar(255) NOT NULL UNIQUE,
+	contrasenia nvarchar(255) NOT NULL,
+	telefono numeric(18,0),
+	intentos_login int DEFAULT 0 NOT NULL, 
+	tipo_usuario nvarchar(3), 
+	habilitada bit DEFAULT 1,
+	habilitada_comprar bit DEFAULT 1,
+	CONSTRAINT pk_id_usuario PRIMARY KEY ( id_usuario )
+)
+GO
+
+CREATE TABLE DATA_GROUP.UsuarioXRol (
+	id_usuario NUMERIC(18,0) NOT NULL, 
+	id_rol NUMERIC(18,0) NOT NULL,
+	habilitada bit DEFAULT 1 NOT NULL,
+	CONSTRAINT pk_usuario_rol PRIMARY KEY ( id_usuario,id_rol ),
+	CONSTRAINT fk_UsuarioXRol_to_Usuario FOREIGN KEY (id_usuario) 
+	REFERENCES DATA_GROUP.Usuario (id_usuario),
+	CONSTRAINT fk_UsuarioXRol_to_Rol FOREIGN KEY (id_rol) 
+	REFERENCES DATA_GROUP.Rol (id_rol)
+)
+GO
+
+CREATE TABLE DATA_GROUP.TipoDocumento (
+	id_tipo_documento NUMERIC(18, 0) IDENTITY (1,1) NOT NULL,
+	descripcion nvarchar(255) NOT NULL,
+	CONSTRAINT pk_tipo_documento PRIMARY KEY (id_tipo_documento)
+)
+GO
+
+
+CREATE TABLE DATA_GROUP.Administrador ( 
+	id_administrador NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
+	id_usuario NUMERIC(18,0) NOT NULL, 
+	habilitada bit DEFAULT 1 NOT NULL,
+	CONSTRAINT pk_id_administrador PRIMARY KEY ( id_usuario ),
+	CONSTRAINT fk_Administrador_to_Usuario
+	FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario)
+)
+GO
+
+CREATE TABLE DATA_GROUP.Cliente (
+	id_tipo_documento NUMERIC(18, 0) NOT NULL,
+	nro_documento nvarchar(50) NOT NULL,
+	id_usuario NUMERIC(18,0),
+	nombre nvarchar(255), 
+	apellido nvarchar (255),
+	dom_calle nvarchar(255),
+	nro_calle NUMERIC(18, 0),
+	piso NUMERIC(18,0),      
+	depto nvarchar(50),      
+	localidad nvarchar(255),
+	cod_postal nvarchar(50),
+	mail nvarchar(255),
+	fecha_nacimiento datetime,
+	sexo int DEFAULT 2,
+	CONSTRAINT pk_id_cliente PRIMARY KEY ( id_tipo_documento, nro_documento ),
+	CONSTRAINT fk_Cliente_to_Usuario FOREIGN KEY (id_usuario) 
+	REFERENCES DATA_GROUP.Usuario (id_usuario),
+	CONSTRAINT fk_Cliente_to_TipoDocumento FOREIGN KEY (id_tipo_documento) 
+	REFERENCES DATA_GROUP.TipoDocumento(id_tipo_documento)
+)
+GO
+
+CREATE TABLE DATA_GROUP.Empresa (
+	cuit nvarchar(50) NOT NULL,
+	razon_social nvarchar(255) NOT NULL, 
+	id_usuario NUMERIC(18,0), 
+	mail nvarchar(50),
+	dom_calle nvarchar(255),
+	piso NUMERIC(18,0) , 
+	depto nvarchar(50),
+	localidad nvarchar(255),
+	nro_calle NUMERIC(18,0),
+	cod_postal nvarchar(50),
+	ciudad nvarchar(255),
+	nombre_de_contacto nvarchar(255),
+	fecha_creacion datetime,
+	CONSTRAINT pk_id_empresa PRIMARY KEY ( cuit, razon_social ),
+	CONSTRAINT fk_Empresa_to_Usuario
+	FOREIGN KEY (id_usuario) REFERENCES DATA_GROUP.Usuario (id_usuario)
+)
+GO
+
+CREATE TABLE DATA_GROUP.Rubro(
+	id_rubro NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
+	descripcion nvarchar(255) NOT NULL,
+	CONSTRAINT pk_id_rubro PRIMARY KEY ( id_rubro )
+)
+GO
+
+CREATE TABLE DATA_GROUP.TipoPublicacion(
+	id_tipo_publicacion NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
+	descripcion nvarchar(255) NOT NULL,
+	CONSTRAINT pk_id_tipo_publicacion PRIMARY KEY ( id_tipo_publicacion )
+)
+GO
+
+CREATE TABLE DATA_GROUP.VisibilidadPublicacion(
+	id_visibilidad NUMERIC(18,0) NOT NULL,
+	descripcion nvarchar(255) NOT NULL UNIQUE,
+	precio NUMERIC(18, 2) NOT NULL,
+	porcentaje NUMERIC(18, 2) NOT NULL,
+	dias_vencimiento_publi NUMERIC(18, 0) NOT NULL,
+	habilitada bit DEFAULT 1,
+	CONSTRAINT pk_id_visibilidad PRIMARY KEY ( id_visibilidad )
+)
+GO
+
+CREATE TABLE DATA_GROUP.EstadoPublicacion(
+	id_estado NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
+	descripcion nvarchar(255) NOT NULL,
+	CONSTRAINT pk_id_estado PRIMARY KEY ( id_estado )
+)
+GO
+
+CREATE TABLE DATA_GROUP.FormaDePago(
+	id_forma_pago NUMERIC(18,0) IDENTITY(1,1) NOT NULL, 
+	descripcion nvarchar(255) NOT NULL,
+	CONSTRAINT pk_id_forma_pago PRIMARY KEY ( id_forma_pago )
+)
+GO
+
+CREATE TABLE DATA_GROUP.Publicacion(
+	id_publicacion NUMERIC(18,0) NOT NULL,
+	descripcion nvarchar(255),
+	stock NUMERIC(18,0),
+	fecha_inicio datetime,
+	fecha_vencimiento datetime,
+	precio NUMERIC(18,2),
+	permite_preguntas bit DEFAULT 1 NOT NULL,
+	id_tipo_publicacion NUMERIC(18,0) NOT NULL,
+	id_visibilidad NUMERIC(18,0) NOT NULL, 
+	id_estado NUMERIC(18,0) NOT NULL, 
+	id_usuario_publicador NUMERIC(18,0) NOT NULL,
+	id_rubro NUMERIC(18, 0),
+	facturada bit DEFAULT 1,
+	habilitada bit DEFAULT 1 NOT NULL,
+	CONSTRAINT pk_id_publicacion PRIMARY KEY ( id_publicacion ),
+	CONSTRAINT fk_Publicacion_to_TipoPublicacion
+	FOREIGN KEY (id_tipo_publicacion) REFERENCES DATA_GROUP.TipoPublicacion (id_tipo_publicacion),
+	CONSTRAINT fk_Publicacion_to_EstadoPublicacion FOREIGN KEY (id_estado) 
+	REFERENCES DATA_GROUP.EstadoPublicacion (id_estado),
+	CONSTRAINT fk_Publicacion_to_VisibilidadPublicacion FOREIGN KEY (id_visibilidad) 
+	REFERENCES DATA_GROUP.VisibilidadPublicacion (id_visibilidad),
+	CONSTRAINT fk_Publicacion_to_Usuario FOREIGN KEY (id_usuario_publicador) 
+	REFERENCES DATA_GROUP.Usuario (id_usuario),
+	CONSTRAINT fk_Publicacion_to_Rubro FOREIGN KEY (id_rubro) 
+	REFERENCES DATA_GROUP.Rubro (id_rubro)
+)
+GO
+
+CREATE TABLE DATA_GROUP.CalificacionPublicacion(
+	id_calificacion NUMERIC(18, 0) NOT NULL,
+	estrellas_calificacion NUMERIC(18, 0),
+	detalle_calificacion nvarchar(255),
+	CONSTRAINT pk_id_calificacion_publicacion PRIMARY KEY(id_calificacion)
+)
+GO
+
+CREATE TABLE DATA_GROUP.Compra (
+	id_compra NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
+	id_publicacion NUMERIC(18, 0) NOT NULL,
+	id_usuario_comprador NUMERIC(18, 0) NOT NULL,
+	id_calificacion NUMERIC(18, 0),
+	fecha datetime NOT NULL,
+	cantidad NUMERIC(18, 0) NOT NULL,
+	facturada bit DEFAULT 1, --1 es facturada, 0 no facturada
+	comision numeric(18,2) NOT NULL DEFAULT 0,
+	CONSTRAINT pk_id_compra PRIMARY KEY (id_compra),
+	CONSTRAINT fk_Compra_to_Publicacion FOREIGN KEY (id_publicacion) 
+	REFERENCES DATA_GROUP.Publicacion (id_publicacion),
+	CONSTRAINT fk_Compra_to_Usuario FOREIGN KEY (id_usuario_comprador) 
+	REFERENCES DATA_GROUP.Usuario (id_usuario),
+	CONSTRAINT fk_Compra_to_CalificacionPublicacion FOREIGN KEY (id_calificacion) 
+	REFERENCES DATA_GROUP.CalificacionPublicacion (id_calificacion)
+)
+GO
+
+CREATE TABLE DATA_GROUP.Oferta(
+	id_oferta NUMERIC(18, 0) IDENTITY(1,1) NOT NULL,
+	id_publicacion NUMERIC(18, 0) NOT NULL,
+	id_usuario_ofertador NUMERIC(18, 0) NOT NULL,
+	fecha datetime NOT NULL,
+	monto NUMERIC(18, 2) NOT NULL,
+	CONSTRAINT pk_id_oferta PRIMARY KEY (id_oferta),
+	CONSTRAINT fk_Oferta_to_Publicacion FOREIGN KEY (id_publicacion) 
+	REFERENCES DATA_GROUP.Publicacion (id_publicacion),
+	CONSTRAINT fk_Oferta_to_Usuario FOREIGN KEY (id_usuario_ofertador) 
+	REFERENCES DATA_GROUP.Usuario (id_usuario)
+)
+GO
+
+CREATE TABLE DATA_GROUP.Factura(
+	nro_factura NUMERIC(18, 0) NOT NULL,
+	id_vendedor NUMERIC(18, 0) NOT NULL,
+	fecha datetime NOT NULL,
+	total NUMERIC(18, 2) NOT NULL,
+	id_forma_pago Numeric(18, 0) NOT NULL,
+	forma_pago_datos nvarchar(255) NOT NULL,
+	CONSTRAINT pk_nro_factura PRIMARY KEY (nro_factura),
+	CONSTRAINT fk_Factura_to_Usuario FOREIGN KEY (id_vendedor) 
+	REFERENCES DATA_GROUP.Usuario (id_usuario),
+	CONSTRAINT fk_Factura_to_FormaDePago FOREIGN KEY (id_forma_pago) 
+	REFERENCES DATA_GROUP.FormaDePago (id_forma_pago)
+)
+GO
+
+CREATE TABLE DATA_GROUP.ItemFactura(
+	nro_factura NUMERIC(18, 0) NOT NULL,
+	id_publicacion NUMERIC(18, 0) NOT NULL,
+	id_compra NUMERIC(18, 0) NOT NULL,
+	cantidad NUMERIC(18, 0) NOT NULL,
+	monto NUMERIC(18, 2) NOT NULL,
+	resumen nvarchar(255),
+	CONSTRAINT fk_ItemFactura_to_Publicacion FOREIGN KEY (id_publicacion) 
+	REFERENCES DATA_GROUP.Publicacion ( id_publicacion ),
+	CONSTRAINT fk_ItemFactura_to_Factura FOREIGN KEY (nro_factura) 
+	REFERENCES DATA_GROUP.Factura ( nro_factura )
+)
+GO
+
+CREATE TABLE DATA_GROUP.Pregunta(
+	id_pregunta NUMERIC(18,0) IDENTITY(1,1) NOT NULL,
+	id_publicacion NUMERIC(18,0) NOT NULL,
+	id_usuario NUMERIC(18, 0) NOT NULL,
+	pregunta nvarchar(255),
+	fecha_pregunta datetime,
+	respuesta nvarchar(400),
+	fecha_respuesta datetime,
+	CONSTRAINT pk_id_pregunta PRIMARY KEY ( id_pregunta ),
+	CONSTRAINT fk_Pregunta_to_Publicacion FOREIGN KEY (id_publicacion) 
+	REFERENCES DATA_GROUP.Publicacion (id_publicacion),
+	CONSTRAINT fk_Pregunta_to_Usuario FOREIGN KEY (id_usuario) 
+	REFERENCES DATA_GROUP.Usuario (id_usuario)
+)
+GO
+
+CREATE TABLE DATA_GROUP.CantVisibilidadesFacturadasPorUsuario (
+	id_visibilidad_fact NUMERIC(18,0),
+	id_usuario_fact NUMERIC(18,0),
+	cantidad_fact NUMERIC(18,0),
+	CONSTRAINT fk_CantVisibilidadesFacturadasPorUsuario_to_VisibilidadPublicacion
+	FOREIGN KEY (id_visibilidad_fact) REFERENCES DATA_GROUP.VisibilidadPublicacion ( id_visibilidad ),
+	CONSTRAINT fk_CantVisibilidadesFacturadasPorUsuario_to_Usuario 
+	FOREIGN KEY (id_usuario_fact) REFERENCES DATA_GROUP.Usuario ( id_usuario )
+)
+GO
+
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+------------------------------------MIGRACION----------------------------------------
+-------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------
+----------------------FormaDePago-----------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.FormaDePago(descripcion)
+VALUES ('Contado'), ('Tarjeta de credito')
+GO
+
+--------------------------------------------------------
+----------------------TipoDocumento---------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.TipoDocumento(descripcion)
+VALUES ('DNI'), ('LC'), ('LE'), ('CUIT')
+GO
+
+--------------------------------------------------------
+--------------------EstadoPublicacion-------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.EstadoPublicacion(descripcion)
+VALUES ('Publicada'),('Borrador'),('Pausada'),('Finalizada')
+GO
+
+--------------------------------------------------------
+------------------VisibilidadPublicacion----------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.VisibilidadPublicacion(id_visibilidad, descripcion, precio, porcentaje, dias_vencimiento_publi)
+SELECT DISTINCT Publicacion_Visibilidad_Cod, Publicacion_Visibilidad_Desc,Publicacion_Visibilidad_Precio, Publicacion_Visibilidad_Porcentaje, 7
+FROM gd_esquema.Maestra
+GO
+
+--------------------------------------------------------
+------------------------Rol-----------------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Rol(nombre)
+VALUES ('Administrador General'),('Cliente'),('Empresa')
+GO
+
+--------------------------------------------------------
+----------------------Funcionalidad---------------------
+--------------------------------------------------------
+
+INSERT INTO DATA_GROUP.Funcionalidad(nombre)
+VALUES  ('ABM de Rol'), --1
+		('Registro de Usuario'), --2
+		('ABM de Cliente'), --3
+		('ABM de Empresa'), --4
+		('ABM de Rubro'), --5
+	    ('ABM de Visibilidad de Publicacion'), --6
+		('Nueva Publicacion'), --7
+		('Editar Publicacion'), --8
+	    ('Gestion de Preguntas'), --9
+		('Comprar/Ofertar'), --10
+		('Historial de Operaciones'), --11
+		('Calificar al Vendedor'), --12
+	    ('Facturar Publicaciones'), --13
+		('Listado Estadistico') --14
+GO
+	   
+--------------------------------------------------------
+-------------------FuncionalidadXRol--------------------
+--------------------------------------------------------
+--Rol Administrador General
+INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
+VALUES (1,1), (1,2), (1,3), (1,4), (1,5), (1,6), (1,7), (1,8), (1,9), (1,10), (1,11), (1,12), (1,13), (1, 14)
+GO
+--Rol Cliente
+INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
+VALUES (2,7), (2,8), (2,9), (2,10), (2,11), (2, 12), (2, 14)
+GO
+--Rol Empresa
+INSERT INTO DATA_GROUP.FuncionalidadXRol(id_rol, id_funcionalidad)
+VALUES  (3,7), (3,8), (3,9), (3, 11), (3, 14)
+GO
+--------------------------------------------------------
+------------------------Rubro---------------------------
+--------------------------------------------------------
+
+INSERT INTO DATA_GROUP.Rubro(descripcion)
+SELECT DISTINCT Publicacion_Rubro_Descripcion
+FROM gd_esquema.Maestra
+GO
+
+--------------------------------------------------------
+---------------------TipoPublicacion--------------------
+--------------------------------------------------------
+
+INSERT INTO DATA_GROUP.TipoPublicacion(descripcion)
+VALUES ('Compra inmediata'), ('Subasta')
+GO
+
+--------------------------------------------------------
+-------------------------Usuarios-----------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Usuario(username, contrasenia, tipo_usuario)	--pass_cli_migrados
+SELECT DISTINCT LTRIM(RTRIM(CONVERT(nvarchar(255), Publ_Cli_Dni))), 'b34d9e1f824369575b069ae374f616b5e8e50b248cfb1a9fb19ec9a7a119ce5b', 'CLI'
+FROM gd_esquema.Maestra
+WHERE Publ_Cli_Dni IS NOT NULL
+UNION																		--pass: pass_emp_migrados
+SELECT DISTINCT LTRIM(RTRIM(CONVERT(nvarchar(255), Publ_Empresa_Cuit))), 'ef9e14d5e625e301a7daa1163c515578f6c37891d63eb1a9139fc4af530c70b4', 'EMP'
+FROM gd_esquema.Maestra
+WHERE Publ_Empresa_Cuit IS NOT NULL
+GO
+
+INSERT INTO DATA_GROUP.Usuario(username, contrasenia, tipo_usuario)
+VALUES ('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', 'ADM')
+GO
+
+--------------------------------------------------------
+----------------------Administrador---------------------
+--------------------------------------------------------
+
+INSERT INTO DATA_GROUP.Administrador(id_usuario)
+SELECT U.id_usuario
+FROM DATA_GROUP.Usuario U
+WHERE U.tipo_usuario='ADM' AND U.username ='admin' AND U.contrasenia='e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7'
+GO
+
+--------------------------------------------------------
+-------------------------Cliente------------------------
+--------------------------------------------------------
+
+INSERT INTO DATA_GROUP.Cliente(nro_documento, id_tipo_documento, id_usuario, apellido, nombre, fecha_nacimiento, mail, dom_calle, nro_calle, piso, depto, cod_postal)
+SELECT DISTINCT LTRIM(RTRIM(STR(maes.Publ_Cli_Dni))), 1, usu.id_usuario, maes.Publ_Cli_Apeliido, maes.Publ_Cli_Nombre, maes.Publ_Cli_Fecha_Nac, maes.Publ_Cli_Mail, Publ_Cli_Dom_Calle, Publ_Cli_Nro_Calle, Publ_Cli_Piso, Publ_Cli_Depto, Publ_Cli_Cod_Postal
+FROM gd_esquema.Maestra maes
+JOIN DATA_GROUP.Usuario usu
+ON usu.tipo_usuario='CLI' AND usu.username=CAST(maes.Publ_Cli_Dni AS NVARCHAR(255))
+GO
+
+--------------------------------------------------------
+-------------------------Empresa------------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Empresa(razon_social, cuit, id_usuario, fecha_creacion, mail, dom_calle, nro_calle, piso, depto, cod_postal)
+SELECT DISTINCT m.Publ_Empresa_Razon_Social, m.Publ_Empresa_Cuit, u.id_usuario, m.Publ_Empresa_Fecha_Creacion, m.Publ_Empresa_Mail, m.Publ_Empresa_Dom_Calle, m.Publ_Empresa_Nro_Calle, m.Publ_Empresa_Piso, m.Publ_Empresa_Depto, m.Publ_Empresa_Cod_Postal
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Usuario u
+ON u.tipo_usuario='EMP' AND u.username=CAST(m.Publ_Empresa_Cuit AS NVARCHAR(255))
+WHERE m.Publ_Empresa_Cuit is not null
+GO
+
+--------------------------------------------------------
+------------------------RolXUsuario---------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.UsuarioXRol(id_usuario, id_rol)
+SELECT DISTINCT c.id_usuario, 2
+FROM DATA_GROUP.Cliente c
+UNION
+SELECT DISTINCT e.id_usuario, 3
+FROM DATA_GROUP.Empresa e
+UNION
+SELECT DISTINCT a.id_usuario, 1
+FROM DATA_GROUP.Administrador a
+GO
+
+
+--------------------------------------------------------
+------------------------Publicacion---------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Publicacion (id_publicacion, descripcion, stock, fecha_inicio, fecha_vencimiento, precio, id_tipo_publicacion, id_visibilidad, id_estado, id_usuario_publicador, id_rubro)
+SELECT DISTINCT m.Publicacion_Cod, 
+				m.Publicacion_Descripcion, 
+				m.Publicacion_Stock, 
+				m.Publicacion_Fecha, 
+				m.Publicacion_Fecha_Venc, 
+				m.Publicacion_Precio, 
+				case m.Publicacion_Tipo WHEN 'Compra Inmediata' THEN 1 WHEN 'Subasta' THEN 2 END, 
+				m.Publicacion_Visibilidad_Cod,
+				case WHEN m.Publicacion_Fecha_Venc > CAST('20140618' as datetime) THEN 1 ELSE 4 END,
+				u.id_usuario, 
+				r.id_rubro
+FROM gd_esquema.Maestra m
+INNER JOIN DATA_GROUP.Usuario u
+ON CONVERT(nvarchar, m.Publ_Cli_Dni)=u.username OR CONVERT(nvarchar, m.Publ_Empresa_Cuit)=u.username
+INNER JOIN DATA_GROUP.Rubro r
+ON m.Publicacion_Rubro_Descripcion=r.descripcion
+WHERE m.Publicacion_Cod is not null
+GO
+
+--------------------------------------------------------
+-----------------CalificacionPublicacion----------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.CalificacionPublicacion(id_calificacion, estrellas_calificacion, detalle_calificacion)
+SELECT DISTINCT m.Calificacion_Codigo, m.Calificacion_Cant_Estrellas, m.Calificacion_Descripcion
+FROM gd_esquema.Maestra m
+WHERE m.Calificacion_Codigo is not null
+GO
+
+--------------------------------------------------------
+-------------------------Compras------------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Compra(fecha, cantidad, id_calificacion, id_usuario_comprador, id_publicacion)
+SELECT m.Compra_Fecha, m.Compra_Cantidad, m.Calificacion_Codigo, u.id_usuario, m.Publicacion_Cod
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Usuario u
+ON u.username=CAST(m.Cli_Dni as nvarchar(255))
+WHERE m.Compra_Fecha is not null AND
+		m.Cli_Dni is not null AND
+		m.Publicacion_Cod is not null AND
+		M.Calificacion_Codigo is not null
+GO
+
+--------------------------------------------------------
+-------------------------Ofertas------------------------
+--------------------------------------------------------		
+INSERT INTO DATA_GROUP.Oferta(fecha, monto, id_publicacion, id_usuario_ofertador)
+SELECT m.Oferta_Fecha, m.Oferta_Monto, m.Publicacion_Cod, u.id_usuario
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Usuario u
+ON u.username=CAST(m.Cli_Dni as nvarchar(255))
+WHERE m.Oferta_Fecha is not null and
+		m.Cli_Dni is not null
+GO
+
+--------------------------------------------------------
+------------------------Facturas------------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.Factura(nro_factura, fecha, forma_pago_datos, total, id_vendedor, id_forma_pago)
+SELECT DISTINCT m.Factura_Nro, m.Factura_Fecha, m.Forma_Pago_Desc, m.Factura_Total, p.id_usuario_publicador, 1
+FROM gd_esquema.Maestra m
+JOIN DATA_GROUP.Publicacion p
+ON m.Publicacion_Cod=p.id_publicacion
+WHERE m.Factura_Nro is not null
+GO
+
+--------------------------------------------------------
+----------------------ItemFactura-----------------------
+--------------------------------------------------------
+INSERT INTO DATA_GROUP.ItemFactura(cantidad, monto, id_publicacion, nro_factura, resumen, id_compra)
+SELECT m.Item_Factura_Cantidad, m.Item_Factura_Monto, m.Publicacion_Cod, m.Factura_Nro, 'Factura de publicacion ' + LTRIM(RTRIM(STR(m.Publicacion_Cod))), 0
+FROM gd_esquema.Maestra m
+WHERE m.Factura_Nro is not null
+GO
+
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+-----------------------------------------------Stored Procedures------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------
+
 CREATE PROCEDURE [DATA_GROUP].[sp_rubro_select_all]
 AS
 BEGIN
@@ -12,11 +554,8 @@ BEGIN
 END
 GO
 
----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_rubro_filter]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_rubro_filter]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_rubro_filter](
 	@descripcion nvarchar(255) = NULL
 )
@@ -30,11 +569,8 @@ BEGIN
 END
 GO
 
----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.nuevaVisibilidad') is not null
-	DROP PROCEDURE DATA_GROUP.nuevaVisibilidad
-	GO
 CREATE PROCEDURE DATA_GROUP.nuevaVisibilidad
 @descripcion nvarchar(255),
 @precio numeric(18, 2),
@@ -56,11 +592,8 @@ BEGIN
 END
 GO
 
----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.modificarVisibilidad') is not null
-	DROP PROCEDURE DATA_GROUP.modificarVisibilidad
-	GO
 CREATE PROCEDURE DATA_GROUP.modificarVisibilidad
 @id_visibilidad_a_modificar numeric(18,0),
 @descripcion nvarchar(255),
@@ -78,11 +611,8 @@ BEGIN
 END
 GO
 
----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.inhabilitarVisibilidad') is not null
-	DROP PROCEDURE DATA_GROUP.inhabilitarVisibilidad
-	GO
 CREATE PROCEDURE DATA_GROUP.inhabilitarVisibilidad
 @id_visibilidad numeric(18,0)
 AS
@@ -95,11 +625,8 @@ BEGIN
 END
 GO
 
----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.habilitarVisibilidad') is not null
-	DROP PROCEDURE DATA_GROUP.habilitarVisibilidad
-	GO
 CREATE PROCEDURE DATA_GROUP.habilitarVisibilidad
 @id_visibilidad numeric(18,0)
 AS
@@ -112,11 +639,8 @@ BEGIN
 END
 GO
 
----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_Visibilidad_filter]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_Visibilidad_filter]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_Visibilidad_filter](
 	@descripcion nvarchar(255) = NULL,
 	@precio numeric(18, 2)  = NULL,
@@ -134,11 +658,8 @@ BEGIN
 END
 GO
 
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_Visibilidad_select_all]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_Visibilidad_select_all]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_Visibilidad_select_all]
 AS
 BEGIN
@@ -148,9 +669,8 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID('DATA_GROUP.nuevoUsuario') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.nuevoUsuario
-	GO
+-------------------------------------------------------------------------------------------
+
 CREATE PROCEDURE DATA_GROUP.nuevoUsuario
 @username nvarchar(255),
 @contrasenia nvarchar(255),
@@ -166,9 +686,8 @@ BEGIN
 END
 GO
 
-IF OBJECT_ID('DATA_GROUP.asociarRolAUsuario') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.asociarRolAUsuario
-	GO
+-------------------------------------------------------------------------------------------
+
 CREATE PROCEDURE DATA_GROUP.asociarRolAUsuario
 @id_rol numeric(18, 0),
 @id_usuario numeric(18, 0)
@@ -179,10 +698,8 @@ BEGIN
 END
 GO
 
-----------------------------------------------------
-IF OBJECT_ID('DATA_GROUP.nuevoCliente') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.nuevoCliente
-	GO
+-------------------------------------------------------------------------------------------
+
 CREATE PROCEDURE DATA_GROUP.nuevoCliente(
 @id_usuario_agregado numeric(18, 0) OUTPUT,
 @id_tipo_doc numeric(18, 0),  
@@ -273,9 +790,6 @@ GO
 
 -------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.modificarUsuario') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.modificarUsuario
-	GO
 CREATE PROCEDURE DATA_GROUP.modificarUsuario
 @id_usuario numeric(18, 0),
 @username nvarchar(255),
@@ -300,9 +814,6 @@ GO
 
 -------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.modificarCliente') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.modificarCliente
-	GO
 CREATE PROCEDURE DATA_GROUP.modificarCliente
 (	
 	@id_usuario_a_modificar numeric(18, 0),
@@ -368,9 +879,6 @@ GO
 
 --------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_cliente_filter]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_cliente_filter]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_cliente_filter](
 	@id_tipo_doc numeric(18, 0) = NULL,  
 	@nro_documento nvarchar(50) = NULL, 
@@ -434,9 +942,6 @@ GO
 
 --------------------------Nueva Empresa---------------------------
 
-IF OBJECT_ID('DATA_GROUP.nuevaEmpresa') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.nuevaEmpresa
-	GO
 CREATE PROCEDURE DATA_GROUP.nuevaEmpresa(
 @id_usuario_agregado numeric(18, 0) OUTPUT,
 @nombre_de_usuario nvarchar(255), 
@@ -526,9 +1031,6 @@ GO
 
 ---------------------------------Modificar Empresa-------------------------------
 
-IF OBJECT_ID('DATA_GROUP.modificarEmpresa') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.modificarEmpresa
-	GO
 CREATE PROCEDURE DATA_GROUP.modificarEmpresa
 @id_usuario_a_modificar numeric(18,0),
 @cuit nvarchar(50), 
@@ -591,9 +1093,6 @@ GO
 
 ---------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_empresa_filter]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_empresa_filter]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_empresa_filter]
 (
 	@CUIT nvarchar(50) = NULL, 
@@ -636,9 +1135,6 @@ GO
 
 -----------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getIdRolPorNombre') IS NOT NULL
-	DROP FUNCTION DATA_GROUP.getIdRolPorNombre
-	GO
 CREATE FUNCTION DATA_GROUP.getIdRolPorNombre( @nombre_rol nvarchar(255))
 	RETURNS NUMERIC(18, 0)
 AS
@@ -655,9 +1151,6 @@ GO
 
 -----------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTodosLosRoles') is not null
-	DROP PROCEDURE DATA_GROUP.getTodosLosRoles
-	GO
 CREATE PROCEDURE DATA_GROUP.getTodosLosRoles
 AS
 BEGIN
@@ -668,9 +1161,6 @@ GO
 
 -----------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getRolesDeUsuario') is not null
-	DROP PROCEDURE DATA_GROUP.getRolesDeUsuario
-	GO
 CREATE PROCEDURE DATA_GROUP.getRolesDeUsuario 
 	@username nvarchar(255)
 AS
@@ -689,9 +1179,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_rol_filter]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_rol_filter]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_rol_filter](
 	@nombre nvarchar(255) = NULL
 )
@@ -706,9 +1193,6 @@ END
 GO
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.modificarRol') is not null
-	DROP PROCEDURE DATA_GROUP.modificarRol
-	GO
 CREATE PROCEDURE DATA_GROUP.modificarRol
 @id_rol numeric(18,0),
 @nombre nvarchar(255)
@@ -722,9 +1206,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.modificarFuncionalidadDeUnRol') is not null
-	DROP PROCEDURE DATA_GROUP.modificarFuncionalidadDeUnRol
-	GO
 CREATE PROCEDURE DATA_GROUP.modificarFuncionalidadDeUnRol
 @id_rol numeric(18,0),
 @id_funcionalidad numeric(18,0),
@@ -753,9 +1234,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.SP_deshabilitarRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_deshabilitarRol
-	GO
 CREATE PROCEDURE DATA_GROUP.SP_deshabilitarRol
 (@id_rol numeric(18,0))
 AS
@@ -791,9 +1269,6 @@ END
 GO
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.SP_habilitarRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_habilitarRol
-	GO
 CREATE PROCEDURE DATA_GROUP.SP_habilitarRol
 @id_rol numeric(18,0)
 AS
@@ -831,9 +1306,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.SP_agregarFuncionalidadXRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_agregarFuncionalidadXRol
-	GO
 CREATE PROCEDURE DATA_GROUP.SP_agregarFuncionalidadXRol
 @id_rol numeric(18,0),
 @id_funcionalidad numeric(18,0),
@@ -847,9 +1319,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.SP_crearRol') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.SP_crearRol
-	GO
 CREATE PROCEDURE DATA_GROUP.SP_crearRol
 @nombreRolNuevo nvarchar(255),
 @habilitada bit,
@@ -874,9 +1343,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTodosAnios') is not null
-	DROP PROCEDURE DATA_GROUP.getTodosAnios
-	GO
 CREATE PROCEDURE DATA_GROUP.getTodosAnios
 AS
 BEGIN
@@ -887,9 +1353,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
-	GO
 CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMasProductosNoVendidos
 @anio int,
 @trimestre int,
@@ -920,9 +1383,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMayorFacturacion') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.getTop5VendedoresConMayorFacturacion
-	GO
 CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMayorFacturacion
 @anio int, 
 @trimestre int,
@@ -944,9 +1404,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTop5VendedoresConMayorCalificaciones') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.getTop5VendedoresConMayorCalificaciones
-	GO
 CREATE PROCEDURE DATA_GROUP.getTop5VendedoresConMayorCalificaciones
 @anio int, 
 @trimestre int,
@@ -956,7 +1413,7 @@ AS
 BEGIN
 	SELECT TOP 5 
 			p.id_usuario_publicador Vendedor, 
-			@anio as 'AÃ±o',
+			@anio as 'Año',
 			AVG(cal.estrellas_calificacion) as 'Calificacio promedio'
 	FROM DATA_GROUP.CalificacionPublicacion cal
 	JOIN DATA_GROUP.Compra comp
@@ -972,9 +1429,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTop5ClientesConMasPublicacionesSinCalificar') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.getTop5ClientesConMasPublicacionesSinCalificar
-	GO
 CREATE PROCEDURE DATA_GROUP.getTop5ClientesConMasPublicacionesSinCalificar
 @anio int,
 @trimestre int,
@@ -985,7 +1439,7 @@ BEGIN
 	SELECT TOP 5 
 			usu.username as 'Username', 
 			COUNT(*) as 'Cantidad',
-			@anio as 'AÃ±o',
+			@anio as 'Año',
 			CASE WHEN @trimestre=1 THEN 'Primer trimestre'
 				 WHEN @trimestre=2 THEN 'Segundo trimestre'
 				 WHEN @trimestre=3 THEN 'Tercer trimestre'
@@ -1004,9 +1458,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTodasComprasRealizadas') is not null
-	DROP PROCEDURE DATA_GROUP.getTodasComprasRealizadas
-	GO
 CREATE PROCEDURE DATA_GROUP.getTodasComprasRealizadas
 @username nvarchar(255)
 AS
@@ -1022,9 +1473,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTodasLasOfertasRealizadas') is not null
-	DROP PROCEDURE DATA_GROUP.getTodasLasOfertasRealizadas
-	GO
 CREATE PROCEDURE DATA_GROUP.getTodasLasOfertasRealizadas
 @username nvarchar(255)
 AS
@@ -1054,9 +1502,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getCalificacionesDelUsuario') is not null
-	DROP PROCEDURE DATA_GROUP.getCalificacionesDelUsuario
-	GO
 CREATE PROCEDURE DATA_GROUP.getCalificacionesDelUsuario
 @username nvarchar(255)
 AS
@@ -1098,9 +1543,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.cantidadDeComprasSinCalificar') is not null
-	DROP PROCEDURE DATA_GROUP.cantidadDeComprasSinCalificar
-	GO
 CREATE PROCEDURE DATA_GROUP.cantidadDeComprasSinCalificar
 @id_usuario numeric(18, 0),
 @cantidad_sin_calificar int OUTPUT
@@ -1116,9 +1558,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador') is not null
-	DROP PROCEDURE DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador
-	GO
 CREATE PROCEDURE DATA_GROUP.ValidarCalificacionesOtorgadasDelComprador
 @id_usuario numeric(18, 0),
 @puede_comprar bit OUTPUT
@@ -1144,9 +1583,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_nuevaOferta') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.sp_nuevaOferta
-	GO
 CREATE PROCEDURE DATA_GROUP.sp_nuevaOferta
 @id_publicacion numeric(18, 0),
 @id_usuario_ofertador numeric(18, 0),
@@ -1187,9 +1623,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.habilitarParaComprar') is not null
-	DROP PROCEDURE DATA_GROUP.habilitarParaComprar
-	GO
 CREATE PROCEDURE DATA_GROUP.habilitarParaComprar
 @id_usuario numeric(18,0)
 AS
@@ -1203,9 +1636,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.nuevaCalificacion') is not null
-	DROP PROCEDURE DATA_GROUP.nuevaCalificacion
-	GO
 CREATE PROCEDURE DATA_GROUP.nuevaCalificacion
 @id_compra numeric(18,0),
 @estrellas_calificacion numeric(18, 0),
@@ -1247,9 +1677,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getComprasSinCalificar') is not null
-	DROP PROCEDURE DATA_GROUP.getComprasSinCalificar
-	GO
 CREATE PROCEDURE DATA_GROUP.getComprasSinCalificar
 @id_usuario numeric(18, 0)
 AS
@@ -1262,9 +1689,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.inHabilitarUsuario') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.inHabilitarUsuario
-	GO
 CREATE PROCEDURE DATA_GROUP.inHabilitarUsuario
 @id_usuario numeric(18, 0)
 AS
@@ -1303,9 +1727,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.habilitarUsuario') IS NOT NULL 
-	DROP PROCEDURE DATA_GROUP.habilitarUsuario
-	GO
 CREATE PROCEDURE DATA_GROUP.habilitarUsuario
 @id_usuario numeric(18, 0)
 AS
@@ -1346,9 +1767,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.cantidadDeComprasSinRendir') is not null
-	DROP PROCEDURE DATA_GROUP.cantidadDeComprasSinRendir
-	GO
 CREATE PROCEDURE DATA_GROUP.cantidadDeComprasSinRendir
 @id_vendedor numeric(18, 0),
 @cantidad_sin_rendir int OUTPUT
@@ -1365,9 +1783,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.ValidarComprasRendidasDelVendedor') is not null
-	DROP PROCEDURE DATA_GROUP.ValidarComprasRendidasDelVendedor
-	GO
 CREATE PROCEDURE DATA_GROUP.ValidarComprasRendidasDelVendedor
 @id_publicacion numeric(18, 0)
 AS
@@ -1390,9 +1805,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.sp_nuevaCompra') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.sp_nuevaCompra
-	GO
 CREATE PROCEDURE DATA_GROUP.sp_nuevaCompra
 @id_publicacion numeric(18, 0),
 @id_usuario numeric(18, 0),
@@ -1466,9 +1878,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.puedeComprar') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.puedeComprar
-	GO
 CREATE PROCEDURE DATA_GROUP.puedeComprar
 @id_usuario numeric(18,0),
 @puedeComprar bit OUTPUT
@@ -1484,9 +1893,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.actualizarContraseniaPrimerIngreso') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.actualizarContraseniaPrimerIngreso
-	GO
 CREATE PROCEDURE DATA_GROUP.actualizarContraseniaPrimerIngreso
 @id_usuario numeric(18,0),
 @contrasenia nvarchar(255)
@@ -1500,29 +1906,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
--- IF OBJECT_ID('DATA_GROUP.nuevoUsuario') IS NOT NULL
-	-- DROP PROCEDURE DATA_GROUP.nuevoUsuario
-	-- GO
--- CREATE PROCEDURE DATA_GROUP.nuevoUsuario
--- @username nvarchar(255),
--- @contrasenia nvarchar(255),
--- @telefono numeric(18, 0),
--- @tipoUsuario nvarchar(3),
--- @id_usuario numeric(18, 0) OUTPUT
--- AS
--- BEGIN
-	-- INSERT INTO DATA_GROUP.Usuario(username, contrasenia, telefono, intentos_login, tipo_usuario)
-	-- VALUES(@username, @contrasenia, @telefono, 0, @tipoUsuario)
-	
-	-- SET @id_usuario = SCOPE_IDENTITY(); --Me devuelve el id de la ultima fila insertada
--- END
--- GO
-
--------------------------------------------------------------------------------------
-
-IF OBJECT_ID('DATA_GROUP.setCantidadIntentos') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.setCantidadIntentos
-	GO
 CREATE PROCEDURE DATA_GROUP.setCantidadIntentos
 @username nvarchar(255),
 @cantidad int
@@ -1536,9 +1919,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-If OBJECT_ID('DATA_GROUP.getUsuarioByUsername') is not null
-	DROP PROCEDURE DATA_GROUP.getUsuarioByUsername
-	GO
 CREATE PROCEDURE DATA_GROUP.getUsuarioByUsername(
 	@username nvarchar(255))
 AS
@@ -1559,9 +1939,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.existeUsuario') is not null
-	DROP PROCEDURE DATA_GROUP.existeUsuario
-	GO
 CREATE PROCEDURE DATA_GROUP.existeUsuario
 @username nvarchar(255),
 @resultado bit OUTPUT
@@ -1584,9 +1961,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_Usuario_filter]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_Usuario_filter]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_Usuario_filter](
 	@username nvarchar(255) = NULL,
 	@telefono numeric(18, 0) = NULL
@@ -1602,9 +1976,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.promedioCalificaciones') IS NOT NULL
-	DROP PROCEDURE DATA_GROUP.promedioCalificaciones
-	GO
 CREATE PROCEDURE DATA_GROUP.promedioCalificaciones
 @id_usuario numeric(18,0),
 @promedio numeric(18,2) OUTPUT
@@ -1623,9 +1994,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getDatosDelVendedor') is not null
-	DROP PROCEDURE DATA_GROUP.getDatosDelVendedor
-	GO
 CREATE PROCEDURE DATA_GROUP.getDatosDelVendedor
 @id_usuario numeric(18,0)
 AS
@@ -1692,9 +2060,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_EstadoPublicacion_select_all]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_EstadoPublicacion_select_all]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_EstadoPublicacion_select_all]
 AS
 BEGIN
@@ -1705,9 +2070,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getBonificados') is not null
-	DROP PROCEDURE DATA_GROUP.getBonificados
-	GO
 CREATE PROCEDURE DATA_GROUP.getBonificados
 @id_usuario numeric(18,0)
 AS
@@ -1724,9 +2086,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getPendientesDeFacturar') is not null
-	DROP PROCEDURE DATA_GROUP.getPendientesDeFacturar
-	GO
 CREATE PROCEDURE DATA_GROUP.getPendientesDeFacturar
 @id_usuario numeric(18,0)
 AS
@@ -1802,9 +2161,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-If OBJECT_ID('DATA_GROUP.crearFactura') is not null
-	DROP PROCEDURE DATA_GROUP.crearFactura
-	GO
 CREATE PROCEDURE DATA_GROUP.crearFactura
 @nro_factura numeric(18,0) OUTPUT, 
 @id_vendedor numeric(18,0), 
@@ -1849,9 +2205,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.crearItemFactura') is not null
-	DROP PROCEDURE DATA_GROUP.crearItemFactura
-	GO
 CREATE PROCEDURE DATA_GROUP.crearItemFactura
 @nro_factura numeric(18,0), 
 @id_publicacion numeric(18,0),
@@ -1922,9 +2275,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTodasLasFuncionalidadesHabilitadas') is not null
-	DROP PROCEDURE DATA_GROUP.getTodasLasFuncionalidadesHabilitadas
-	GO
 CREATE PROCEDURE DATA_GROUP.getTodasLasFuncionalidadesHabilitadas
 AS
 BEGIN
@@ -1938,9 +2288,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getTodasLasFuncionalidades') is not null
-	DROP PROCEDURE DATA_GROUP.getTodasLasFuncionalidades
-	GO
 CREATE PROCEDURE DATA_GROUP.getTodasLasFuncionalidades
 AS
 BEGIN
@@ -1953,9 +2300,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getFuncionalidadDeUnRol') is not null
-	DROP PROCEDURE DATA_GROUP.getFuncionalidadDeUnRol
-	GO
 CREATE PROCEDURE DATA_GROUP.getFuncionalidadDeUnRol(
 	@id_rol numeric(18,0))
 AS
@@ -1972,9 +2316,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getFuncDeUnRolHabilYNoHabilitadas') is not null
-	DROP PROCEDURE DATA_GROUP.getFuncDeUnRolHabilYNoHabilitadas
-	GO
 CREATE PROCEDURE DATA_GROUP.getFuncDeUnRolHabilYNoHabilitadas
 @id_rol numeric(18,0)
 AS
@@ -1989,9 +2330,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[realizar_identificacion]') is not null
-	DROP PROCEDURE [DATA_GROUP].[realizar_identificacion]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[realizar_identificacion](
 	@username nvarchar(255),
 	@passwordHash nvarchar(255),
@@ -2049,9 +2387,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.nuevaRespuesta') is not null
-	DROP PROCEDURE DATA_GROUP.nuevaRespuesta
-	GO
 CREATE PROCEDURE DATA_GROUP.nuevaRespuesta
 @id_pregunta numeric(18,0),
 @respuesta nvarchar(400)
@@ -2066,9 +2401,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getPreguntasSinResponder') is not null
-	DROP PROCEDURE DATA_GROUP.getPreguntasSinResponder
-	GO
 CREATE PROCEDURE DATA_GROUP.getPreguntasSinResponder
 @id_vendedor numeric(18,0)
 AS
@@ -2092,9 +2424,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getPreguntasYaRespondidas') is not null
-	DROP PROCEDURE DATA_GROUP.getPreguntasYaRespondidas
-	GO
 CREATE PROCEDURE DATA_GROUP.getPreguntasYaRespondidas
 @id_vendedor numeric(18,0)
 AS
@@ -2118,9 +2447,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.getRespuestasDeUnaPublicacion') is not null
-	DROP PROCEDURE DATA_GROUP.getRespuestasDeUnaPublicacion
-	GO
 CREATE PROCEDURE DATA_GROUP.getRespuestasDeUnaPublicacion
 @id_publicacion numeric(18,0)
 AS
@@ -2145,9 +2471,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.nuevaPregunta') is not null
-	DROP PROCEDURE DATA_GROUP.nuevaPregunta
-	GO
 CREATE PROCEDURE DATA_GROUP.nuevaPregunta
 @id_pregunta numeric(18,0) OUTPUT, 
 @id_publicacion numeric(18,0), 
@@ -2190,9 +2513,6 @@ GO
 
 -------------------------------------------------------------------------------------
 
-IF OBJECT_ID('DATA_GROUP.nuevaPublicacion') is not null
-	DROP PROCEDURE DATA_GROUP.nuevaPublicacion
-	GO
 CREATE PROCEDURE DATA_GROUP.nuevaPublicacion
 @id_publicacion_nueva numeric(18, 0) OUTPUT,
 @descripcion nvarchar(255), 
@@ -2303,12 +2623,10 @@ BEGIN
 			   );
 	END CATCH
 END
+GO
 
 ------------------------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[modificarPublicacion]') is not null
-	DROP PROCEDURE [DATA_GROUP].[modificarPublicacion]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[modificarPublicacion]
 @id_publicacion_modificar numeric(18, 0),
 @descripcion nvarchar(255), 
@@ -2358,12 +2676,10 @@ BEGIN
 			   );
 	END CATCH
 END
+GO
 
 ------------------------------------------------------------------------------------------
 
-IF OBJECT_ID('[DATA_GROUP].[sp_publicacion_filter]') is not null
-	DROP PROCEDURE [DATA_GROUP].[sp_publicacion_filter]
-	GO
 CREATE PROCEDURE [DATA_GROUP].[sp_publicacion_filter](
 	@descripcion nvarchar(255) = NULL,
 	@fecha_inicio datetime = NULL,

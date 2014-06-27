@@ -151,10 +151,20 @@
             2328306,
             0,
             0});
+            this.nud_Stock.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nud_Stock.Name = "nud_Stock";
             this.nud_Stock.Size = new System.Drawing.Size(197, 21);
             this.nud_Stock.TabIndex = 27;
             this.nud_Stock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nud_Stock.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // nud_Precio
             // 
@@ -170,11 +180,21 @@
             2328306,
             0,
             0});
+            this.nud_Precio.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nud_Precio.Name = "nud_Precio";
             this.nud_Precio.Size = new System.Drawing.Size(197, 21);
             this.nud_Precio.TabIndex = 28;
             this.nud_Precio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.nud_Precio.ThousandsSeparator = true;
+            this.nud_Precio.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // chk_Permite_preguntas
             // 

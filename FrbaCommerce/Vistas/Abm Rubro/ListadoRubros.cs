@@ -22,10 +22,12 @@ namespace FrbaCommerce.Vistas.Abm_Rubro
     public partial class ListadoRubros : FormBaseListado
     {
         private RubroDB rubroDB;
+        public bool cerrado;
 
         public ListadoRubros()
             : base(true)
         {
+            this.cerrado = false;
             this.rubroDB = new RubroDB();
             InitializeComponent();
             this.btn_Seleccionar.Visible = true;
@@ -66,7 +68,8 @@ namespace FrbaCommerce.Vistas.Abm_Rubro
             }
             return resultado;
         }
-        #endregion 
+        #endregion
+
 
         #region [AccionLimpiar]
         protected override void AccionLimpiar()

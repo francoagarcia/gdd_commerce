@@ -423,6 +423,16 @@ namespace FrbaCommerce
         #region Nueva publicacoin
         private void itm_Var_Nueva_Publicacion_Click(object sender, EventArgs e)
         {
+            if (this.frm_comprar != null) 
+            {
+                try
+                {
+                    this.frm_comprar.Close();
+                }
+                catch (Exception) 
+                { 
+                }
+            }
             try
             {
                 frm_seleccionTipoPublicacion = null;
@@ -442,6 +452,16 @@ namespace FrbaCommerce
         #region Editar publicacion
         private void itm_Var_Editar_Publicacion_Click(object sender, EventArgs e)
         {
+            if (this.frm_comprar != null)
+            {
+                try
+                {
+                    this.frm_comprar.Close();
+                }
+                catch (Exception)
+                {
+                }
+            }
             try
             {
                 frm_publicacionesVendedor = null;

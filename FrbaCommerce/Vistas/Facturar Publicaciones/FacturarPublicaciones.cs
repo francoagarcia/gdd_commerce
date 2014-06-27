@@ -24,6 +24,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
         private IList<ItemPendiente> items;
         private IList<VisibilidadesFacturadas> visibilidadesFacturadas;
         private FacturacionDB factuDB;
+        private Factura factura;
 
         private const string COMPRA = "COMP";
         private const string PUBLICACION = "PUBL";
@@ -104,7 +105,10 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
                 if (Convert.ToBoolean(row.Cells["Facturar"].Value))
                 //Cuenta los que estan en true y suma los importes de ellos
                 {
-                    totalFacturar = totalFacturar + Convert.ToDecimal(row.Cells["importe_a_rendir"].Value);
+                    if (!itemEsUnaBonificacion(row))
+                        totalFacturar = totalFacturar + Convert.ToDecimal(row.Cells["importe_a_rendir"].Value);
+                    else
+                        totalFacturar = totalFacturar - Convert.ToDecimal(row.Cells["importe_a_rendir"].Value);
                     cantidadItems++;
                 }
             }
@@ -112,7 +116,6 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             this.tb_Total_a_facturar.Text = totalFacturar.ToString();
             this.tb_Cantidad_de_items.Text = cantidadItems.ToString();
 
-            // tb_Saldo.Text = "$ " + (decAcum - decTotal + decBonif).ToString();
         }
 
         private void CalcularTotalAdeudado() 
@@ -331,7 +334,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             itemBonificado.id_publicacion = getIdPublicacion(row);
             itemBonificado.id_visibilidad = getIdVisibilidad(row);
             itemBonificado.importe_a_rendir = getImporteARendir(row);
-            itemBonificado.resumen = "Bonificacion por 10 publicaciones. Publicacion bonificada: " + getIdPublicacion(row).ToString();
+            itemBonificado.resumen = "Bonificacion por 10 publicaciones. Publicacion bonificada: " + getIdPublicacion(row).ToString() +" - Importe: $ -" +getImporteARendir(row).ToString();
             itemBonificado.tipo_item_a_facturar = BONIFICACION;
             return itemBonificado;        
         }
@@ -412,7 +415,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
                 decimal descuentoPorBonificacio = itemsBonificados.Sum(i => i.importe_a_rendir);
 
                 tb_Cantidad_de_bonificaciones.Text = cant.ToString();
-                tb_Bonificacion_monto.Text = descuentoPorBonificacio.ToString();
+                tb_Bonificacion_monto.Text = "-"+descuentoPorBonificacio.ToString();
 
                 this.PrepararGrilla();
             }
@@ -459,13 +462,15 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
 
         protected override void AccionAceptar()
         {
-            Factura factura = this.armarFactura();
+            this.factura = null;
+            this.factura = this.armarFactura();
             IList<ItemFactura> items = this.armarItems();
             if (items.Count > 0)
             {
-                if (this.armarFacturaDB(factura, items))
+                if (this.armarFacturaDB(items))
                 {
-                    MessageDialog.MensajeInformativo(this, "La factura fue creada exitosamente!");
+                    FacturaVista frm = new FacturaVista(this.factura, items);
+                    frm.ShowDialog();
                     this.CargarGrilla();
                 }
             }
@@ -475,11 +480,11 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
             }
         }
 
-        private bool armarFacturaDB(Factura factura, IList<ItemFactura> items)
+        private bool armarFacturaDB(IList<ItemFactura> items)
         {
             try
             {
-                decimal nro_factura = this.factuDB.CrearFacturaCompleta(factura, items);
+                this.factura.nro_factura = this.factuDB.CrearFacturaCompleta(factura, items);
             }
             catch (SqlException e)
             {
@@ -498,10 +503,11 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
         private Factura armarFactura() 
         {
             Factura factura = new Factura();
+            factura.nro_factura = 0;
             factura.vendedor = this.usuarioSeleccionado;
             factura.forma_pago = this.cb_Forma_pago.SelectedItem as FormaDePago;
             factura.forma_pago_datos = this.tb_Datos_de_pago.Text;
-            factura.total = Convert.ToDecimal(this.tb_Total_a_facturar.Text);
+            factura.total = Convert.ToDecimal(this.tb_Total_a_facturar.Text);// -(Convert.ToDecimal(this.tb_Cantidad_de_bonificaciones.Text) * Convert.ToDecimal(tb_Bonificacion_monto.Text));
             return factura;
         }
 
