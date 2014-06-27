@@ -26,7 +26,10 @@ namespace FrbaCommerce.Entidades.Builder
             publi.visibilidad = this.BuildVisibilidad(row);
             publi.usuario_publicador = new Usuario();
             publi.usuario_publicador.id_usuario = Convert.ToDecimal(row["id_usuario_publicador"]);
-
+            if(row.Table.Columns.Contains("username"))
+            {
+                publi.usuario_publicador.username = row["username"] != System.DBNull.Value ? Convert.ToString(row["username"]) : "";
+            }
 
             return publi;
         }

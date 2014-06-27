@@ -1011,7 +1011,7 @@ CREATE PROCEDURE DATA_GROUP.getTodasComprasRealizadas
 @username nvarchar(255)
 AS
 BEGIN
-	SELECT c.id_compra
+	SELECT c.id_compra 'Id de compra', c.id_publicacion 'Nro de Publicacion',c.fecha 'Fecha', c.cantidad 'Cantidad'
 	FROM DATA_GROUP.Compra c
 	JOIN DATA_GROUP.Usuario u
 	ON u.id_usuario=c.id_usuario_comprador AND u.username=@username
@@ -1029,17 +1029,24 @@ CREATE PROCEDURE DATA_GROUP.getTodasLasOfertasRealizadas
 @username nvarchar(255)
 AS
 BEGIN
+	
 	DECLARE @id_usuario numeric(18, 0)
 	SET @id_usuario=(SELECT id_usuario FROM DATA_GROUP.Usuario WHERE username=@username)
 
-	SELECT c.id_compra, 'Oferta ganada'
+	SELECT  c.id_compra 'Id', 
+			0 as 'Monto ofertado',
+			'Ganada' as 'Resultado de la oferta',
+			c.fecha as 'Fecha'
 	FROM DATA_GROUP.Compra c
 	JOIN DATA_GROUP.Publicacion p
 	ON c.id_publicacion=p.id_publicacion 
 		AND p.id_tipo_publicacion=2
 		AND c.id_usuario_comprador=@id_usuario
 	UNION
-	SELECT o.id_oferta, 'Oferta perdida'
+	SELECT  o.id_oferta 'Id', 
+			o.monto 'Monto ofertado',
+			'No ganada' as 'Resultado de la oferta',
+			o.fecha as 'Fecha'
 	FROM DATA_GROUP.Oferta o
 	WHERE o.id_usuario_ofertador=@id_usuario
 END
@@ -1058,20 +1065,33 @@ BEGIN
 	DECLARE @id_usuario numeric(18, 0)
 	SET @id_usuario=(SELECT id_usuario FROM DATA_GROUP.Usuario WHERE username=@username)
 	
-	SELECT cal.estrellas_calificacion, 'Calificacion recibida' as Calificacion
+	SELECT  cal.estrellas_calificacion as 'Puntuacion', 
+			'Recibida de: '+u.username as Calificacion,
+			CASE WHEN cal.detalle_calificacion is null OR cal.detalle_calificacion='' THEN '-Sin comentarios-'
+				 ELSE cal.detalle_calificacion
+			END as Comentario
 	FROM DATA_GROUP.Compra com
 	JOIN DATA_GROUP.CalificacionPublicacion cal
 	ON com.id_calificacion=cal.id_calificacion 
 	JOIN DATA_GROUP.Publicacion p
-	ON p.id_publicacion=com.id_publicacion
-		AND p.id_usuario_publicador=@id_usuario
+	ON p.id_publicacion=com.id_publicacion AND p.id_usuario_publicador=@id_usuario
+	JOIN DATA_GROUP.Usuario u
+	ON u.id_usuario=com.id_usuario_comprador
 	UNION
-	SELECT cal.estrellas_calificacion, 'Calificacion otorgada' as Calificacion
+	SELECT  cal.estrellas_calificacion as 'Puntuacion', 
+			'Otorgada a: '+u.username as Calificacion,
+			CASE WHEN cal.detalle_calificacion is null OR cal.detalle_calificacion='' THEN '-Sin comentarios-'
+				 ELSE cal.detalle_calificacion
+			END as Comentario
 	FROM DATA_GROUP.Compra com
 	JOIN DATA_GROUP.CalificacionPublicacion cal
 	ON com.id_calificacion=cal.id_calificacion
 		AND com.id_usuario_comprador=@id_usuario
-
+	JOIN DATA_GROUP.Publicacion p
+	ON p.id_publicacion=com.id_publicacion
+	JOIN DATA_GROUP.Usuario u
+	ON p.id_usuario_publicador=u.id_usuario
+	
 END
 GO
 
@@ -2372,7 +2392,8 @@ BEGIN
 			tipPub.descripcion descTipoPubli,
 			p.id_visibilidad,
 			visi.descripcion descVisi,
-			p.id_usuario_publicador
+			p.id_usuario_publicador,
+			u.username
 	FROM DATA_GROUP.Publicacion p
 	INNER JOIN DATA_GROUP.EstadoPublicacion est
 	ON est.id_estado=p.id_estado
@@ -2382,6 +2403,8 @@ BEGIN
 	ON tipPub.id_tipo_publicacion=p.id_tipo_publicacion
 	INNER JOIN DATA_GROUP.VisibilidadPublicacion visi
 	ON visi.id_visibilidad=p.id_visibilidad
+	INNER JOIN DATA_GROUP.Usuario u
+	ON u.id_usuario=p.id_usuario_publicador
 	WHERE  ((@id_usuario_publicador IS NULL) OR (p.id_usuario_publicador=@id_usuario_publicador))
 	  AND ((@id_rubro IS NULL) OR (p.id_rubro = @id_rubro ))
 	  AND ((@id_estado IS NULL) OR (p.id_estado = @id_estado))

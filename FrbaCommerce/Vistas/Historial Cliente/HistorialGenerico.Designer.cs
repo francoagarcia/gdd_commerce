@@ -42,7 +42,9 @@
             this.dgv_Historial.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgv_Historial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Historial.Location = new System.Drawing.Point(7, 7);
+            this.dgv_Historial.MultiSelect = false;
             this.dgv_Historial.Name = "dgv_Historial";
+            this.dgv_Historial.ReadOnly = true;
             this.dgv_Historial.Size = new System.Drawing.Size(532, 277);
             this.dgv_Historial.TabIndex = 2;
             // 

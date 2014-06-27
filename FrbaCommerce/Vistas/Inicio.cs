@@ -483,8 +483,7 @@ namespace FrbaCommerce
             try
             {
                 frm_historial = new Historial(Program.ContextoActual.UsuarioActual);
-                frm_historial.StartPosition = FormStartPosition.CenterParent;
-                //frm_historial.WindowState = FormWindowState.Maximized;
+                frm_historial.StartPosition = FormStartPosition.CenterScreen;
                 frm_historial.MdiParent = this;
                 frm_historial.Show();
             }
@@ -553,6 +552,7 @@ namespace FrbaCommerce
         }
         #endregion
 
+        #region Cambiar Pass
         private void itm_Const_Cambiar_contrasenia_Click(object sender, EventArgs e)
         {
             try
@@ -569,6 +569,6 @@ namespace FrbaCommerce
                 MessageDialog.MensajeError(this, ex.Message);
             }
         }
-
+        #endregion
     }
 }
