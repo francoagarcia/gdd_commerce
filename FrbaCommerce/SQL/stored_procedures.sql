@@ -2280,7 +2280,7 @@ BEGIN
 									AND c.id_visibilidad_fact = @id_visibilidad)
 					BEGIN
 						INSERT INTO DATA_GROUP.CantVisibilidadesFacturadasPorUsuario(id_usuario_fact, id_visibilidad_fact, cantidad_fact)
-						VALUES(@id_usuario_publicador, @id_visibilidad, 1); --Es por cada factura generada
+						VALUES(@id_usuario_publicador, @id_visibilidad, 0); --Es por cada factura generada
 					END
 				END
 				
@@ -2303,6 +2303,7 @@ BEGIN
 			   );
 	END CATCH
 END
+GO
 
 ------------------------------------------------------------------------------------------------------------
 
@@ -2358,6 +2359,7 @@ BEGIN
 			   );
 	END CATCH
 END
+GO
 
 ------------------------------------------------------------------------------------------
 
