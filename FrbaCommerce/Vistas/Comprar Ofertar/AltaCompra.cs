@@ -13,6 +13,7 @@ using FrbaCommerce.Entidades;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.GUIMethods.FormBase;
 using FrbaCommerce.GUIMethods.Validaciones;
+using FrbaCommerce.Generics;
 
 namespace FrbaCommerce.Vistas.Comprar_Ofertar
 {
@@ -92,7 +93,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             compra.publicacion = this.publiCompra;
             compra.usuario_comprador = new Usuario();
             compra.usuario_comprador = this.usuarioActual;
-            compra.fecha = DateTime.UtcNow;
+            compra.fecha = DateManager.Ahora();
             compra.cantidad = this.nud_Ingresar_cantidad.Value;
             compra.calificacion = new Calificacion();
             return compra;

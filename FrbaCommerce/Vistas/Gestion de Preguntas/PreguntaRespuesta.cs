@@ -13,6 +13,7 @@ using FrbaCommerce.GUIMethods.Validaciones;
 using System.Data.SqlClient;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.Generics.Resultados;
+using FrbaCommerce.Generics;
 
 namespace FrbaCommerce.Vistas.Gestion_de_Preguntas
 {
@@ -69,7 +70,7 @@ namespace FrbaCommerce.Vistas.Gestion_de_Preguntas
             if (this.ModoCrear)
             {
                 this.tb_Respuesta.Text = "";
-                this.tb_Fecha_de_respuesta.Text = DateTime.Today.ToShortDateString();
+                this.tb_Fecha_de_respuesta.Text = DateManager.Ahora().ToString();
             }
             else 
             {

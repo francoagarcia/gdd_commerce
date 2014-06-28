@@ -13,7 +13,7 @@ using FrbaCommerce.Entidades;
 using FrbaCommerce.GUIMethods;
 using FrbaCommerce.GUIMethods.FormBase;
 using FrbaCommerce.GUIMethods.Validaciones;
-
+using FrbaCommerce.Generics;
 
 namespace FrbaCommerce.Vistas.Comprar_Ofertar
 {
@@ -86,7 +86,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             oferta.publicacion = this.publi;
             oferta.usuario_ofertador = new Usuario();
             oferta.usuario_ofertador = this.usuarioActual;
-            oferta.fecha = DateTime.UtcNow;
+            oferta.fecha = DateManager.Ahora();
             oferta.monto = this.nud_Ingresar_monto_a_ofertar.Value;
             return oferta;
         }

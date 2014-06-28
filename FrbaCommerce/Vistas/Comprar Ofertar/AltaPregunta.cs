@@ -57,7 +57,7 @@ namespace FrbaCommerce.Vistas.Comprar_Ofertar
             preg.id_pregunta = 0;
             preg.id_publicacion = this.publi.id_publicacion;
             preg.pregunta = this.tb_Pregunta.Text;
-            preg.fecha_pregunta = DateTime.Today;
+            preg.fecha_pregunta = DateManager.Ahora();
             preg.usuario = new Usuario();
             preg.usuario = this.usuarioPreguntador;
             return preg;

@@ -47,7 +47,7 @@ namespace FrbaCommerce.Vistas.Facturar_Publicaciones
         {
             this.tb_Username.Text = this.factura.vendedor.username;
             this.tb_Total_facturado.Text = "$ "+this.factura.total.ToString();
-            this.tb_Fecha.Text = DateTime.UtcNow.ToString();
+            this.tb_Fecha.Text = DateManager.Ahora().ToString();
             this.lbl_Titulo.Text = this.lbl_Titulo.Text + this.factura.nro_factura.ToString();
             this.CargarItems();
         }
