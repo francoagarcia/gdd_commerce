@@ -156,7 +156,6 @@
     <Compile Include="GUIMethods\FormBase\FormBaseSeleccionTipo.Designer.cs">
       <DependentUpon>FormBaseSeleccionTipo.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIMethods\GrillaPaginada.cs" />
     <Compile Include="GUIMethods\NameVariableParser.cs" />
     <Compile Include="GUIMethods\Validaciones\IValidador.cs" />
     <Compile Include="GUIMethods\MenuItemsHelper.cs" />
